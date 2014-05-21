@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Cấu hình";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<fieldset class="settings">
+    <legend>Cấu hình</legend>
+    <div>
+        <a href='/Settings/Icd'>
+            <img src="../../Content/images/icd-10-icon-217x300.png"/>
+            <span>Mã bệnh - Icd</span>
+        </a>
+    </div>
+    <div>
+        <a href='/Settings/Cpt'>
+            <img src="../../Content/images/treatment.png"/>
+            <span>Điều trị - CPT</span>
+        </a>
+    </div>
+    <div>
+        <a href='/Settings/Drug'>
+            <img src="../../Content/images/Drug.png"/>
+            <span>Thuốc</span>
+        </a>
+    </div>
+    <div>
+        <a href='/Settings/Doctor'>
+            <img src="../../Content/images/doctor.png"/>
+            <span>Bác sỹ</span>
+        </a>
+    </div>
+
+</fieldset>

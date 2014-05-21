@@ -1,0 +1,79 @@
+/*   login  */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+form, label,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+    line-height: 1;
+	background-color:#FFF;
+    color: #000;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    margin: 5px
+}
+
+thead td{ background-color: cadetblue;height: 20px;color: #fff;text-align: center;padding-top: 5px; font-size: 12px}
+
+.button {
+margin: 0;
+padding: 0;
+border: 0;
+width: auto;
+background: none;
+outline: 0 none;
+overflow: hidden;
+vertical-align: bottom;
+-webkit-appearance: none;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+-o-border-radius: 3px;
+-ms-border-radius: 3px;
+-khtml-border-radius: 3px;
+border-radius: 3px;
+padding: 3px 3px 3px 3px;
+border-width: 1px;
+border-style: solid;
+text-align: center
+}
+
+.btnLogin {border: none;background: url(../images/btnLogin.png) no-repeat top left;width:80px;height: 26px;}
+.btnLogin:hover {border: none;background: url(../images/btnLoginOver.png) no-repeat top left;width:80px;height: 26px;cursor: pointer;}
+
+.table{border-right: solid 1px #333}
+.table tr td{ border-bottom: solid 1px #333;height: 15px;padding: 5px 5px 0px 5px;border-left: solid 1px #333;}
+.table tr:hover{background-color: azure}
+
+#frmHeader{background: url(../images/logo.png) left no-repeat;padding-left: 90px; height: 50px}
+#frmHeader .title{text-shadow: rgb(255, 255, 255) 0px 1px;color: rgb(102, 102, 102);font-size: 16px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;height: 19px;}
+#frmHeader .btnSettings {background: url(../images/settings.png) no-repeat top;width: 50px;height: 36px;padding: 7px;}
+#frmHeader .btnNewPatients {background: url(../images/new-patient.png) no-repeat top; width: 50px;height: 36px;padding: 7px;}
+#frmHeader a{ text-decoration: none;color: #333;font-size: 12px}
+#frmHeader .user{ text-align: right; padding: 0px 10px}
+#frmHeader .btnSearch {text-align: right;padding: 0px 10px;width:200px;height: 26px;}
+#frmHeader .btnSearch input{width:100%;height: 26px;}
+
+.main fieldset{margin-top: 10px}
+.main .patientinfo table{float: left}
+.main .patientinfo .title{ padding-left: 20px;padding-right: 5px;}
+.main .patientinfo .value input{ width: 200px;}
+.main .patientinfo .save { margin: 0 10px; float: left}
+
+.main .patientlist{ border-bottom: none;border-left: none;border-right: none;padding: 5px 0px 0px 0px; margin-top: 15px}
+
+.main .settings div{ width: 128px;height: 150px;float: left;margin: 20px;text-align: center}
+.main .settings img{ width: 128px;height: 128px;margin-bottom: 10px}
+.main .settings a{text-decoration: none;color: #333;font-size: 14px}
