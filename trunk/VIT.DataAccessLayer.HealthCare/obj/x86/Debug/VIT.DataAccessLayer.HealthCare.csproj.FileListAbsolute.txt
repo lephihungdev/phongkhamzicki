@@ -1,0 +1,8 @@
+E:\public\project\HealthCare\VIT.DataAccessLayer.HealthCare\bin\Debug\VIT.DataAccessLayer.HealthCare.dll.config
+E:\public\project\HealthCare\VIT.DataAccessLayer.HealthCare\bin\Debug\VIT.DataAccessLayer.HealthCare.dll
+E:\public\project\HealthCare\VIT.DataAccessLayer.HealthCare\bin\Debug\VIT.DataAccessLayer.HealthCare.pdb
+E:\public\project\HealthCare\VIT.DataAccessLayer.HealthCare\bin\Debug\EntityFramework.dll
+E:\public\project\HealthCare\VIT.DataAccessLayer.HealthCare\bin\Debug\VIT.DataHelper.dll
+E:\public\project\HealthCare\VIT.DataAccessLayer.HealthCare\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\public\project\HealthCare\VIT.DataAccessLayer.HealthCare\obj\x86\Debug\VIT.DataAccessLayer.HealthCare.dll
+E:\public\project\HealthCare\VIT.DataAccessLayer.HealthCare\obj\x86\Debug\VIT.DataAccessLayer.HealthCare.pdb

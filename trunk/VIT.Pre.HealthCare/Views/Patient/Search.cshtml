@@ -1,0 +1,119 @@
+﻿@using System.Diagnostics
+@model VIT.Pre.HealthCare.Models.PatientModel
+@{
+    ViewBag.Title = "Phòng khám online";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset class="patientinfo">
+        <legend>Thông tin bệnh nhân</legend>
+        <table>
+            <tr>
+                <td class="title">@Html.LabelFor(model => model.Id):</td>
+                <td class="value">@Html.HiddenFor(model => model.Id)</td>
+            </tr>
+            <tr>
+                <td class="title">
+                    @Html.LabelFor(model => model.FirstName):
+                    @Html.ValidationMessageFor(model => model.FirstName)
+                </td>
+                <td class="value">@Html.EditorFor(model => model.FirstName)</td>
+            </tr>
+            <tr>
+                 <td class="title">
+                    @Html.LabelFor(model => model.LastName):
+                    @Html.ValidationMessageFor(model => model.LastName)
+                 </td>    
+                 <td class="value">@Html.EditorFor(model => model.LastName)</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td class="title">
+                    @Html.LabelFor(model => model.Sex):
+                    @Html.ValidationMessageFor(model => model.Sex)
+                </td>
+                <td class="value">@Html.EditorFor(model => model.Sex)</td>
+            </tr>
+            <tr>
+                <td class="title">
+                    @Html.LabelFor(model => model.Birthday):
+                    @Html.ValidationMessageFor(model => model.Birthday)
+                </td>
+                <td class="value">@Html.EditorFor(model => model.Birthday)</td>
+            </tr>
+            <tr>
+                <td class="title">
+                    @Html.LabelFor(model => model.DateOnSet):
+                    @Html.ValidationMessageFor(model => model.DateOnSet)
+                </td>
+                <td class="value">@Html.EditorFor(model => model.DateOnSet)</td>
+            </tr>
+        </table>
+         <table>
+            <tr>
+               <td class="title">
+                    @Html.LabelFor(model => model.Phone):
+                    @Html.ValidationMessageFor(model => model.Phone)
+                </td>
+                <td class="value">@Html.EditorFor(model => model.Phone)</td>
+            </tr>
+            <tr>
+                <td class="title">
+                    @Html.LabelFor(model => model.Address):
+                    @Html.ValidationMessageFor(model => model.Address)
+                </td>
+                <td class="value">@Html.EditorFor(model => model.Address)</td>
+            </tr>
+            <tr>
+                <td class="title">
+                    @Html.LabelFor(model => model.Email):
+                    @Html.ValidationMessageFor(model => model.Email)
+                </td>
+                <td class="value">@Html.EditorFor(model => model.Email)</td>
+            </tr>
+        </table>
+        @{ var display = Model != null && Model.Id > 0 ? "" : "none"; }
+        <input type="submit" value="Lưu" class="btnLogin save"/>
+        <div style="float:left; padding-top: 7px; display:@display ">@Html.ActionLink("Bệnh án", "List", "Charge")</div>
+    </fieldset>
+}
+
+<fieldset class="patientlist">
+    <legend>Danh sách bệnh nhân</legend>
+    <table class="table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <thead>
+            <tr>
+                <td>Mã</td>
+                <td>Họ</td>
+                <td>Tên</td>
+                <td>Ngày sinh</td>
+                <td>Giới tính</td>
+                <td>Điện Thoại</td>
+                <td>Địa chỉ</td>
+            </tr>
+        </thead>
+        
+        @foreach (var o in Model.Patients)
+        {
+            <tr>
+                <td>@o.Id</td>
+                <td>@o.FirstName</td>
+                <td>@o.LastName</td>
+                <td>@o.Birthday</td>
+                <td>@o.Sex</td>
+                <td>@o.Phone</td>
+                <td>
+                    <span>@o.Address</span>
+                    <span style="display: none">@o.DateOnSet</span>
+                    <span style="display: none">@o.Email</span>
+                </td>
+            </tr>
+        }
+    </table>
+ </fieldset>

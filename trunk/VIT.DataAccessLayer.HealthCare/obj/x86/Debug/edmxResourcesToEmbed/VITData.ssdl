@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VITCRMModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="VITCRMModelStoreContainer">
+    <EntitySet Name="Charges" EntityType="VITCRMModel.Store.Charges" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CPT" EntityType="VITCRMModel.Store.CPT" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Doctor" EntityType="VITCRMModel.Store.Doctor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Drug" EntityType="VITCRMModel.Store.Drug" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Facility" EntityType="VITCRMModel.Store.Facility" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ICD" EntityType="VITCRMModel.Store.ICD" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Patient" EntityType="VITCRMModel.Store.Patient" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="VITCRMModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="User" EntityType="VITCRMModel.Store.User" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Charges_Doctor" Association="VITCRMModel.Store.FK_Charges_Doctor">
+      <End Role="Doctor" EntitySet="Doctor" />
+      <End Role="Charges" EntitySet="Charges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Charges_Facility" Association="VITCRMModel.Store.FK_Charges_Facility">
+      <End Role="Facility" EntitySet="Facility" />
+      <End Role="Charges" EntitySet="Charges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Charges_Patient" Association="VITCRMModel.Store.FK_Charges_Patient">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="Charges" EntitySet="Charges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CPT_Facility" Association="VITCRMModel.Store.FK_CPT_Facility">
+      <End Role="Facility" EntitySet="Facility" />
+      <End Role="CPT" EntitySet="CPT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Doctor_Facility" Association="VITCRMModel.Store.FK_Doctor_Facility">
+      <End Role="Facility" EntitySet="Facility" />
+      <End Role="Doctor" EntitySet="Doctor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Drug_Facility" Association="VITCRMModel.Store.FK_Drug_Facility">
+      <End Role="Facility" EntitySet="Facility" />
+      <End Role="Drug" EntitySet="Drug" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Facility" Association="VITCRMModel.Store.FK_User_Facility">
+      <End Role="Facility" EntitySet="Facility" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Charges">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PatientId" Type="int" Nullable="false" />
+    <Property Name="FacilityId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="DoctorId" Type="int" />
+    <Property Name="Diagnostic" Type="nvarchar" MaxLength="200" />
+    <Property Name="ICDCode1" Type="varchar" MaxLength="50" />
+    <Property Name="ICDCode2" Type="varchar" MaxLength="50" />
+    <Property Name="ICDCode3" Type="varchar" MaxLength="50" />
+    <Property Name="ICDCode4" Type="varchar" MaxLength="50" />
+    <Property Name="CPTCode" Type="varchar" MaxLength="10" />
+    <Property Name="Quality" Type="int" />
+    <Property Name="Drugs" Type="varchar" MaxLength="50" />
+    <Property Name="Note" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="CPT">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FacilityId" Type="int" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="Fee" Type="decimal" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Doctor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FacilityId" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sex" Type="bit" />
+    <Property Name="Birthday" Type="datetime" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Drug">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FacilityId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Fee" Type="decimal" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Facility">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="ICD">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sex" Type="bit" />
+    <Property Name="Birthday" Type="datetime" />
+    <Property Name="DateOnSet" Type="datetime" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FacilityId" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="FullName" Type="nvarchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_Charges_Doctor">
+    <End Role="Doctor" Type="VITCRMModel.Store.Doctor" Multiplicity="0..1" />
+    <End Role="Charges" Type="VITCRMModel.Store.Charges" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doctor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Charges">
+        <PropertyRef Name="DoctorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Charges_Facility">
+    <End Role="Facility" Type="VITCRMModel.Store.Facility" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Charges" Type="VITCRMModel.Store.Charges" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Facility">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Charges">
+        <PropertyRef Name="FacilityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Charges_Patient">
+    <End Role="Patient" Type="VITCRMModel.Store.Patient" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Charges" Type="VITCRMModel.Store.Charges" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Charges">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CPT_Facility">
+    <End Role="Facility" Type="VITCRMModel.Store.Facility" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CPT" Type="VITCRMModel.Store.CPT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Facility">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CPT">
+        <PropertyRef Name="FacilityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Doctor_Facility">
+    <End Role="Facility" Type="VITCRMModel.Store.Facility" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Doctor" Type="VITCRMModel.Store.Doctor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Facility">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Doctor">
+        <PropertyRef Name="FacilityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Drug_Facility">
+    <End Role="Facility" Type="VITCRMModel.Store.Facility" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Drug" Type="VITCRMModel.Store.Drug" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Facility">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Drug">
+        <PropertyRef Name="FacilityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Facility">
+    <End Role="Facility" Type="VITCRMModel.Store.Facility" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="User" Type="VITCRMModel.Store.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Facility">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="FacilityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

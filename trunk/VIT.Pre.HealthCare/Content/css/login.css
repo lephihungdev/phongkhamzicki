@@ -1,0 +1,85 @@
+/*   login  */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+    line-height: 1;
+	background-color:#FFF;
+    color: #000;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+#body_login {
+	margin:0 auto;
+	background:url(../images/bgLogin.png)  top no-repeat;
+	width:471px;
+	height:320px;
+	margin-top:130px;
+}
+
+input#username {
+  background-color:white;
+  background-image:url(../images/login/text-bg.gif);
+  background-position:0 0;
+  background-repeat:repeat no-repeat;
+  border:1px solid #B5B8C8;
+  padding:1px 3px;
+  width:177px;
+}
+input#password {
+  background-color:white;
+  background-image:url(../images/login/text-bg.gif);
+  background-position:0 0;
+  background-repeat:repeat no-repeat;
+  border:1px solid #B5B8C8;
+  padding:1px 3px;
+  width:177px;
+}
+.btnLogin {
+    border: none;
+    background: url(../images/btnLogin.png) no-repeat top left;
+	width:80px;
+	height: 26px;
+}
+.btnLogin:hover {
+    border: none;
+    background: url(../images/btnLoginOver.png) no-repeat top left;
+	width:80px;
+	height: 26px;
+	cursor: pointer;
+}
+.alignFormLogin 
+{
+	margin-top: 100px;
+	margin-left: 263px;
+	float: left;
+}
+.containerAlignFormLogin 
+{
+    float: left;
+    height: 320px;
+}
+.alignFormLogin  .alignPass 
+{
+	padding-top: 15px;
+}
+.textversion
+{
+	text-align:center; width:100%; float: left
+}

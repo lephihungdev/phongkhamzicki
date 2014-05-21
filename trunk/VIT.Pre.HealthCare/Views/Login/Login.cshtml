@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
+}
+
+<div id="body_login">
+    <div class="containerAlignFormLogin">
+        <form name="f1" onsubmit="return login()" action="" method="post">
+            <table class="alignFormLogin">
+                <tbody>
+                    <tr>
+                        <td>Tài khoản</td>
+                    </tr>
+                    <tr>
+                        <td><input name="userName" id="userName" type="text" value=""></td>
+                    </tr>
+                    <tr>
+                        <td class="alignPass">Mật khẩu</td>
+                    </tr>
+                    <tr>
+                        <td><input name="passWord" id="passWord" type="password" value=""></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Đăng nhập" class="btnLogin"></td>
+                    </tr>
+                    <tr>
+                        <td><p id="loginErrorLabel" style="padding-top: 5px; color: Red; font-weight: bold; font-size: 12px;">
+                                 @ViewBag.LoginErrorLabel
+                            </p></td>
+                    </tr>
+                </tbody>
+            </table> 
+        </form>
+                
+    </div>
+    <p class="textversion">Zicki Health Care <span id="versionNumber">version 1.0.0.0</span> © 2014 Zicki.vn, Inc.</p>  
+</div>
