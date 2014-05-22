@@ -37,7 +37,7 @@
 
         public string Email { get; set; }
 
-        public IDictionary<int, string> Sexs { get; set; }
+        public IList<SexDto> Sexs { get; set; }
         public IList<PatientDto> Patients { get; set; }
     }
 }

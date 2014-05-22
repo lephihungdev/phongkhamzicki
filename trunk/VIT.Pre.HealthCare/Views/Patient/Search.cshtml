@@ -43,7 +43,7 @@
                     @Html.LabelFor(model => model.Sex):
                     @Html.ValidationMessageFor(model => model.Sex)
                 </td>
-                <td class="value">@Html.DropDownListFor(model => model.Sex, new SelectList(Model.Sexs, "Key", "Value"))</td>
+                <td class="value">@Html.DropDownListFor(model => model.Sex, new SelectList(Model.Sexs, "Id", "Name", Model.Sexs.First().Id))</td>
             </tr>
             <tr>
                 <td class="title">
@@ -113,12 +113,13 @@
                 <td>@o.FirstName</td>
                 <td>@o.LastName</td>
                 <td>@o.Birthday</td>
-                <td style="text-align: center">@o.Sex</td>
+                <td style="text-align: center">@o.SexName</td>
                 <td>@o.Phone</td>
                 <td>
                     <span>@o.Address</span>
                     <span style="display: none">@o.DateOnSet</span>
                     <span style="display: none">@o.Email</span>
+                    <span style="display: none">@o.Sex</span>
                 </td>
                 <td style="text-align: center"><a href="/Patient/Delete?id=@o.Id"><img src="../../Content/images/DeleteRed.png"/></a></td>
             </tr>

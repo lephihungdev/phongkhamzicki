@@ -5,6 +5,7 @@
 
     using VIT.DataAccessLayer.HealthCare.Data;
     using VIT.DataHelper.LinqHelper.Infrastructure;
+    using VIT.DataTransferObject.HealthCare;
 
     public abstract class BLLBase
     {
@@ -92,11 +93,13 @@
         }
 
         #region Public method
-        public IDictionary<int, string> GetSexs()
+        public IList<SexDto> GetSexs()
         {
-            var sexs = new Dictionary<int, string>();
-            sexs[0] = "Nữ";
-            sexs[1] = "Nam";
+            var sexs = new List<SexDto>
+            {
+                new SexDto {Id = true, Name= "Nam"},
+                new SexDto {Id = false, Name= "Nữ"}
+            };
 
             return sexs;
         }

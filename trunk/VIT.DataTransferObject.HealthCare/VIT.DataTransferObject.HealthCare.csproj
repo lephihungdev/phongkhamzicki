@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChargeDto.cs" />
+    <Compile Include="SexDto.cs" />
     <Compile Include="CptDto.cs" />
     <Compile Include="DoctorDto.cs" />
     <Compile Include="DrugDto.cs" />
