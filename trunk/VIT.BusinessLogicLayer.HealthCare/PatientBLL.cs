@@ -10,11 +10,13 @@
     public class PatientBLL : BLLBase
     {
         private readonly IPatientDAL _dal;
+        private readonly IChargeDAL _chargeDAL;
 
         public PatientBLL(string connectionString = "")
             : base(connectionString)
         {
             this._dal = new PatientDAL(this.DatabaseFactory);
+            this._chargeDAL = new ChargeDAL(this.DatabaseFactory);
         }
 
         /// <returns>
@@ -88,9 +90,12 @@
 
         public void Update(PatientDto dto, int facilityId)
         {
-            var entity = this._dal.GetAll().FirstOrDefault(e => e.Id == dto.Id && e.Charges.Count == 0 || e.Charges.Any(c => c.FacilityId == facilityId));
-            
+            var entity = this._dal.GetAll().FirstOrDefault(e => e.Id == dto.Id);
             if(entity == null) throw new Exception("Đối tượng không tồn tại");
+
+            var charges = this._chargeDAL.GetAll().Where(e => e.PatientId == dto.Id);
+            if (charges.Any(c => c.FacilityId != facilityId)) throw new Exception("Bệnh nhân này đã khám và chữa bệnh ở nhiều nơi, không thể xóa");
+            if (charges.Any(c => c.FacilityId == facilityId)) throw new Exception("Phải xóa hết bệnh án");          
 
             entity.Address = dto.Address;
             entity.Birthday = dto.Birthday;
