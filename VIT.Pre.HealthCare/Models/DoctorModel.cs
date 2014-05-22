@@ -34,6 +34,7 @@
 
         public string Email { get; set; }
 
+        public IList<SexDto> Sexs { get; set; }
         public IList<DoctorDto> Doctors { get; set; }
     }
 }

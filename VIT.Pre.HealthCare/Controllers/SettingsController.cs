@@ -181,7 +181,11 @@
             this.ViewBag.UserName = user.UserName;
 
             var model = new DoctorModel();
-            model.Doctors = this._doctorBLL.Get(user.CompanyId, key).ToList();
+            var doctors = this._doctorBLL.Get(user.CompanyId).ToList();
+            doctors.ForEach(e => e.SexName = e.Sex == true ? "Nam" : "Nữ");
+            model.Doctors = doctors;
+            model.Sexs = this._doctorBLL.GetSexs();
+
             return this.View(model);
         }
 
@@ -212,7 +216,10 @@
                 model.Id = dto.Id;
             }
 
-            model.Doctors = this._doctorBLL.Get(user.CompanyId).ToList();
+            var doctors = this._doctorBLL.Get(user.CompanyId).ToList();
+            doctors.ForEach(e => e.SexName = e.Sex == true ? "Nam" : "Nữ");
+            model.Doctors = doctors;
+            model.Sexs = this._doctorBLL.GetSexs();
 
             return this.View(model);
         }

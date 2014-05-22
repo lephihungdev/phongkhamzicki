@@ -32,7 +32,9 @@
             if(!allfacility) facility = user.CompanyId;
             
             var model = new PatientModel();
-            model.Patients = this._patientBLL.Search(key, facility).ToList();
+            var patients = this._patientBLL.Search(string.Empty, user.CompanyId).ToList();
+            patients.ForEach(e => e.SexName = e.Sex == true ? "Nam" : "Nữ");
+            model.Patients = patients;
             model.Sexs = this._patientBLL.GetSexs();
 
             return this.View(model);
@@ -75,7 +77,9 @@
                 model.Id = dto.Id;
             }
 
-            model.Patients = this._patientBLL.Search(string.Empty, user.CompanyId).ToList();
+            var patients = this._patientBLL.Search(string.Empty, user.CompanyId).ToList();
+            patients.ForEach(e => e.SexName = e.Sex == true ? "Nam" : "Nữ");
+            model.Patients = patients;
             model.Sexs = this._patientBLL.GetSexs();
 
             return this.View(model);
