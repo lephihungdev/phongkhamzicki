@@ -36,7 +36,6 @@ namespace VIT.DataAccessLayer.HealthCare.Data
         public DbSet<Facility> Facilities { get; set; }
         public DbSet<ICD> ICDs { get; set; }
         public DbSet<Patient> Patients { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<User> Users { get; set; }
     }
 }

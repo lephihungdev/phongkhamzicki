@@ -1,6 +1,7 @@
 ﻿namespace VIT.BusinessLogicLayer.HealthCare
 {
     using System;
+    using System.Collections.Generic;
 
     using VIT.DataAccessLayer.HealthCare.Data;
     using VIT.DataHelper.LinqHelper.Infrastructure;
@@ -89,5 +90,16 @@
             /// </summary>
             Down
         }
+
+        #region Public method
+        public IDictionary<int, string> GetSexs()
+        {
+            var sexs = new Dictionary<int, string>();
+            sexs[0] = "Nữ";
+            sexs[1] = "Nam";
+
+            return sexs;
+        }
+        #endregion
     }
 }

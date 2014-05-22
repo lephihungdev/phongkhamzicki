@@ -22,6 +22,8 @@
         public Nullable<bool> Sex { get; set; }
 
         [Display(Name = "Ngày sinh")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> Birthday { get; set; }
 
         [Display(Name = "Ngày bắt đầu bệnh")]
@@ -35,6 +37,7 @@
 
         public string Email { get; set; }
 
+        public IDictionary<int, string> Sexs { get; set; }
         public IList<PatientDto> Patients { get; set; }
     }
 }

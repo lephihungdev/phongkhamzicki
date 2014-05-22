@@ -1,5 +1,6 @@
 ﻿namespace VIT.Pre.HealthCare.Controllers
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -32,7 +33,18 @@
             
             var model = new PatientModel();
             model.Patients = this._patientBLL.Search(key, facility).ToList();
+            model.Sexs = this._patientBLL.GetSexs();
+
             return this.View(model);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
+            if (user == null) return this.RedirectToAction("Login", "Login");
+
+            this._patientBLL.Delete(id, user.CompanyId);
+            return this.RedirectToAction("Search", "Patient");
         }
 
         [HttpPost]
@@ -57,9 +69,14 @@
             };
 
             if (model.Id > 0) this._patientBLL.Update(dto, user.CompanyId);
-            else this._patientBLL.Insert(dto, user.CompanyId);
+            else
+            {
+                this._patientBLL.Insert(dto, user.CompanyId);
+                model.Id = dto.Id;
+            }
 
             model.Patients = this._patientBLL.Search(string.Empty, user.CompanyId).ToList();
+            model.Sexs = this._patientBLL.GetSexs();
 
             return this.View(model);
         }
