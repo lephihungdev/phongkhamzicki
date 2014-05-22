@@ -24,6 +24,8 @@
             var charges = query.Select(e => new ChargeDto
                     {
                         Id = e.Id,
+                        PatientName = e.Patient.LastName + " " + e.Patient.FirstName,
+                        DoctorName = e.Doctor.LastName + " " + e.Doctor.FirstName,
                         CPTCode = e.CPTCode,
                         Diagnostic = e.Diagnostic,
                         Drugs = e.Drugs,
@@ -32,7 +34,10 @@
                         ICDCode3 = e.ICDCode3,
                         ICDCode4 = e.ICDCode4,
                         Note = e.Note,
-                        Quality = e.Quality
+                        Quality = e.Quality,
+                        DateOnset = e.DateOnset,
+                        DateService = e.DateService,
+                        DoctorId = e.DoctorId
                     });
 
             return charges;
@@ -44,6 +49,9 @@
             
             if(entity == null) throw new Exception("Đối tượng không tồn tại");
 
+            entity.DoctorId = dto.DoctorId;
+            entity.DateOnset = dto.DateOnset;
+            entity.DateService = dto.DateService;
             entity.CPTCode = dto.CPTCode;
             entity.Diagnostic = dto.Diagnostic;
             entity.Drugs = dto.Drugs;
@@ -63,6 +71,9 @@
             var entity = new Charge();
             entity.PatientId = patientId;
             entity.FacilityId = facilityId;
+            entity.DoctorId = dto.DoctorId;
+            entity.DateOnset = dto.DateOnset;
+            entity.DateService = dto.DateService;
             entity.CPTCode = dto.CPTCode;
             entity.Diagnostic = dto.Diagnostic;
             entity.Drugs = dto.Drugs;

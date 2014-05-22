@@ -46,7 +46,7 @@
             return this.View();
         }
 
-        public ActionResult Logout(string userName, string passWord)
+        public ActionResult Logout()
         {
             this.Session[SettingsManager.Constants.SessionUser] = null;
 

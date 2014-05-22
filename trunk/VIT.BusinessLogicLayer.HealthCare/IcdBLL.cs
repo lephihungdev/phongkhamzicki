@@ -17,20 +17,22 @@
             this._dal = new ICDDAL(this.DatabaseFactory);
         }
 
-        public IQueryable<CodeDto> Get()
+        public IQueryable<IcdDto> Get(string key = "")
         {
             var query = this._dal.GetAll()
-                .Select(e => new CodeDto
+                .Select(e => new IcdDto
                     {
                         Id = e.Id,
                         Code = e.Code,
                         Description = e.Description
                     });
 
+            if (!string.IsNullOrEmpty(key)) query = query.Where(e => e.Code.StartsWith(key));
+
             return query;
         }
 
-        public void Update(CodeDto dto)
+        public void Update(IcdDto dto)
         {
             var entity = this._dal.GetAll().FirstOrDefault(e => e.Id == dto.Id);
             
@@ -41,7 +43,7 @@
             this.SaveChanges();
         }
 
-        public void Insert(CodeDto dto)
+        public void Insert(IcdDto dto)
         {
             var exist = this._dal.GetAll().Any(e => e.Code == dto.Code);
 
@@ -51,8 +53,9 @@
             entity.Code = dto.Code;
             entity.Description = dto.Description;
             this._dal.Add(entity);
-
+            
             this.SaveChanges();
+            dto.Id = entity.Id;
         }
 
         public void Delete(int id)

@@ -1,6 +1,0 @@
-<Modules>
-  <Module PersistentId="70DA31DE-B0F6-4D25-BECF-1561770B093C" ModuleId="VIT.BusinessLogicLayer.VIT.HealthCare" />
-  <Module PersistentId="B714060F-8C1A-4BF1-BFD6-A94F42CF5DF6" ModuleId="VIT.DataAccessLayer.VIT.HealthCare" />
-  <Module PersistentId="45D16F8C-52C4-4A81-8202-C57EFFBBF0F0" ModuleId="VIT.DataTransferObject.HealthCare" />
-  <Module PersistentId="6F42948F-37E2-437C-B8AE-87AD71A4BC8C" ModuleId="VIT.Pre.VIT.HealthCare" />
-</Modules>

@@ -60,6 +60,7 @@
             this._dal.Add(entity);
 
             this.SaveChanges();
+            dto.Id = entity.Id;
         }
 
         public void Delete(int id, int facilityId)

@@ -14,8 +14,13 @@
         <legend>Thông tin bệnh nhân</legend>
         <table>
             <tr>
-                <td class="title">@Html.LabelFor(model => model.Id):</td>
-                <td class="value">@Html.HiddenFor(model => model.Id)</td>
+                <td class="title">
+                    @Html.LabelFor(model => model.Id):
+                    @Html.HiddenFor(model => model.Id)
+                </td>
+                <td class="value">
+                    @Html.DisplayFor(model => model.Id)
+                </td>
             </tr>
             <tr>
                 <td class="title">
@@ -38,7 +43,7 @@
                     @Html.LabelFor(model => model.Sex):
                     @Html.ValidationMessageFor(model => model.Sex)
                 </td>
-                <td class="value">@Html.EditorFor(model => model.Sex)</td>
+                <td class="value">@Html.DropDownListFor(model => model.Sex, new SelectList(Model.Sexs, "Key", "Value"))</td>
             </tr>
             <tr>
                 <td class="title">
@@ -55,9 +60,9 @@
                 <td class="value">@Html.EditorFor(model => model.DateOnSet)</td>
             </tr>
         </table>
-         <table>
+        <table>
             <tr>
-               <td class="title">
+                <td class="title">
                     @Html.LabelFor(model => model.Phone):
                     @Html.ValidationMessageFor(model => model.Phone)
                 </td>
@@ -78,9 +83,10 @@
                 <td class="value">@Html.EditorFor(model => model.Email)</td>
             </tr>
         </table>
-        @{ var display = Model != null && Model.Id > 0 ? "" : "none"; }
+        @{ var id = Model != null && Model.Id > 0 ? Model.Id : 0; }
+        @{ var display = id > 0 ? "" : "none"; }
         <input type="submit" value="Lưu" class="btnLogin save"/>
-        <div style="float:left; padding-top: 7px; display:@display ">@Html.ActionLink("Bệnh án", "List", "Charge")</div>
+        <a href="../Charge/Index?patientId=@id" style="float:left; padding-top: 7px; display:@display ">Bệnh án</a>
     </fieldset>
 }
 
@@ -96,6 +102,7 @@
                 <td>Giới tính</td>
                 <td>Điện Thoại</td>
                 <td>Địa chỉ</td>
+                <td style="width: 25px">Xóa</td>
             </tr>
         </thead>
         
@@ -106,13 +113,14 @@
                 <td>@o.FirstName</td>
                 <td>@o.LastName</td>
                 <td>@o.Birthday</td>
-                <td>@o.Sex</td>
+                <td style="text-align: center">@o.Sex</td>
                 <td>@o.Phone</td>
                 <td>
                     <span>@o.Address</span>
                     <span style="display: none">@o.DateOnSet</span>
                     <span style="display: none">@o.Email</span>
                 </td>
+                <td style="text-align: center"><a href="/Patient/Delete?id=@o.Id"><img src="../../Content/images/DeleteRed.png"/></a></td>
             </tr>
         }
     </table>

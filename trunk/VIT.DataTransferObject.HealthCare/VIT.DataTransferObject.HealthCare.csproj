@@ -51,10 +51,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChargeDto.cs" />
+    <Compile Include="CptDto.cs" />
     <Compile Include="DoctorDto.cs" />
     <Compile Include="DrugDto.cs" />
     <Compile Include="PatientDto.cs" />
-    <Compile Include="CodeDto.cs" />
+    <Compile Include="IcdDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserLoginDto.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
