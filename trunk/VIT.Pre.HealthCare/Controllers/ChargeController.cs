@@ -37,9 +37,16 @@
 
             var model = new ChargeModel();
             model.ListCpts = this._cptBLL.Get(user.CompanyId).ToList();
+            model.ListCpts.Insert(0, new CptDto { Code = null, Description = "--- Chọn ---" });
+
             model.ListDoctors = this._doctorBLL.Get(user.CompanyId).ToList();
+            model.ListDoctors.Insert(0, new DoctorDto { LastName = "--- Chọn ---" });
+
             model.ListDrugs = this._drugBLL.Get(user.CompanyId).ToList();
+            model.ListDrugs.Insert(0, new DrugDto { Name = null, Description = "--- Chọn ---" });
+
             model.ListIcds = this._icdBLL.Get().ToList();
+            model.ListIcds.Insert(0, new IcdDto { Code = null, Description = "--- Chọn ---" });
 
             var facility = 0;
             if (!allfacility) facility = user.CompanyId;
@@ -102,9 +109,16 @@
             };
 
             model.ListCpts = this._cptBLL.Get(user.CompanyId).ToList();
+            model.ListCpts.Insert(0, new CptDto { Code = null, Description = "--- Chọn ---" });
+
             model.ListDoctors = this._doctorBLL.Get(user.CompanyId).ToList();
+            model.ListDoctors.Insert(0, new DoctorDto { LastName = "--- Chọn ---" });
+
             model.ListDrugs = this._drugBLL.Get(user.CompanyId).ToList();
+            model.ListDrugs.Insert(0, new DrugDto { Name = null, Description = "--- Chọn ---" });
+
             model.ListIcds = this._icdBLL.Get().ToList();
+            model.ListIcds.Insert(0, new IcdDto { Code = null, Description = "--- Chọn ---" });
 
             var facility = 0;
             if (!allfacility) facility = user.CompanyId;
