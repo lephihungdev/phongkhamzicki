@@ -73,28 +73,28 @@
                     @Html.LabelFor(model => model.ICDCode1):
                     @Html.ValidationMessageFor(model => model.ICDCode1)
                 </td>
-                <td class="value">@Html.EditorFor(model => model.ICDCode1)</td>
+                <td class="value">@Html.DropDownListFor(model => model.ICDCode1, new SelectList(Model.ListIcds, "Code", "Description", Model.ListIcds.First().Code))</td>
             </tr>
             <tr>
                 <td class="title">
                     @Html.LabelFor(model => model.ICDCode2):
                     @Html.ValidationMessageFor(model => model.ICDCode2)
                 </td>
-                <td class="value">@Html.EditorFor(model => model.ICDCode2)</td>
+                <td class="value">@Html.DropDownListFor(model => model.ICDCode2, new SelectList(Model.ListIcds, "Code", "Description", Model.ListIcds.First().Code))</td>
             </tr>
             <tr>
                 <td class="title">
                     @Html.LabelFor(model => model.ICDCode3):
                     @Html.ValidationMessageFor(model => model.ICDCode3)
                 </td>
-                <td class="value">@Html.EditorFor(model => model.ICDCode3)</td>
+                <td class="value">@Html.DropDownListFor(model => model.ICDCode3, new SelectList(Model.ListIcds, "Code", "Description", Model.ListIcds.First().Code))</td>
             </tr>
             <tr>
                 <td class="title">
                     @Html.LabelFor(model => model.ICDCode4):
                     @Html.ValidationMessageFor(model => model.ICDCode4)
                 </td>
-                <td class="value">@Html.EditorFor(model => model.ICDCode4)</td>
+                <td class="value">@Html.DropDownListFor(model => model.ICDCode4, new SelectList(Model.ListIcds, "Code", "Description", Model.ListIcds.First().Code))</td>
             </tr>
         </table>
         
@@ -111,7 +111,7 @@
                     @Html.LabelFor(model => model.CPTCode):
                     @Html.ValidationMessageFor(model => model.CPTCode)
                 </td>
-                <td class="value">@Html.EditorFor(model => model.CPTCode)</td>
+                <td class="value">@Html.DropDownListFor(model => model.CPTCode, new SelectList(Model.ListCpts, "Code", "Description", Model.ListCpts.First().Code</td>
             </tr>
             <tr>
                 <td class="title">
@@ -125,7 +125,7 @@
                     @Html.LabelFor(model => model.DoctorId):
                     @Html.ValidationMessageFor(model => model.DoctorId)
                 </td>
-                <td class="value">@Html.EditorFor(model => model.DoctorId)</td>
+                <td class="value">@Html.DropDownListFor(model => model.DoctorId, new SelectList(Model.ListDoctors, "Id", "LastName", Model.ListDoctors.First().Id))</td>
             </tr>
             <tr>
                 <td class="title">

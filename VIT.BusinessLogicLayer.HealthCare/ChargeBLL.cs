@@ -24,8 +24,8 @@
             var charges = query.Select(e => new ChargeDto
                     {
                         Id = e.Id,
-                        PatientName = e.Patient.LastName + " " + e.Patient.FirstName,
-                        DoctorName = e.Doctor.LastName + " " + e.Doctor.FirstName,
+                        PatientName = e.Patient.FirstName + " " + e.Patient.LastName,
+                        DoctorName = e.Doctor.FirstName + " " + e.Doctor.LastName,
                         CPTCode = e.CPTCode,
                         Diagnostic = e.Diagnostic,
                         Drugs = e.Drugs,
