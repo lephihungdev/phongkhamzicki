@@ -16,7 +16,10 @@
 
         [Display(Name = "Mô tả")]
         public string Description { get; set; }
-        
+
+        [Display(Name = "Sử dụng")]
+        public bool Active { get; set; }
+
         public IList<IcdDto> Icds { get; set; }
     }
 }

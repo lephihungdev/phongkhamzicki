@@ -26,7 +26,8 @@
                         Id = e.Id,
                         Code = e.Code,
                         Description = e.Description,
-                        Fee = e.Fee
+                        Fee = e.Fee,
+                        Active = e.Active
                     });
 
             if (!string.IsNullOrEmpty(key)) query = query.Where(e => e.Code.StartsWith(key));
@@ -42,6 +43,7 @@
 
             entity.Description = dto.Description;
             entity.Fee = dto.Fee;
+            entity.Active = dto.Active;
 
             this.SaveChanges();
         }
@@ -57,6 +59,7 @@
             entity.Code = dto.Code;
             entity.Description = dto.Description;
             entity.Fee = dto.Fee;
+            entity.Active = dto.Active;
             this._dal.Add(entity);
 
             this.SaveChanges();

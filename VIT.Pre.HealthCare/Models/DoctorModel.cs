@@ -32,6 +32,9 @@
         [Display(Name = "Địa chỉ")]
         public string Address { get; set; }
 
+        [Display(Name = "Sử dụng")]
+        public bool Active { get; set; }
+
         public string Email { get; set; }
 
         public IList<SexDto> Sexs { get; set; }

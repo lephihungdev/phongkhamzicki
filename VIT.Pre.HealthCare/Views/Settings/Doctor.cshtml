@@ -19,7 +19,7 @@
                     @Html.HiddenFor(model => model.Id)
                 </td>
                 <td class="value">
-                    @Html.DisplayFor(model => model.Id)
+                    <div class="id">@Html.DisplayFor(model => model.Id)</div>
                 </td>
             </tr>
             <tr>
@@ -60,7 +60,7 @@
                 <td class="value">@Html.EditorFor(model => model.Phone)</td>
             </tr>
         </table>
-         <table>
+        <table>
             <tr>
                 <td class="title">
                     @Html.LabelFor(model => model.Address):
@@ -76,9 +76,13 @@
                 <td class="value">@Html.EditorFor(model => model.Email)</td>
             </tr>
             <tr>
-                <td colspan="2"><input type="submit" value="Lưu" class="btnLogin save" style="float:right"/></td>
+                <td class="title">
+                    @Html.LabelFor(model => model.Active):
+                </td>
+                <td class="value check">@Html.CheckBoxFor(model => model.Active)</td>
             </tr>
         </table>
+        <input type="submit" value="Lưu" class="btnLogin save"/>
     </fieldset>
 }
 
@@ -102,12 +106,14 @@
                 <td>Giới tính</td>
                 <td>Điện Thoại</td>
                 <td>Địa chỉ</td>
+                <td style="width: 52px">Sử dụng</td>
                 <td style="width: 25px">Xóa</td>
             </tr>
         </thead>
         
         @foreach (var o in Model.Doctors)
         {
+            var active = o.Active ? "Y" : "N";
             <tr>
                 <td>@o.Id</td>
                 <td>@o.FirstName</td>
@@ -120,8 +126,15 @@
                     <span style="display: none">@o.Email</span>
                     <span style="display: none">@o.Sex</span>
                 </td>
+                <td style="text-align: center">@active</td>
                 <td style="text-align: center"><a href="/Settings/DoctorDelete?id=@o.Id"><img src="../../Content/images/DeleteRed.png"/></a></td>
             </tr>
         }
     </table>
  </fieldset>
+ 
+  <script type="text/javascript" language="javascript">
+      $(document).ready(function () {
+          $("#Birthday").attr('type', 'date');
+      });
+</script>

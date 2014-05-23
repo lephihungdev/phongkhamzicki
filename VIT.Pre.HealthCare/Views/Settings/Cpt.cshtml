@@ -19,7 +19,7 @@
                     @Html.HiddenFor(model => model.Id)
                 </td>
                 <td class="value">
-                    @Html.DisplayFor(model => model.Id)
+                    <div class="id">@Html.DisplayFor(model => model.Id)</div>
                 </td>
             </tr>
         </table>
@@ -51,6 +51,15 @@
                 <td class="value">@Html.EditorFor(model => model.Fee)</td>
             </tr>
         </table>
+        
+        <table>
+            <tr>
+                <td class="title">
+                    @Html.LabelFor(model => model.Active):
+                </td>
+                <td class="value check">@Html.CheckBoxFor(model => model.Active)</td>
+            </tr>
+        </table>
 
         <input type="submit" value="Lưu" class="btnLogin save" style="float:left; padding-left: 15px"/>
     </fieldset>
@@ -73,17 +82,20 @@
                 <td>Mã</td>
                 <td>Mô tả</td>
                 <td>Phí</td>
+                <td style="width: 52px">Sử dụng</td>
                 <td style="width: 25px">Xóa</td>
             </tr>
         </thead>
         
         @foreach (var o in Model.Cpts)
         {
+            var active = o.Active ? "Y" : "N";
             <tr>
                 <td>@o.Id</td>
                 <td>@o.Code</td>
                 <td>@o.Description</td>
                 <td>@o.Fee</td>
+                <td style="text-align: center">@active</td>
                 <td style="text-align: center"><a href="/Settings/CptDelete?id=@o.Id"><img src="../../Content/images/DeleteRed.png"/></a></td>
             </tr>
         }

@@ -1,5 +1,6 @@
 ﻿namespace VIT.Pre.HealthCare.Controllers
 {
+    using System;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -64,11 +65,18 @@
                 Fee = model.Fee,
             };
 
-            if (model.Id > 0) this._drugBLL.Update(dto, user.CompanyId);
-            else
+            try
             {
-                this._drugBLL.Insert(dto, user.CompanyId);
-                model.Id = dto.Id;
+                if (model.Id > 0) this._drugBLL.Update(dto, user.CompanyId);
+                else
+                {
+                    this._drugBLL.Insert(dto, user.CompanyId);
+                    model.Id = dto.Id;
+                }
+            }
+            catch (Exception exception)
+            {
+                ViewBag.ErrorLabel = exception.Message;
             }
 
             model.Drugs = this._drugBLL.Get(user.CompanyId).ToList();
@@ -113,11 +121,18 @@
                 Fee = model.Fee,
             };
 
-            if (model.Id > 0) this._cptBLL.Update(dto, user.CompanyId);
-            else
+            try
             {
-                this._cptBLL.Insert(dto, user.CompanyId);
-                model.Id = dto.Id;
+                if (model.Id > 0) this._cptBLL.Update(dto, user.CompanyId);
+                else
+                {
+                    this._cptBLL.Insert(dto, user.CompanyId);
+                    model.Id = dto.Id;
+                }
+            }
+            catch (Exception exception)
+            {
+                ViewBag.ErrorLabel = exception.Message;
             }
 
             model.Cpts = this._cptBLL.Get(user.CompanyId).ToList();
@@ -132,6 +147,40 @@
 
             this._cptBLL.Delete(id, user.CompanyId);
             return this.RedirectToAction("Cpt", "Settings");
+        }
+
+        public ActionResult IcdCodeComplete(string term)
+        {
+            var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
+            if (user == null) return this.RedirectToAction("Login", "Login");
+            this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
+            this.ViewBag.UserName = user.UserName;
+
+            var query = this._icdBLL.Get().Where(c => c.Code.StartsWith(term) || c.Description.Contains(term));
+            var icds = query.Select(e => new AutoCompletedDto
+            {
+                label = e.Description,
+                value = e.Code
+            });
+
+            return this.Json(icds, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult IcdDescriptionComplete(string term)
+        {
+            var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
+            if (user == null) return this.RedirectToAction("Login", "Login");
+            this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
+            this.ViewBag.UserName = user.UserName;
+
+            var query = this._icdBLL.Get().Where(c => c.Description.Contains(term));
+            var icds = query.Select(e => new AutoCompletedDto
+            {
+                label = e.Description,
+                value = e.Description
+            });
+
+            return this.Json(icds, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Icd(string code)
@@ -161,11 +210,18 @@
                 Description = model.Description
             };
 
-            if (model.Id > 0) this._icdBLL.Update(dto);
-            else
+            try
             {
-                this._icdBLL.Insert(dto);
-                model.Id = dto.Id;
+                if (model.Id > 0) this._icdBLL.Update(dto);
+                else
+                {
+                    this._icdBLL.Insert(dto);
+                    model.Id = dto.Id;
+                }
+            }
+            catch (Exception exception)
+            {
+                ViewBag.ErrorLabel = exception.Message;
             }
 
             model.Icds = this._icdBLL.Get().ToList();
@@ -209,11 +265,18 @@
                 Sex = model.Sex
             };
 
-            if (model.Id > 0) this._doctorBLL.Update(dto, user.CompanyId);
-            else
+            try
             {
-                this._doctorBLL.Insert(dto, user.CompanyId);
-                model.Id = dto.Id;
+                if (model.Id > 0) this._doctorBLL.Update(dto, user.CompanyId);
+                else
+                {
+                    this._doctorBLL.Insert(dto, user.CompanyId);
+                    model.Id = dto.Id;
+                }
+            }
+            catch (Exception exception)
+            {
+                ViewBag.ErrorLabel = exception.Message;
             }
 
             var doctors = this._doctorBLL.Get(user.CompanyId).ToList();

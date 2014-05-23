@@ -31,7 +31,6 @@
                         Id = e.Id,
                         Address = e.Address,
                         Birthday = e.Birthday,
-                        DateOnSet = e.DateOnSet,
                         Email = e.Email,
                         FirstName = e.FirstName,
                         LastName = e.FirstName,
@@ -64,7 +63,6 @@
                     Id = e.Id,
                     Address = e.Address,
                     Birthday = e.Birthday,
-                    DateOnSet = e.DateOnSet,
                     Email = e.Email,
                     FirstName = e.FirstName,
                     LastName = e.LastName,
@@ -90,16 +88,11 @@
 
         public void Update(PatientDto dto, int facilityId)
         {
-            var entity = this._dal.GetAll().FirstOrDefault(e => e.Id == dto.Id);
-            if(entity == null) throw new Exception("Đối tượng không tồn tại");
-
-            var charges = this._chargeDAL.GetAll().Where(e => e.PatientId == dto.Id);
-            if (charges.Any(c => c.FacilityId != facilityId)) throw new Exception("Bệnh nhân này đã khám và chữa bệnh ở nhiều nơi, không thể xóa");
-            if (charges.Any(c => c.FacilityId == facilityId)) throw new Exception("Phải xóa hết bệnh án");          
+            var entity = this._dal.GetAll().FirstOrDefault(e => e.Id == dto.Id && (e.Charges.Count == 0 || (e.Charges.Any(c => c.FacilityId == facilityId) && !e.Charges.Any(c => c.FacilityId != facilityId))));
+            if(entity == null) throw new Exception("Đối tượng không tồn tại");         
 
             entity.Address = dto.Address;
             entity.Birthday = dto.Birthday;
-            entity.DateOnSet = dto.DateOnSet;
             entity.Email = entity.Email;
             entity.FirstName = entity.FirstName;
             entity.LastName = entity.LastName;
@@ -114,7 +107,6 @@
             var entity = new Patient();
             entity.Address = dto.Address;
             entity.Birthday = dto.Birthday;
-            entity.DateOnSet = dto.DateOnSet;
             entity.Email = dto.Email;
             entity.FirstName = dto.FirstName;
             entity.LastName = dto.LastName;
@@ -128,9 +120,12 @@
 
         public void Delete(int id, int facilityId)
         {
-            var entity = this._dal.GetAll().FirstOrDefault(e => e.Id == id && e.Charges.Count == 0 || (e.Charges.Any(c => c.FacilityId == facilityId) && !e.Charges.Any(c => c.FacilityId != facilityId)));
-
+            var entity = this._dal.GetAll().FirstOrDefault(e => e.Id == id);
             if (entity == null) throw new Exception("Đối tượng không tồn tại");
+
+            var charges = this._chargeDAL.GetAll().Where(e => e.PatientId == id);
+            if (charges.Any(c => c.FacilityId != facilityId)) throw new Exception("Bệnh nhân này đã khám và chữa bệnh ở nhiều nơi, không thể xóa");
+            if (charges.Any(c => c.FacilityId == facilityId)) throw new Exception("Phải xóa hết bệnh án");    
 
             this._dal.Delete(entity);
 

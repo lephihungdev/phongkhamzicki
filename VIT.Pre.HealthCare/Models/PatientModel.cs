@@ -25,10 +25,7 @@
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> Birthday { get; set; }
-
-        [Display(Name = "Ngày bắt đầu bệnh")]
-        public Nullable<System.DateTime> DateOnSet { get; set; }
-
+        
         [Display(Name = "Điện thoại")]
         public string Phone { get; set; }
 

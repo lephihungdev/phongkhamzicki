@@ -20,7 +20,7 @@
                     @Html.HiddenFor(model => model.Id)
                 </td>
                 <td class="value">
-                    @Html.DisplayFor(model => model.Id)
+                    <div class="id">@Html.DisplayFor(model => model.Id)</div>
                 </td>
             </tr>
             <tr>
@@ -29,7 +29,7 @@
                     @Html.HiddenFor(model => model.PatientId)
                 </td>
                 <td class="value">
-                    @Html.DisplayFor(model => model.PatientId)
+                    <div class="id">@Html.DisplayFor(model => model.PatientId)</div>
                 </td>
             </tr>
             <tr>
@@ -37,7 +37,7 @@
                     @Html.LabelFor(model => model.PatientName):
                 </td>
                 <td class="value">
-                    @Html.DisplayFor(model => model.PatientName)
+                    <div class="id">@Html.DisplayFor(model => model.PatientName)</div>
                 </td>
             </tr>
             <tr>
@@ -66,46 +66,39 @@
                     @Html.LabelFor(model => model.Diagnostic):
                     @Html.ValidationMessageFor(model => model.Diagnostic)
                 </td>
-                <td class="value">@Html.EditorFor(model => model.Diagnostic)</td>
+                <td class="value"><div class="ui-widget">@Html.EditorFor(model => model.Diagnostic)</div></td>
             </tr>
             <tr>
                 <td class="title">
                     @Html.LabelFor(model => model.ICDCode1):
                     @Html.ValidationMessageFor(model => model.ICDCode1)
                 </td>
-                <td class="value">@Html.DropDownListFor(model => model.ICDCode1, new SelectList(Model.ListIcds, "Code", "Description", Model.ListIcds.First().Code))</td>
+                <td class="value">@Html.EditorFor(model => model.ICDCode1)</td>
             </tr>
             <tr>
                 <td class="title">
                     @Html.LabelFor(model => model.ICDCode2):
                     @Html.ValidationMessageFor(model => model.ICDCode2)
                 </td>
-                <td class="value">@Html.DropDownListFor(model => model.ICDCode2, new SelectList(Model.ListIcds, "Code", "Description", Model.ListIcds.First().Code))</td>
+                <td class="value">@Html.EditorFor(model => model.ICDCode2)</td>
             </tr>
             <tr>
                 <td class="title">
                     @Html.LabelFor(model => model.ICDCode3):
                     @Html.ValidationMessageFor(model => model.ICDCode3)
                 </td>
-                <td class="value">@Html.DropDownListFor(model => model.ICDCode3, new SelectList(Model.ListIcds, "Code", "Description", Model.ListIcds.First().Code))</td>
+                <td class="value">@Html.EditorFor(model => model.ICDCode3)</td>
             </tr>
             <tr>
                 <td class="title">
                     @Html.LabelFor(model => model.ICDCode4):
                     @Html.ValidationMessageFor(model => model.ICDCode4)
                 </td>
-                <td class="value">@Html.DropDownListFor(model => model.ICDCode4, new SelectList(Model.ListIcds, "Code", "Description", Model.ListIcds.First().Code))</td>
+                <td class="value">@Html.EditorFor(model => model.ICDCode4)</td>
             </tr>
         </table>
         
         <table>
-            <tr>
-                <td class="title">
-                    @Html.LabelFor(model => model.Drugs):
-                    @Html.ValidationMessageFor(model => model.Drugs)
-                </td>
-                <td class="value">@Html.EditorFor(model => model.Drugs)</td>
-            </tr>
             <tr>
                 <td class="title">
                     @Html.LabelFor(model => model.CPTCode):
@@ -114,11 +107,15 @@
                 <td class="value">@Html.DropDownListFor(model => model.CPTCode, new SelectList(Model.ListCpts, "Code", "Description", Model.ListCpts.First().Code))</td>
             </tr>
             <tr>
+                <td class="title"><label>Thuốc:</label></td>
+                <td class="value">@Html.DisplayFor(model => model.Drugs)<input type="button" value="Chi tiết"></td>
+            </tr>
+            <tr>
                 <td class="title">
-                    @Html.LabelFor(model => model.Quality):
-                    @Html.ValidationMessageFor(model => model.Quality)
+                    @Html.LabelFor(model => model.Days):
+                    @Html.ValidationMessageFor(model => model.Days)
                 </td>
-                <td class="value">@Html.EditorFor(model => model.Quality)</td>
+                <td class="value">@Html.EditorFor(model => model.Days)</td>
             </tr>
             <tr>
                 <td class="title">
@@ -161,12 +158,13 @@
             <tr>
                 <td>@o.Id</td>
                 <td>@o.DateService</td>
-                <td>@o.Diagnostic</td>
+                <td>@o.DiagnosticDisplay</td>
                 <td>@o.CPTCode</td>
                 <td>@o.CPTDescription</td>
                 <td>@o.Drugs</td>
                 <td>
-                    @o.Quality
+                    @o.Days
+                    <span style="display: none">@o.Diagnostic</span>
                     <span style="display: none">@o.DateOnset</span>
                     <span style="display: none">@o.DoctorId</span>
                     <span style="display: none">@o.ICDCode1</span>
@@ -180,5 +178,10 @@
         }
     </table>
  </fieldset>
-
-
+ 
+  <script type="text/javascript" language="javascript">
+      $(document).ready(function () {
+          $("#DateService").attr('type', 'date');
+          $("#DateOnset").attr('type', 'date');
+      });
+</script>

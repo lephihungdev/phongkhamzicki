@@ -1,6 +1,6 @@
 ﻿namespace VIT.Pre.HealthCare.Controllers
 {
-    using System.Collections.Generic;
+    using System;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -32,8 +32,7 @@
             if(!allfacility) facility = user.CompanyId;
             
             var model = new PatientModel();
-            var patients = this._patientBLL.Search(string.Empty, user.CompanyId).ToList();
-            patients.ForEach(e => e.SexName = e.Sex == true ? "Nam" : "Nữ");
+            var patients = this._patientBLL.Search(string.Empty, facility).ToList();
             model.Patients = patients;
             model.Sexs = this._patientBLL.GetSexs();
 
@@ -45,7 +44,15 @@
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
 
-            this._patientBLL.Delete(id, user.CompanyId);
+            try
+            {
+                this._patientBLL.Delete(id, user.CompanyId);
+            }
+            catch (Exception exception)
+            {
+                ViewBag.ErrorLabel = exception.Message;
+            }
+
             return this.RedirectToAction("Search", "Patient");
         }
 
@@ -61,7 +68,6 @@
             {
                 Address = model.Address,
                 Birthday = model.Birthday,
-                DateOnSet = model.DateOnSet,
                 Email = model.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
@@ -70,15 +76,22 @@
                 Sex = model.Sex
             };
 
-            if (model.Id > 0) this._patientBLL.Update(dto, user.CompanyId);
-            else
+            try
             {
-                this._patientBLL.Insert(dto, user.CompanyId);
-                model.Id = dto.Id;
+                if (model.Id > 0) this._patientBLL.Update(dto, user.CompanyId);
+                else
+                {
+                    this._patientBLL.Insert(dto, user.CompanyId);
+                    model.Id = dto.Id;
+                }
+            }
+            catch (Exception exception)
+            {
+                ViewBag.ErrorLabel = exception.Message;
             }
 
             var patients = this._patientBLL.Search(string.Empty, user.CompanyId).ToList();
-            patients.ForEach(e => e.SexName = e.Sex == true ? "Nam" : "Nữ");
+            
             model.Patients = patients;
             model.Sexs = this._patientBLL.GetSexs();
 

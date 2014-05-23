@@ -28,13 +28,12 @@
                         DoctorName = e.Doctor.FirstName + " " + e.Doctor.LastName,
                         CPTCode = e.CPTCode,
                         Diagnostic = e.Diagnostic,
-                        Drugs = e.Drugs,
                         ICDCode1 = e.ICDCode1,
                         ICDCode2 = e.ICDCode2,
                         ICDCode3 = e.ICDCode3,
                         ICDCode4 = e.ICDCode4,
                         Note = e.Note,
-                        Quality = e.Quality,
+                        Days = e.Days,
                         DateOnset = e.DateOnset,
                         DateService = e.DateService,
                         DoctorId = e.DoctorId
@@ -54,13 +53,12 @@
             entity.DateService = dto.DateService;
             entity.CPTCode = dto.CPTCode;
             entity.Diagnostic = dto.Diagnostic;
-            entity.Drugs = dto.Drugs;
             entity.ICDCode1 = dto.ICDCode1;
             entity.ICDCode2 = dto.ICDCode2;
             entity.ICDCode3 = dto.ICDCode3;
             entity.ICDCode4 = dto.ICDCode4;
             entity.Note = dto.Note;
-            entity.Quality = dto.Quality;
+            entity.Days = dto.Days;
             entity.UserId = userId;
 
             this.SaveChanges();
@@ -76,13 +74,12 @@
             entity.DateService = dto.DateService;
             entity.CPTCode = dto.CPTCode;
             entity.Diagnostic = dto.Diagnostic;
-            entity.Drugs = dto.Drugs;
             entity.ICDCode1 = dto.ICDCode1;
             entity.ICDCode2 = dto.ICDCode2;
             entity.ICDCode3 = dto.ICDCode3;
             entity.ICDCode4 = dto.ICDCode4;
             entity.Note = dto.Note;
-            entity.Quality = dto.Quality;
+            entity.Days = dto.Days;
             entity.UserId = userId;
             this._dal.Add(entity);
 

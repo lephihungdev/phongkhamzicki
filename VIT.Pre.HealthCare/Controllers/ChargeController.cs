@@ -36,11 +36,12 @@
             this.ViewBag.UserName = user.UserName;
 
             var model = new ChargeModel();
+            
             model.ListCpts = this._cptBLL.Get(user.CompanyId).ToList();
             model.ListCpts.Insert(0, new CptDto { Code = null, Description = "--- Chọn ---" });
 
             model.ListDoctors = this._doctorBLL.Get(user.CompanyId).ToList();
-            model.ListDoctors.Insert(0, new DoctorDto { LastName = "--- Chọn ---" });
+            model.ListDoctors.Insert(0, new DoctorDto { Id = 0, LastName = "--- Chọn ---" });
 
             model.ListDrugs = this._drugBLL.Get(user.CompanyId).ToList();
             model.ListDrugs.Insert(0, new DrugDto { Name = null, Description = "--- Chọn ---" });
@@ -51,35 +52,39 @@
             var facility = 0;
             if (!allfacility) facility = user.CompanyId;
             
+            model.DateOnset = this._chargeBLL.Get(patientId, facility).Select(e => e.DateOnset).Max();
+            
             var charges = this._chargeBLL.Get(patientId, facility).ToList();
             foreach (var charge in charges)
             {
                 charge.CPTDescription = model.ListCpts.Where(e => e.Code == charge.CPTCode).Select(e => e.Description).FirstOrDefault();
-                
+
+                charge.DiagnosticDisplay = charge.Diagnostic;
                 if(!string.IsNullOrEmpty(charge.ICDCode1))
                 {
-                    charge.Diagnostic += string.IsNullOrEmpty(charge.Diagnostic) ? string.Empty : ", ";
-                    charge.Diagnostic += model.ListIcds.Where(e => e.Code == charge.ICDCode1).Select(e => e.Description).FirstOrDefault();
+                    charge.DiagnosticDisplay += string.IsNullOrEmpty(charge.DiagnosticDisplay) ? string.Empty : ", ";
+                    charge.DiagnosticDisplay += model.ListIcds.Where(e => e.Code == charge.ICDCode1).Select(e => e.Description).FirstOrDefault();
                 }
 
                 if (!string.IsNullOrEmpty(charge.ICDCode2))
                 {
-                    charge.Diagnostic += string.IsNullOrEmpty(charge.Diagnostic) ? string.Empty : ", ";
-                    charge.Diagnostic += model.ListIcds.Where(e => e.Code == charge.ICDCode2).Select(e => e.Description).FirstOrDefault();
+                    charge.DiagnosticDisplay += string.IsNullOrEmpty(charge.DiagnosticDisplay) ? string.Empty : ", ";
+                    charge.DiagnosticDisplay += model.ListIcds.Where(e => e.Code == charge.ICDCode2).Select(e => e.Description).FirstOrDefault();
                 }
 
                 if (!string.IsNullOrEmpty(charge.ICDCode3))
                 {
-                    charge.Diagnostic += string.IsNullOrEmpty(charge.Diagnostic) ? string.Empty : ", ";
-                    charge.Diagnostic += model.ListIcds.Where(e => e.Code == charge.ICDCode2).Select(e => e.Description).FirstOrDefault();
+                    charge.DiagnosticDisplay += string.IsNullOrEmpty(charge.DiagnosticDisplay) ? string.Empty : ", ";
+                    charge.DiagnosticDisplay += model.ListIcds.Where(e => e.Code == charge.ICDCode2).Select(e => e.Description).FirstOrDefault();
                 }
 
                 if (!string.IsNullOrEmpty(charge.ICDCode4))
                 {
-                    charge.Diagnostic += string.IsNullOrEmpty(charge.Diagnostic) ? string.Empty : ", ";
-                    charge.Diagnostic += model.ListIcds.Where(e => e.Code == charge.ICDCode2).Select(e => e.Description).FirstOrDefault();
+                    charge.DiagnosticDisplay += string.IsNullOrEmpty(charge.DiagnosticDisplay) ? string.Empty : ", ";
+                    charge.DiagnosticDisplay += model.ListIcds.Where(e => e.Code == charge.ICDCode2).Select(e => e.Description).FirstOrDefault();
                 }
             }
+
             model.ListCharges = charges;
 
             return View(model);
@@ -98,31 +103,61 @@
                 Id = model.Id,
                 CPTCode = model.CPTCode,
                 Diagnostic = model.Diagnostic,
-                DoctorId = model.DoctorId,
-                Drugs = model.Drugs,
+                DoctorId = model.DoctorId == 0 ? null : model.DoctorId,
                 ICDCode1 = model.ICDCode1,
                 ICDCode2 = model.ICDCode2,
                 ICDCode3 = model.ICDCode3,
                 ICDCode4 = model.ICDCode4,
                 Note = model.Note,
-                Quality = model.Quality
+                Days = model.Days
             };
 
-            model.ListCpts = this._cptBLL.Get(user.CompanyId).ToList();
+            model.ListCpts = this._cptBLL.Get(user.CompanyId).Where(e => e.Active).ToList();
             model.ListCpts.Insert(0, new CptDto { Code = null, Description = "--- Chọn ---" });
 
-            model.ListDoctors = this._doctorBLL.Get(user.CompanyId).ToList();
+            model.ListDoctors = this._doctorBLL.Get(user.CompanyId).Where(e => e.Active).ToList();
             model.ListDoctors.Insert(0, new DoctorDto { LastName = "--- Chọn ---" });
 
-            model.ListDrugs = this._drugBLL.Get(user.CompanyId).ToList();
+            model.ListDrugs = this._drugBLL.Get(user.CompanyId).Where(e => e.Active).ToList();
             model.ListDrugs.Insert(0, new DrugDto { Name = null, Description = "--- Chọn ---" });
 
-            model.ListIcds = this._icdBLL.Get().ToList();
+            model.ListIcds = this._icdBLL.Get().Where(e => e.Active).ToList();
             model.ListIcds.Insert(0, new IcdDto { Code = null, Description = "--- Chọn ---" });
 
             var facility = 0;
             if (!allfacility) facility = user.CompanyId;
-            model.ListCharges = this._chargeBLL.Get(model.PatientId, facility).ToList();
+
+            var charges = this._chargeBLL.Get(model.PatientId, facility).ToList();
+            foreach (var charge in charges)
+            {
+                charge.CPTDescription = model.ListCpts.Where(e => e.Code == charge.CPTCode).Select(e => e.Description).FirstOrDefault();
+
+                charge.DiagnosticDisplay = charge.Diagnostic;
+                if (!string.IsNullOrEmpty(charge.ICDCode1))
+                {
+                    charge.DiagnosticDisplay += string.IsNullOrEmpty(charge.DiagnosticDisplay) ? string.Empty : ", ";
+                    charge.DiagnosticDisplay += model.ListIcds.Where(e => e.Code == charge.ICDCode1).Select(e => e.Description).FirstOrDefault();
+                }
+
+                if (!string.IsNullOrEmpty(charge.ICDCode2))
+                {
+                    charge.DiagnosticDisplay += string.IsNullOrEmpty(charge.DiagnosticDisplay) ? string.Empty : ", ";
+                    charge.DiagnosticDisplay += model.ListIcds.Where(e => e.Code == charge.ICDCode2).Select(e => e.Description).FirstOrDefault();
+                }
+
+                if (!string.IsNullOrEmpty(charge.ICDCode3))
+                {
+                    charge.DiagnosticDisplay += string.IsNullOrEmpty(charge.DiagnosticDisplay) ? string.Empty : ", ";
+                    charge.DiagnosticDisplay += model.ListIcds.Where(e => e.Code == charge.ICDCode2).Select(e => e.Description).FirstOrDefault();
+                }
+
+                if (!string.IsNullOrEmpty(charge.ICDCode4))
+                {
+                    charge.DiagnosticDisplay += string.IsNullOrEmpty(charge.DiagnosticDisplay) ? string.Empty : ", ";
+                    charge.DiagnosticDisplay += model.ListIcds.Where(e => e.Code == charge.ICDCode2).Select(e => e.Description).FirstOrDefault();
+                }
+            }
+            model.ListCharges = charges;
 
             return View(model);
         }
