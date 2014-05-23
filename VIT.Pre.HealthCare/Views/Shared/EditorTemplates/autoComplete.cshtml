@@ -1,0 +1,26 @@
+﻿@using VIT.Pre.HealthCare
+@{
+    var attributes = new RouteValueDictionary();
+    string autocompleteUrl = Html.GetAutoCompleteActionListUrl(ViewContext.ViewData.ModelMetadata);
+    string autocompleteGetTextUrl = Html.GetAutoCompleteActionGetTextByValueUrl(ViewContext.ViewData.ModelMetadata);
+    var dataAutocompleteId = Guid.NewGuid();
+    attributes.Add("data-autocomplete-id", dataAutocompleteId);
+}
+
+<input type="text" class="text-box" data-autocomplete-url="@autocompleteUrl" data-autocomplete-getdisplaytext_url="@autocompleteGetTextUrl" data-autocomplete-id="@dataAutocompleteId"/>
+@Html.Hidden("", ViewContext.ViewData.TemplateInfo.FormattedModelValue, attributes)
+
+<script src="../../../Scripts/autoComplete.js" type="text/javascript"></script>
+
+<style>
+    .ui-helper-hidden-accessible {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+</style>
