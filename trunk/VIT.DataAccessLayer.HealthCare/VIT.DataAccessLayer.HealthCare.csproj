@@ -66,6 +66,12 @@
     <Compile Include="ChargeDAL.genarated.cs">
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>
+    <Compile Include="ChargeDrug.cs">
+      <DependentUpon>Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeDrugDAL.genarated.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
     <Compile Include="CPT.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>

@@ -19,7 +19,7 @@
                     @Html.HiddenFor(model => model.Id)
                 </td>
                 <td class="value">
-                    @Html.DisplayFor(model => model.Id)
+                    <div class="id">@Html.DisplayFor(model => model.Id)</div>
                 </td>
             </tr>
         </table>
@@ -40,6 +40,15 @@
                     @Html.ValidationMessageFor(model => model.Description)
                 </td>
                 <td class="value">@Html.EditorFor(model => model.Description)</td>
+            </tr>
+        </table>
+        
+        <table>
+            <tr>
+                <td class="title">
+                    @Html.LabelFor(model => model.Active):
+                </td>
+                <td class="value check">@Html.CheckBoxFor(model => model.Active)</td>
             </tr>
         </table>
 
@@ -63,15 +72,18 @@
                 <td>Id</td>
                 <td>Mã bệnh</td>
                 <td>Mô tả</td>
+                <td style="width: 52px">Sử dụng</td>
             </tr>
         </thead>
         
         @foreach (var o in Model.Icds)
         {
+            var active = o.Active ? "Y" : "N";
             <tr>
                 <td>@o.Id</td>
                 <td>@o.Code</td>
                 <td>@o.Description</td>
+                <td style="text-align: center">@active</td>
             </tr>
         }
     </table>

@@ -30,7 +30,8 @@
                         FirstName = e.FirstName,
                         LastName = e.FirstName,
                         Phone = e.Phone,
-                        Sex = e.Sex
+                        Sex = e.Sex,
+                        Active = e.Active
                     });
 
             if (!string.IsNullOrEmpty(key))
@@ -49,12 +50,12 @@
 
             entity.Address = dto.Address;
             entity.Birthday = dto.Birthday;
-            entity.Email = entity.Email;
-            entity.FirstName = entity.FirstName;
-            entity.LastName = entity.LastName;
-            entity.Phone = entity.Phone;
-            entity.Sex = entity.Sex;
-            
+            entity.Email = dto.Email;
+            entity.FirstName = dto.FirstName;
+            entity.LastName = dto.LastName;
+            entity.Phone = dto.Phone;
+            entity.Sex = dto.Sex;
+            entity.Active = dto.Active;
 
             this.SaveChanges();
         }
@@ -69,7 +70,9 @@
             entity.LastName = dto.LastName;
             entity.Phone = dto.Phone;
             entity.Sex = dto.Sex;
+            entity.Active = dto.Active;
             entity.FacilityId = facilityId;
+
             this._dal.Add(entity);
 
             this.SaveChanges();

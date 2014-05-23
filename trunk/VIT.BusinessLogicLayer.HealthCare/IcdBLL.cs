@@ -24,7 +24,8 @@
                     {
                         Id = e.Id,
                         Code = e.Code,
-                        Description = e.Description
+                        Description = e.Description,
+                        Active = e.Active
                     });
 
             if (!string.IsNullOrEmpty(key)) query = query.Where(e => e.Code.StartsWith(key));
@@ -39,6 +40,7 @@
             if(entity == null) throw new Exception("Đối tượng không tồn tại");
 
             entity.Description = dto.Description;
+            entity.Active = dto.Active;
 
             this.SaveChanges();
         }
@@ -52,6 +54,7 @@
             var entity = new ICD();
             entity.Code = dto.Code;
             entity.Description = dto.Description;
+            entity.Active = dto.Active;
             this._dal.Add(entity);
             
             this.SaveChanges();

@@ -19,7 +19,7 @@
                     @Html.HiddenFor(model => model.Id)
                 </td>
                 <td class="value">
-                    @Html.DisplayFor(model => model.Id)
+                    <div class="id">@Html.DisplayFor(model => model.Id)</div>
                 </td>
             </tr>
             <tr>
@@ -41,7 +41,6 @@
             <tr>
                 <td class="title">
                     @Html.LabelFor(model => model.Sex):
-                    @Html.ValidationMessageFor(model => model.Sex)
                 </td>
                 <td class="value">@Html.DropDownListFor(model => model.Sex, new SelectList(Model.Sexs, "Id", "Name", Model.Sexs.First().Id))</td>
             </tr>
@@ -54,20 +53,13 @@
             </tr>
             <tr>
                 <td class="title">
-                    @Html.LabelFor(model => model.DateOnSet):
-                    @Html.ValidationMessageFor(model => model.DateOnSet)
-                </td>
-                <td class="value">@Html.EditorFor(model => model.DateOnSet)</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="title">
                     @Html.LabelFor(model => model.Phone):
                     @Html.ValidationMessageFor(model => model.Phone)
                 </td>
                 <td class="value">@Html.EditorFor(model => model.Phone)</td>
             </tr>
+        </table>
+        <table>
             <tr>
                 <td class="title">
                     @Html.LabelFor(model => model.Address):
@@ -82,11 +74,17 @@
                 </td>
                 <td class="value">@Html.EditorFor(model => model.Email)</td>
             </tr>
+            <tr>
+                <td class="title">
+                   <input type="submit" value="Lưu" class="btnLogin save"/>
+                </td>
+                <td class="value">
+                    @{ var id = Model != null && Model.Id > 0 ? Model.Id : 0; }
+                    @{ var display = id > 0 ? "" : "none"; }
+                    <a href="../Charge/Index?patientId=@id" style="float:left; padding-top: 7px; display:@display ">Bệnh án</a>
+                </td>
+            </tr>
         </table>
-        @{ var id = Model != null && Model.Id > 0 ? Model.Id : 0; }
-        @{ var display = id > 0 ? "" : "none"; }
-        <input type="submit" value="Lưu" class="btnLogin save"/>
-        <a href="../Charge/Index?patientId=@id" style="float:left; padding-top: 7px; display:@display ">Bệnh án</a>
     </fieldset>
 }
 
@@ -108,16 +106,16 @@
         
         @foreach (var o in Model.Patients)
         {
+            var sex = o.Sex == true ? "Nam" : "Nữ";
             <tr>
                 <td>@o.Id</td>
                 <td>@o.FirstName</td>
                 <td>@o.LastName</td>
                 <td>@o.Birthday</td>
-                <td style="text-align: center">@o.SexName</td>
+                <td style="text-align: center">@sex</td>
                 <td>@o.Phone</td>
                 <td>
                     <span>@o.Address</span>
-                    <span style="display: none">@o.DateOnSet</span>
                     <span style="display: none">@o.Email</span>
                     <span style="display: none">@o.Sex</span>
                 </td>
@@ -126,3 +124,9 @@
         }
     </table>
  </fieldset>
+ 
+ <script type="text/javascript" language="javascript">
+     $(document).ready(function () {
+         $("#Birthday").attr('type', 'date');
+     });
+</script>

@@ -50,7 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoCompletedDto.cs" />
     <Compile Include="ChargeDto.cs" />
+    <Compile Include="ChargeDrugDto.cs" />
     <Compile Include="SexDto.cs" />
     <Compile Include="CptDto.cs" />
     <Compile Include="DoctorDto.cs" />

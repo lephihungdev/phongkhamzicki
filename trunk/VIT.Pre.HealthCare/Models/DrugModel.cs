@@ -20,6 +20,9 @@
         [Display(Name = "Phí")]
         public decimal Fee { get; set; }
 
+        [Display(Name = "Sử dụng")]
+        public bool Active { get; set; }
+
         public IList<DrugDto> Drugs { get; set; }
     }
 }

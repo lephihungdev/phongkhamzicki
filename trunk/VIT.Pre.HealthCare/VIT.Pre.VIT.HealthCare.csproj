@@ -69,6 +69,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoCompleteAttribute.cs" />
+    <Compile Include="AutocompleteHelpers.cs" />
     <Compile Include="Controllers\ChargeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
@@ -128,9 +130,13 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Scripts\autoComplete.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.4.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.4.js" />
     <Content Include="Scripts\jquery-1.4.4.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Content\css\jquery-ui.css" />
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.js" />
@@ -155,6 +161,7 @@
     <Content Include="Views\Settings\Icd.cshtml" />
     <Content Include="Views\Settings\Cpt.cshtml" />
     <Content Include="Views\Charge\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\autoComplete.cshtml" />
     <None Include="Web References\PreAdmin\PreAdmin.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
