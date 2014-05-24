@@ -33,7 +33,7 @@
                         Birthday = e.Birthday,
                         Email = e.Email,
                         FirstName = e.FirstName,
-                        LastName = e.FirstName,
+                        LastName = e.LastName,
                         Phone = e.Phone,
                         Sex = e.Sex
                     });
