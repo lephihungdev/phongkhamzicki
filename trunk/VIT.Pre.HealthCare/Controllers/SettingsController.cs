@@ -63,6 +63,7 @@
                 Name = model.Name,
                 Description = model.Description,
                 Fee = model.Fee,
+                Active = model.Active,
             };
 
             try
@@ -119,6 +120,7 @@
                 Code = model.Code,
                 Description = model.Description,
                 Fee = model.Fee,
+                Active = model.Active
             };
 
             try
@@ -207,7 +209,8 @@
             {
                 Id = model.Id,
                 Code = model.Code,
-                Description = model.Description
+                Description = model.Description,
+                Active = model.Active
             };
 
             try
@@ -262,7 +265,8 @@
                 LastName = model.LastName,
                 Phone = model.Phone,
                 Id = model.Id,
-                Sex = model.Sex
+                Sex = model.Sex,
+                Active = model.Active
             };
 
             try
