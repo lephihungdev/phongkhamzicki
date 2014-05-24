@@ -162,6 +162,7 @@
     <Content Include="Views\Settings\Cpt.cshtml" />
     <Content Include="Views\Charge\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\autoComplete.cshtml" />
+    <Content Include="Views\Charge\Detail.cshtml" />
     <None Include="Web References\PreAdmin\PreAdmin.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

@@ -16,7 +16,7 @@
             <tr>
                 <td class="title">
                     @Html.LabelFor(model => model.Id):
-                    @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.Id, new { @Value = Model.Id })
                 </td>
                 <td class="value">
                     <div class="id">@Html.DisplayFor(model => model.Id)</div>
