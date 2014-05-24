@@ -1,4 +1,4 @@
-﻿@model VIT.Pre.HealthCare.Models.ChargeModel
+﻿@model VIT.Pre.HealthCare.Models.ChargeListModel
 
 @{
     ViewBag.Title = "Chăm sóc sức khỏe";
@@ -11,8 +11,40 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)}
 
+<fieldset class="patientinfo">
+    <legend>Thông tin bệnh nhân</legend>
+        
+    <table>
+        <tr>
+            <td class="title">@Html.LabelFor(model => model.PatientId):</td>
+            <td class="value"><div class="id">@Html.DisplayFor(model => model.PatientId)</div></td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td class="title">@Html.LabelFor(model => model.PatientName):</td>
+            <td class="value"><div class="id">@Html.DisplayFor(model => model.PatientName)</div></td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td class="title">Ngày khám gần nhất:</td>
+            <td class="value"><div class="id">@Html.DisplayFor(model => model.DateService)</div></td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td rowspan="2" class="title" style="border-right: solid 1px #333">In hồ sơ bệnh án:</td>
+            <td class="value check"><input type="checkbox" />Tất cả phòng khám</td>
+        </tr>
+        <tr>
+            <td class="value"><input type="submit" value="In" class="btnLogin save" style="float:left; padding-left: 15px; width: 80px"/></td>
+        </tr>
+    </table>
+</fieldset>
+
 <fieldset class="patientlist">
-    <legend>Danh sách bệnh nhân</legend>
+    <legend>Hồ sơ bệnh án</legend>
     <table class="table" width="100%" border="0" cellspacing="0" cellpadding="0">
         <thead>
             <tr>
@@ -20,8 +52,8 @@
                 <td>Ngày khám</td>
                 <td>Chuẩn đoán</td>
                 <td>Điều trị</td>
-                <td>Chi tiết</td>
-                <td style="width: 60px">Số lượng</td>
+                <td style="width: 65px">Thòi gian</td>
+                <td style="width: 60px">Chi tiết</td>
                 <td style="width: 25px">Xóa</td>
             </tr>
         </thead>
@@ -32,8 +64,7 @@
                 <td>@o.Id</td>
                 <td>@o.DateService</td>
                 <td>@o.DiagnosticDisplay</td>
-                <td>@o.CPTCode</td>
-                <td>@o.CPTDescription</td>
+                <td>@o.CPTCode - @o.CPTDescription</td>
                 <td>
                     @o.Days
                     <span style="display: none">@o.Diagnostic</span>
@@ -45,6 +76,7 @@
                     <span style="display: none">@o.ICDCode4</span>
                     <span style="display: none">@o.Note</span>
                 </td>
+                <td style="text-align: center"><a href="/Charge/Detail?id=@o.Id&patientId=@Model.PatientId"><img src="../../Content/images/edit.png"/></a></td>
                 <td style="text-align: center"><a href="/Charge/Delete?id=@o.Id"><img src="../../Content/images/DeleteRed.png"/></a></td>
             </tr>
         }
