@@ -67,7 +67,7 @@
             var dto = new PatientDto
             {
                 Address = model.Address,
-                Birthday = model.Birthday,
+                BirthYear = model.BirthYear,
                 Email = model.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
