@@ -11,12 +11,16 @@
     {
         private readonly IChargeDAL _dal;
         private readonly IChargeDrugDAL _chargeDrugDAL;
+        private readonly IICDDAL _icdDAL;
+        private readonly ICPTDAL _cptDAL;
 
         public ChargeBLL(string connectionString = "")
             : base(connectionString)
         {
             this._dal = new ChargeDAL(this.DatabaseFactory);
             this._chargeDrugDAL = new ChargeDrugDAL(this.DatabaseFactory);
+            this._icdDAL = new ICDDAL(this.DatabaseFactory);
+            this._cptDAL = new CPTDAL(this.DatabaseFactory);
         }
 
         public IQueryable<ChargeDto> Get(int patientId, int facilityId = 0)
@@ -42,6 +46,42 @@
                     });
 
             return charges;
+        }
+
+        public ChargeInfoDto GetInfo(int chargeId)
+        {
+            var query = this._dal.GetAll().Where(e => e.Id == chargeId);
+            var charge = query.Select(e => new ChargeInfoDto
+            {
+                Id = e.Id,
+                PatientId = e.PatientId,
+                PatientName = e.Patient.FirstName + " " + e.Patient.LastName,
+                DoctorName = e.Doctor.FirstName + " " + e.Doctor.LastName,
+                CPT = e.CPTCode,
+                Diagnostic = e.Diagnostic + "|" + (e.ICDCode1 ?? string.Empty) + "|" + (e.ICDCode2 ?? string.Empty) + "|" + (e.ICDCode3 ?? string.Empty) + "|" + (e.ICDCode4 ?? string.Empty),
+                Note = e.Note,
+                Days = e.Days,
+                DateService = e.DateService
+            })
+            .FirstOrDefault();
+
+            charge.CPT = this._cptDAL.GetAll().Where(e => e.Code == charge.CPT).Select(e => e.Description).FirstOrDefault();
+
+            if (!string.IsNullOrEmpty(charge.Diagnostic))
+            { 
+                var icds = charge.Diagnostic.Split('|');
+                charge.Diagnostic = icds[0];
+                for(var i = 1; i < 5; i++)
+                {
+                    if (!string.IsNullOrEmpty(icds[i]))
+                    {
+                        charge.Diagnostic += string.IsNullOrEmpty(charge.Diagnostic) ? string.Empty : ", ";
+                        charge.Diagnostic += this._icdDAL.GetAll().Where(e => e.Code == icds[i]).Select(e => e.Description).FirstOrDefault();
+                    }
+                }
+            }
+
+            return charge;
         }
 
         public IQueryable<ChargeDrugDto> GetDrugs(int patientId, int chargeId = 0)
