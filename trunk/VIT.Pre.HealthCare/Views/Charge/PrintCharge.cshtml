@@ -1,0 +1,51 @@
+﻿@model VIT.Pre.HealthCare.Models.ChargePrintModel
+
+@{
+    ViewBag.Title = "PrintCharge";
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+}
+
+<table width="100%">
+    <tr>
+        <td style="text-align:left; font-weight:bold">@ViewBag.FacilityName</td>
+        <td style="text-align:right">Số toa thuốc: @Model.Id</td>
+    </tr>
+</table>
+<h1>ĐƠN THUỐC</h1>
+
+<table width="100%">
+    <tr>
+        <td style="text-align:left;">Mã bệnh nhân: <b>@Model.PatientId</b></td>
+        <td style="text-align:left;padding-left:20px">Họ tên: <b>@Model.PatientName</b></td>
+    </tr>
+    <tr>
+        <td style="text-align:left;">Chẩn đoán: <b>@Model.Diagnostic</b></td>
+        <td style="text-align:left;padding-left:20px">Ngày khám: <b>@String.Format("{0:dd/MM/yyy}", Model.DateService)</b></td>
+    </tr>
+    <tr>
+        <td style="text-align:left;">Phương pháp điều trị: <b>@Model.CPT</b></td>
+        <td style="text-align:left;padding-left:20px">Thời gian điều trị: <b>@Model.Days</b> ngày</td>
+    </tr>
+</table>
+
+<table class="toathuoc" width="100%" border="1" cellspacing="0" cellpadding="0" style="margin:10px 0px">
+
+        @foreach (var o in Model.Drugs)
+        {
+            <tr>
+                <td>@o.DrugId</td>
+                <td>@o.DrugName</td>
+                <td>@o.Quality</td>
+                <td>@o.Note</td>
+            </tr>
+        }
+</table>
+
+<div>Ghi chú: @Model.Note</div>
+
+<div class="sign">Ngày @String.Format("{0:dd/MM/yyy}", DateTime.Now)</div>
+<div class="sign">Bác sĩ điều trị</div>
+<div class="sign" style="margin-top: 50px">â @Model.DoctorName</div>
+    
+    <hr />
+    Khám lại xin mang theo đơn này.

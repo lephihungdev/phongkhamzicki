@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="Models\ChargeDetailModel.cs" />
     <Compile Include="Models\ChargeListModel.cs" />
+    <Compile Include="Models\ChargePrintModel.cs" />
     <Compile Include="Models\CptModel.cs" />
     <Compile Include="Models\IcdModel.cs" />
     <Compile Include="Models\DoctorModel.cs" />
@@ -98,6 +99,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\print.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\images\Document-Add-icon.png" />
     <Content Include="Content\images\edit.png" />
@@ -167,6 +169,8 @@
     <Content Include="Views\Charge\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\autoComplete.cshtml" />
     <Content Include="Views\Charge\Detail.cshtml" />
+    <Content Include="Views\Shared\_PrintLayout.cshtml" />
+    <Content Include="Views\Charge\PrintCharge.cshtml" />
     <None Include="Web References\PreAdmin\PreAdmin.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

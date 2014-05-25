@@ -31,32 +31,28 @@
             this._doctorBLL = new DoctorBLL();
         }
 
-        public ActionResult AddDrugs(ChargeDetailModel model)
+        public ActionResult PrintCharge(int chargeId)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
             this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
             this.ViewBag.UserName = user.UserName;
 
-            var dto = new ChargeDto
-            {
-                Id = model.Id,
-                CPTCode = model.CPTCode,
-                Diagnostic = model.Diagnostic,
-                DoctorId = model.DoctorId == 0 ? null : model.DoctorId,
-                ICDCode1 = model.ICDCode1,
-                ICDCode2 = model.ICDCode2,
-                ICDCode3 = model.ICDCode3,
-                ICDCode4 = model.ICDCode4,
-                Note = model.Note,
-                Days = model.Days
-            };
+            var chargeInfo = this._chargeBLL.GetInfo(chargeId);
+            var model = new ChargePrintModel
+                {
+                    Id = chargeInfo.Id,
+                    CPT = chargeInfo.CPT,
+                    DateService = chargeInfo.DateService,
+                    Days = chargeInfo.Days,
+                    Diagnostic = chargeInfo.Diagnostic,
+                    DoctorName = chargeInfo.DoctorName,
+                    Note = chargeInfo.Note,
+                    PatientId = chargeInfo.PatientId,
+                    PatientName = chargeInfo.PatientName                    
+                };
 
-            model.ListDoctors = this._doctorBLL.Get(user.CompanyId).Where(e => e.Active).ToList();
-            model.ListDoctors.Insert(0, new DoctorDto { LastName = "--- Chọn ---" });
-
-            var facility = 0;
-            facility = user.CompanyId;
+            model.Drugs = this._chargeBLL.GetDrugs(model.PatientId, chargeId).ToList();
 
             return View(model);
         }
