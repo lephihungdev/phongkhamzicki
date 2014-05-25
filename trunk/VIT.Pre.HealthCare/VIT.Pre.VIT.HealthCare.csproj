@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\main.css" />
+    <Content Include="Content\images\Document-Add-icon.png" />
     <Content Include="Content\images\edit.png" />
     <Content Include="Content\images\DeleteRed.png" />
     <Content Include="Content\images\doctor.png" />
