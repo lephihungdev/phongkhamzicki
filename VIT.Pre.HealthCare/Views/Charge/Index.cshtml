@@ -14,33 +14,33 @@
 <fieldset class="patientinfo">
     <legend>Thông tin bệnh nhân</legend>
         
-    <table>
+    <table style="margin-right:15px">
         <tr>
             <td class="title">@Html.LabelFor(model => model.PatientId):</td>
             <td class="value"><div class="id">@Html.DisplayFor(model => model.PatientId)</div></td>
         </tr>
-    </table>
-    <table>
         <tr>
             <td class="title">@Html.LabelFor(model => model.PatientName):</td>
             <td class="value"><div class="id">@Html.DisplayFor(model => model.PatientName)</div></td>
         </tr>
-    </table>
-    <table>
         <tr>
             <td class="title">Ngày khám gần nhất:</td>
             <td class="value"><div class="id">@Html.DisplayFor(model => model.DateService)</div></td>
         </tr>
     </table>
-    <table>
+    <table style="margin-right:15px">
+        <tr>
+            <td colspan="2" class="value"></td>
+        </tr>
         <tr>
             <td rowspan="2" class="title" style="border-right: solid 1px #333">In hồ sơ bệnh án:</td>
             <td class="value check"><input type="checkbox" />Tất cả phòng khám</td>
         </tr>
         <tr>
-            <td class="value"><input type="submit" value="In" class="btnLogin save" style="float:left; padding-left: 15px; width: 80px"/></td>
+            <td class="value"><input type="submit" value="In" class="btnLogin save" style="float:left; margin-left: 15px; width: 80px"/></td>
         </tr>
     </table>
+        <a href="/Charge/Detail?patientId=@Model.PatientId" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/Document-Add-icon.png" alt="Thêm mới điều trị" style="width: 58px;"/> Thêm điều trị mới</a>
 </fieldset>
 
 <fieldset class="patientlist">
