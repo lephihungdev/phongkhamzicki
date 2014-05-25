@@ -78,7 +78,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ChargeModel.cs" />
+    <Compile Include="Models\ChargeDetailModel.cs" />
     <Compile Include="Models\ChargeListModel.cs" />
     <Compile Include="Models\CptModel.cs" />
     <Compile Include="Models\IcdModel.cs" />
@@ -110,6 +110,7 @@
     <Content Include="Content\images\icd-10-icon-217x300.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\new-patient.png" />
+    <Content Include="Content\images\plus.png" />
     <Content Include="Content\images\settings.png" />
     <Content Include="Content\images\treatment.jpg" />
     <Content Include="Content\images\Drug.jpg" />

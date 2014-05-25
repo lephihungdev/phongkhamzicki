@@ -3,7 +3,7 @@
     /// <summary>
     /// The auto completed model.
     /// </summary>
-    public class AutoCompletedDto
+    public class AutoCompletedStringDto
     {
         /// <summary>
         /// Gets or sets the label.

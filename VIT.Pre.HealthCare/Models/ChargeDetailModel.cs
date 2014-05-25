@@ -7,7 +7,7 @@
 
     using VIT.DataTransferObject.HealthCare;
 
-    public class ChargeModel
+    public class ChargeDetailModel
     {
         [Display(Name = "Mã bệnh án")]
         public int Id { get; set; }
@@ -25,39 +25,33 @@
         public string DoctorName { get; set; }
 
         [Display(Name = "Chuẩn đoán")]
-        [UIHint("autoComplete"), AllowHtml]
-        [AutoComplete("Settings", "IcdDescriptionComplete")]
         public string Diagnostic { get; set; }
 
         [Display(Name = "ICD 1")]
         [UIHint("autoComplete"), AllowHtml]
-        [AutoComplete("Settings", "IcdCodeComplete")]
+        [AutoComplete("Settings", "IcdComplete")]
         public string ICDCode1 { get; set; }
 
         [Display(Name = "ICD 2")]
         [UIHint("autoComplete"), AllowHtml]
-        [AutoComplete("Settings", "IcdCodeComplete")]
+        [AutoComplete("Settings", "IcdComplete")]
         public string ICDCode2 { get; set; }
 
         [Display(Name = "ICD 3")]
         [UIHint("autoComplete"), AllowHtml]
-        [AutoComplete("Settings", "IcdCodeComplete")]
+        [AutoComplete("Settings", "IcdComplete")]
         public string ICDCode3 { get; set; }
 
         [Display(Name = "ICD 4")]
         [UIHint("autoComplete"), AllowHtml]
-        [AutoComplete("Settings", "IcdCodeComplete")]
+        [AutoComplete("Settings", "IcdComplete")]
         public string ICDCode4 { get; set; }
 
         [Display(Name = "Điều trị")]
         [Required(ErrorMessage = "Không được để trống.")]
+        [UIHint("autoComplete"), AllowHtml]
+        [AutoComplete("Settings", "CptComplete")]
         public string CPTCode { get; set; }
-
-        [Display(Name = "Điều trị")]
-        public string CPTDescription { get; set; }
-
-        [Display(Name = "Thuốc")]
-        public string Drugs { get; set; }
 
         [Display(Name = "Số ngày")]
         public int Days { get; set; }
@@ -75,10 +69,19 @@
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> DateOnset { get; set; }
 
-        public IList<CptDto> ListCpts { get; set; }
+
+
+        [Display(Name = "Thuốc")]
+        [UIHint("autoComplete"), AllowHtml]
+        [AutoComplete("Settings", "DrugComplete")]
+        public int DrugId { get; set; }
+        public Nullable<int> Quality { get; set; }
+        public string DrugNote { get; set; }
+
+
+
+
         public IList<DoctorDto> ListDoctors { get; set; }
-        public IList<DrugDto> ListDrugs { get; set; }
-        public IList<IcdDto> ListIcds { get; set; }
-        public IList<ChargeDto> ListCharges { get; set; }
+        public IList<ChargeDrugDto> ListChargeDrugs { get; set; }
     }
 }

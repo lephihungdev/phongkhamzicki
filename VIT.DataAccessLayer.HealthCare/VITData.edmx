@@ -23,6 +23,10 @@
             <End Role="Drug" EntitySet="Drug" />
             <End Role="ChargeDrug" EntitySet="ChargeDrug" />
           </AssociationSet>
+          <AssociationSet Name="FK_ChargeDrug_Patient" Association="VITCRMModel.Store.FK_ChargeDrug_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="ChargeDrug" EntitySet="ChargeDrug" />
+          </AssociationSet>
           <AssociationSet Name="FK_Charges_Doctor" Association="VITCRMModel.Store.FK_Charges_Doctor">
             <End Role="Doctor" EntitySet="Doctor" />
             <End Role="Charge" EntitySet="Charge" />
@@ -78,6 +82,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ChargeId" Type="int" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
           <Property Name="DrugId" Type="int" Nullable="false" />
           <Property Name="Quality" Type="int" />
           <Property Name="Note" Type="nvarchar" MaxLength="255" />
@@ -144,6 +149,7 @@
           <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="Sex" Type="bit" />
           <Property Name="Birthday" Type="datetime" />
+          <Property Name="DateOnSet" Type="datetime" />
           <Property Name="Phone" Type="varchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar" MaxLength="200" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
@@ -181,6 +187,20 @@
             </Principal>
             <Dependent Role="ChargeDrug">
               <PropertyRef Name="DrugId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChargeDrug_Patient">
+          <End Role="Patient" Type="VITCRMModel.Store.Patient" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ChargeDrug" Type="VITCRMModel.Store.ChargeDrug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChargeDrug">
+              <PropertyRef Name="PatientId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -314,6 +334,10 @@
             <End Role="Drug" EntitySet="Drugs" />
             <End Role="ChargeDrug" EntitySet="ChargeDrugs" />
           </AssociationSet>
+          <AssociationSet Name="FK_ChargeDrug_Patient" Association="VITHealthCareModel.FK_ChargeDrug_Patient">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="ChargeDrug" EntitySet="ChargeDrugs" />
+          </AssociationSet>
           <AssociationSet Name="FK_CPT_Facility" Association="VITHealthCareModel.FK_CPT_Facility">
             <End Role="Facility" EntitySet="Facilities" />
             <End Role="CPT" EntitySet="CPTs" />
@@ -361,11 +385,13 @@
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="ChargeId" />
+          <Property Type="Int32" Name="PatientId" Nullable="false" />
           <Property Type="Int32" Name="DrugId" Nullable="false" />
           <Property Type="Int32" Name="Quality" />
           <Property Type="String" Name="Note" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Charge" Relationship="VITHealthCareModel.FK_ChargeDrug_Charges" FromRole="ChargeDrug" ToRole="Charge" />
           <NavigationProperty Name="Drug" Relationship="VITHealthCareModel.FK_ChargeDrug_Drug" FromRole="ChargeDrug" ToRole="Drug" />
+          <NavigationProperty Name="Patient" Relationship="VITHealthCareModel.FK_ChargeDrug_Patient" FromRole="ChargeDrug" ToRole="Patient" />
         </EntityType>
         <EntityType Name="CPT">
           <Key>
@@ -439,10 +465,12 @@
           <Property Type="String" Name="LastName" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="Sex" />
           <Property Type="DateTime" Name="Birthday" />
+          <Property Type="DateTime" Name="DateOnSet" />
           <Property Type="String" Name="Phone" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Address" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Charges" Relationship="VITHealthCareModel.FK_Charges_Patient" FromRole="Patient" ToRole="Charge" />
+          <NavigationProperty Name="ChargeDrugs" Relationship="VITHealthCareModel.FK_ChargeDrug_Patient" FromRole="Patient" ToRole="ChargeDrug" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -512,6 +540,18 @@
             </Principal>
             <Dependent Role="ChargeDrug">
               <PropertyRef Name="DrugId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChargeDrug_Patient">
+          <End Type="VITHealthCareModel.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="VITHealthCareModel.ChargeDrug" Role="ChargeDrug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChargeDrug">
+              <PropertyRef Name="PatientId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -596,6 +636,7 @@
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="Quality" ColumnName="Quality" />
                 <ScalarProperty Name="DrugId" ColumnName="DrugId" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
                 <ScalarProperty Name="ChargeId" ColumnName="ChargeId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -665,6 +706,7 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="DateOnSet" ColumnName="DateOnSet" />
                 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
                 <ScalarProperty Name="Sex" ColumnName="Sex" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -707,17 +749,17 @@
     <Diagrams>
       <Diagram Name="VITData">
         <EntityTypeShape EntityType="VITHealthCareModel.Charge" Width="1.5" PointX="5.25" PointY="10.625" Height="4.6725065104166674" />
-        <EntityTypeShape EntityType="VITHealthCareModel.ChargeDrug" Width="1.5" PointX="7.5" PointY="13.875" Height="2.3648893229166692" />
+        <EntityTypeShape EntityType="VITHealthCareModel.ChargeDrug" Width="1.5" PointX="7.5" PointY="13.75" Height="2.7494921875000014" />
         <EntityTypeShape EntityType="VITHealthCareModel.CPT" Width="1.5" PointX="3" PointY="9.875" Height="2.3648893229166745" />
         <EntityTypeShape EntityType="VITHealthCareModel.Doctor" Width="1.5" PointX="3" PointY="13" Height="3.326396484374996" />
         <EntityTypeShape EntityType="VITHealthCareModel.Drug" Width="1.5" PointX="3" PointY="17" Height="2.5571907552083388" />
         <EntityTypeShape EntityType="VITHealthCareModel.Facility" Width="1.5" PointX="0.75" PointY="9.625" Height="2.3648893229166674" />
         <EntityTypeShape EntityType="VITHealthCareModel.ICD" Width="1.5" PointX="0.75" PointY="0.75" Height="1.7879850260416674" />
-        <EntityTypeShape EntityType="VITHealthCareModel.Patient" Width="1.5" PointX="3" PointY="5.625" Height="2.7494921875000031" />
+        <EntityTypeShape EntityType="VITHealthCareModel.Patient" Width="1.5" PointX="3" PointY="5.375" Height="3.1340950520833388" />
         <EntityTypeShape EntityType="VITHealthCareModel.User" Width="1.5" PointX="3" PointY="20.375" Height="2.1725878906250031" />
         <AssociationConnector Association="VITHealthCareModel.FK_ChargeDrug_Charges" >
-          <ConnectorPoint PointX="6.75" PointY="14.586253255208334" />
-          <ConnectorPoint PointX="7.5" PointY="14.586253255208334" />
+          <ConnectorPoint PointX="6.75" PointY="14.523753255208334" />
+          <ConnectorPoint PointX="7.5" PointY="14.523753255208334" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Charges_Doctor" >
           <ConnectorPoint PointX="4.5" PointY="14.148753255208334" />
@@ -731,14 +773,21 @@
           <ConnectorPoint PointX="6" PointY="10.625" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Charges_Patient" >
-          <ConnectorPoint PointX="4.5" PointY="6.9997460937500016" />
-          <ConnectorPoint PointX="5.5937475" PointY="6.9997460937500016" />
+          <ConnectorPoint PointX="4.5" PointY="6.9420475260416694" />
+          <ConnectorPoint PointX="5.5937475" PointY="6.9420475260416694" />
           <ConnectorPoint PointX="5.5937475" PointY="10.625" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_ChargeDrug_Drug" >
           <ConnectorPoint PointX="4.5" PointY="18.278595377604169" />
           <ConnectorPoint PointX="8.25" PointY="18.278595377604169" />
-          <ConnectorPoint PointX="8.25" PointY="16.239889322916667" />
+          <ConnectorPoint PointX="8.25" PointY="16.499492187500003" />
+        </AssociationConnector>
+        <AssociationConnector Association="VITHealthCareModel.FK_ChargeDrug_Patient" >
+          <ConnectorPoint PointX="4.5" PointY="7.7568237890624978" />
+          <ConnectorPoint PointX="5.5104141666666671" PointY="7.7568237890624969" />
+          <ConnectorPoint PointX="5.6770808333333331" PointY="7.7568237890624978" />
+          <ConnectorPoint PointX="8.25" PointY="7.7568237890624978" />
+          <ConnectorPoint PointX="8.25" PointY="13.75" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_CPT_Facility" >
           <ConnectorPoint PointX="2.25" PointY="10.932444661458334" />
