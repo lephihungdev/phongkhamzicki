@@ -17,12 +17,14 @@ namespace VIT.Entity.HealthCare
     {
         public int Id { get; set; }
         public Nullable<int> ChargeId { get; set; }
+        public int PatientId { get; set; }
         public int DrugId { get; set; }
         public Nullable<int> Quality { get; set; }
         public string Note { get; set; }
     
         public virtual Charge Charge { get; set; }
         public virtual Drug Drug { get; set; }
+        public virtual Patient Patient { get; set; }
     }
     
 }

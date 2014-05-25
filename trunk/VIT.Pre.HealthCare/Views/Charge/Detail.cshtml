@@ -1,4 +1,4 @@
-﻿@model VIT.Pre.HealthCare.Models.ChargeModel
+﻿@model VIT.Pre.HealthCare.Models.ChargeDetailModel
 
 @{
     ViewBag.Title = "Chăm sóc sức khỏe";
@@ -11,7 +11,7 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <fieldset class="patientinfo">
-        <legend>Chi tiết bệnh</legend>
+        <legend>Thông tin điều trị</legend>
         
         <table>
             <tr>
@@ -20,7 +20,7 @@
                     @Html.HiddenFor(model => model.Id)
                 </td>
                 <td class="value">
-                    <div class="id">@Html.DisplayFor(model => model.Id)</div>
+                    <div class="id">@Html.DisplayFor(model => model.Id, new { @Value = Model.Id })</div>
                 </td>
             </tr>
             <tr>
@@ -104,11 +104,7 @@
                     @Html.LabelFor(model => model.CPTCode):
                     @Html.ValidationMessageFor(model => model.CPTCode)
                 </td>
-                <td class="value">@Html.DropDownListFor(model => model.CPTCode, new SelectList(Model.ListCpts, "Code", "Description", Model.ListCpts.First().Code))</td>
-            </tr>
-            <tr>
-                <td class="title"><label>Thuốc:</label></td>
-                <td class="value">@Html.DisplayFor(model => model.Drugs)<input type="button" value="Chi tiết"></td>
+                <td class="value">@Html.EditorFor(model => model.CPTCode)</td>
             </tr>
             <tr>
                 <td class="title">
@@ -129,56 +125,47 @@
                     @Html.LabelFor(model => model.Note):
                     @Html.ValidationMessageFor(model => model.Note)
                 </td>
-                <td class="value">@Html.EditorFor(model => model.Note)</td>
+                <td class="value chargenote">@Html.TextAreaFor(model => model.Note)</td>
             </tr>
         </table>
         
         <input type="submit" value="Lưu" class="btnLogin save"/>
+        <input type="submit" value="In" class="btnLogin save"/>
     </fieldset>
-}
 
-<fieldset class="patientlist">
-    <legend>Danh sách bệnh nhân</legend>
+<fieldset class="druglist">
+    <legend>Thông tin thuốc</legend>
     <table class="table" width="100%" border="0" cellspacing="0" cellpadding="0">
         <thead>
             <tr>
-                <td>Mã</td>
-                <td>Ngày khám</td>
-                <td>Chuẩn đoán</td>
-                <td>Điều trị</td>
-                <td>Chi tiết</td>
-                <td>Thuốc</td>
-                <td style="width: 60px">Số lượng</td>
-                <td style="width: 25px">Xóa</td>
+                <td>Mã thốc</td>
+                <td>Tên thuốc</td>
+                <td>Số lượng</td>
+                <td>Ghi chú</td>
+                <td style="width: 25px"></td>
             </tr>
         </thead>
         
-        @foreach (var o in Model.ListCharges)
+        @foreach (var o in Model.ListChargeDrugs)
         {
             <tr>
-                <td>@o.Id</td>
-                <td>@o.DateService</td>
-                <td>@o.DiagnosticDisplay</td>
-                <td>@o.CPTCode</td>
-                <td>@o.CPTDescription</td>
-                <td>@o.Drugs</td>
-                <td>
-                    @o.Days
-                    <span style="display: none">@o.Diagnostic</span>
-                    <span style="display: none">@o.DateOnset</span>
-                    <span style="display: none">@o.DoctorId</span>
-                    <span style="display: none">@o.ICDCode1</span>
-                    <span style="display: none">@o.ICDCode2</span>
-                    <span style="display: none">@o.ICDCode3</span>
-                    <span style="display: none">@o.ICDCode4</span>
-                    <span style="display: none">@o.Note</span>
-                </td>
-                <td style="text-align: center"><a href="/Charge/Delete?id=@o.Id"><img src="../../Content/images/DeleteRed.png"/></a></td>
+                <td>@o.DrugId</td>
+                <td>@o.DrugName</td>
+                <td>@o.Quality</td>
+                <td>@o.Note</td>
+                <td style="text-align: center"><a href=""><img src="../../Content/images/DeleteRed.png"/></a></td>
             </tr>
         }
+
+        <tr class="input">
+                <td colspan="2">@Html.EditorFor(model => model.DrugId)</td>
+                <td>@Html.EditorFor(model => model.Quality)</td>
+                <td>@Html.EditorFor(model => model.DrugNote)</td>
+                <td style="text-align: center"><a href="/Charge/Detail"><img src="../../Content/images/plus.png"/></a></td>
+            </tr>
     </table>
  </fieldset>
- 
+}
   <script type="text/javascript" language="javascript">
       $(document).ready(function () {
           $("#DateService").attr('type', 'date');

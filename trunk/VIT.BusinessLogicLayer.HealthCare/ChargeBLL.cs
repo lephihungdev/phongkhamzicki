@@ -10,11 +10,13 @@
     public class ChargeBLL : BLLBase
     {
         private readonly IChargeDAL _dal;
+        private readonly IChargeDrugDAL _chargeDrugDAL;
 
         public ChargeBLL(string connectionString = "")
             : base(connectionString)
         {
             this._dal = new ChargeDAL(this.DatabaseFactory);
+            this._chargeDrugDAL = new ChargeDrugDAL(this.DatabaseFactory);
         }
 
         public IQueryable<ChargeDto> Get(int patientId, int facilityId = 0)
@@ -40,6 +42,23 @@
                     });
 
             return charges;
+        }
+
+        public IQueryable<ChargeDrugDto> GetDrugs(int patientId, int chargeId = 0)
+        {
+            var query = this._chargeDrugDAL.GetAll().Where(e => e.PatientId == patientId);
+            if (chargeId == 0) query = query.Where(e => e.ChargeId == null);
+            else query = query.Where(e => e.ChargeId == chargeId);
+            var drugs = query.Select(e => new ChargeDrugDto
+            {
+                Id = e.Id,
+                DrugId = e.DrugId,
+                DrugName = e.Drug.Name,
+                Quality = e.Quality,
+                Note = e.Note
+            });
+
+            return drugs;
         }
 
         public void Update(ChargeDto dto, int facilityId, int userId)

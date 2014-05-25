@@ -37,6 +37,25 @@
             return View();
         }
 
+        public ActionResult DrugComplete(string term)
+        {
+            var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
+            if (user == null) return this.RedirectToAction("Login", "Login");
+            this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
+            this.ViewBag.UserName = user.UserName;
+
+            var query = this._drugBLL.Get(user.CompanyId)
+                .Where(e => e.Active)
+                .Where(c => c.Name.StartsWith(term) || c.Description.Contains(term));
+            var icds = query.Select(e => new AutoCompletedIntDto
+            {
+                label = e.Name,
+                value = e.Id
+            });
+
+            return this.Json(icds, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Drug(string code)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
@@ -92,6 +111,25 @@
 
             this._drugBLL.Delete(id, user.CompanyId);
             return this.RedirectToAction("Drug", "Settings");
+        }
+
+        public ActionResult CptComplete(string term)
+        {
+            var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
+            if (user == null) return this.RedirectToAction("Login", "Login");
+            this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
+            this.ViewBag.UserName = user.UserName;
+
+            var query = this._cptBLL.Get(user.CompanyId)
+                .Where(e => e.Active)
+                .Where(c => c.Code.StartsWith(term) || c.Description.Contains(term));
+            var icds = query.Select(e => new AutoCompletedStringDto
+            {
+                label = e.Code + "-" + e.Description,
+                value = e.Code
+            });
+
+            return this.Json(icds, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Cpt(string code)
@@ -151,32 +189,15 @@
             return this.RedirectToAction("Cpt", "Settings");
         }
 
-        public ActionResult IcdCodeComplete(string term)
+        public ActionResult IcdComplete(string term)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
             this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
             this.ViewBag.UserName = user.UserName;
 
-            var query = this._icdBLL.Get().Where(c => c.Code.StartsWith(term) || c.Description.Contains(term));
-            var icds = query.Select(e => new AutoCompletedDto
-            {
-                label = e.Description,
-                value = e.Code
-            });
-
-            return this.Json(icds, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult IcdDescriptionComplete(string term)
-        {
-            var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
-            if (user == null) return this.RedirectToAction("Login", "Login");
-            this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
-            this.ViewBag.UserName = user.UserName;
-
-            var query = this._icdBLL.Get().Where(c => c.Description.Contains(term));
-            var icds = query.Select(e => new AutoCompletedDto
+            var query = this._icdBLL.Get().Where(e => e.Active).Where(c => c.Code.StartsWith(term) || c.Description.Contains(term));
+            var icds = query.Select(e => new AutoCompletedStringDto
             {
                 label = e.Description,
                 value = e.Description

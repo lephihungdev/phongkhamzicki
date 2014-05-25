@@ -53,6 +53,7 @@ text-align: center
 .main .patientinfo table label, .main .patientinfo table .id{padding-top: 6px}
 .main .patientinfo .title{ padding-left: 20px;padding-right: 5px;}
 .main .patientinfo .value input{ width: 200px;}
+.main .patientinfo .chargenote textarea{ width: 199px; height:51px}
 .main .patientinfo .check input{ width: 20px !important;}
 .main .patientinfo .value .id{height: 16px;}
 .main .patientinfo .value select{ width: 204px; height: 23px;}
@@ -60,7 +61,9 @@ text-align: center
 .main .patientinfo .save { margin: 0 10px; float: left}
 
 .main .patientlist{ border-bottom: none;border-left: none;border-right: none;padding: 5px 0px 0px 0px; margin-top: 15px}
-.main .patientlist table img{ width: 16px;height: 16px;}
+.main .patientlist table img, .main .druglist table img{ width: 16px;height: 16px;}
+.main .druglist table .input td{padding:5px}
+.main .druglist .input input{ width: 99%;}
 
 .main .settings div{ width: 128px;height: 150px;float: left;margin: 20px;text-align: center}
 .main .settings img{ width: 128px;height: 128px;margin-bottom: 10px}
