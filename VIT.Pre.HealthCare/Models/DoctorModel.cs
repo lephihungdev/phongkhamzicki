@@ -21,10 +21,8 @@
         [Display(Name = "Giới tính")]
         public Nullable<bool> Sex { get; set; }
 
-        [Display(Name = "Ngày sinh")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        public Nullable<System.DateTime> Birthday { get; set; }
+        [Display(Name = "Năm sinh")]
+        public int? BirthYear { get; set; }
 
         [Display(Name = "Điện thoại")]
         public string Phone { get; set; }

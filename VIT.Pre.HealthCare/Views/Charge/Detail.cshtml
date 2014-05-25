@@ -129,8 +129,8 @@
             </tr>
         </table>
         
-        <input type="submit" value="Lưu" class="btnLogin save"/>
-        <input type="submit" value="In" class="btnLogin save"/>
+        <input type="button" value="Lưu" class="btnLogin save"/>
+        <input type="button" value="In" class="btnLogin save"/>
     </fieldset>
 
 <fieldset class="druglist">
@@ -161,7 +161,7 @@
                 <td colspan="2">@Html.EditorFor(model => model.DrugId)</td>
                 <td>@Html.EditorFor(model => model.Quality)</td>
                 <td>@Html.EditorFor(model => model.DrugNote)</td>
-                <td style="text-align: center"><a href="/Charge/Detail"><img src="../../Content/images/plus.png"/></a></td>
+                <td style="text-align: center"><input type="button" value="Thêm" class="btnLogin save"/></td>
             </tr>
     </table>
  </fieldset>

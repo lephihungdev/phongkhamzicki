@@ -25,7 +25,7 @@ namespace VIT.Entity.HealthCare
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Nullable<bool> Sex { get; set; }
-        public Nullable<System.DateTime> Birthday { get; set; }
+        public Nullable<int> BirthYear { get; set; }
         public Nullable<System.DateTime> DateOnSet { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
