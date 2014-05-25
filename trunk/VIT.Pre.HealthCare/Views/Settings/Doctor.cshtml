@@ -47,10 +47,10 @@
             </tr>
             <tr>
                 <td class="title">
-                    @Html.LabelFor(model => model.Birthday):
-                    @Html.ValidationMessageFor(model => model.Birthday)
+                    @Html.LabelFor(model => model.BirthYear):
+                    @Html.ValidationMessageFor(model => model.BirthYear)
                 </td>
-                <td class="value">@Html.EditorFor(model => model.Birthday)</td>
+                <td class="value">@Html.EditorFor(model => model.BirthYear)</td>
             </tr>
             <tr>
                <td class="title">
@@ -118,7 +118,7 @@
                 <td>@o.Id</td>
                 <td>@o.FirstName</td>
                 <td>@o.LastName</td>
-                <td>@o.Birthday</td>
+                <td>@o.BirthYear</td>
                 <td>@o.SexName</td>
                 <td>@o.Phone</td>
                 <td>
@@ -132,9 +132,3 @@
         }
     </table>
  </fieldset>
- 
-  <script type="text/javascript" language="javascript">
-      $(document).ready(function () {
-          $("#Birthday").attr('type', 'date');
-      });
-</script>
