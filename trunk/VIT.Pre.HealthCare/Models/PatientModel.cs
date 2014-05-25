@@ -21,7 +21,7 @@
         [Display(Name = "Giới tính")]
         public Nullable<bool> Sex { get; set; }
 
-        [Display(Name = "Ngày sinh")]
+        [Display(Name = "Năm sinh")]
         public int? BirthYear { get; set; }
         
         [Display(Name = "Điện thoại")]

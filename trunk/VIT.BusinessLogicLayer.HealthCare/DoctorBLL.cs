@@ -25,7 +25,7 @@
                     {
                         Id = e.Id,
                         Address = e.Address,
-                        Birthday = e.Birthday,
+                        BirthYear = e.BirthYear,
                         Email = e.Email,
                         FirstName = e.FirstName,
                         LastName = e.FirstName,
@@ -49,7 +49,7 @@
             if(entity == null) throw new Exception("Đối tượng không tồn tại");
 
             entity.Address = dto.Address;
-            entity.Birthday = dto.Birthday;
+            entity.BirthYear = dto.BirthYear;
             entity.Email = dto.Email;
             entity.FirstName = dto.FirstName;
             entity.LastName = dto.LastName;
@@ -64,7 +64,7 @@
         {
             var entity = new Doctor();
             entity.Address = dto.Address;
-            entity.Birthday = dto.Birthday;
+            entity.BirthYear = dto.BirthYear;
             entity.Email = dto.Email;
             entity.FirstName = dto.FirstName;
             entity.LastName = dto.LastName;

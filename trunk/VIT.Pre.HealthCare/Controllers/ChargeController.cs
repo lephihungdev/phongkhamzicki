@@ -91,11 +91,11 @@
 
                 model.Days = chargeInfo.Days;
                 model.Note = chargeInfo.Note;
-                model.ICDCode1 = chargeInfo.ICDCode1;
-                model.ICDCode2 = chargeInfo.ICDCode2;
-                model.ICDCode3 = chargeInfo.ICDCode3;
-                model.ICDCode4 = chargeInfo.ICDCode4;
-                model.CPTCode = chargeInfo.CPTCode;
+                //model.ICDCode1 = chargeInfo.ICDCode1;
+                //model.ICDCode2 = chargeInfo.ICDCode2;
+                //model.ICDCode3 = chargeInfo.ICDCode3;
+                //model.ICDCode4 = chargeInfo.ICDCode4;
+                //model.CPTCode = chargeInfo.CPTCode;
                 model.DoctorId = chargeInfo.DoctorId;
                 model.Diagnostic = chargeInfo.Diagnostic;
             }
