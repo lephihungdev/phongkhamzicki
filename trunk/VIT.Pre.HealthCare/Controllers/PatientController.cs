@@ -32,7 +32,7 @@
             if(!allfacility) facility = user.CompanyId;
             
             var model = new PatientModel();
-            var patients = this._patientBLL.Search(string.Empty, facility).ToList();
+            var patients = this._patientBLL.Search(key, facility).ToList();
             model.Patients = patients;
             model.Sexs = this._patientBLL.GetSexs();
 

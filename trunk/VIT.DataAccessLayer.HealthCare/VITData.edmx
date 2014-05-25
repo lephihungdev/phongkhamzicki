@@ -107,7 +107,7 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="Sex" Type="bit" />
-          <Property Name="Birthday" Type="datetime" />
+          <Property Name="BirthYear" Type="int" />
           <Property Name="Phone" Type="varchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar" MaxLength="200" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
@@ -148,7 +148,7 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="Sex" Type="bit" />
-          <Property Name="Birthday" Type="datetime" />
+          <Property Name="BirthYear" Type="int" />
           <Property Name="DateOnSet" Type="datetime" />
           <Property Name="Phone" Type="varchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar" MaxLength="200" />
@@ -414,7 +414,7 @@
           <Property Type="String" Name="FirstName" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="LastName" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="Sex" />
-          <Property Type="DateTime" Name="Birthday" />
+          <Property Type="Int32" Name="BirthYear" />
           <Property Type="String" Name="Phone" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Address" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -464,7 +464,7 @@
           <Property Type="String" Name="FirstName" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="LastName" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="Sex" />
-          <Property Type="DateTime" Name="Birthday" />
+          <Property Type="Int32" Name="BirthYear" />
           <Property Type="DateTime" Name="DateOnSet" />
           <Property Type="String" Name="Phone" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Address" MaxLength="200" FixedLength="false" Unicode="true" />
@@ -661,7 +661,7 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="BirthYear" ColumnName="BirthYear" />
                 <ScalarProperty Name="Sex" ColumnName="Sex" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -707,7 +707,7 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="DateOnSet" ColumnName="DateOnSet" />
-                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="BirthYear" ColumnName="BirthYear" />
                 <ScalarProperty Name="Sex" ColumnName="Sex" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
