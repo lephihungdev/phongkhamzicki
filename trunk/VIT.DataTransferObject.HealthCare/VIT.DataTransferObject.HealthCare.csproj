@@ -55,6 +55,7 @@
     <Compile Include="ChargeDrugDto.cs" />
     <Compile Include="AutoCompletedIntDto.cs" />
     <Compile Include="ChargeInfoDto.cs" />
+    <Compile Include="ClinicalDto.cs" />
     <Compile Include="SexDto.cs" />
     <Compile Include="CptDto.cs" />
     <Compile Include="DoctorDto.cs" />

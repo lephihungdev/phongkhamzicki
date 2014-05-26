@@ -100,5 +100,98 @@
 
             return this.View(model);
         }
+
+        public ActionResult Clinical(int patientId)
+        {
+            var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
+            if (user == null) return this.RedirectToAction("Login", "Login");
+            this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
+            this.ViewBag.UserName = user.UserName;
+
+            var dto = this._patientBLL.GetClinical(patientId, null);
+
+            var model = new ClinicalModel
+            {
+                Id = dto.Id,
+                PatientId = dto.PatientId,
+                ChargeId = dto.ChargeId,
+                CanNang = dto.CanNang,
+                ChieuCao = dto.ChieuCao,
+                HuyetAp = dto.HuyetAp,
+                NhipTim = dto.NhipTim,
+                NhipTho = dto.NhipTho,
+                TimMet = dto.TimMet,
+                TimNangNguc = dto.TimNangNguc,
+                TimKhoTho = dto.TimKhoTho,
+                PhoiHo = dto.PhoiHo,
+                BaoTuDayHoi = dto.BaoTuDayHoi,
+                DaNgua = dto.DaNgua,
+                DaLupusDo = dto.DaLupusDo,
+                DaVayNen = dto.DaVayNen,
+                DaNamLangBeng = dto.DaNamLangBeng,
+                DaCham = dto.DaCham,
+                DaToDia = dto.DaToDia,
+                DaBachBien = dto.DaBachBien,
+                DaZona = dto.DaZona,
+                DauSayXam = dto.DauSayXam,
+                DauDau = dto.DauDau,
+                DauChayMatSong = dto.DauChayMatSong,
+                DauTocRung = dto.DauTocRung,
+                LungDauBaVai = dto.LungDauBaVai,
+                LungCungCoGay = dto.LungCungCoGay,
+                LungLoiSauLung = dto.LungLoiSauLung,
+                LungDauLung = dto.LungDauLung,
+                NgucBungTucNguc = dto.NgucBungTucNguc,
+                NgucBungDauLienSuon = dto.NgucBungDauLienSuon,
+                NgucBungDauBung = dto.NgucBungDauBung,
+                NgucBungDauQuanhRon = dto.NgucBungDauQuanhRon,
+                NgucBungLoiHong = dto.NgucBungLoiHong,
+                TayChanTeMoi = dto.TayChanTeMoi,
+                TayChanDauBapVe = dto.TayChanDauBapVe,
+                TayChanPhu = dto.TayChanPhu,
+                TayChanRaMoHoi = dto.TayChanRaMoHoi,
+                TayChanThonGot = dto.TayChanThonGot,
+                IaBinhThuong = dto.IaBinhThuong,
+                IaBon = dto.IaBon,
+                IaLong = dto.IaLong,
+                IaRaMau = dto.IaRaMau,
+                TieuIt = dto.TieuIt,
+                TieuGat = dto.TieuGat,
+                TieuCoMu = dto.TieuCoMu,
+                TieuRaMau = dto.TieuRaMau,
+                TieuNuocTrong = dto.TieuNuocTrong,
+                TieuNuocVang = dto.TieuNuocVang,
+                TieuNuocDuc = dto.TieuNuocDuc,
+                TieuDemMayLan = dto.TieuDemMayLan,
+                AnMet = dto.AnMet,
+                AnChanAn = dto.AnChanAn,
+                AnDau = dto.AnDau,
+                AnKhoTho = dto.AnKhoTho,
+                AnBinhHoi = dto.AnBinhHoi,
+                AnKhoTieu = dto.AnKhoTieu,
+                NguDuoc = dto.NguDuoc,
+                NguKho = dto.NguKho,
+                NguNangNguc = dto.NguNangNguc,
+                NguRutChan = dto.NguRutChan,
+                NguChuotRut = dto.NguChuotRut,
+                UTai = dto.UTai,
+                HayQuen = dto.HayQuen,
+                MunNhot = dto.MunNhot,
+                Nam = dto.Nam,
+                TanNhang = dto.TanNhang,
+                DangMangThai = dto.DangMangThai,
+                MoiSinh = dto.MoiSinh,
+                KinhNguyetTre = dto.KinhNguyetTre,
+                KinhNguyetGianDoan = dto.KinhNguyetGianDoan,
+                KinhNguyetSom = dto.KinhNguyetSom,
+                KinhNguyetRongKinh = dto.KinhNguyetRongKinh,
+                KinhNguyetManKinh = dto.KinhNguyetManKinh,
+                HuyetTrang = dto.HuyetTrang,
+
+                PatientName = dto.PatientName
+            };
+
+            return View(model);
+        }
     }
 }

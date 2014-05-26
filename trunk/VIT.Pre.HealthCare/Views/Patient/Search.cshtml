@@ -82,6 +82,7 @@
                     @{ var id = Model != null && Model.Id > 0 ? Model.Id : 0; }
                     @{ var display = id > 0 ? "" : "none"; }
                     <a href="../Charge/Index?patientId=@id" style="float:left; padding-top: 7px; display:@display ">Bệnh án</a>
+                    <a href="/Patient/Clinical?patientId=@id" style="float:left; padding-top: 7px; display:@display ">Bệnh án</a>
                 </td>
             </tr>
         </table>
