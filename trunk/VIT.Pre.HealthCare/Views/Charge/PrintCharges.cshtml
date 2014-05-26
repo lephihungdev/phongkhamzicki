@@ -1,0 +1,41 @@
+﻿@model IEnumerable<VIT.Pre.HealthCare.Models.ChargesPrintModel>
+
+@{
+    ViewBag.Title = "PrintCharges";
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+}
+
+<h1>BỆNH ÁN</h1>
+
+<table width="100%">
+    <tr>
+        <td style="text-align:left;">Mã bệnh nhân: <b>@ViewBag.PatientId</b></td>
+        <td style="text-align:left;padding-left:20px;width:175px">Họ tên: <b>@ViewBag.PatientName</b></td>
+    </tr>
+</table>
+
+<table class="table" width="100%" border="0" cellspacing="0" cellpadding="0">
+    @foreach (var m in Model)
+    {
+        <tr>
+            <td colspan="5" class="fac">@m.FacilityName (Id: @m.FacilityId)</td>
+        </tr>
+        <tr class="header">
+            <td>Mã</td>
+            <td style="width: 63px">Ngày khám</td>
+            <td>Chuẩn đoán</td>
+            <td style="min-width: 41px">Điều trị</td>
+            <td style="width: 55px">Thòi gian</td>
+        </tr>
+        foreach (var o in m.ListCharges)
+        {
+            <tr class="body">
+                <td style="text-align: center">@o.Id</td>
+                <td style="text-align: center">@String.Format("{0:dd/MM/yyy}", @o.DateService)</td>
+                <td>@o.DiagnosticDisplay</td>
+                <td>@o.CPTCode - @o.CPTDescription</td>
+                <td style="text-align: center">@o.Days</td>
+            </tr>
+        }
+    }
+</table>

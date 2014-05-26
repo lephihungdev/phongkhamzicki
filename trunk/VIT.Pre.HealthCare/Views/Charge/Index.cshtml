@@ -34,13 +34,13 @@
         </tr>
         <tr>
             <td rowspan="2" class="title" style="border-right: solid 1px #333">In hồ sơ bệnh án:</td>
-            <td class="value check"><input type="checkbox" />Tất cả phòng khám</td>
+            <td class="value check"><input id="allFac" type="checkbox" />Tất cả phòng khám</td>
         </tr>
         <tr>
-            <td class="value"><input type="submit" value="In" class="btnLogin save" style="float:left; margin-left: 15px; width: 80px"/></td>
+            <td class="value"><input type="button" onclick="Print();" value="In" class="btnLogin save" style="float:left; margin-left: 15px; width: 80px"/></td>
         </tr>
     </table>
-        <a href="/Charge/Detail?patientId=@Model.PatientId" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/Document-Add-icon.png" alt="Thêm mới điều trị" style="width: 58px;"/> Thêm điều trị mới</a>
+    <a href="/Charge/Detail?patientId=@Model.PatientId" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/Document-Add-icon.png" alt="Thêm mới điều trị" style="width: 58px;"/> Thêm điều trị mới</a>
 </fieldset>
 
 <fieldset class="patientlist">
@@ -62,7 +62,7 @@
         {
             <tr>
                 <td>@o.Id</td>
-                <td>@o.DateService</td>
+                <td>@String.Format("{0:dd/MM/yyy}", @o.DateService)</td>
                 <td>@o.DiagnosticDisplay</td>
                 <td>@o.CPTCode - @o.CPTDescription</td>
                 <td>
@@ -88,4 +88,12 @@
           $("#DateService").attr('type', 'date');
           $("#DateOnset").attr('type', 'date');
       });
+
+      function Print() {
+          if ($("#allFac")[0].checked) {
+              window.open('/Charge/PrintCharges?patientId=@Model.PatientId&allfacility=true', '_blank', 'width=450, height=600');
+          } else {
+              window.open('/Charge/PrintCharges?patientId=@Model.PatientId', '_blank', 'width=440, height=600');
+          }
+      }
 </script>

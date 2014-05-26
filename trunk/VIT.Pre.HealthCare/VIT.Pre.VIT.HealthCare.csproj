@@ -81,6 +81,7 @@
     <Compile Include="Models\ChargeDetailModel.cs" />
     <Compile Include="Models\ChargeListModel.cs" />
     <Compile Include="Models\ChargePrintModel.cs" />
+    <Compile Include="Models\ChargesPrintModel.cs" />
     <Compile Include="Models\CptModel.cs" />
     <Compile Include="Models\IcdModel.cs" />
     <Compile Include="Models\DoctorModel.cs" />
@@ -102,6 +103,7 @@
     <Content Include="Content\css\print.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\images\Document-Add-icon.png" />
+    <Content Include="Content\images\dossierbleu_documents.png" />
     <Content Include="Content\images\edit.png" />
     <Content Include="Content\images\DeleteRed.png" />
     <Content Include="Content\images\doctor.png" />
@@ -113,6 +115,8 @@
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\new-patient.png" />
     <Content Include="Content\images\plus.png" />
+    <Content Include="Content\images\print-printer-icon.png" />
+    <Content Include="Content\images\Save.png" />
     <Content Include="Content\images\settings.png" />
     <Content Include="Content\images\treatment.jpg" />
     <Content Include="Content\images\Drug.jpg" />
@@ -171,6 +175,7 @@
     <Content Include="Views\Charge\Detail.cshtml" />
     <Content Include="Views\Shared\_PrintLayout.cshtml" />
     <Content Include="Views\Charge\PrintCharge.cshtml" />
+    <Content Include="Views\Charge\PrintCharges.cshtml" />
     <None Include="Web References\PreAdmin\PreAdmin.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

@@ -101,9 +101,35 @@
             return drugs;
         }
 
-        public void Update(ChargeDto dto, int facilityId, int userId)
+        public void RemoveChargeDrug(int id, int patientId, int chargeId)
         {
-            var entity = this._dal.GetAll().FirstOrDefault(e => e.Id == dto.Id && e.FacilityId == facilityId);
+            var entity = this._chargeDrugDAL.GetAll().FirstOrDefault(e => e.Id == id && e.PatientId == patientId && e.ChargeId == chargeId);
+
+            if (entity == null) throw new Exception("Đối tượng không tồn tại");
+
+            this._chargeDrugDAL.Delete(entity);
+
+            this.SaveChanges();
+        }
+        public void AddChargeDrug(ChargeDrugDto dto)
+        {
+            var entity = new ChargeDrug
+            {
+                PatientId = dto.PatientId,
+                DrugId = dto.DrugId,
+                ChargeId = dto.ChargeId,
+                Quality = dto.Quality,
+                Note = dto.Note
+            };
+            this._chargeDrugDAL.Add(entity);
+
+            this.SaveChanges();
+            dto.Id = entity.Id;
+        }
+
+        public void Update(ChargeDto dto, int patientId, int facilityId, int userId)
+        {
+            var entity = this._dal.GetAll().FirstOrDefault(e => e.Id == dto.Id && e.PatientId == patientId && e.FacilityId == facilityId);
             
             if(entity == null) throw new Exception("Đối tượng không tồn tại");
 
@@ -120,27 +146,42 @@
             entity.Days = dto.Days;
             entity.UserId = userId;
 
+            this._dal.Update(entity);
+
             this.SaveChanges();
         }
 
         public void Insert(ChargeDto dto, int patientId, int facilityId, int userId)
         {
-            var entity = new Charge();
-            entity.PatientId = patientId;
-            entity.FacilityId = facilityId;
-            entity.DoctorId = dto.DoctorId;
-            entity.DateOnset = dto.DateOnset;
-            entity.DateService = dto.DateService;
-            entity.CPTCode = dto.CPTCode;
-            entity.Diagnostic = dto.Diagnostic;
-            entity.ICDCode1 = dto.ICDCode1;
-            entity.ICDCode2 = dto.ICDCode2;
-            entity.ICDCode3 = dto.ICDCode3;
-            entity.ICDCode4 = dto.ICDCode4;
-            entity.Note = dto.Note;
-            entity.Days = dto.Days;
-            entity.UserId = userId;
+            var entity = new Charge
+                {
+                    PatientId = patientId,
+                    FacilityId = facilityId,
+                    DoctorId = dto.DoctorId,
+                    DateOnset = dto.DateOnset,
+                    DateService = dto.DateService,
+                    CPTCode = dto.CPTCode,
+                    Diagnostic = dto.Diagnostic,
+                    ICDCode1 = dto.ICDCode1,
+                    ICDCode2 = dto.ICDCode2,
+                    ICDCode3 = dto.ICDCode3,
+                    ICDCode4 = dto.ICDCode4,
+                    Note = dto.Note,
+                    Days = dto.Days,
+                    UserId = userId
+                };
+
             this._dal.Add(entity);
+
+            this.SaveChanges();
+            dto.Id = entity.Id;
+
+            var drugs = this._chargeDrugDAL.GetAll().Where(e => e.ChargeId == 0 && e.PatientId == patientId).ToList();
+            foreach (var chargeDrug in drugs)
+            {
+                chargeDrug.ChargeId = dto.Id;
+                this._chargeDrugDAL.Update(chargeDrug);
+            }
 
             this.SaveChanges();
         }

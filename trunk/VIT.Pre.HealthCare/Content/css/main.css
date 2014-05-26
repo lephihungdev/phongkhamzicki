@@ -61,7 +61,7 @@ text-align: center
 .main .patientinfo .save { margin: 0 10px; float: left}
 
 .main .patientlist{ border-bottom: none;border-left: none;border-right: none;padding: 5px 0px 0px 0px; margin-top: 15px}
-.main .patientlist table img, .main .druglist table img{ width: 16px;height: 16px;}
+.main .patientlist table img, .main .druglist table img{ width: 16px;height: 16px;cursor: pointer}
 .main .druglist table .input td{padding:5px}
 .main .druglist .input input{ width: 99%;}
 
