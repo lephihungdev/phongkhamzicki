@@ -82,6 +82,7 @@
     <Compile Include="Models\ChargeListModel.cs" />
     <Compile Include="Models\ChargePrintModel.cs" />
     <Compile Include="Models\ChargesPrintModel.cs" />
+    <Compile Include="Models\ClinicalModel.cs" />
     <Compile Include="Models\CptModel.cs" />
     <Compile Include="Models\IcdModel.cs" />
     <Compile Include="Models\DoctorModel.cs" />
@@ -176,6 +177,7 @@
     <Content Include="Views\Shared\_PrintLayout.cshtml" />
     <Content Include="Views\Charge\PrintCharge.cshtml" />
     <Content Include="Views\Charge\PrintCharges.cshtml" />
+    <Content Include="Views\Patient\Clinical.cshtml" />
     <None Include="Web References\PreAdmin\PreAdmin.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
