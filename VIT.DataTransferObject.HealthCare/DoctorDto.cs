@@ -16,5 +16,13 @@
         public bool Active { get; set; }
 
         public string SexName { get; set; }
+
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
     }
 }

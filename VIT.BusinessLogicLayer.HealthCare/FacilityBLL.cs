@@ -3,6 +3,7 @@
     using System.Linq;
 
     using VIT.DataAccessLayer.HealthCare;
+    using VIT.DataTransferObject.HealthCare;
     using VIT.Entity.HealthCare;
 
     public class FacilityBLL : BLLBase
@@ -15,6 +16,18 @@
         {
             this._facilityDAL = new FacilityDAL(this.DatabaseFactory);
             this._userDAL = new UserDAL(this.DatabaseFactory);
+        }
+
+        public IQueryable<AutoCompletedIntDto> GetAll(int patientId)
+        {
+            var facilities = this._facilityDAL.GetAll()
+                .Where(e => e.Charges.Any(c => c.PatientId == patientId))
+                .Select(e => new AutoCompletedIntDto
+                    {
+                        label = e.Name,
+                        value = e.Id
+                    });
+            return facilities;
         }
 
         public string GetFacilityName(int id)

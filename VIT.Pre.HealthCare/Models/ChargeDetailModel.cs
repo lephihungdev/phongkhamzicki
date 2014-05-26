@@ -29,28 +29,28 @@
 
         [Display(Name = "ICD 1")]
         [UIHint("autoComplete"), AllowHtml]
-        [AutoComplete("Settings", "IcdComplete")]
+        [AutoComplete("Settings", "IcdComplete", "IcdCompleteById")]
         public string ICDCode1 { get; set; }
 
         [Display(Name = "ICD 2")]
         [UIHint("autoComplete"), AllowHtml]
-        [AutoComplete("Settings", "IcdComplete")]
+        [AutoComplete("Settings", "IcdComplete", "IcdCompleteById")]
         public string ICDCode2 { get; set; }
 
         [Display(Name = "ICD 3")]
         [UIHint("autoComplete"), AllowHtml]
-        [AutoComplete("Settings", "IcdComplete")]
+        [AutoComplete("Settings", "IcdComplete", "IcdCompleteById")]
         public string ICDCode3 { get; set; }
 
         [Display(Name = "ICD 4")]
         [UIHint("autoComplete"), AllowHtml]
-        [AutoComplete("Settings", "IcdComplete")]
+        [AutoComplete("Settings", "IcdComplete", "IcdCompleteById")]
         public string ICDCode4 { get; set; }
 
         [Display(Name = "Điều trị")]
         [Required(ErrorMessage = "Không được để trống.")]
         [UIHint("autoComplete"), AllowHtml]
-        [AutoComplete("Settings", "CptComplete")]
+        [AutoComplete("Settings", "CptComplete", "CptCompleteById")]
         public string CPTCode { get; set; }
 
         [Display(Name = "Số ngày")]

@@ -125,11 +125,29 @@
                 .Where(c => c.Code.StartsWith(term) || c.Description.Contains(term));
             var icds = query.Select(e => new AutoCompletedStringDto
             {
-                label = e.Code + "-" + e.Description,
+                label = e.Code + " - " + e.Description,
                 value = e.Code
             });
 
             return this.Json(icds, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult CptCompleteById(string value)
+        {
+            var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
+            if (user == null) return this.RedirectToAction("Login", "Login");
+            this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
+            this.ViewBag.UserName = user.UserName;
+
+            var dto = new AutoCompletedStringDto();
+            var data = this._cptBLL.Get(user.CompanyId).Select(e => new { e.Code, e.Description }).FirstOrDefault(c => c.Code == value);
+            if (data != null)
+            {
+                dto.label = data.Code + " - " + data.Description;
+                dto.value = data.Code;
+            }
+
+            return this.Json(dto, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Cpt(string code)
@@ -200,10 +218,28 @@
             var icds = query.Select(e => new AutoCompletedStringDto
             {
                 label = e.Description,
-                value = e.Description
+                value = e.Code
             });
 
             return this.Json(icds, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult IcdCompleteById(string value)
+        {
+            var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
+            if (user == null) return this.RedirectToAction("Login", "Login");
+            this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
+            this.ViewBag.UserName = user.UserName;
+
+            var dto = new AutoCompletedStringDto();
+            var data = this._icdBLL.Get().Select(e => new { e.Code, e.Description }).FirstOrDefault(c => c.Code == value);
+            if (data != null)
+            {
+                dto.label = data.Description;
+                dto.value = data.Code;
+            }
+
+            return this.Json(dto, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Icd(string code)

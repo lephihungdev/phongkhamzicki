@@ -5,8 +5,8 @@ $(document).ready(function () {
         .each(function () {
             var $this = $(this);
             $this.autocomplete({
-                change: function(event, ui) {
-                    
+                change: function (event, ui) {
+
                     // blank if nothing was selected
                     if (!ui.item) {
                         $this.val(null);
@@ -15,7 +15,7 @@ $(document).ready(function () {
                         // set value for hidden field
                         var id = $this.attr("data-autocomplete-id");
                         var $hidden = $("[type='hidden'][data-autocomplete-id='" + id + "']");
-                        $hidden.val("-1");
+                        $hidden.val(null);
                     }
                 },
                 select: function (event, ui) {
@@ -39,20 +39,17 @@ $(document).ready(function () {
             var id = $this.attr("data-autocomplete-id");
             var $hidden = $("[type='hidden'][data-autocomplete-id='" + id + "']");
             if ($hidden.val() != "-1" || $hidden.val() != "" || $hidden.val() != null) {
-                var value = parseInt($hidden.val());
-                if (value > 0) {
-                    var getTextUrl = $(this).attr("data-autocomplete-getdisplaytext_url");
-                    if (getTextUrl != null || getTextUrl != "") {
-                        $.ajax({
-                            url: getTextUrl,
-                            type: 'POST',
-                            data: { value: value },
-                            success: function (data) {
-                                $this.val(data.label);
-                            },
-                            error: function (xhr) { alert("Something seems Wrong"); }
-                        });
-                    }
+                var getTextUrl = $(this).attr("data-autocomplete-getdisplaytext_url");
+                if (getTextUrl != null || getTextUrl != "") {
+                    $.ajax({
+                        url: getTextUrl,
+                        type: 'POST',
+                        data: { value: $hidden.val() },
+                        success: function (data) {
+                            $this.val(data.label);
+                        },
+                        error: function (xhr) { alert("Something seems Wrong"); }
+                    });
                 }
             }
         });

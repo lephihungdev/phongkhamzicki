@@ -53,10 +53,18 @@
         /// <returns>
         /// danh sách bệnh nhân
         /// </returns>
-        public IQueryable<PatientDto> Search(string key, int facilityId = 0)
+        public IQueryable<PatientDto> Search(string key, bool hasCharge, int facilityId = 0)
         {
             var query = this._dal.GetAll();
-            if (facilityId > 0) query = query.Where(e => e.Charges.Count == 0 || e.Charges.Any(c => c.FacilityId == facilityId));
+            if (hasCharge)
+            {
+                if (facilityId > 0) query = query.Where(e => e.Charges.Any(c => c.FacilityId == facilityId));
+                else query = query.Where(e => e.Charges.Any());
+            }
+            else
+            {
+                if (facilityId > 0) query = query.Where(e => e.Charges.Count == 0);
+            }
 
             var patients = query.Select(e => new PatientDto
                 {
