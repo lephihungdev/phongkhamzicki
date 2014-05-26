@@ -21,6 +21,7 @@ namespace VIT.Entity.HealthCare
             this.CPTs = new Collection<CPT>();
             this.Doctors = new Collection<Doctor>();
             this.Drugs = new Collection<Drug>();
+            this.Patients = new Collection<Patient>();
             this.Users = new Collection<User>();
         }
     
@@ -31,6 +32,7 @@ namespace VIT.Entity.HealthCare
         public virtual Collection<CPT> CPTs { get; set; }
         public virtual Collection<Doctor> Doctors { get; set; }
         public virtual Collection<Drug> Drugs { get; set; }
+        public virtual Collection<Patient> Patients { get; set; }
         public virtual Collection<User> Users { get; set; }
     }
     

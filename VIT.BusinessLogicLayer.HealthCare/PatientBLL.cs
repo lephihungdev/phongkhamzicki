@@ -53,18 +53,14 @@
         /// <returns>
         /// danh sách bệnh nhân
         /// </returns>
-        public IQueryable<PatientDto> Search(string key, bool hasCharge, int facilityId = 0)
+        public IQueryable<PatientDto> Search(string key, bool? hasCharge, int facilityId = 0)
         {
             var query = this._dal.GetAll();
-            if (hasCharge)
-            {
-                if (facilityId > 0) query = query.Where(e => e.Charges.Any(c => c.FacilityId == facilityId));
-                else query = query.Where(e => e.Charges.Any());
-            }
-            else
-            {
-                if (facilityId > 0) query = query.Where(e => e.Charges.Count == 0);
-            }
+
+            if (hasCharge == true) query = query.Where(e => e.Charges.Count > 0);
+            else if (hasCharge == false) query = query.Where(e => e.Charges.Count == 0);
+
+            if (facilityId > 0) query = query.Where(e => e.FacilityId == facilityId || e.Charges.Any(c => c.FacilityId == facilityId));
 
             var patients = query.Select(e => new PatientDto
                 {
@@ -113,6 +109,7 @@
         public void Insert(PatientDto dto, int facilityId)
         {
             var entity = new Patient();
+            entity.FacilityId = facilityId;
             entity.Address = dto.Address;
             entity.BirthYear = dto.BirthYear;
             entity.Email = dto.Email;
