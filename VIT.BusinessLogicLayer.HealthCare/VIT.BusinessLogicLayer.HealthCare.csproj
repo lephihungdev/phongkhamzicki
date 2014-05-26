@@ -69,7 +69,7 @@
   <ItemGroup>
     <ProjectReference Include="..\VIT.DataAccessLayer.HealthCare\VIT.DataAccessLayer.HealthCare.csproj">
       <Project>{B714060F-8C1A-4BF1-BFD6-A94F42CF5DF6}</Project>
-      <Name>VIT.DataAccessLayer.VIT.HealthCare</Name>
+      <Name>VIT.DataAccessLayer.HealthCare</Name>
     </ProjectReference>
     <ProjectReference Include="..\VIT.DataTransferObject.HealthCare\VIT.DataTransferObject.HealthCare.csproj">
       <Project>{45D16F8C-52C4-4A81-8202-C57EFFBBF0F0}</Project>
