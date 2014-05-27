@@ -8,170 +8,341 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "charge" }))
-{
-    @Html.ValidationSummary(true)
-    <fieldset class="patientinfo">
-        <legend>Thông tin điều trị</legend>
-        
-        <table>
-            <tr>
-                <td class="title">
-                    @Html.LabelFor(model => model.Id):
-                    @Html.HiddenFor(model => model.Id)
-                </td>
-                <td class="value">
-                    <div class="id">@Html.DisplayFor(model => model.Id, new { @Value = Model.Id })</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="title">
-                    @Html.LabelFor(model => model.PatientId):
-                    @Html.HiddenFor(model => model.PatientId)
-                </td>
-                <td class="value">
-                    <div class="id">@Html.DisplayFor(model => model.PatientId)</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="title">
-                    @Html.LabelFor(model => model.PatientName):
-                </td>
-                <td class="value">
-                    <div class="id">@Html.DisplayFor(model => model.PatientName)</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="title">
-                    @Html.LabelFor(model => model.DateOnset):
-                    @Html.ValidationMessageFor(model => model.DateOnset)
-                </td>
-                <td class="value">
-                    @Html.EditorFor(model => model.DateOnset)
-                </td>
-            </tr>
-            <tr>
-                <td class="title">
-                    @Html.LabelFor(model => model.DateService):
-                    @Html.ValidationMessageFor(model => model.DateService)
-                </td>
-                <td class="value">
-                    @Html.EditorFor(model => model.DateService)
-                </td>
-            </tr>
-        </table>
-   
-        <table>
-            <tr>
-                <td class="title">
-                    @Html.LabelFor(model => model.Diagnostic):
-                    @Html.ValidationMessageFor(model => model.Diagnostic)
-                </td>
-                <td class="value"><div class="ui-widget">@Html.EditorFor(model => model.Diagnostic)</div></td>
-            </tr>
-            <tr>
-                <td class="title">
-                    @Html.LabelFor(model => model.ICDCode1):
-                    @Html.ValidationMessageFor(model => model.ICDCode1)
-                </td>
-                <td class="value">@Html.EditorFor(model => model.ICDCode1)</td>
-            </tr>
-            <tr>
-                <td class="title">
-                    @Html.LabelFor(model => model.ICDCode2):
-                    @Html.ValidationMessageFor(model => model.ICDCode2)
-                </td>
-                <td class="value">@Html.EditorFor(model => model.ICDCode2)</td>
-            </tr>
-            <tr>
-                <td class="title">
-                    @Html.LabelFor(model => model.ICDCode3):
-                    @Html.ValidationMessageFor(model => model.ICDCode3)
-                </td>
-                <td class="value">@Html.EditorFor(model => model.ICDCode3)</td>
-            </tr>
-            <tr>
-                <td class="title">
-                    @Html.LabelFor(model => model.ICDCode4):
-                    @Html.ValidationMessageFor(model => model.ICDCode4)
-                </td>
-                <td class="value">@Html.EditorFor(model => model.ICDCode4)</td>
-            </tr>
-        </table>
-        
-        <table>
-            <tr>
-                <td class="title">
-                    @Html.LabelFor(model => model.CPTCode):
-                    @Html.ValidationMessageFor(model => model.CPTCode)
-                </td>
-                <td class="value">@Html.EditorFor(model => model.CPTCode)</td>
-            </tr>
-            <tr>
-                <td class="title">
-                    @Html.LabelFor(model => model.Days):
-                    @Html.ValidationMessageFor(model => model.Days)
-                </td>
-                <td class="value">@Html.EditorFor(model => model.Days)</td>
-            </tr>
-            <tr>
-                <td class="title">
-                    @Html.LabelFor(model => model.DoctorId):
-                    @Html.ValidationMessageFor(model => model.DoctorId)
-                </td>
-                <td class="value">@Html.DropDownListFor(model => model.DoctorId, new SelectList(Model.ListDoctors, "Id", "FullName", Model.ListDoctors.First().Id))</td>
-            </tr>
-            <tr>
-                <td class="title">
-                    @Html.LabelFor(model => model.Note):
-                    @Html.ValidationMessageFor(model => model.Note)
-                </td>
-                <td class="value chargenote">@Html.TextAreaFor(model => model.Note)</td>
-            </tr>
-        </table>
-        
-        <div style="float: left; margin: 5px"><a href="#" onclick="SetAction('ADDCHARGE')" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/Save.png" alt="Lưu" style="width: 58px;"/>Lưu</a></div>
-        <div style="float: left; margin: 5px"><a href="#" onclick="window.open('/Charge/PrintCharge?chargeId=@Model.Id', '_blank', 'width=450, height=600');" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/print-printer-icon.png" alt="In" style="width: 58px;"/>In bệnh án</a></div>
-        <div style="float: left; margin: 5px"><a href="/Charge/Index?patientId=@Model.PatientId" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/dossierbleu_documents.png" alt="Quay lại danh sách" style="width: 58px;"/>Quay lại danh sách</a></div>
-    </fieldset>
+<table>
+    <tr>
+        <td style="width: 155px;vertical-align: top" class="clinicaldisplay">
+            <fieldset class="patientinfo chargeinfo">
+                <legend>Lâm sàng</legend>
+                <ul> <b>Tổng quát</b>
+                    <li>Chiều cao: @Model.Clinical.ChieuCao</li>
+                    <li>Cân nặng: @Model.Clinical.CanNang</li>
+                    <li>Huyết áp: @Model.Clinical.CanNang</li>
+                    <li>Nhịp tim: @Model.Clinical.NhipTim</li>
+                    <li>Nhịp thở: @Model.Clinical.NhipTho</li>
+                </ul>
+                <ul @Model.Clinical.Display(Model.Clinical.TimKhoTho 
+                    || Model.Clinical.TimMet 
+                    || Model.Clinical.TimNangNguc 
+                    || Model.Clinical.PhoiHo)>
+                     <b>Tim - phổi</b>
+                    <li @Model.Clinical.Display(Model.Clinical.TimKhoTho)>Khó thở</li>
+                    <li @Model.Clinical.Display(Model.Clinical.TimMet)>Mệt</li>
+                    <li @Model.Clinical.Display(Model.Clinical.TimNangNguc)>Nặng ngực</li>
+                    <li @Model.Clinical.Display(Model.Clinical.PhoiHo)>Ho</li>
+                </ul>
+                <ul @Model.Clinical.Display(Model.Clinical.DauDau
+                                            || Model.Clinical.DauSayXam
+                                            || Model.Clinical.DauChayMatSong
+                                            || Model.Clinical.DauTocRung)>
+                    <b>Đầu</b>
+                    <li @Model.Clinical.Display(Model.Clinical.DauDau)>Đau</li>
+                    <li @Model.Clinical.Display(Model.Clinical.DauSayXam)>Sây xẩm</li>
+                    <li @Model.Clinical.Display(Model.Clinical.DauChayMatSong)>Chảy mắt sống</li>
+                    <li @Model.Clinical.Display(Model.Clinical.DauTocRung)>Rụng tóc</li>
+                </ul>
+                 <ul @Model.Clinical.Display(Model.Clinical.NgucBungDauBung
+                          || Model.Clinical.NgucBungDauLienSuon
+                          || Model.Clinical.NgucBungDauQuanhRon
+                          || Model.Clinical.BaoTuDayHoi
+                          || Model.Clinical.NgucBungLoiHong
+                          || Model.Clinical.NgucBungTucNguc)>
+                     <b>Ngực - bụng</b>
+                    <li @Model.Clinical.Display(Model.Clinical.NgucBungDauBung)>Đau bụng</li>
+                    <li @Model.Clinical.Display(Model.Clinical.NgucBungDauLienSuon)>Đau liên sườn</li>
+                    <li @Model.Clinical.Display(Model.Clinical.TimMet)>Đau quanh rốn</li>
+                    <li @Model.Clinical.Display(Model.Clinical.PhoiHo)>Đầy hơi</li>
+                    <li @Model.Clinical.Display(Model.Clinical.NgucBungLoiHong)>Lối hông</li>
+                    <li @Model.Clinical.Display(Model.Clinical.NgucBungTucNguc)>Tức ngực</li>
+                </ul>
+                <ul @Model.Clinical.Display(Model.Clinical.TayChanDauBapVe
+                          || Model.Clinical.TayChanPhu
+                          || Model.Clinical.TayChanRaMoHoi
+                          || Model.Clinical.TayChanTeMoi
+                          || Model.Clinical.TayChanThonGot)>
+                     <b>Tay chân</b>
+                    <li @Model.Clinical.Display(Model.Clinical.TayChanDauBapVe)>Đau bắp vế</li>
+                    <li @Model.Clinical.Display(Model.Clinical.TayChanPhu)>Phù</li>
+                    <li @Model.Clinical.Display(Model.Clinical.TayChanRaMoHoi)>Ra mồ hôi</li>
+                    <li @Model.Clinical.Display(Model.Clinical.TayChanTeMoi)>Tê mỏi</li>
+                    <li @Model.Clinical.Display(Model.Clinical.TayChanThonGot)>Thốn gót</li>
+                </ul>
+                <ul @Model.Clinical.Display(Model.Clinical.LungCungCoGay
+                          || Model.Clinical.LungDauBaVai
+                          || Model.Clinical.LungDauLung
+                          || Model.Clinical.LungLoiSauLung)>
+                     <b>Lưng - vai</b>
+                    <li @Model.Clinical.Display(Model.Clinical.LungCungCoGay)>Cứng cổ, gáy</li>
+                    <li @Model.Clinical.Display(Model.Clinical.LungDauBaVai)>Đau bả vai</li>
+                    <li @Model.Clinical.Display(Model.Clinical.LungDauLung)>Đau lưng</li>
+                    <li @Model.Clinical.Display(Model.Clinical.LungLoiSauLung)>Lối sau lưng</li>
+                </ul>
+                <ul @Model.Clinical.Display(Model.Clinical.DaBachBien
+                          || Model.Clinical.DaCham
+                          || Model.Clinical.DaLupusDo
+                          || Model.Clinical.DaNamLangBeng
+                          || Model.Clinical.DaNgua
+                          || Model.Clinical.DaToDia
+                          || Model.Clinical.DaVayNen
+                          || Model.Clinical.DaZona)>
+                     <b>Da</b>
+                    <li @Model.Clinical.Display(Model.Clinical.DaBachBien)>Bạch biến</li>
+                    <li @Model.Clinical.Display(Model.Clinical.DaCham)>Chàm</li>
+                    <li @Model.Clinical.Display(Model.Clinical.DaLupusDo)>Lupus đỏ</li>
+                    <li @Model.Clinical.Display(Model.Clinical.DaNamLangBeng)>Lang beng</li>
+                    <li @Model.Clinical.Display(Model.Clinical.DaNgua)>Ngứa</li>
+                    <li @Model.Clinical.Display(Model.Clinical.DaToDia)>Tổ đĩa</li>
+                    <li @Model.Clinical.Display(Model.Clinical.DaVayNen)>Vảy nến</li>
+                    <li @Model.Clinical.Display(Model.Clinical.DaZona)>Zona</li>
+                </ul>
+                <ul @Model.Clinical.Display(Model.Clinical.IaBon
+                          || Model.Clinical.IaLong
+                          || Model.Clinical.IaRaMau)>
+                     <b>Tiêu</b>
+                    <li @Model.Clinical.Display(Model.Clinical.IaBon)>Bón</li>
+                    <li @Model.Clinical.Display(Model.Clinical.IaLong)>Lỏng</li>
+                    <li @Model.Clinical.Display(Model.Clinical.IaRaMau)>Ra máu</li>
+                </ul>
+                <ul @Model.Clinical.Display(Model.Clinical.TieuCoMu
+                          || Model.Clinical.TieuGat
+                          || Model.Clinical.TieuIt
+                          || Model.Clinical.TieuNuocDuc
+                          || Model.Clinical.TieuNuocVang
+                          || Model.Clinical.TieuRaMau
+                          || Model.Clinical.TieuDemMayLan > 0)>
+                     <b>Tiểu</b>
+                    <li @Model.Clinical.Display(Model.Clinical.TieuCoMu)>Có mủ</li>
+                    <li @Model.Clinical.Display(Model.Clinical.TieuGat)>Gắt</li>
+                    <li @Model.Clinical.Display(Model.Clinical.TieuIt)>Ít</li>
+                    <li @Model.Clinical.Display(Model.Clinical.TieuNuocDuc)>Nước đục</li>
+                    <li @Model.Clinical.Display(Model.Clinical.TieuNuocVang)>Nước vàng</li>
+                    <li @Model.Clinical.Display(Model.Clinical.TieuRaMau)>Ra máu</li>
+                    <li @Model.Clinical.Display(Model.Clinical.TieuDemMayLan > 0)>Tiểu đêm @Model.Clinical.TieuDemMayLan lần</li>
+                </ul>
+                <ul @Model.Clinical.Display(Model.Clinical.AnBinhHoi
+                          || Model.Clinical.AnChanAn
+                          || Model.Clinical.AnDau
+                          || Model.Clinical.AnKhoTieu
+                          || Model.Clinical.AnMet)>
+                     <b>Ăn</b>
+                    <li @Model.Clinical.Display(Model.Clinical.AnBinhHoi)>Bình hơi</li>
+                    <li @Model.Clinical.Display(Model.Clinical.AnChanAn)>Chắn ăn</li>
+                    <li @Model.Clinical.Display(Model.Clinical.AnDau)>Đau</li>
+                    <li @Model.Clinical.Display(Model.Clinical.AnKhoTieu)>Khó tiêu</li>
+                    <li @Model.Clinical.Display(Model.Clinical.AnMet)>Mệt</li>
+                </ul>
+                <ul @Model.Clinical.Display(Model.Clinical.NguChuotRut
+                          || Model.Clinical.NguKho
+                          || Model.Clinical.NguNangNguc
+                          || Model.Clinical.NguRutChan)>
+                     <b>Ngủ</b>
+                    <li @Model.Clinical.Display(Model.Clinical.NguChuotRut)>Chuột rút</li>
+                    <li @Model.Clinical.Display(Model.Clinical.NguKho)>Khó</li>
+                    <li @Model.Clinical.Display(Model.Clinical.NguNangNguc)>Nặng ngực</li>
+                    <li @Model.Clinical.Display(Model.Clinical.NguRutChan)>Rút chân</li>
+                </ul>
+                <ul @Model.Clinical.Display(Model.Clinical.UTai
+                          || Model.Clinical.HayQuen
+                          || Model.Clinical.MunNhot
+                          || Model.Clinical.Nam
+                          || Model.Clinical.TanNhang)>
+                     <b>Khác</b>
+                    <li @Model.Clinical.Display(Model.Clinical.UTai)>Ù tai</li>
+                    <li @Model.Clinical.Display(Model.Clinical.HayQuen)>Hay quên</li>
+                    <li @Model.Clinical.Display(Model.Clinical.MunNhot)>Mụn nhọt</li>
+                    <li @Model.Clinical.Display(Model.Clinical.Nam)>Nám</li>
+                    <li @Model.Clinical.Display(Model.Clinical.TanNhang)>Tàn nhang</li>
+                </ul>
+                <ul @Model.Clinical.Display(Model.Clinical.DangMangThai
+                          || Model.Clinical.MoiSinh > 0
+                          || Model.Clinical.KinhNguyetGianDoan
+                          || Model.Clinical.KinhNguyetManKinh
+                          || Model.Clinical.KinhNguyetRongKinh
+                          || Model.Clinical.KinhNguyetSom
+                          || Model.Clinical.KinhNguyetTre
+                          || !string.IsNullOrEmpty(Model.Clinical.HuyetTrang))>
+                     <b>Phụ nữ</b>
+                    <li @Model.Clinical.Display(Model.Clinical.DangMangThai)>Đang mang thai</li>
+                    <li @Model.Clinical.Display(Model.Clinical.MoiSinh > 0)>Mới sinh @Model.Clinical.MoiSinh ngày</li>
+                    <li @Model.Clinical.Display(Model.Clinical.KinhNguyetGianDoan)>Kinh nguyệt gián đoạn</li>
+                    <li @Model.Clinical.Display(Model.Clinical.KinhNguyetManKinh)>Mãn kinh</li>
+                    <li @Model.Clinical.Display(Model.Clinical.KinhNguyetRongKinh)>Rong kinh</li>
+                    <li @Model.Clinical.Display(Model.Clinical.KinhNguyetSom)>Kinh nguyệt sớm</li>
+                    <li @Model.Clinical.Display(Model.Clinical.KinhNguyetTre)>Kinh nguyệt trể   </li>
+                    <li @Model.Clinical.Display(!string.IsNullOrEmpty(Model.Clinical.HuyetTrang))>Huyết trắng @Model.Clinical.HuyetTrang</li>
+                </ul>
+            </fieldset>
+        </td>
+        <td>
 
-    <fieldset class="druglist">
-        <legend>Thông tin thuốc</legend>
-        <table class="table" width="100%" border="0" cellspacing="0" cellpadding="0">
-            <thead>
-                <tr>
-                    <td>Mã thốc</td>
-                    <td>Tên thuốc</td>
-                    <td>Số lượng</td>
-                    <td>Ghi chú</td>
-                    <td style="width: 30px"></td>
-                </tr>
-            </thead>
-        
-            @foreach (var o in Model.ListChargeDrugs)
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "charge" }))
             {
-                <tr>
-                    <td>@o.DrugId</td>
-                    <td>@o.DrugName</td>
-                    <td>@o.Quality</td>
-                    <td>@o.Note</td>
-                    <td style="text-align: center"><img onclick="SetDrugId(@o.Id); SetAction('REMOVEDRUG')" src="../../Content/images/DeleteRed.png" alt="Xóa thuốc"/></td>
-                </tr>
-            }
+                @Html.ValidationSummary(true)
+                <fieldset class="patientinfo chargeinfo">
+                    <legend>Thông tin điều trị</legend>
+        
+                    <table>
+                        <tr>
+                            <td class="title">
+                                @Html.LabelFor(model => model.Id):
+                                @Html.HiddenFor(model => model.Id)
+                            </td>
+                            <td class="value">
+                                <div class="id">@Html.DisplayFor(model => model.Id, new { @Value = Model.Id })</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="title">
+                                @Html.LabelFor(model => model.PatientId):
+                                @Html.HiddenFor(model => model.PatientId)
+                            </td>
+                            <td class="value">
+                                <div class="id">@Html.DisplayFor(model => model.PatientId)</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="title">
+                                @Html.LabelFor(model => model.PatientName):
+                            </td>
+                            <td class="value">
+                                <div class="id">@Html.DisplayFor(model => model.PatientName)</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="title">
+                                @Html.LabelFor(model => model.DateOnset):
+                                @Html.ValidationMessageFor(model => model.DateOnset)
+                            </td>
+                            <td class="value">
+                                @Html.EditorFor(model => model.DateOnset)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="title">
+                                @Html.LabelFor(model => model.DateService):
+                                @Html.ValidationMessageFor(model => model.DateService)
+                            </td>
+                            <td class="value">
+                                @Html.EditorFor(model => model.DateService)
+                            </td>
+                        </tr>
+                    </table>
+   
+                    <table>
+                        <tr>
+                            <td class="title">
+                                @Html.LabelFor(model => model.Diagnostic):
+                                @Html.ValidationMessageFor(model => model.Diagnostic)
+                            </td>
+                            <td class="value"><div class="ui-widget">@Html.EditorFor(model => model.Diagnostic)</div></td>
+                        </tr>
+                        <tr>
+                            <td class="title">
+                                @Html.LabelFor(model => model.ICDCode1):
+                                @Html.ValidationMessageFor(model => model.ICDCode1)
+                            </td>
+                            <td class="value">@Html.EditorFor(model => model.ICDCode1)</td>
+                        </tr>
+                        <tr>
+                            <td class="title">
+                                @Html.LabelFor(model => model.ICDCode2):
+                                @Html.ValidationMessageFor(model => model.ICDCode2)
+                            </td>
+                            <td class="value">@Html.EditorFor(model => model.ICDCode2)</td>
+                        </tr>
+                        <tr>
+                            <td class="title">
+                                @Html.LabelFor(model => model.ICDCode3):
+                                @Html.ValidationMessageFor(model => model.ICDCode3)
+                            </td>
+                            <td class="value">@Html.EditorFor(model => model.ICDCode3)</td>
+                        </tr>
+                        <tr>
+                            <td class="title">
+                                @Html.LabelFor(model => model.ICDCode4):
+                                @Html.ValidationMessageFor(model => model.ICDCode4)
+                            </td>
+                            <td class="value">@Html.EditorFor(model => model.ICDCode4)</td>
+                        </tr>
+                    </table>
+        
+                    <table>
+                        <tr>
+                            <td class="title">
+                                @Html.LabelFor(model => model.CPTCode):
+                                @Html.ValidationMessageFor(model => model.CPTCode)
+                            </td>
+                            <td class="value">@Html.EditorFor(model => model.CPTCode)</td>
+                        </tr>
+                        <tr>
+                            <td class="title">
+                                @Html.LabelFor(model => model.Days):
+                                @Html.ValidationMessageFor(model => model.Days)
+                            </td>
+                            <td class="value">@Html.EditorFor(model => model.Days)</td>
+                        </tr>
+                        <tr>
+                            <td class="title">
+                                @Html.LabelFor(model => model.DoctorId):
+                                @Html.ValidationMessageFor(model => model.DoctorId)
+                            </td>
+                            <td class="value">@Html.DropDownListFor(model => model.DoctorId, new SelectList(Model.ListDoctors, "Id", "FullName", Model.ListDoctors.First().Id))</td>
+                        </tr>
+                        <tr>
+                            <td class="title">
+                                @Html.LabelFor(model => model.Note):
+                                @Html.ValidationMessageFor(model => model.Note)
+                            </td>
+                            <td class="value chargenote">@Html.TextAreaFor(model => model.Note)</td>
+                        </tr>
+                    </table>
+        
+                    @{ var display = Model.Id > 0 ? "" : "none"; }
+                    <div style="float: left; margin: 5px"><a href="#" onclick="SetAction('ADDCHARGE')" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/Save.png" alt="Lưu" style="width: 58px;"/>Lưu</a></div>
+                    <div style="float: left; margin: 5px; display: @display"><a href="#" onclick="window.open('/Charge/PrintCharge?chargeId=@Model.Id', '_blank', 'width=450, height=600');" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/print-printer-icon.png" alt="In" style="width: 58px;"/>In bệnh án</a></div>
+                    <div style="float: left; margin: 5px"><a href="/Charge/Index?patientId=@Model.PatientId" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/dossierbleu_documents.png" alt="Quay lại danh sách" style="width: 58px;"/>Quay lại danh sách</a></div>
+                </fieldset>
 
-            <tr class="input">
-                <td colspan="2">@Html.EditorFor(model => model.DrugId)</td>
-                <td>@Html.EditorFor(model => model.Quality)</td>
-                <td>@Html.EditorFor(model => model.DrugNote)</td>
-                <td style="text-align: center">
-                    <img onclick="SetAction('ADDDRUG')" src="../../Content/images/plus.png" alt="Thêm thuốc"/>
-                </td>
-            </tr>
-        </table>
-    </fieldset>
+                <fieldset class="druglist">
+                    <legend>Thông tin thuốc</legend>
+                    <table class="table" width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>
+                                <td>Mã thốc</td>
+                                <td>Tên thuốc</td>
+                                <td>Số lượng</td>
+                                <td>Ghi chú</td>
+                                <td style="width: 30px"></td>
+                            </tr>
+                        </thead>
+        
+                        @foreach (var o in Model.ListChargeDrugs)
+                        {
+                            <tr>
+                                <td>@o.DrugId</td>
+                                <td>@o.DrugName</td>
+                                <td>@o.Quality</td>
+                                <td>@o.Note</td>
+                                <td style="text-align: center"><img onclick="SetDrugId(@o.Id); SetAction('REMOVEDRUG')" src="../../Content/images/DeleteRed.png" alt="Xóa thuốc"/></td>
+                            </tr>
+                        }
+
+                        <tr class="input">
+                            <td colspan="2">@Html.EditorFor(model => model.DrugId)</td>
+                            <td>@Html.EditorFor(model => model.Quality)</td>
+                            <td>@Html.EditorFor(model => model.DrugNote)</td>
+                            <td style="text-align: center">
+                                <img onclick="SetAction('ADDDRUG')" src="../../Content/images/plus.png" alt="Thêm thuốc"/>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
     
-    <input type="hidden" id="action" name="action" value="ADDCHARGE"/>
-}
+                <input type="hidden" id="action" name="action" value="ADDCHARGE"/>
+            }
+        </td>
+    </tr>
+</table>
+
   <script type="text/javascript" language="javascript">
       $(document).ready(function () {
           $("#DateService").attr('type', 'date');

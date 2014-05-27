@@ -35,8 +35,8 @@ namespace VIT.Entity.HealthCare
     
         public virtual Collection<Charge> Charges { get; set; }
         public virtual Collection<ChargeDrug> ChargeDrugs { get; set; }
-        public virtual Facility Facility { get; set; }
         public virtual Collection<Clinical> Clinicals { get; set; }
+        public virtual Facility Facility { get; set; }
     }
     
 }

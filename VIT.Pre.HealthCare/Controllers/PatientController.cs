@@ -151,7 +151,6 @@
                 TayChanPhu = dto.TayChanPhu,
                 TayChanRaMoHoi = dto.TayChanRaMoHoi,
                 TayChanThonGot = dto.TayChanThonGot,
-                IaBinhThuong = dto.IaBinhThuong,
                 IaBon = dto.IaBon,
                 IaLong = dto.IaLong,
                 IaRaMau = dto.IaRaMau,
@@ -159,17 +158,14 @@
                 TieuGat = dto.TieuGat,
                 TieuCoMu = dto.TieuCoMu,
                 TieuRaMau = dto.TieuRaMau,
-                TieuNuocTrong = dto.TieuNuocTrong,
                 TieuNuocVang = dto.TieuNuocVang,
                 TieuNuocDuc = dto.TieuNuocDuc,
                 TieuDemMayLan = dto.TieuDemMayLan,
                 AnMet = dto.AnMet,
                 AnChanAn = dto.AnChanAn,
                 AnDau = dto.AnDau,
-                AnKhoTho = dto.AnKhoTho,
                 AnBinhHoi = dto.AnBinhHoi,
                 AnKhoTieu = dto.AnKhoTieu,
-                NguDuoc = dto.NguDuoc,
                 NguKho = dto.NguKho,
                 NguNangNguc = dto.NguNangNguc,
                 NguRutChan = dto.NguRutChan,
@@ -190,6 +186,94 @@
 
                 PatientName = dto.PatientName
             };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Clinical(ClinicalModel model)
+        {
+            var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
+            if (user == null) return this.RedirectToAction("Login", "Login");
+            this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
+            this.ViewBag.UserName = user.UserName;
+
+            var dto = new ClinicalDto
+            {
+                Id = model.Id,
+                PatientId = model.PatientId,
+                ChargeId = model.ChargeId,
+                CanNang = model.CanNang,
+                ChieuCao = model.ChieuCao,
+                HuyetAp = model.HuyetAp,
+                NhipTim = model.NhipTim,
+                NhipTho = model.NhipTho,
+                TimMet = model.TimMet,
+                TimNangNguc = model.TimNangNguc,
+                TimKhoTho = model.TimKhoTho,
+                PhoiHo = model.PhoiHo,
+                BaoTuDayHoi = model.BaoTuDayHoi,
+                DaNgua = model.DaNgua,
+                DaLupusDo = model.DaLupusDo,
+                DaVayNen = model.DaVayNen,
+                DaNamLangBeng = model.DaNamLangBeng,
+                DaCham = model.DaCham,
+                DaToDia = model.DaToDia,
+                DaBachBien = model.DaBachBien,
+                DaZona = model.DaZona,
+                DauSayXam = model.DauSayXam,
+                DauDau = model.DauDau,
+                DauChayMatSong = model.DauChayMatSong,
+                DauTocRung = model.DauTocRung,
+                LungDauBaVai = model.LungDauBaVai,
+                LungCungCoGay = model.LungCungCoGay,
+                LungLoiSauLung = model.LungLoiSauLung,
+                LungDauLung = model.LungDauLung,
+                NgucBungTucNguc = model.NgucBungTucNguc,
+                NgucBungDauLienSuon = model.NgucBungDauLienSuon,
+                NgucBungDauBung = model.NgucBungDauBung,
+                NgucBungDauQuanhRon = model.NgucBungDauQuanhRon,
+                NgucBungLoiHong = model.NgucBungLoiHong,
+                TayChanTeMoi = model.TayChanTeMoi,
+                TayChanDauBapVe = model.TayChanDauBapVe,
+                TayChanPhu = model.TayChanPhu,
+                TayChanRaMoHoi = model.TayChanRaMoHoi,
+                TayChanThonGot = model.TayChanThonGot,
+                IaBon = model.IaBon,
+                IaLong = model.IaLong,
+                IaRaMau = model.IaRaMau,
+                TieuIt = model.TieuIt,
+                TieuGat = model.TieuGat,
+                TieuCoMu = model.TieuCoMu,
+                TieuRaMau = model.TieuRaMau,
+                TieuNuocVang = model.TieuNuocVang,
+                TieuNuocDuc = model.TieuNuocDuc,
+                TieuDemMayLan = model.TieuDemMayLan,
+                AnMet = model.AnMet,
+                AnChanAn = model.AnChanAn,
+                AnDau = model.AnDau,
+                AnBinhHoi = model.AnBinhHoi,
+                AnKhoTieu = model.AnKhoTieu,
+                NguKho = model.NguKho,
+                NguNangNguc = model.NguNangNguc,
+                NguRutChan = model.NguRutChan,
+                NguChuotRut = model.NguChuotRut,
+                UTai = model.UTai,
+                HayQuen = model.HayQuen,
+                MunNhot = model.MunNhot,
+                Nam = model.Nam,
+                TanNhang = model.TanNhang,
+                DangMangThai = model.DangMangThai,
+                MoiSinh = model.MoiSinh,
+                KinhNguyetTre = model.KinhNguyetTre,
+                KinhNguyetGianDoan = model.KinhNguyetGianDoan,
+                KinhNguyetSom = model.KinhNguyetSom,
+                KinhNguyetRongKinh = model.KinhNguyetRongKinh,
+                KinhNguyetManKinh = model.KinhNguyetManKinh,
+                HuyetTrang = model.HuyetTrang,
+            };
+
+            this._patientBLL.SaveClinical(dto);
 
             return View(model);
         }

@@ -65,18 +65,23 @@
             })
             .FirstOrDefault();
 
-            charge.CPT = this._cptDAL.GetAll().Where(e => e.Code == charge.CPT).Select(e => e.Description).FirstOrDefault();
+            if (charge != null)
+            {
+                charge.CPT = this._cptDAL.GetAll().Where(e => e.Code == charge.CPT).Select(e => e.Description).FirstOrDefault();
 
-            if (!string.IsNullOrEmpty(charge.Diagnostic))
-            { 
-                var icds = charge.Diagnostic.Split('|');
-                charge.Diagnostic = icds[0];
-                for(var i = 1; i < 5; i++)
+                if (!string.IsNullOrEmpty(charge.Diagnostic))
                 {
-                    if (!string.IsNullOrEmpty(icds[i]))
+                    var icds = charge.Diagnostic.Split('|');
+                    charge.Diagnostic = icds[0];
+                    for (var i = 1; i < 5; i++)
                     {
-                        charge.Diagnostic += string.IsNullOrEmpty(charge.Diagnostic) ? string.Empty : ", ";
-                        charge.Diagnostic += this._icdDAL.GetAll().Where(e => e.Code == icds[i]).Select(e => e.Description).FirstOrDefault();
+                        if (!string.IsNullOrEmpty(icds[i]))
+                        {
+                            charge.Diagnostic += string.IsNullOrEmpty(charge.Diagnostic) ? string.Empty : ", ";
+                            charge.Diagnostic +=
+                                this._icdDAL.GetAll().Where(e => e.Code == icds[i]).Select(e => e.Description).
+                                    FirstOrDefault();
+                        }
                     }
                 }
             }

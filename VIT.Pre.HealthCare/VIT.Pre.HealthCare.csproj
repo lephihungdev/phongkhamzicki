@@ -112,6 +112,7 @@
     <Content Include="Content\css\login.css" />
     <Content Include="Content\images\btnLogin.png" />
     <Content Include="Content\images\btnLoginOver.png" />
+    <Content Include="Content\images\enrollment_icon_1.png" />
     <Content Include="Content\images\icd-10-icon-217x300.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\new-patient.png" />
