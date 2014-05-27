@@ -49,6 +49,7 @@ text-align: center
 #frmHeader .btnSearch input{width:100%;height: 26px;}
 
 .main fieldset{margin-top: 10px}
+
 .main .patientinfo table{float: left}
 .main .patientinfo table label, .main .patientinfo table .id{padding-top: 6px}
 .main .patientinfo .title{ padding-left: 20px;padding-right: 5px;}
@@ -60,6 +61,14 @@ text-align: center
 .main .patientinfo .value select option{padding:5px 0;}
 .main .patientinfo .save { margin: 0 10px; float: left}
 
+.main .chargeinfo .value input{ width: 150px !important;}
+.main .chargeinfo .value select{ width: 154px; height: 23px;}
+.main .chargeinfo .chargenote textarea{ width: 149px; height:51px}
+
+.main .clinicaldisplay fieldset{min-height: 255px}
+.main .clinicaldisplay ul{list-style-type: none;padding: 0px;margin: 5px 0px 5px 0px;}
+.main .clinicaldisplay ul li{padding: 3px 10px}
+
 .main .patientlist{ border-bottom: none;border-left: none;border-right: none;padding: 5px 0px 0px 0px; margin-top: 15px}
 .main .patientlist table img, .main .druglist table img{ width: 16px;height: 16px;cursor: pointer}
 .main .druglist table .input td{padding:5px}
@@ -68,3 +77,13 @@ text-align: center
 .main .settings div{ width: 128px;height: 150px;float: left;margin: 20px;text-align: center}
 .main .settings img{ width: 128px;height: 128px;margin-bottom: 10px}
 .main .settings a{text-decoration: none;color: #333;font-size: 14px}
+
+.main .Clinical a{text-decoration: none;color: #333;font-size: 14px}
+.main .Clinical img{width: 24px;vertical-align:middle}
+.main .Clinical fieldset{ width: 150px; float: left}
+.main .Clinical div{ width: 176px; float: left}
+.main .Clinical fieldset table{float: left; width: 100%}
+.main .Clinical fieldset table td{height: 26px}
+.main .Clinical fieldset input{max-width: 50px}
+.main .Clinical fieldset .textnum input{width: 20px}
+.main .Clinical fieldset legend{font-weight: bold}

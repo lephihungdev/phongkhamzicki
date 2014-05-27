@@ -5,579 +5,394 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>Clinical</h2>
-
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
-<h1>Lâm Sàng</h1>
-
-
-
+<div class="Clinical">
+<h1 style="text-align: center">Lâm Sàng</h1>
 
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
     <table width="100%">
-    <tr>
-        <td style="text-align:left;">Mã bệnh nhân: <b>@Html.DisplayFor(model => model.PatientId)</b></td>
-        <td style="text-align:left;padding-left:20px;width:175px">Họ tên: <b>@Html.DisplayFor(model => model.PatientName)</b></td>
-    </tr>
+        <tr>
+            <td style="text-align:right;width: 35%">Mã bệnh nhân: <b>@Html.DisplayFor(model => model.PatientId)</b></td>
+            <td style="text-align:left;padding-left:15px">Họ tên: <b>@Html.DisplayFor(model => model.PatientName)</b></td>
+            <td style="text-align:right;width: 15%"><input type="submit" value="Lưu" class="btnLogin save"/></td>
+            <td style="text-align:left;padding-left:20px;width: 35%">
+                <a href="../Charge/Index?patientId=@Model.PatientId" style="padding-top: 5px; ">
+                    <img src="../../Content/images/dossierbleu_documents.png" alt="Quay lại danh sách"/>
+                    Bệnh án
+                </a>
+            </td>
+        </tr>
 </table>
     @Html.HiddenFor(model => model.PatientId, new { @Value = Model.PatientId })
-    <fieldset>
-        <legend>Tổng quát</legend>
-        <table>
-            <tr>
-                <td class="title">Chiều cao:</td>
-                <td class="value">@Html.EditorFor(model => model.ChieuCao)</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="title">Cân nặng:</td>
-                <td class="value">@Html.EditorFor(model => model.CanNang)</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="title">Huyết áp:</td>
-                <td class="value">@Html.EditorFor(model => model.HuyetAp)</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="title">Nhịp tim:</td>
-                <td class="value">@Html.EditorFor(model => model.NhipTim)</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="title">Nhịp thở:</td>
-                <td class="value">@Html.EditorFor(model => model.NhipTho)</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="title">Nhịp thở:</td>
-                <td class="value">@Html.EditorFor(model => model.NhipTho)</td>
-            </tr>
-        </table>
-    </fieldset>
+    @Html.HiddenFor(model => model.Id, new { @Value = Model.Id })
+
+    <div>
+        <fieldset>
+            <legend>Tổng quát</legend>
+            <table>
+                <tr>
+                    <td class="title">Chiều cao:</td>
+                    <td class="value">@Html.EditorFor(model => model.ChieuCao)</td>
+                </tr>
+                <tr>
+                    <td class="title">Cân nặng:</td>
+                    <td class="value">@Html.EditorFor(model => model.CanNang)</td>
+                </tr>
+                <tr>
+                    <td class="title">Huyết áp:</td>
+                    <td class="value">@Html.EditorFor(model => model.HuyetAp)</td>
+                </tr>
+                <tr>
+                    <td class="title">Nhịp tim:</td>
+                    <td class="value">@Html.EditorFor(model => model.NhipTim)</td>
+                </tr>
+                <tr>
+                    <td class="title">Nhịp thở:</td>
+                    <td class="value">@Html.EditorFor(model => model.NhipTho)</td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <fieldset>
+            <legend>Tim - phổi</legend>
+            <table>
+                <tr>
+                    <td class="title">Mệt:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.TimMet)</td>
+                </tr>
+                <tr>
+                    <td class="title">Nặng ngực:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.TimNangNguc)</td>
+                </tr>
+                <tr>
+                    <td class="title">Khó thở:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.TimKhoTho)</td>
+                </tr>
+                <tr>
+                    <td class="title">Ho:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.PhoiHo)</td>
+                </tr>
+            </table>
+        </fieldset> 
+    </div>
     
-    <fieldset>
-        <legend>Tim - phổi</legend>
-        <table>
-            <tr>
-                <td class="title">Mệt:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.TimMet)</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="title">Nặng ngực:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.TimNangNguc)</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="title">Khó thở:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.TimKhoTho)</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="title">Ho:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.PhoiHo)</td>
-            </tr>
-        </table>
-    </fieldset>
+    <div>
+        
+        <fieldset>
+            <legend>Đầu</legend>
+            <table>
+                <tr>
+                    <td class="title">Sây xẩm:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.DauSayXam)</td>
+                </tr>
+                <tr>
+                    <td class="title">Đau:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.DauDau)</td>
+                </tr>
+                <tr>
+                    <td class="title">Chảy mắt sống:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.DauChayMatSong)</td>
+                </tr>
+                <tr>
+                    <td class="title">Rụng tóc:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.DauTocRung)</td>
+                </tr>
+            </table>
+        </fieldset>
     
-    <fieldset>
+         <fieldset>
         <legend>Ngực - bụng</legend>
         <table>
             <tr>
                 <td class="title">Tức ngực:</td>
                 <td class="value">@Html.CheckBoxFor(model => model.NgucBungTucNguc)</td>
             </tr>
-        </table>
-        <table>
             <tr>
                 <td class="title">Đau liên sườn:</td>
                 <td class="value">@Html.CheckBoxFor(model => model.NgucBungDauLienSuon)</td>
             </tr>
-        </table>
-        <table>
             <tr>
                 <td class="title">Đầy hơi:</td>
                 <td class="value">@Html.CheckBoxFor(model => model.BaoTuDayHoi)</td>
             </tr>
-        </table>
-        <table>
             <tr>
                 <td class="title">Đau bụng:</td>
                 <td class="value">@Html.CheckBoxFor(model => model.NgucBungDauBung)</td>
             </tr>
-        </table>
-        <table>
             <tr>
                 <td class="title">Đau quanh rốn:</td>
                 <td class="value">@Html.CheckBoxFor(model => model.NgucBungDauQuanhRon)</td>
             </tr>
-        </table>
-        <table>
             <tr>
                 <td class="title">Lối hông:</td>
                 <td class="value">@Html.CheckBoxFor(model => model.NgucBungLoiHong)</td>
             </tr>
         </table>
     </fieldset>
+    </div>
+    
+    <div>
+        <fieldset>
+            <legend>Tay chân</legend>
+            <table>
+                <tr>
+                    <td class="title">Tê mỏi:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.TayChanTeMoi)</td>
+                </tr>
+                <tr>
+                    <td class="title">Đau bắp vế:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.TayChanDauBapVe)</td>
+                </tr>
+                <tr>
+                    <td class="title">Phù:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.TayChanPhu)</td>
+                </tr>
+                <tr>
+                    <td class="title">Ra mồ hôi:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.TayChanRaMoHoi)</td>
+                </tr>
+                <tr>
+                    <td class="title">Thốn gót:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.TayChanThonGot)</td>
+                </tr>
+            </table>
+        </fieldset>
+    
+       <fieldset>
+            <legend>Khác</legend>
+            <table>
+                <tr>
+                    <td class="title">Ù tai:</td>
+                    <td class="value">@Html.EditorFor(model => model.UTai)</td>
+                </tr>
+                <tr>
+                    <td class="title">Hay quên:</td>
+                    <td class="value">@Html.EditorFor(model => model.HayQuen)</td>
+                </tr>
+                <tr>
+                    <td class="title">Mụn nhọt:</td>
+                    <td class="value">@Html.EditorFor(model => model.MunNhot)</td>
+                </tr>
+                <tr>
+                    <td class="title">Nám:</td>
+                    <td class="value">@Html.EditorFor(model => model.Nam)</td>
+                </tr>
+                <tr>
+                    <td class="title">Tàn nhang:</td>
+                    <td class="value">@Html.EditorFor(model => model.TanNhang)</td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+    
+    <div>
+        <fieldset>
+            <legend>Lưng - vai</legend>
+            <table>
+                <tr>
+                    <td class="title">Đau bả vai:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.LungDauBaVai)</td>
+                </tr>
+                <tr>
+                    <td class="title">Cứng cổ - gáy:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.LungDauBaVai)</td>
+                </tr>
+                <tr>
+                    <td class="title">Lối sau lưng:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.LungLoiSauLung)</td>
+                </tr>
+                <tr>
+                    <td class="title">Đau lưng:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.LungDauLung)</td>
+                </tr>
+            </table>
+        </fieldset>
+        
+         <fieldset>
+            <legend>Da</legend>
+            <table>
+                <tr>
+                    <td class="title">Ngứa:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.DaNgua)</td>
+                </tr>
+                <tr>
+                    <td class="title">Lupus đỏ:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.DaLupusDo)</td>
+                </tr>
+                <tr>
+                    <td class="title">Vảy nến:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.DaVayNen)</td>
+                </tr>
+                <tr>
+                    <td class="title">Nấm - Lang beng:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.DaNamLangBeng)</td>
+                </tr>
+                <tr>
+                    <td class="title">Chàm:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.DaCham)</td>
+                </tr>
+                <tr>
+                    <td class="title">Tổ đĩa:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.DaToDia)</td>
+                </tr>
+                <tr>
+                    <td class="title">Bạch biến:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.DaBachBien)</td>
+                </tr>
+                <tr>
+                    <td class="title">Zona:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.DaZona)</td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+    
+    <div>
+        <fieldset>
+            <legend>Tiêu</legend>
+            <table>
+                <tr>
+                    <td class="title">Tiêu bón:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.IaBon)</td>
+                </tr>
+                <tr>
+                    <td class="title">Tiêu lỏng:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.IaLong)</td>
+                </tr>
+                <tr>
+                    <td class="title">Tiêu ra máu:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.IaRaMau)</td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <fieldset>
+            <legend>Tiểu</legend>
+            <table>
+                <tr>
+                    <td class="title">Tiểu ít:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.TieuIt)</td>
+                </tr>
+                <tr>
+                    <td class="title">Tiểu gắt:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.TieuGat)</td>
+                </tr>
+                <tr>
+                    <td class="title">Tiểu có mủ:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.TieuCoMu)</td>
+                </tr>
+                <tr>
+                    <td class="title">Tiểu ra máu:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.TieuRaMau)</td>
+                </tr>
+                <tr>
+                    <td class="title">Tiểu nước vàng:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.TieuNuocVang)</td>
+                </tr>
+                <tr>
+                    <td class="title">Tiểu nước đục:</td>
+                    <td class="value">@Html.CheckBoxFor(model => model.TieuNuocDuc)</td>
+                </tr>
+                <tr>
+                    <td class="title">Tiểu đêm:</td>
+                    <td class="value textnum">@Html.EditorFor(model => model.TieuDemMayLan)</td>
+                    <td class="title">lần</td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+    
+    <div>
+        <fieldset>
+            <legend>Ăn</legend>
+            <table>
+                <tr>
+                    <td class="title">Mệt:</td>
+                    <td class="value">@Html.EditorFor(model => model.AnMet)</td>
+                </tr>
+                <tr>
+                    <td class="title">Chán ăn:</td>
+                    <td class="value">@Html.EditorFor(model => model.AnChanAn)</td>
+                </tr>
+                <tr>
+                    <td class="title">Đau:</td>
+                    <td class="value">@Html.EditorFor(model => model.AnDau)</td>
+                </tr>
+                <tr>
+                    <td class="title">Bình hơi:</td>
+                    <td class="value">@Html.EditorFor(model => model.AnBinhHoi)</td>
+                </tr>
+                <tr>
+                    <td class="title">Khó tiêu:</td>
+                    <td class="value">@Html.EditorFor(model => model.AnKhoTieu)</td>
+                </tr>
+            </table>
+        </fieldset>
+    
+        <fieldset>
+            <legend>Ngủ</legend>
+            <table>
+                <tr>
+                    <td class="title">Khó:</td>
+                    <td class="value">@Html.EditorFor(model => model.NguKho)</td>
+                </tr>
+                <tr>
+                    <td class="title">Nặng ngực:</td>
+                    <td class="value">@Html.EditorFor(model => model.NguNangNguc)</td>
+                </tr>
+                <tr>
+                    <td class="title">Rút chân:</td>
+                    <td class="value">@Html.EditorFor(model => model.NguRutChan)</td>
+                </tr>
+                <tr>
+                    <td class="title">Chuột rút:</td>
+                    <td class="value">@Html.EditorFor(model => model.NguChuotRut)</td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
     
     <fieldset>
-        <legend>Da</legend>
+        <legend>Phụ nữ</legend>
         <table>
             <tr>
-                <td class="title">Ngứa:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.DaNgua)</td>
+                <td class="title">Đang mang thai:</td>
+                <td class="value">@Html.EditorFor(model => model.DangMangThai)</td>
             </tr>
-        </table>
-        <table>
             <tr>
-                <td class="title">Lupus đỏ:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.DaLupusDo)</td>
+                <td class="title">Mới sinh:</td>
+                <td class="value textnum">@Html.EditorFor(model => model.MoiSinh)</td>
+                <td class="title">ngày</td>
             </tr>
-        </table>
-        <table>
             <tr>
-                <td class="title">Vảy nến:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.DaVayNen)</td>
+                <td class="title">Kinh nguyệt trể:</td>
+                <td class="value">@Html.EditorFor(model => model.KinhNguyetTre)</td>
             </tr>
-        </table>
-        <table>
             <tr>
-                <td class="title">Nấm - Lang beng:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.DaNamLangBeng)</td>
+                <td class="title">Kinh gián đoạn:</td>
+                <td class="value">@Html.EditorFor(model => model.KinhNguyetGianDoan)</td>
             </tr>
-        </table>
-        <table>
             <tr>
-                <td class="title">Chàm:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.DaCham)</td>
+                <td class="title">Kinh sớm:</td>
+                <td class="value">@Html.EditorFor(model => model.KinhNguyetSom)</td>
             </tr>
-        </table>
-        <table>
             <tr>
-                <td class="title">Tổ đĩa:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.DaToDia)</td>
+                <td class="title">Rong kinh:</td>
+                <td class="value">@Html.EditorFor(model => model.KinhNguyetRongKinh)</td>
             </tr>
-        </table>
-        <table>
             <tr>
-                <td class="title">Bạch biến:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.DaBachBien)</td>
+                <td class="title">Mãn kinh:</td>
+                <td class="value">@Html.EditorFor(model => model.KinhNguyetManKinh)</td>
             </tr>
-        </table>
-        <table>
             <tr>
-                <td class="title">Zona:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.DaZona)</td>
+                <td class="title">Huyết trắng:</td>
+                <td class="value">@Html.EditorFor(model => model.KinhNguyetManKinh)</td>
             </tr>
         </table>
-    </fieldset>
-    
-    <fieldset>
-        <legend>Đầu</legend>
-        <table>
-            <tr>
-                <td class="title">Sây xẩm:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.DauSayXam)</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="title">Đau:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.DauDau)</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="title">Chảy mắt sống:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.DauChayMatSong)</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="title">Rụng tóc:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.DauTocRung)</td>
-            </tr>
-        </table>
-    </fieldset>
-    
-    <fieldset>
-        <legend>Lưng - vai</legend>
-        <table>
-            <tr>
-                <td class="title">Đau bả vai:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.LungDauBaVai)</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="title">Cứng cổ - gáy:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.LungDauBaVai)</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="title">Lối sau lưng:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.LungLoiSauLung)</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="title">Đau lưng:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.LungDauLung)</td>
-            </tr>
-        </table>
-    </fieldset>
-    
-    <fieldset>
-        <legend>Tay chân</legend>
-        <table>
-            <tr>
-                <td class="title">Tê mỏi:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.TayChanTeMoi)</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="title">Đau bắp vế:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.TayChanDauBapVe)</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="title">Phù:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.TayChanPhu)</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="title">Ra mồ hôi:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.TayChanRaMoHoi)</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="title">Thốn gót:</td>
-                <td class="value">@Html.CheckBoxFor(model => model.TayChanThonGot)</td>
-            </tr>
-        </table>
-    </fieldset>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IaBinhThuong)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IaBinhThuong)
-            @Html.ValidationMessageFor(model => model.IaBinhThuong)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IaBon)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IaBon)
-            @Html.ValidationMessageFor(model => model.IaBon)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IaLong)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IaLong)
-            @Html.ValidationMessageFor(model => model.IaLong)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IaRaMau)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IaRaMau)
-            @Html.ValidationMessageFor(model => model.IaRaMau)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TieuIt)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.TieuIt)
-            @Html.ValidationMessageFor(model => model.TieuIt)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TieuGat)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.TieuGat)
-            @Html.ValidationMessageFor(model => model.TieuGat)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TieuCoMu)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.TieuCoMu)
-            @Html.ValidationMessageFor(model => model.TieuCoMu)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TieuRaMau)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.TieuRaMau)
-            @Html.ValidationMessageFor(model => model.TieuRaMau)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TieuNuocTrong)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.TieuNuocTrong)
-            @Html.ValidationMessageFor(model => model.TieuNuocTrong)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TieuNuocVang)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.TieuNuocVang)
-            @Html.ValidationMessageFor(model => model.TieuNuocVang)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TieuNuocDuc)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.TieuNuocDuc)
-            @Html.ValidationMessageFor(model => model.TieuNuocDuc)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TieuDemMayLan)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.TieuDemMayLan)
-            @Html.ValidationMessageFor(model => model.TieuDemMayLan)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AnMet)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.AnMet)
-            @Html.ValidationMessageFor(model => model.AnMet)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AnChanAn)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.AnChanAn)
-            @Html.ValidationMessageFor(model => model.AnChanAn)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AnDau)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.AnDau)
-            @Html.ValidationMessageFor(model => model.AnDau)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AnKhoTho)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.AnKhoTho)
-            @Html.ValidationMessageFor(model => model.AnKhoTho)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AnBinhHoi)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.AnBinhHoi)
-            @Html.ValidationMessageFor(model => model.AnBinhHoi)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AnKhoTieu)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.AnKhoTieu)
-            @Html.ValidationMessageFor(model => model.AnKhoTieu)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.NguDuoc)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.NguDuoc)
-            @Html.ValidationMessageFor(model => model.NguDuoc)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.NguKho)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.NguKho)
-            @Html.ValidationMessageFor(model => model.NguKho)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.NguNangNguc)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.NguNangNguc)
-            @Html.ValidationMessageFor(model => model.NguNangNguc)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.NguRutChan)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.NguRutChan)
-            @Html.ValidationMessageFor(model => model.NguRutChan)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.NguChuotRut)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.NguChuotRut)
-            @Html.ValidationMessageFor(model => model.NguChuotRut)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.UTai)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.UTai)
-            @Html.ValidationMessageFor(model => model.UTai)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HayQuen)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HayQuen)
-            @Html.ValidationMessageFor(model => model.HayQuen)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.MunNhot)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.MunNhot)
-            @Html.ValidationMessageFor(model => model.MunNhot)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Nam)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Nam)
-            @Html.ValidationMessageFor(model => model.Nam)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TanNhang)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.TanNhang)
-            @Html.ValidationMessageFor(model => model.TanNhang)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DangMangThai)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DangMangThai)
-            @Html.ValidationMessageFor(model => model.DangMangThai)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.MoiSinh)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.MoiSinh)
-            @Html.ValidationMessageFor(model => model.MoiSinh)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.KinhNguyetTre)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.KinhNguyetTre)
-            @Html.ValidationMessageFor(model => model.KinhNguyetTre)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.KinhNguyetGianDoan)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.KinhNguyetGianDoan)
-            @Html.ValidationMessageFor(model => model.KinhNguyetGianDoan)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.KinhNguyetSom)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.KinhNguyetSom)
-            @Html.ValidationMessageFor(model => model.KinhNguyetSom)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.KinhNguyetRongKinh)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.KinhNguyetRongKinh)
-            @Html.ValidationMessageFor(model => model.KinhNguyetRongKinh)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.KinhNguyetManKinh)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.KinhNguyetManKinh)
-            @Html.ValidationMessageFor(model => model.KinhNguyetManKinh)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HuyetTrang)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HuyetTrang)
-            @Html.ValidationMessageFor(model => model.HuyetTrang)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PatientName)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PatientName)
-            @Html.ValidationMessageFor(model => model.PatientName)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
     </fieldset>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
-

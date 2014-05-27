@@ -25,7 +25,8 @@
             </table>
         </form>
         <div class="main">
-            <p id="ErrorLabel" style="padding: 5px; color: Red; font-weight: bold; font-size: 12px;">@ViewBag.ErrorLabel</p>
+            @{ var display = string.IsNullOrEmpty(@ViewBag.ErrorLabel) ? "none" : "";}
+            <p id="ErrorLabel" style="padding: 5px; color: Red; font-weight: bold; font-size: 12px;display:@display">@ViewBag.ErrorLabel</p>
             @RenderBody()
         </div>
     </body>

@@ -8,6 +8,7 @@
         <EntityContainer Name="VITCRMModelStoreContainer">
           <EntitySet Name="Charge" EntityType="VITCRMModel.Store.Charge" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ChargeDrug" EntityType="VITCRMModel.Store.ChargeDrug" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Clinical" EntityType="VITCRMModel.Store.Clinical" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CPT" EntityType="VITCRMModel.Store.CPT" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Doctor" EntityType="VITCRMModel.Store.Doctor" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Drug" EntityType="VITCRMModel.Store.Drug" store:Type="Tables" Schema="dbo" />
@@ -15,7 +16,6 @@
           <EntitySet Name="ICD" EntityType="VITCRMModel.Store.ICD" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Patient" EntityType="VITCRMModel.Store.Patient" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="VITCRMModel.Store.User" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Clinical" EntityType="VITCRMModel.Store.Clinical" store:Type="Tables" Schema="fashaju_zicki" />
           <AssociationSet Name="FK_ChargeDrug_Charges" Association="VITCRMModel.Store.FK_ChargeDrug_Charges">
             <End Role="Charge" EntitySet="Charge" />
             <End Role="ChargeDrug" EntitySet="ChargeDrug" />
@@ -100,6 +100,82 @@
           <Property Name="Quality" Type="int" />
           <Property Name="Note" Type="nvarchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="Clinical">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="ChargeId" Type="int" />
+          <Property Name="CanNang" Type="nvarchar" MaxLength="50" />
+          <Property Name="ChieuCao" Type="nvarchar" MaxLength="50" />
+          <Property Name="HuyetAp" Type="nvarchar" MaxLength="50" />
+          <Property Name="NhipTim" Type="nvarchar" MaxLength="50" />
+          <Property Name="NhipTho" Type="nvarchar" MaxLength="50" />
+          <Property Name="TimMet" Type="bit" Nullable="false" />
+          <Property Name="TimNangNguc" Type="bit" Nullable="false" />
+          <Property Name="TimKhoTho" Type="bit" Nullable="false" />
+          <Property Name="PhoiHo" Type="bit" Nullable="false" />
+          <Property Name="BaoTuDayHoi" Type="bit" Nullable="false" />
+          <Property Name="DaNgua" Type="bit" Nullable="false" />
+          <Property Name="DaLupusDo" Type="bit" Nullable="false" />
+          <Property Name="DaVayNen" Type="bit" Nullable="false" />
+          <Property Name="DaNamLangBeng" Type="bit" Nullable="false" />
+          <Property Name="DaCham" Type="bit" Nullable="false" />
+          <Property Name="DaToDia" Type="bit" Nullable="false" />
+          <Property Name="DaBachBien" Type="bit" Nullable="false" />
+          <Property Name="DaZona" Type="bit" Nullable="false" />
+          <Property Name="DauSayXam" Type="bit" Nullable="false" />
+          <Property Name="DauDau" Type="bit" Nullable="false" />
+          <Property Name="DauChayMatSong" Type="bit" Nullable="false" />
+          <Property Name="DauTocRung" Type="bit" Nullable="false" />
+          <Property Name="LungDauBaVai" Type="bit" Nullable="false" />
+          <Property Name="LungCungCoGay" Type="bit" Nullable="false" />
+          <Property Name="LungLoiSauLung" Type="bit" Nullable="false" />
+          <Property Name="LungDauLung" Type="bit" Nullable="false" />
+          <Property Name="NgucBungTucNguc" Type="bit" Nullable="false" />
+          <Property Name="NgucBungDauLienSuon" Type="bit" Nullable="false" />
+          <Property Name="NgucBungDauBung" Type="bit" Nullable="false" />
+          <Property Name="NgucBungDauQuanhRon" Type="bit" Nullable="false" />
+          <Property Name="NgucBungLoiHong" Type="bit" Nullable="false" />
+          <Property Name="TayChanTeMoi" Type="bit" Nullable="false" />
+          <Property Name="TayChanDauBapVe" Type="bit" Nullable="false" />
+          <Property Name="TayChanPhu" Type="bit" Nullable="false" />
+          <Property Name="TayChanRaMoHoi" Type="bit" Nullable="false" />
+          <Property Name="TayChanThonGot" Type="bit" Nullable="false" />
+          <Property Name="IaBon" Type="bit" Nullable="false" />
+          <Property Name="IaLong" Type="bit" Nullable="false" />
+          <Property Name="IaRaMau" Type="bit" Nullable="false" />
+          <Property Name="TieuIt" Type="bit" Nullable="false" />
+          <Property Name="TieuGat" Type="bit" Nullable="false" />
+          <Property Name="TieuCoMu" Type="bit" Nullable="false" />
+          <Property Name="TieuRaMau" Type="bit" Nullable="false" />
+          <Property Name="TieuNuocVang" Type="bit" Nullable="false" />
+          <Property Name="TieuNuocDuc" Type="bit" Nullable="false" />
+          <Property Name="TieuDemMayLan" Type="int" Nullable="false" />
+          <Property Name="AnMet" Type="bit" Nullable="false" />
+          <Property Name="AnChanAn" Type="bit" Nullable="false" />
+          <Property Name="AnDau" Type="bit" Nullable="false" />
+          <Property Name="AnBinhHoi" Type="bit" Nullable="false" />
+          <Property Name="AnKhoTieu" Type="bit" Nullable="false" />
+          <Property Name="NguKho" Type="bit" Nullable="false" />
+          <Property Name="NguNangNguc" Type="bit" Nullable="false" />
+          <Property Name="NguRutChan" Type="bit" Nullable="false" />
+          <Property Name="NguChuotRut" Type="bit" Nullable="false" />
+          <Property Name="UTai" Type="bit" Nullable="false" />
+          <Property Name="HayQuen" Type="bit" Nullable="false" />
+          <Property Name="MunNhot" Type="bit" Nullable="false" />
+          <Property Name="Nam" Type="bit" Nullable="false" />
+          <Property Name="TanNhang" Type="bit" Nullable="false" />
+          <Property Name="DangMangThai" Type="bit" Nullable="false" />
+          <Property Name="MoiSinh" Type="int" />
+          <Property Name="KinhNguyetTre" Type="bit" Nullable="false" />
+          <Property Name="KinhNguyetGianDoan" Type="bit" Nullable="false" />
+          <Property Name="KinhNguyetSom" Type="bit" Nullable="false" />
+          <Property Name="KinhNguyetRongKinh" Type="bit" Nullable="false" />
+          <Property Name="KinhNguyetManKinh" Type="bit" Nullable="false" />
+          <Property Name="HuyetTrang" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="CPT">
           <Key>
             <PropertyRef Name="Id" />
@@ -177,86 +253,6 @@
           <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Password" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="FullName" Type="nvarchar" Nullable="false" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="Clinical">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="PatientId" Type="int" Nullable="false" />
-          <Property Name="ChargeId" Type="int" />
-          <Property Name="CanNang" Type="nvarchar" MaxLength="50" />
-          <Property Name="ChieuCao" Type="nvarchar" MaxLength="50" />
-          <Property Name="HuyetAp" Type="nvarchar" MaxLength="50" />
-          <Property Name="NhipTim" Type="nvarchar" MaxLength="50" />
-          <Property Name="NhipTho" Type="nvarchar" MaxLength="50" />
-          <Property Name="TimMet" Type="bit" Nullable="false" />
-          <Property Name="TimNangNguc" Type="bit" Nullable="false" />
-          <Property Name="TimKhoTho" Type="bit" Nullable="false" />
-          <Property Name="PhoiHo" Type="bit" Nullable="false" />
-          <Property Name="BaoTuDayHoi" Type="bit" Nullable="false" />
-          <Property Name="DaNgua" Type="bit" Nullable="false" />
-          <Property Name="DaLupusDo" Type="bit" Nullable="false" />
-          <Property Name="DaVayNen" Type="bit" Nullable="false" />
-          <Property Name="DaNamLangBeng" Type="bit" Nullable="false" />
-          <Property Name="DaCham" Type="bit" Nullable="false" />
-          <Property Name="DaToDia" Type="bit" Nullable="false" />
-          <Property Name="DaBachBien" Type="bit" Nullable="false" />
-          <Property Name="DaZona" Type="bit" Nullable="false" />
-          <Property Name="DauSayXam" Type="bit" Nullable="false" />
-          <Property Name="DauDau" Type="bit" Nullable="false" />
-          <Property Name="DauChayMatSong" Type="bit" Nullable="false" />
-          <Property Name="DauTocRung" Type="bit" Nullable="false" />
-          <Property Name="LungDauBaVai" Type="bit" Nullable="false" />
-          <Property Name="LungCungCoGay" Type="bit" Nullable="false" />
-          <Property Name="LungLoiSauLung" Type="bit" Nullable="false" />
-          <Property Name="LungDauLung" Type="bit" Nullable="false" />
-          <Property Name="NgucBungTucNguc" Type="bit" Nullable="false" />
-          <Property Name="NgucBungDauLienSuon" Type="bit" Nullable="false" />
-          <Property Name="NgucBungDauBung" Type="bit" Nullable="false" />
-          <Property Name="NgucBungDauQuanhRon" Type="bit" Nullable="false" />
-          <Property Name="NgucBungLoiHong" Type="bit" Nullable="false" />
-          <Property Name="TayChanTeMoi" Type="bit" Nullable="false" />
-          <Property Name="TayChanDauBapVe" Type="bit" Nullable="false" />
-          <Property Name="TayChanPhu" Type="bit" Nullable="false" />
-          <Property Name="TayChanRaMoHoi" Type="bit" Nullable="false" />
-          <Property Name="TayChanThonGot" Type="bit" Nullable="false" />
-          <Property Name="IaBinhThuong" Type="bit" Nullable="false" />
-          <Property Name="IaBon" Type="bit" Nullable="false" />
-          <Property Name="IaLong" Type="bit" Nullable="false" />
-          <Property Name="IaRaMau" Type="bit" Nullable="false" />
-          <Property Name="TieuIt" Type="bit" Nullable="false" />
-          <Property Name="TieuGat" Type="bit" Nullable="false" />
-          <Property Name="TieuCoMu" Type="bit" Nullable="false" />
-          <Property Name="TieuRaMau" Type="bit" Nullable="false" />
-          <Property Name="TieuNuocTrong" Type="bit" Nullable="false" />
-          <Property Name="TieuNuocVang" Type="bit" Nullable="false" />
-          <Property Name="TieuNuocDuc" Type="bit" Nullable="false" />
-          <Property Name="TieuDemMayLan" Type="int" Nullable="false" />
-          <Property Name="AnMet" Type="bit" Nullable="false" />
-          <Property Name="AnChanAn" Type="bit" Nullable="false" />
-          <Property Name="AnDau" Type="bit" Nullable="false" />
-          <Property Name="AnKhoTho" Type="bit" Nullable="false" />
-          <Property Name="AnBinhHoi" Type="bit" Nullable="false" />
-          <Property Name="AnKhoTieu" Type="bit" Nullable="false" />
-          <Property Name="NguDuoc" Type="bit" Nullable="false" />
-          <Property Name="NguKho" Type="bit" Nullable="false" />
-          <Property Name="NguNangNguc" Type="bit" Nullable="false" />
-          <Property Name="NguRutChan" Type="bit" Nullable="false" />
-          <Property Name="NguChuotRut" Type="bit" Nullable="false" />
-          <Property Name="UTai" Type="bit" Nullable="false" />
-          <Property Name="HayQuen" Type="bit" Nullable="false" />
-          <Property Name="MunNhot" Type="bit" Nullable="false" />
-          <Property Name="Nam" Type="bit" Nullable="false" />
-          <Property Name="TanNhang" Type="bit" Nullable="false" />
-          <Property Name="DangMangThai" Type="bit" Nullable="false" />
-          <Property Name="MoiSinh" Type="int" />
-          <Property Name="KinhNguyetTre" Type="bit" Nullable="false" />
-          <Property Name="KinhNguyetGianDoan" Type="bit" Nullable="false" />
-          <Property Name="KinhNguyetSom" Type="bit" Nullable="false" />
-          <Property Name="KinhNguyetRongKinh" Type="bit" Nullable="false" />
-          <Property Name="KinhNguyetManKinh" Type="bit" Nullable="false" />
-          <Property Name="HuyetTrang" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_ChargeDrug_Charges">
           <End Role="Charge" Type="VITCRMModel.Store.Charge" Multiplicity="0..1" />
@@ -439,6 +435,7 @@
         <EntityContainer Name="HealthCareEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Charges" EntityType="VITHealthCareModel.Charge" />
           <EntitySet Name="ChargeDrugs" EntityType="VITHealthCareModel.ChargeDrug" />
+          <EntitySet Name="Clinicals" EntityType="VITHealthCareModel.Clinical" />
           <EntitySet Name="CPTs" EntityType="VITHealthCareModel.CPT" />
           <EntitySet Name="Doctors" EntityType="VITHealthCareModel.Doctor" />
           <EntitySet Name="Drugs" EntityType="VITHealthCareModel.Drug" />
@@ -446,7 +443,6 @@
           <EntitySet Name="ICDs" EntityType="VITHealthCareModel.ICD" />
           <EntitySet Name="Patients" EntityType="VITHealthCareModel.Patient" />
           <EntitySet Name="Users" EntityType="VITHealthCareModel.User" />
-          <EntitySet Name="Clinicals" EntityType="VITHealthCareModel.Clinical" />
           <AssociationSet Name="FK_ChargeDrug_Charges" Association="VITHealthCareModel.FK_ChargeDrug_Charges">
             <End Role="Charge" EntitySet="Charges" />
             <End Role="ChargeDrug" EntitySet="ChargeDrugs" />
@@ -475,6 +471,10 @@
             <End Role="Patient" EntitySet="Patients" />
             <End Role="ChargeDrug" EntitySet="ChargeDrugs" />
           </AssociationSet>
+          <AssociationSet Name="FK_Clinical_Patient" Association="VITHealthCareModel.FK_Clinical_Patient">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Clinical" EntitySet="Clinicals" />
+          </AssociationSet>
           <AssociationSet Name="FK_CPT_Facility" Association="VITHealthCareModel.FK_CPT_Facility">
             <End Role="Facility" EntitySet="Facilities" />
             <End Role="CPT" EntitySet="CPTs" />
@@ -494,10 +494,6 @@
           <AssociationSet Name="FK_User_Facility" Association="VITHealthCareModel.FK_User_Facility">
             <End Role="Facility" EntitySet="Facilities" />
             <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Clinical_Patient" Association="VITHealthCareModel.FK_Clinical_Patient">
-            <End Role="Patient" EntitySet="Patients" />
-            <End Role="Clinical" EntitySet="Clinicals" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Charge">
@@ -538,6 +534,84 @@
           <NavigationProperty Name="Charge" Relationship="VITHealthCareModel.FK_ChargeDrug_Charges" FromRole="ChargeDrug" ToRole="Charge" />
           <NavigationProperty Name="Drug" Relationship="VITHealthCareModel.FK_ChargeDrug_Drug" FromRole="ChargeDrug" ToRole="Drug" />
           <NavigationProperty Name="Patient" Relationship="VITHealthCareModel.FK_ChargeDrug_Patient" FromRole="ChargeDrug" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="Clinical">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="PatientId" Nullable="false" />
+          <Property Type="Int32" Name="ChargeId" />
+          <Property Type="String" Name="CanNang" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ChieuCao" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="HuyetAp" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NhipTim" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NhipTho" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="TimMet" Nullable="false" />
+          <Property Type="Boolean" Name="TimNangNguc" Nullable="false" />
+          <Property Type="Boolean" Name="TimKhoTho" Nullable="false" />
+          <Property Type="Boolean" Name="PhoiHo" Nullable="false" />
+          <Property Type="Boolean" Name="BaoTuDayHoi" Nullable="false" />
+          <Property Type="Boolean" Name="DaNgua" Nullable="false" />
+          <Property Type="Boolean" Name="DaLupusDo" Nullable="false" />
+          <Property Type="Boolean" Name="DaVayNen" Nullable="false" />
+          <Property Type="Boolean" Name="DaNamLangBeng" Nullable="false" />
+          <Property Type="Boolean" Name="DaCham" Nullable="false" />
+          <Property Type="Boolean" Name="DaToDia" Nullable="false" />
+          <Property Type="Boolean" Name="DaBachBien" Nullable="false" />
+          <Property Type="Boolean" Name="DaZona" Nullable="false" />
+          <Property Type="Boolean" Name="DauSayXam" Nullable="false" />
+          <Property Type="Boolean" Name="DauDau" Nullable="false" />
+          <Property Type="Boolean" Name="DauChayMatSong" Nullable="false" />
+          <Property Type="Boolean" Name="DauTocRung" Nullable="false" />
+          <Property Type="Boolean" Name="LungDauBaVai" Nullable="false" />
+          <Property Type="Boolean" Name="LungCungCoGay" Nullable="false" />
+          <Property Type="Boolean" Name="LungLoiSauLung" Nullable="false" />
+          <Property Type="Boolean" Name="LungDauLung" Nullable="false" />
+          <Property Type="Boolean" Name="NgucBungTucNguc" Nullable="false" />
+          <Property Type="Boolean" Name="NgucBungDauLienSuon" Nullable="false" />
+          <Property Type="Boolean" Name="NgucBungDauBung" Nullable="false" />
+          <Property Type="Boolean" Name="NgucBungDauQuanhRon" Nullable="false" />
+          <Property Type="Boolean" Name="NgucBungLoiHong" Nullable="false" />
+          <Property Type="Boolean" Name="TayChanTeMoi" Nullable="false" />
+          <Property Type="Boolean" Name="TayChanDauBapVe" Nullable="false" />
+          <Property Type="Boolean" Name="TayChanPhu" Nullable="false" />
+          <Property Type="Boolean" Name="TayChanRaMoHoi" Nullable="false" />
+          <Property Type="Boolean" Name="TayChanThonGot" Nullable="false" />
+          <Property Type="Boolean" Name="IaBon" Nullable="false" />
+          <Property Type="Boolean" Name="IaLong" Nullable="false" />
+          <Property Type="Boolean" Name="IaRaMau" Nullable="false" />
+          <Property Type="Boolean" Name="TieuIt" Nullable="false" />
+          <Property Type="Boolean" Name="TieuGat" Nullable="false" />
+          <Property Type="Boolean" Name="TieuCoMu" Nullable="false" />
+          <Property Type="Boolean" Name="TieuRaMau" Nullable="false" />
+          <Property Type="Boolean" Name="TieuNuocVang" Nullable="false" />
+          <Property Type="Boolean" Name="TieuNuocDuc" Nullable="false" />
+          <Property Type="Int32" Name="TieuDemMayLan" Nullable="false" />
+          <Property Type="Boolean" Name="AnMet" Nullable="false" />
+          <Property Type="Boolean" Name="AnChanAn" Nullable="false" />
+          <Property Type="Boolean" Name="AnDau" Nullable="false" />
+          <Property Type="Boolean" Name="AnBinhHoi" Nullable="false" />
+          <Property Type="Boolean" Name="AnKhoTieu" Nullable="false" />
+          <Property Type="Boolean" Name="NguKho" Nullable="false" />
+          <Property Type="Boolean" Name="NguNangNguc" Nullable="false" />
+          <Property Type="Boolean" Name="NguRutChan" Nullable="false" />
+          <Property Type="Boolean" Name="NguChuotRut" Nullable="false" />
+          <Property Type="Boolean" Name="UTai" Nullable="false" />
+          <Property Type="Boolean" Name="HayQuen" Nullable="false" />
+          <Property Type="Boolean" Name="MunNhot" Nullable="false" />
+          <Property Type="Boolean" Name="Nam" Nullable="false" />
+          <Property Type="Boolean" Name="TanNhang" Nullable="false" />
+          <Property Type="Boolean" Name="DangMangThai" Nullable="false" />
+          <Property Type="Int32" Name="MoiSinh" />
+          <Property Type="Boolean" Name="KinhNguyetTre" Nullable="false" />
+          <Property Type="Boolean" Name="KinhNguyetGianDoan" Nullable="false" />
+          <Property Type="Boolean" Name="KinhNguyetSom" Nullable="false" />
+          <Property Type="Boolean" Name="KinhNguyetRongKinh" Nullable="false" />
+          <Property Type="Boolean" Name="KinhNguyetManKinh" Nullable="false" />
+          <Property Type="String" Name="HuyetTrang" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Charge" Relationship="VITHealthCareModel.FK_Clinical_Charge" FromRole="Clinical" ToRole="Charge" />
+          <NavigationProperty Name="Patient" Relationship="VITHealthCareModel.FK_Clinical_Patient" FromRole="Clinical" ToRole="Patient" />
         </EntityType>
         <EntityType Name="CPT">
           <Key>
@@ -619,8 +693,8 @@
           <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Charges" Relationship="VITHealthCareModel.FK_Charges_Patient" FromRole="Patient" ToRole="Charge" />
           <NavigationProperty Name="ChargeDrugs" Relationship="VITHealthCareModel.FK_ChargeDrug_Patient" FromRole="Patient" ToRole="ChargeDrug" />
-          <NavigationProperty Name="Facility" Relationship="VITHealthCareModel.FK_Patient_Facility" FromRole="Patient" ToRole="Facility" />
           <NavigationProperty Name="Clinicals" Relationship="VITHealthCareModel.FK_Clinical_Patient" FromRole="Patient" ToRole="Clinical" />
+          <NavigationProperty Name="Facility" Relationship="VITHealthCareModel.FK_Patient_Facility" FromRole="Patient" ToRole="Facility" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -632,88 +706,6 @@
           <Property Type="String" Name="Password" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="FullName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Facility" Relationship="VITHealthCareModel.FK_User_Facility" FromRole="User" ToRole="Facility" />
-        </EntityType>
-        <EntityType Name="Clinical">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="PatientId" Nullable="false" />
-          <Property Type="Int32" Name="ChargeId" />
-          <Property Type="String" Name="CanNang" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="ChieuCao" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="HuyetAp" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="NhipTim" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="NhipTho" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="TimMet" Nullable="false" />
-          <Property Type="Boolean" Name="TimNangNguc" Nullable="false" />
-          <Property Type="Boolean" Name="TimKhoTho" Nullable="false" />
-          <Property Type="Boolean" Name="PhoiHo" Nullable="false" />
-          <Property Type="Boolean" Name="BaoTuDayHoi" Nullable="false" />
-          <Property Type="Boolean" Name="DaNgua" Nullable="false" />
-          <Property Type="Boolean" Name="DaLupusDo" Nullable="false" />
-          <Property Type="Boolean" Name="DaVayNen" Nullable="false" />
-          <Property Type="Boolean" Name="DaNamLangBeng" Nullable="false" />
-          <Property Type="Boolean" Name="DaCham" Nullable="false" />
-          <Property Type="Boolean" Name="DaToDia" Nullable="false" />
-          <Property Type="Boolean" Name="DaBachBien" Nullable="false" />
-          <Property Type="Boolean" Name="DaZona" Nullable="false" />
-          <Property Type="Boolean" Name="DauSayXam" Nullable="false" />
-          <Property Type="Boolean" Name="DauDau" Nullable="false" />
-          <Property Type="Boolean" Name="DauChayMatSong" Nullable="false" />
-          <Property Type="Boolean" Name="DauTocRung" Nullable="false" />
-          <Property Type="Boolean" Name="LungDauBaVai" Nullable="false" />
-          <Property Type="Boolean" Name="LungCungCoGay" Nullable="false" />
-          <Property Type="Boolean" Name="LungLoiSauLung" Nullable="false" />
-          <Property Type="Boolean" Name="LungDauLung" Nullable="false" />
-          <Property Type="Boolean" Name="NgucBungTucNguc" Nullable="false" />
-          <Property Type="Boolean" Name="NgucBungDauLienSuon" Nullable="false" />
-          <Property Type="Boolean" Name="NgucBungDauBung" Nullable="false" />
-          <Property Type="Boolean" Name="NgucBungDauQuanhRon" Nullable="false" />
-          <Property Type="Boolean" Name="NgucBungLoiHong" Nullable="false" />
-          <Property Type="Boolean" Name="TayChanTeMoi" Nullable="false" />
-          <Property Type="Boolean" Name="TayChanDauBapVe" Nullable="false" />
-          <Property Type="Boolean" Name="TayChanPhu" Nullable="false" />
-          <Property Type="Boolean" Name="TayChanRaMoHoi" Nullable="false" />
-          <Property Type="Boolean" Name="TayChanThonGot" Nullable="false" />
-          <Property Type="Boolean" Name="IaBinhThuong" Nullable="false" />
-          <Property Type="Boolean" Name="IaBon" Nullable="false" />
-          <Property Type="Boolean" Name="IaLong" Nullable="false" />
-          <Property Type="Boolean" Name="IaRaMau" Nullable="false" />
-          <Property Type="Boolean" Name="TieuIt" Nullable="false" />
-          <Property Type="Boolean" Name="TieuGat" Nullable="false" />
-          <Property Type="Boolean" Name="TieuCoMu" Nullable="false" />
-          <Property Type="Boolean" Name="TieuRaMau" Nullable="false" />
-          <Property Type="Boolean" Name="TieuNuocTrong" Nullable="false" />
-          <Property Type="Boolean" Name="TieuNuocVang" Nullable="false" />
-          <Property Type="Boolean" Name="TieuNuocDuc" Nullable="false" />
-          <Property Type="Int32" Name="TieuDemMayLan" Nullable="false" />
-          <Property Type="Boolean" Name="AnMet" Nullable="false" />
-          <Property Type="Boolean" Name="AnChanAn" Nullable="false" />
-          <Property Type="Boolean" Name="AnDau" Nullable="false" />
-          <Property Type="Boolean" Name="AnKhoTho" Nullable="false" />
-          <Property Type="Boolean" Name="AnBinhHoi" Nullable="false" />
-          <Property Type="Boolean" Name="AnKhoTieu" Nullable="false" />
-          <Property Type="Boolean" Name="NguDuoc" Nullable="false" />
-          <Property Type="Boolean" Name="NguKho" Nullable="false" />
-          <Property Type="Boolean" Name="NguNangNguc" Nullable="false" />
-          <Property Type="Boolean" Name="NguRutChan" Nullable="false" />
-          <Property Type="Boolean" Name="NguChuotRut" Nullable="false" />
-          <Property Type="Boolean" Name="UTai" Nullable="false" />
-          <Property Type="Boolean" Name="HayQuen" Nullable="false" />
-          <Property Type="Boolean" Name="MunNhot" Nullable="false" />
-          <Property Type="Boolean" Name="Nam" Nullable="false" />
-          <Property Type="Boolean" Name="TanNhang" Nullable="false" />
-          <Property Type="Boolean" Name="DangMangThai" Nullable="false" />
-          <Property Type="Int32" Name="MoiSinh" />
-          <Property Type="Boolean" Name="KinhNguyetTre" Nullable="false" />
-          <Property Type="Boolean" Name="KinhNguyetGianDoan" Nullable="false" />
-          <Property Type="Boolean" Name="KinhNguyetSom" Nullable="false" />
-          <Property Type="Boolean" Name="KinhNguyetRongKinh" Nullable="false" />
-          <Property Type="Boolean" Name="KinhNguyetManKinh" Nullable="false" />
-          <Property Type="String" Name="HuyetTrang" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Charge" Relationship="VITHealthCareModel.FK_Clinical_Charge" FromRole="Clinical" ToRole="Charge" />
-          <NavigationProperty Name="Patient" Relationship="VITHealthCareModel.FK_Clinical_Patient" FromRole="Clinical" ToRole="Patient" />
         </EntityType>
         <Association Name="FK_ChargeDrug_Charges">
           <End Type="VITHealthCareModel.Charge" Role="Charge" Multiplicity="0..1" />
@@ -799,6 +791,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Clinical_Patient">
+          <End Type="VITHealthCareModel.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="VITHealthCareModel.Clinical" Role="Clinical" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clinical">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CPT_Facility">
           <End Type="VITHealthCareModel.Facility" Role="Facility" Multiplicity="1" />
           <End Type="VITHealthCareModel.CPT" Role="CPT" Multiplicity="*" />
@@ -859,18 +863,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Clinical_Patient">
-          <End Type="VITHealthCareModel.Patient" Role="Patient" Multiplicity="1" />
-          <End Type="VITHealthCareModel.Clinical" Role="Clinical" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Patient">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Clinical">
-              <PropertyRef Name="PatientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -906,6 +898,83 @@
                 <ScalarProperty Name="DrugId" ColumnName="DrugId" />
                 <ScalarProperty Name="PatientId" ColumnName="PatientId" />
                 <ScalarProperty Name="ChargeId" ColumnName="ChargeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clinicals">
+            <EntityTypeMapping TypeName="VITHealthCareModel.Clinical">
+              <MappingFragment StoreEntitySet="Clinical">
+                <ScalarProperty Name="HuyetTrang" ColumnName="HuyetTrang" />
+                <ScalarProperty Name="KinhNguyetManKinh" ColumnName="KinhNguyetManKinh" />
+                <ScalarProperty Name="KinhNguyetRongKinh" ColumnName="KinhNguyetRongKinh" />
+                <ScalarProperty Name="KinhNguyetSom" ColumnName="KinhNguyetSom" />
+                <ScalarProperty Name="KinhNguyetGianDoan" ColumnName="KinhNguyetGianDoan" />
+                <ScalarProperty Name="KinhNguyetTre" ColumnName="KinhNguyetTre" />
+                <ScalarProperty Name="MoiSinh" ColumnName="MoiSinh" />
+                <ScalarProperty Name="DangMangThai" ColumnName="DangMangThai" />
+                <ScalarProperty Name="TanNhang" ColumnName="TanNhang" />
+                <ScalarProperty Name="Nam" ColumnName="Nam" />
+                <ScalarProperty Name="MunNhot" ColumnName="MunNhot" />
+                <ScalarProperty Name="HayQuen" ColumnName="HayQuen" />
+                <ScalarProperty Name="UTai" ColumnName="UTai" />
+                <ScalarProperty Name="NguChuotRut" ColumnName="NguChuotRut" />
+                <ScalarProperty Name="NguRutChan" ColumnName="NguRutChan" />
+                <ScalarProperty Name="NguNangNguc" ColumnName="NguNangNguc" />
+                <ScalarProperty Name="NguKho" ColumnName="NguKho" />
+                <ScalarProperty Name="AnKhoTieu" ColumnName="AnKhoTieu" />
+                <ScalarProperty Name="AnBinhHoi" ColumnName="AnBinhHoi" />
+                <ScalarProperty Name="AnDau" ColumnName="AnDau" />
+                <ScalarProperty Name="AnChanAn" ColumnName="AnChanAn" />
+                <ScalarProperty Name="AnMet" ColumnName="AnMet" />
+                <ScalarProperty Name="TieuDemMayLan" ColumnName="TieuDemMayLan" />
+                <ScalarProperty Name="TieuNuocDuc" ColumnName="TieuNuocDuc" />
+                <ScalarProperty Name="TieuNuocVang" ColumnName="TieuNuocVang" />
+                <ScalarProperty Name="TieuRaMau" ColumnName="TieuRaMau" />
+                <ScalarProperty Name="TieuCoMu" ColumnName="TieuCoMu" />
+                <ScalarProperty Name="TieuGat" ColumnName="TieuGat" />
+                <ScalarProperty Name="TieuIt" ColumnName="TieuIt" />
+                <ScalarProperty Name="IaRaMau" ColumnName="IaRaMau" />
+                <ScalarProperty Name="IaLong" ColumnName="IaLong" />
+                <ScalarProperty Name="IaBon" ColumnName="IaBon" />
+                <ScalarProperty Name="TayChanThonGot" ColumnName="TayChanThonGot" />
+                <ScalarProperty Name="TayChanRaMoHoi" ColumnName="TayChanRaMoHoi" />
+                <ScalarProperty Name="TayChanPhu" ColumnName="TayChanPhu" />
+                <ScalarProperty Name="TayChanDauBapVe" ColumnName="TayChanDauBapVe" />
+                <ScalarProperty Name="TayChanTeMoi" ColumnName="TayChanTeMoi" />
+                <ScalarProperty Name="NgucBungLoiHong" ColumnName="NgucBungLoiHong" />
+                <ScalarProperty Name="NgucBungDauQuanhRon" ColumnName="NgucBungDauQuanhRon" />
+                <ScalarProperty Name="NgucBungDauBung" ColumnName="NgucBungDauBung" />
+                <ScalarProperty Name="NgucBungDauLienSuon" ColumnName="NgucBungDauLienSuon" />
+                <ScalarProperty Name="NgucBungTucNguc" ColumnName="NgucBungTucNguc" />
+                <ScalarProperty Name="LungDauLung" ColumnName="LungDauLung" />
+                <ScalarProperty Name="LungLoiSauLung" ColumnName="LungLoiSauLung" />
+                <ScalarProperty Name="LungCungCoGay" ColumnName="LungCungCoGay" />
+                <ScalarProperty Name="LungDauBaVai" ColumnName="LungDauBaVai" />
+                <ScalarProperty Name="DauTocRung" ColumnName="DauTocRung" />
+                <ScalarProperty Name="DauChayMatSong" ColumnName="DauChayMatSong" />
+                <ScalarProperty Name="DauDau" ColumnName="DauDau" />
+                <ScalarProperty Name="DauSayXam" ColumnName="DauSayXam" />
+                <ScalarProperty Name="DaZona" ColumnName="DaZona" />
+                <ScalarProperty Name="DaBachBien" ColumnName="DaBachBien" />
+                <ScalarProperty Name="DaToDia" ColumnName="DaToDia" />
+                <ScalarProperty Name="DaCham" ColumnName="DaCham" />
+                <ScalarProperty Name="DaNamLangBeng" ColumnName="DaNamLangBeng" />
+                <ScalarProperty Name="DaVayNen" ColumnName="DaVayNen" />
+                <ScalarProperty Name="DaLupusDo" ColumnName="DaLupusDo" />
+                <ScalarProperty Name="DaNgua" ColumnName="DaNgua" />
+                <ScalarProperty Name="BaoTuDayHoi" ColumnName="BaoTuDayHoi" />
+                <ScalarProperty Name="PhoiHo" ColumnName="PhoiHo" />
+                <ScalarProperty Name="TimKhoTho" ColumnName="TimKhoTho" />
+                <ScalarProperty Name="TimNangNguc" ColumnName="TimNangNguc" />
+                <ScalarProperty Name="TimMet" ColumnName="TimMet" />
+                <ScalarProperty Name="NhipTho" ColumnName="NhipTho" />
+                <ScalarProperty Name="NhipTim" ColumnName="NhipTim" />
+                <ScalarProperty Name="HuyetAp" ColumnName="HuyetAp" />
+                <ScalarProperty Name="ChieuCao" ColumnName="ChieuCao" />
+                <ScalarProperty Name="CanNang" ColumnName="CanNang" />
+                <ScalarProperty Name="ChargeId" ColumnName="ChargeId" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -995,87 +1064,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Clinicals">
-            <EntityTypeMapping TypeName="VITHealthCareModel.Clinical">
-              <MappingFragment StoreEntitySet="Clinical">
-                <ScalarProperty Name="HuyetTrang" ColumnName="HuyetTrang" />
-                <ScalarProperty Name="KinhNguyetManKinh" ColumnName="KinhNguyetManKinh" />
-                <ScalarProperty Name="KinhNguyetRongKinh" ColumnName="KinhNguyetRongKinh" />
-                <ScalarProperty Name="KinhNguyetSom" ColumnName="KinhNguyetSom" />
-                <ScalarProperty Name="KinhNguyetGianDoan" ColumnName="KinhNguyetGianDoan" />
-                <ScalarProperty Name="KinhNguyetTre" ColumnName="KinhNguyetTre" />
-                <ScalarProperty Name="MoiSinh" ColumnName="MoiSinh" />
-                <ScalarProperty Name="DangMangThai" ColumnName="DangMangThai" />
-                <ScalarProperty Name="TanNhang" ColumnName="TanNhang" />
-                <ScalarProperty Name="Nam" ColumnName="Nam" />
-                <ScalarProperty Name="MunNhot" ColumnName="MunNhot" />
-                <ScalarProperty Name="HayQuen" ColumnName="HayQuen" />
-                <ScalarProperty Name="UTai" ColumnName="UTai" />
-                <ScalarProperty Name="NguChuotRut" ColumnName="NguChuotRut" />
-                <ScalarProperty Name="NguRutChan" ColumnName="NguRutChan" />
-                <ScalarProperty Name="NguNangNguc" ColumnName="NguNangNguc" />
-                <ScalarProperty Name="NguKho" ColumnName="NguKho" />
-                <ScalarProperty Name="NguDuoc" ColumnName="NguDuoc" />
-                <ScalarProperty Name="AnKhoTieu" ColumnName="AnKhoTieu" />
-                <ScalarProperty Name="AnBinhHoi" ColumnName="AnBinhHoi" />
-                <ScalarProperty Name="AnKhoTho" ColumnName="AnKhoTho" />
-                <ScalarProperty Name="AnDau" ColumnName="AnDau" />
-                <ScalarProperty Name="AnChanAn" ColumnName="AnChanAn" />
-                <ScalarProperty Name="AnMet" ColumnName="AnMet" />
-                <ScalarProperty Name="TieuDemMayLan" ColumnName="TieuDemMayLan" />
-                <ScalarProperty Name="TieuNuocDuc" ColumnName="TieuNuocDuc" />
-                <ScalarProperty Name="TieuNuocVang" ColumnName="TieuNuocVang" />
-                <ScalarProperty Name="TieuNuocTrong" ColumnName="TieuNuocTrong" />
-                <ScalarProperty Name="TieuRaMau" ColumnName="TieuRaMau" />
-                <ScalarProperty Name="TieuCoMu" ColumnName="TieuCoMu" />
-                <ScalarProperty Name="TieuGat" ColumnName="TieuGat" />
-                <ScalarProperty Name="TieuIt" ColumnName="TieuIt" />
-                <ScalarProperty Name="IaRaMau" ColumnName="IaRaMau" />
-                <ScalarProperty Name="IaLong" ColumnName="IaLong" />
-                <ScalarProperty Name="IaBon" ColumnName="IaBon" />
-                <ScalarProperty Name="IaBinhThuong" ColumnName="IaBinhThuong" />
-                <ScalarProperty Name="TayChanThonGot" ColumnName="TayChanThonGot" />
-                <ScalarProperty Name="TayChanRaMoHoi" ColumnName="TayChanRaMoHoi" />
-                <ScalarProperty Name="TayChanPhu" ColumnName="TayChanPhu" />
-                <ScalarProperty Name="TayChanDauBapVe" ColumnName="TayChanDauBapVe" />
-                <ScalarProperty Name="TayChanTeMoi" ColumnName="TayChanTeMoi" />
-                <ScalarProperty Name="NgucBungLoiHong" ColumnName="NgucBungLoiHong" />
-                <ScalarProperty Name="NgucBungDauQuanhRon" ColumnName="NgucBungDauQuanhRon" />
-                <ScalarProperty Name="NgucBungDauBung" ColumnName="NgucBungDauBung" />
-                <ScalarProperty Name="NgucBungDauLienSuon" ColumnName="NgucBungDauLienSuon" />
-                <ScalarProperty Name="NgucBungTucNguc" ColumnName="NgucBungTucNguc" />
-                <ScalarProperty Name="LungDauLung" ColumnName="LungDauLung" />
-                <ScalarProperty Name="LungLoiSauLung" ColumnName="LungLoiSauLung" />
-                <ScalarProperty Name="LungCungCoGay" ColumnName="LungCungCoGay" />
-                <ScalarProperty Name="LungDauBaVai" ColumnName="LungDauBaVai" />
-                <ScalarProperty Name="DauTocRung" ColumnName="DauTocRung" />
-                <ScalarProperty Name="DauChayMatSong" ColumnName="DauChayMatSong" />
-                <ScalarProperty Name="DauDau" ColumnName="DauDau" />
-                <ScalarProperty Name="DauSayXam" ColumnName="DauSayXam" />
-                <ScalarProperty Name="DaZona" ColumnName="DaZona" />
-                <ScalarProperty Name="DaBachBien" ColumnName="DaBachBien" />
-                <ScalarProperty Name="DaToDia" ColumnName="DaToDia" />
-                <ScalarProperty Name="DaCham" ColumnName="DaCham" />
-                <ScalarProperty Name="DaNamLangBeng" ColumnName="DaNamLangBeng" />
-                <ScalarProperty Name="DaVayNen" ColumnName="DaVayNen" />
-                <ScalarProperty Name="DaLupusDo" ColumnName="DaLupusDo" />
-                <ScalarProperty Name="DaNgua" ColumnName="DaNgua" />
-                <ScalarProperty Name="BaoTuDayHoi" ColumnName="BaoTuDayHoi" />
-                <ScalarProperty Name="PhoiHo" ColumnName="PhoiHo" />
-                <ScalarProperty Name="TimKhoTho" ColumnName="TimKhoTho" />
-                <ScalarProperty Name="TimNangNguc" ColumnName="TimNangNguc" />
-                <ScalarProperty Name="TimMet" ColumnName="TimMet" />
-                <ScalarProperty Name="NhipTho" ColumnName="NhipTho" />
-                <ScalarProperty Name="NhipTim" ColumnName="NhipTim" />
-                <ScalarProperty Name="HuyetAp" ColumnName="HuyetAp" />
-                <ScalarProperty Name="ChieuCao" ColumnName="ChieuCao" />
-                <ScalarProperty Name="CanNang" ColumnName="CanNang" />
-                <ScalarProperty Name="ChargeId" ColumnName="ChargeId" />
-                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1098,87 +1086,89 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="VITData">
-        <EntityTypeShape EntityType="VITHealthCareModel.Charge" Width="1.5" PointX="5.25" PointY="23.875" Height="4.8648079427083317" />
-        <EntityTypeShape EntityType="VITHealthCareModel.ChargeDrug" Width="1.5" PointX="7.5" PointY="26.875" Height="2.7494921875000031" />
-        <EntityTypeShape EntityType="VITHealthCareModel.CPT" Width="1.5" PointX="3" PointY="18.375" Height="2.3648893229166674" />
-        <EntityTypeShape EntityType="VITHealthCareModel.Doctor" Width="1.5" PointX="3" PointY="21.5" Height="3.326396484374996" />
-        <EntityTypeShape EntityType="VITHealthCareModel.Drug" Width="1.5" PointX="3" PointY="25.5" Height="2.5571907552083388" />
-        <EntityTypeShape EntityType="VITHealthCareModel.Facility" Width="1.5" PointX="0.75" PointY="20" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="VITHealthCareModel.Charge" Width="1.5" PointX="5.25" PointY="23.375" Height="4.8648079427083317" />
+        <EntityTypeShape EntityType="VITHealthCareModel.ChargeDrug" Width="1.5" PointX="7.5" PointY="26.375" Height="2.7494921875000031" />
+        <EntityTypeShape EntityType="VITHealthCareModel.Clinical" Width="1.5" PointX="10.5" PointY="20.25" Height="15.056783854166667" />
+        <EntityTypeShape EntityType="VITHealthCareModel.CPT" Width="1.5" PointX="3" PointY="17.875" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="VITHealthCareModel.Doctor" Width="1.5" PointX="3" PointY="21" Height="3.326396484374996" />
+        <EntityTypeShape EntityType="VITHealthCareModel.Drug" Width="1.5" PointX="3" PointY="25.125" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="VITHealthCareModel.Facility" Width="1.5" PointX="0.75" PointY="19.625" Height="2.5571907552083388" />
         <EntityTypeShape EntityType="VITHealthCareModel.ICD" Width="1.5" PointX="0.75" PointY="0.75" Height="1.7879850260416674" />
-        <EntityTypeShape EntityType="VITHealthCareModel.Patient" Width="1.5" PointX="3" PointY="28.875" Height="3.7109993489583388" />
-        <EntityTypeShape EntityType="VITHealthCareModel.User" Width="1.5" PointX="3" PointY="33.25" Height="2.1725878906250102" />
-        <EntityTypeShape EntityType="VITHealthCareModel.Clinical" Width="1.5" PointX="10.5" PointY="20.25" Height="15.825989583333339" />
+        <EntityTypeShape EntityType="VITHealthCareModel.Patient" Width="1.5" PointX="3" PointY="28.375" Height="3.7109993489583388" />
+        <EntityTypeShape EntityType="VITHealthCareModel.User" Width="1.5" PointX="3" PointY="32.875" Height="2.1725878906250102" />
         <AssociationConnector Association="VITHealthCareModel.FK_ChargeDrug_Charges" >
-          <ConnectorPoint PointX="6.75" PointY="27.807403971354166" />
-          <ConnectorPoint PointX="7.5" PointY="27.807403971354166" />
+          <ConnectorPoint PointX="6.75" PointY="27.307403971354166" />
+          <ConnectorPoint PointX="7.5" PointY="27.307403971354166" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Charges_Doctor" >
-          <ConnectorPoint PointX="4.5" PointY="24.350698242187498" />
-          <ConnectorPoint PointX="5.25" PointY="24.350698242187498" />
+          <ConnectorPoint PointX="4.5" PointY="23.850698242187498" />
+          <ConnectorPoint PointX="5.25" PointY="23.850698242187498" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Charges_Facility" >
-          <ConnectorPoint PointX="1.5" PointY="22.557190755208339" />
-          <ConnectorPoint PointX="1.5" PointY="28.429749348958335" />
-          <ConnectorPoint PointX="2.0260454166666664" PointY="28.429749348958335" />
-          <ConnectorPoint PointX="2.1927120833333333" PointY="28.429749348958335" />
-          <ConnectorPoint PointX="5.25" PointY="28.429749348958335" />
+          <ConnectorPoint PointX="1.5" PointY="22.182190755208339" />
+          <ConnectorPoint PointX="1.5" PointY="24.725698242187498" />
+          <ConnectorPoint PointX="1.8229191666666667" PointY="24.725698242187498" />
+          <ConnectorPoint PointX="1.9895858333333332" PointY="24.725698242187498" />
+          <ConnectorPoint PointX="2.0260454166666664" PointY="24.725698242187498" />
+          <ConnectorPoint PointX="2.1927120833333333" PointY="24.725698242187498" />
+          <ConnectorPoint PointX="5.25" PointY="24.725698242187498" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Charges_Patient" >
-          <ConnectorPoint PointX="4.5" PointY="30.730499674479169" />
-          <ConnectorPoint PointX="6" PointY="30.730499674479169" />
-          <ConnectorPoint PointX="6" PointY="28.739807942708332" />
+          <ConnectorPoint PointX="4.5" PointY="30.230499674479169" />
+          <ConnectorPoint PointX="6" PointY="30.230499674479169" />
+          <ConnectorPoint PointX="6" PointY="28.239807942708332" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Clinical_Charge" >
-          <ConnectorPoint PointX="6.75" PointY="25.34375" />
-          <ConnectorPoint PointX="10.5" PointY="25.34375" />
+          <ConnectorPoint PointX="6.75" PointY="24.84375" />
+          <ConnectorPoint PointX="10.5" PointY="24.84375" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_ChargeDrug_Drug" >
-          <ConnectorPoint PointX="4.5" PointY="28.057190755208339" />
-          <ConnectorPoint PointX="4.875" PointY="28.432190755208339" />
-          <ConnectorPoint PointX="4.875" PointY="29.999492187500003" />
-          <ConnectorPoint PointX="5.916666666666667" PointY="29.999492187500003" />
-          <ConnectorPoint PointX="6.083333333333333" PointY="29.999492187500003" />
-          <ConnectorPoint PointX="7.1261528461538433" PointY="29.999492187500003" />
-          <ConnectorPoint PointX="7.5011528461538459" PointY="29.624492187500003" />
+          <ConnectorPoint PointX="4.5" PointY="27.682190755208339" />
+          <ConnectorPoint PointX="4.875" PointY="28.057190755208339" />
+          <ConnectorPoint PointX="4.875" PointY="29.499492187500003" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="29.499492187500003" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="29.499492187500003" />
+          <ConnectorPoint PointX="7.1261528461538433" PointY="29.499492187500003" />
+          <ConnectorPoint PointX="7.5011528461538459" PointY="29.124492187500003" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_ChargeDrug_Patient" >
-          <ConnectorPoint PointX="4.5" PointY="29.24974609375" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="29.24974609375" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="29.24974609375" />
-          <ConnectorPoint PointX="5.916666666666667" PointY="29.24974609375" />
-          <ConnectorPoint PointX="6.083333333333333" PointY="29.24974609375" />
-          <ConnectorPoint PointX="7.5" PointY="29.24974609375" />
-        </AssociationConnector>
-        <AssociationConnector Association="VITHealthCareModel.FK_CPT_Facility" >
-          <ConnectorPoint PointX="2.25" PointY="20.369944661458334" />
-          <ConnectorPoint PointX="3" PointY="20.369944661458334" />
-        </AssociationConnector>
-        <AssociationConnector Association="VITHealthCareModel.FK_Doctor_Facility" >
-          <ConnectorPoint PointX="2.25" PointY="22.028595377604169" />
-          <ConnectorPoint PointX="3" PointY="22.028595377604169" />
-        </AssociationConnector>
-        <AssociationConnector Association="VITHealthCareModel.FK_Drug_Facility" >
-          <ConnectorPoint PointX="1.9062525" PointY="22.557190755208339" />
-          <ConnectorPoint PointX="1.9062525" PointY="26.778595377604169" />
-          <ConnectorPoint PointX="2.0260454166666664" PointY="26.778595377604169" />
-          <ConnectorPoint PointX="2.1927120833333333" PointY="26.778595377604169" />
-          <ConnectorPoint PointX="3" PointY="26.778595377604169" />
-        </AssociationConnector>
-        <AssociationConnector Association="VITHealthCareModel.FK_Patient_Facility" >
-          <ConnectorPoint PointX="1.0937475" PointY="22.557190755208339" />
-          <ConnectorPoint PointX="1.0937475" PointY="30.730499674479169" />
-          <ConnectorPoint PointX="2.0260454166666664" PointY="30.730499674479169" />
-          <ConnectorPoint PointX="2.1927120833333333" PointY="30.730499674479169" />
-          <ConnectorPoint PointX="3" PointY="30.730499674479169" />
-        </AssociationConnector>
-        <AssociationConnector Association="VITHealthCareModel.FK_User_Facility" >
-          <ConnectorPoint PointX="2.10937875" PointY="22.557190755208339" />
-          <ConnectorPoint PointX="2.10937875" PointY="34.336293945312505" />
-          <ConnectorPoint PointX="3" PointY="34.336293945312505" />
+          <ConnectorPoint PointX="4.5" PointY="28.74974609375" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="28.74974609375" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="28.74974609375" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="28.74974609375" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="28.74974609375" />
+          <ConnectorPoint PointX="7.5" PointY="28.74974609375" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Clinical_Patient" >
-          <ConnectorPoint PointX="4.5" PointY="31.720749511718754" />
-          <ConnectorPoint PointX="10.5" PointY="31.720749511718754" />
+          <ConnectorPoint PointX="4.5" PointY="31.220749511718754" />
+          <ConnectorPoint PointX="10.5" PointY="31.220749511718754" />
+        </AssociationConnector>
+        <AssociationConnector Association="VITHealthCareModel.FK_CPT_Facility" >
+          <ConnectorPoint PointX="2.25" PointY="19.932444661458334" />
+          <ConnectorPoint PointX="3" PointY="19.932444661458334" />
+        </AssociationConnector>
+        <AssociationConnector Association="VITHealthCareModel.FK_Doctor_Facility" >
+          <ConnectorPoint PointX="2.25" PointY="21.591095377604169" />
+          <ConnectorPoint PointX="3" PointY="21.591095377604169" />
+        </AssociationConnector>
+        <AssociationConnector Association="VITHealthCareModel.FK_Drug_Facility" >
+          <ConnectorPoint PointX="1.9062525" PointY="22.182190755208339" />
+          <ConnectorPoint PointX="1.9062525" PointY="26.403595377604169" />
+          <ConnectorPoint PointX="2.0260454166666664" PointY="26.403595377604169" />
+          <ConnectorPoint PointX="2.1927120833333333" PointY="26.403595377604169" />
+          <ConnectorPoint PointX="3" PointY="26.403595377604169" />
+        </AssociationConnector>
+        <AssociationConnector Association="VITHealthCareModel.FK_Patient_Facility" >
+          <ConnectorPoint PointX="1.0937475" PointY="22.182190755208339" />
+          <ConnectorPoint PointX="1.0937475" PointY="30.230499674479169" />
+          <ConnectorPoint PointX="2.0260454166666664" PointY="30.230499674479169" />
+          <ConnectorPoint PointX="2.1927120833333333" PointY="30.230499674479169" />
+          <ConnectorPoint PointX="3" PointY="30.230499674479169" />
+        </AssociationConnector>
+        <AssociationConnector Association="VITHealthCareModel.FK_User_Facility" >
+          <ConnectorPoint PointX="2.10937875" PointY="22.182190755208339" />
+          <ConnectorPoint PointX="2.10937875" PointY="33.961293945312505" />
+          <ConnectorPoint PointX="3" PointY="33.961293945312505" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

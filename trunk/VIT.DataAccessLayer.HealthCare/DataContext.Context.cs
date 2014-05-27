@@ -31,6 +31,7 @@ namespace VIT.DataAccessLayer.HealthCare.Data
     
         public DbSet<Charge> Charges { get; set; }
         public DbSet<ChargeDrug> ChargeDrugs { get; set; }
+        public DbSet<Clinical> Clinicals { get; set; }
         public DbSet<CPT> CPTs { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Drug> Drugs { get; set; }
@@ -38,6 +39,5 @@ namespace VIT.DataAccessLayer.HealthCare.Data
         public DbSet<ICD> ICDs { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Clinical> Clinicals { get; set; }
     }
 }

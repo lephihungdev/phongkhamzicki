@@ -44,7 +44,6 @@
         public bool TayChanPhu { get; set; }
         public bool TayChanRaMoHoi { get; set; }
         public bool TayChanThonGot { get; set; }
-        public bool IaBinhThuong { get; set; }
         public bool IaBon { get; set; }
         public bool IaLong { get; set; }
         public bool IaRaMau { get; set; }
@@ -52,17 +51,14 @@
         public bool TieuGat { get; set; }
         public bool TieuCoMu { get; set; }
         public bool TieuRaMau { get; set; }
-        public bool TieuNuocTrong { get; set; }
         public bool TieuNuocVang { get; set; }
         public bool TieuNuocDuc { get; set; }
         public int TieuDemMayLan { get; set; }
         public bool AnMet { get; set; }
         public bool AnChanAn { get; set; }
         public bool AnDau { get; set; }
-        public bool AnKhoTho { get; set; }
         public bool AnBinhHoi { get; set; }
         public bool AnKhoTieu { get; set; }
-        public bool NguDuoc { get; set; }
         public bool NguKho { get; set; }
         public bool NguNangNguc { get; set; }
         public bool NguRutChan { get; set; }
@@ -82,5 +78,10 @@
         public string HuyetTrang { get; set; }
 
         public string PatientName { get; set; }
+
+        public string Display(bool? field)
+        {
+            return field == true ? "" : "style=display:none";
+        }
     }
 }

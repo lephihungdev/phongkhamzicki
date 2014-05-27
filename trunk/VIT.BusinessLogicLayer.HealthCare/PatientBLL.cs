@@ -184,7 +184,6 @@
                     TayChanPhu = e.TayChanPhu,
                     TayChanRaMoHoi = e.TayChanRaMoHoi,
                     TayChanThonGot = e.TayChanThonGot,
-                    IaBinhThuong = e.IaBinhThuong,
                     IaBon = e.IaBon,
                     IaLong = e.IaLong,
                     IaRaMau = e.IaRaMau,
@@ -192,17 +191,14 @@
                     TieuGat = e.TieuGat,
                     TieuCoMu = e.TieuCoMu,
                     TieuRaMau = e.TieuRaMau,
-                    TieuNuocTrong = e.TieuNuocTrong,
                     TieuNuocVang = e.TieuNuocVang,
                     TieuNuocDuc = e.TieuNuocDuc,
                     TieuDemMayLan = e.TieuDemMayLan,
                     AnMet = e.AnMet,
                     AnChanAn = e.AnChanAn,
                     AnDau = e.AnDau,
-                    AnKhoTho = e.AnKhoTho,
                     AnBinhHoi = e.AnBinhHoi,
                     AnKhoTieu = e.AnKhoTieu,
-                    NguDuoc = e.NguDuoc,
                     NguKho = e.NguKho,
                     NguNangNguc = e.NguNangNguc,
                     NguRutChan = e.NguRutChan,
@@ -224,7 +220,10 @@
                     PatientName = e.Patient.FirstName + " " + e.Patient.LastName
                 });
 
-            var dto = query.FirstOrDefault(e => e.ChargeId == chargeId);
+            if (chargeId == null) query = query.Where(e => !e.ChargeId.HasValue);
+            else query = query.Where(e => e.ChargeId == chargeId);
+
+            var dto = query.FirstOrDefault();
             if (dto != null) return dto;
 
             dto = query.OrderByDescending(e => e.Id).FirstOrDefault();
@@ -233,8 +232,103 @@
                 var patientName = this._dal.GetAll().Where(e => e.Id == patientId).Select(e => e.FirstName + " " + e.LastName).FirstOrDefault();
                 dto = new ClinicalDto { PatientId = patientId, PatientName = patientName };
             }
+            else
+            {
+                dto.Id = 0;
+                dto.ChargeId = null;
+            }
 
             return dto;
+        }
+
+        public void SaveClinical(ClinicalDto dto)
+        {
+            var query = this._clinicalDAL.GetAll().Where(e => e.PatientId == dto.PatientId);
+
+            if (dto.ChargeId == null) query = query.Where(e => !e.ChargeId.HasValue);
+            else query = query.Where(e => e.ChargeId == dto.ChargeId && e.Id == dto.Id);
+
+            var entity = query.FirstOrDefault();
+
+            if (entity == null)
+            {
+                entity = new Clinical();
+                entity.PatientId = dto.PatientId;
+                entity.ChargeId = dto.ChargeId;
+                this._clinicalDAL.Add(entity);
+            }
+            else this._clinicalDAL.Update(entity);
+            
+            entity.CanNang = dto.CanNang;
+            entity.ChieuCao = dto.ChieuCao;
+            entity.HuyetAp = dto.HuyetAp;
+            entity.NhipTim = dto.NhipTim;
+            entity.NhipTho = dto.NhipTho;
+            entity.TimMet = dto.TimMet;
+            entity.TimNangNguc = dto.TimNangNguc;
+            entity.TimKhoTho = dto.TimKhoTho;
+            entity.PhoiHo = dto.PhoiHo;
+            entity.BaoTuDayHoi = dto.BaoTuDayHoi;
+            entity.DaNgua = dto.DaNgua;
+            entity.DaLupusDo = dto.DaLupusDo;
+            entity.DaVayNen = dto.DaVayNen;
+            entity.DaNamLangBeng = dto.DaNamLangBeng;
+            entity.DaCham = dto.DaCham;
+            entity.DaToDia = dto.DaToDia;
+            entity.DaBachBien = dto.DaBachBien;
+            entity.DaZona = dto.DaZona;
+            entity.DauSayXam = dto.DauSayXam;
+            entity.DauDau = dto.DauDau;
+            entity.DauChayMatSong = dto.DauChayMatSong;
+            entity.DauTocRung = dto.DauTocRung;
+            entity.LungDauBaVai = dto.LungDauBaVai;
+            entity.LungCungCoGay = dto.LungCungCoGay;
+            entity.LungLoiSauLung = dto.LungLoiSauLung;
+            entity.LungDauLung = dto.LungDauLung;
+            entity.NgucBungTucNguc = dto.NgucBungTucNguc;
+            entity.NgucBungDauLienSuon = dto.NgucBungDauLienSuon;
+            entity.NgucBungDauBung = dto.NgucBungDauBung;
+            entity.NgucBungDauQuanhRon = dto.NgucBungDauQuanhRon;
+            entity.NgucBungLoiHong = dto.NgucBungLoiHong;
+            entity.TayChanTeMoi = dto.TayChanTeMoi;
+            entity.TayChanDauBapVe = dto.TayChanDauBapVe;
+            entity.TayChanPhu = dto.TayChanPhu;
+            entity.TayChanRaMoHoi = dto.TayChanRaMoHoi;
+            entity.TayChanThonGot = dto.TayChanThonGot;
+            entity.IaBon = dto.IaBon;
+            entity.IaLong = dto.IaLong;
+            entity.IaRaMau = dto.IaRaMau;
+            entity.TieuIt = dto.TieuIt;
+            entity.TieuGat = dto.TieuGat;
+            entity.TieuCoMu = dto.TieuCoMu;
+            entity.TieuRaMau = dto.TieuRaMau;
+            entity.TieuNuocVang = dto.TieuNuocVang;
+            entity.TieuNuocDuc = dto.TieuNuocDuc;
+            entity.TieuDemMayLan = dto.TieuDemMayLan;
+            entity.AnMet = dto.AnMet;
+            entity.AnChanAn = dto.AnChanAn;
+            entity.AnDau = dto.AnDau;
+            entity.AnBinhHoi = dto.AnBinhHoi;
+            entity.AnKhoTieu = dto.AnKhoTieu;
+            entity.NguKho = dto.NguKho;
+            entity.NguNangNguc = dto.NguNangNguc;
+            entity.NguRutChan = dto.NguRutChan;
+            entity.NguChuotRut = dto.NguChuotRut;
+            entity.UTai = dto.UTai;
+            entity.HayQuen = dto.HayQuen;
+            entity.MunNhot = dto.MunNhot;
+            entity.Nam = dto.Nam;
+            entity.TanNhang = dto.TanNhang;
+            entity.DangMangThai = dto.DangMangThai;
+            entity.MoiSinh = dto.MoiSinh;
+            entity.KinhNguyetTre = dto.KinhNguyetTre;
+            entity.KinhNguyetGianDoan = dto.KinhNguyetGianDoan;
+            entity.KinhNguyetSom = dto.KinhNguyetSom;
+            entity.KinhNguyetRongKinh = dto.KinhNguyetRongKinh;
+            entity.KinhNguyetManKinh = dto.KinhNguyetManKinh;
+            entity.HuyetTrang = dto.HuyetTrang;
+
+            this.SaveChanges();
         }
     }
 }

@@ -17,7 +17,7 @@
         private readonly CptBLL _cptBLL;
         private readonly IcdBLL _icdBLL;
         private readonly ChargeBLL _chargeBLL;
-        private readonly DrugBLL _drugBLL;
+
         private readonly DoctorBLL _doctorBLL;
 
         public ChargeController()
@@ -27,7 +27,6 @@
             this._cptBLL = new CptBLL();
             this._icdBLL = new IcdBLL();
             this._chargeBLL = new ChargeBLL();
-            this._drugBLL = new DrugBLL();
             this._doctorBLL = new DoctorBLL();
         }
 
@@ -158,6 +157,9 @@
             model.ListDoctors.Insert(0, new DoctorDto { Id = 0, LastName = "--- Chọn ---" });
             model.ListChargeDrugs = this._chargeBLL.GetDrugs(patientId, chargeId).ToList();
 
+            if (chargeId == 0) model.Clinical = this._patientBLL.GetClinical(model.PatientId, null);
+            else model.Clinical = this._patientBLL.GetClinical(model.PatientId, chargeId);
+
             return View(model);
         }
 
@@ -222,6 +224,9 @@
             model.ListDoctors = this._doctorBLL.Get(user.CompanyId).Where(e => e.Active).ToList();
             model.ListDoctors.Insert(0, new DoctorDto { LastName = "--- Chọn ---" });
             model.ListChargeDrugs = this._chargeBLL.GetDrugs(model.PatientId, model.Id).ToList();
+
+            if (model.Id == 0) model.Clinical = this._patientBLL.GetClinical(model.PatientId, null);
+            else model.Clinical = this._patientBLL.GetClinical(model.PatientId, model.Id);
 
             return View(model);
         }
