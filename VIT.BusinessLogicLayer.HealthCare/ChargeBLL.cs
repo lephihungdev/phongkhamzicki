@@ -13,6 +13,7 @@
         private readonly IChargeDrugDAL _chargeDrugDAL;
         private readonly IICDDAL _icdDAL;
         private readonly ICPTDAL _cptDAL;
+        private readonly IClinicalDAL _clinicalDAL;
 
         public ChargeBLL(string connectionString = "")
             : base(connectionString)
@@ -21,6 +22,7 @@
             this._chargeDrugDAL = new ChargeDrugDAL(this.DatabaseFactory);
             this._icdDAL = new ICDDAL(this.DatabaseFactory);
             this._cptDAL = new CPTDAL(this.DatabaseFactory);
+            this._clinicalDAL = new ClinicalDAL(this.DatabaseFactory);
         }
 
         public IQueryable<ChargeDto> Get(int patientId, int facilityId = 0)
@@ -187,6 +189,13 @@
                 chargeDrug.ChargeId = dto.Id;
                 this._chargeDrugDAL.Update(chargeDrug);
             }
+
+            var clinical = this._clinicalDAL.GetAll().FirstOrDefault(e => e.PatientId == patientId && !e.ChargeId.HasValue);
+            if (clinical != null)
+            {
+                clinical.ChargeId = entity.Id;
+            }
+            this._clinicalDAL.Update(clinical);
 
             this.SaveChanges();
         }
