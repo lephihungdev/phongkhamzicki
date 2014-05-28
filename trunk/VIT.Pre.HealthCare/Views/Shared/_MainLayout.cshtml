@@ -17,8 +17,8 @@
                 <tr>
                     <td class="title">@ViewBag.FacilityName</td>
                     <td class="user">@ViewBag.UserName | <a href='/Login/Logout'>Đăng xuất</a></td>
-                    <td rowspan="2" class="btnNewPatients button"><a href='/Patient/Search'>BN mới</a></td>
-                    <td rowspan="2" class="btnSettings button"><a href='/Settings/Index'>Cấu hình</a></td>
+                    <td rowspan="2" class="btnNewPatients button" onclick="window.location.href = '/Patient/Search';"><a href='#'>BN mới</a></td>
+                    <td rowspan="2" class="btnSettings button" onclick="window.location.href = '/Settings/Index';"><a href='#'>Cấu hình</a></td>
                 </tr>
                 <tr>
                     <td><input id='search' name="key" type="text" style="width: 100%;height: 19px;"/> </td>
