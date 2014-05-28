@@ -41,8 +41,8 @@ text-align: center
 
 #frmHeader{background: url(../images/logo.png) left no-repeat;padding-left: 90px; height: 50px}
 #frmHeader .title{text-shadow: rgb(255, 255, 255) 0px 1px;color: rgb(102, 102, 102);font-size: 16px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;height: 19px;}
-#frmHeader .btnSettings {background: url(../images/settings.png) no-repeat top;width: 56px;height: 36px;padding: 4px;}
-#frmHeader .btnNewPatients {background: url(../images/new-patient.png) no-repeat top; width: 50px;height: 36px;padding: 4px;}
+#frmHeader .btnSettings {background: url(../images/settings.png) no-repeat top;width: 56px;height: 36px;padding: 4px; cursor:pointer}
+#frmHeader .btnNewPatients {background: url(../images/new-patient.png) no-repeat top; width: 50px;height: 36px;padding: 4px; cursor:pointer}
 #frmHeader a{ text-decoration: none;color: #333;font-size: 12px}
 #frmHeader .user{ text-align: right; padding: 0px 10px}
 #frmHeader .btnSearch {text-align: right;padding: 0px 10px;width:200px;height: 26px;}
