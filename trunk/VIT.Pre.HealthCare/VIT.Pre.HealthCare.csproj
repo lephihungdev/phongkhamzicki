@@ -118,6 +118,7 @@
     <Content Include="Content\images\enrollment_icon_1.png" />
     <Content Include="Content\images\icd-10-icon-217x300.png" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\logo2.ico" />
     <Content Include="Content\images\new-patient.png" />
     <Content Include="Content\images\plus.png" />
     <Content Include="Content\images\print-printer-icon.png" />
