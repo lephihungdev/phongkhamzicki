@@ -72,6 +72,7 @@
     <Compile Include="AutoCompleteAttribute.cs" />
     <Compile Include="AutocompleteHelpers.cs" />
     <Compile Include="Controllers\ChargeController.cs" />
+    <Compile Include="Controllers\FacilityController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Models\ChargePrintModel.cs" />
     <Compile Include="Models\ChargesPrintModel.cs" />
     <Compile Include="Models\ClinicalModel.cs" />
+    <Compile Include="Models\FacilityModel.cs" />
     <Compile Include="Models\CptModel.cs" />
     <Compile Include="Models\IcdModel.cs" />
     <Compile Include="Models\DoctorModel.cs" />
@@ -101,6 +103,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\zicki.css" />
     <Content Include="Content\css\print.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\images\Document-Add-icon.png" />
@@ -120,8 +123,63 @@
     <Content Include="Content\images\print-printer-icon.png" />
     <Content Include="Content\images\Save.png" />
     <Content Include="Content\images\settings.png" />
+    <Content Include="Content\images\solution\BenhAn.JPG" />
+    <Content Include="Content\images\solution\BenhNhan.png" />
+    <Content Include="Content\images\solution\CanLamSang.JPG" />
+    <Content Include="Content\images\solution\DieuTri.JPG" />
+    <Content Include="Content\images\solution\DonThuoc.JPG" />
     <Content Include="Content\images\treatment.jpg" />
     <Content Include="Content\images\Drug.jpg" />
+    <Content Include="Content\images\zicki\another.png" />
+    <Content Include="Content\images\zicki\another_light.png" />
+    <Content Include="Content\images\zicki\background.png" />
+    <Content Include="Content\images\zicki\background_item.png" />
+    <Content Include="Content\images\zicki\bando.png" />
+    <Content Include="Content\images\zicki\bt_login.png" />
+    <Content Include="Content\images\zicki\bt_register.png" />
+    <Content Include="Content\images\zicki\bullet.gif" />
+    <Content Include="Content\images\zicki\close.png" />
+    <Content Include="Content\images\zicki\collapse.png" />
+    <Content Include="Content\images\zicki\dd_arrow.gif" />
+    <Content Include="Content\images\zicki\dislike.png" />
+    <Content Include="Content\images\zicki\furniture.png" />
+    <Content Include="Content\images\zicki\furniture_light.png" />
+    <Content Include="Content\images\zicki\gift.png" />
+    <Content Include="Content\images\zicki\gift_light.png" />
+    <Content Include="Content\images\zicki\heathy.png" />
+    <Content Include="Content\images\zicki\heathy_light.png" />
+    <Content Include="Content\images\zicki\icon1.png" />
+    <Content Include="Content\images\zicki\icon2.png" />
+    <Content Include="Content\images\zicki\icon3.png" />
+    <Content Include="Content\images\zicki\intro-1.png" />
+    <Content Include="Content\images\zicki\intro-2.png" />
+    <Content Include="Content\images\zicki\intro-3.png" />
+    <Content Include="Content\images\zicki\intro-4.png" />
+    <Content Include="Content\images\zicki\like.png" />
+    <Content Include="Content\images\zicki\lineHeader.png" />
+    <Content Include="Content\images\zicki\loading.gif" />
+    <Content Include="Content\images\zicki\logo.png" />
+    <Content Include="Content\images\zicki\main-content.png" />
+    <Content Include="Content\images\zicki\next.png" />
+    <Content Include="Content\images\zicki\phone.png" />
+    <Content Include="Content\images\zicki\prev.png" />
+    <Content Include="Content\images\zicki\publish_x.png" />
+    <Content Include="Content\images\zicki\reg.png" />
+    <Content Include="Content\images\zicki\review_background.png" />
+    <Content Include="Content\images\zicki\selectedMenu.png" />
+    <Content Include="Content\images\zicki\shoes.png" />
+    <Content Include="Content\images\zicki\shoes_light.png" />
+    <Content Include="Content\images\zicki\sitemap.png" />
+    <Content Include="Content\images\zicki\speech-bubbles.png" />
+    <Content Include="Content\images\zicki\star.png" />
+    <Content Include="Content\images\zicki\star_light.png" />
+    <Content Include="Content\images\zicki\television.png" />
+    <Content Include="Content\images\zicki\television_light.png" />
+    <Content Include="Content\images\zicki\toy.png" />
+    <Content Include="Content\images\zicki\toy_light.png" />
+    <Content Include="Content\images\zicki\up-arrow.png" />
+    <Content Include="Content\images\zicki\view-more.png" />
+    <Content Include="Content\images\zicki\yahoo.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -138,6 +196,7 @@
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Content\themes\base\jquery-ui.css" />
     <Content Include="Global.asax" />
+    <None Include="Content\images\zicki\Thumbs.db" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -179,6 +238,8 @@
     <Content Include="Views\Charge\PrintCharge.cshtml" />
     <Content Include="Views\Charge\PrintCharges.cshtml" />
     <Content Include="Views\Patient\Clinical.cshtml" />
+    <Content Include="Views\Shared\_ZickiLayout.cshtml" />
+    <Content Include="Views\Facility\Intro.cshtml" />
     <None Include="Web References\PreAdmin\PreAdmin.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

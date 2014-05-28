@@ -77,12 +77,12 @@
                     charge.Diagnostic = icds[0];
                     for (var i = 1; i < 5; i++)
                     {
-                        if (!string.IsNullOrEmpty(icds[i]))
+                        var code = icds[i];
+                        if (!string.IsNullOrEmpty(code))
                         {
                             charge.Diagnostic += string.IsNullOrEmpty(charge.Diagnostic) ? string.Empty : ", ";
                             charge.Diagnostic +=
-                                this._icdDAL.GetAll().Where(e => e.Code == icds[i]).Select(e => e.Description).
-                                    FirstOrDefault();
+                                this._icdDAL.GetAll().Where(e => e.Code == code).Select(e => e.Description).FirstOrDefault();
                         }
                     }
                 }
@@ -128,6 +128,9 @@
                 Quality = dto.Quality,
                 Note = dto.Note
             };
+
+            if (entity.ChargeId == 0) entity.ChargeId = null;
+
             this._chargeDrugDAL.Add(entity);
 
             this.SaveChanges();
@@ -183,7 +186,7 @@
             this.SaveChanges();
             dto.Id = entity.Id;
 
-            var drugs = this._chargeDrugDAL.GetAll().Where(e => e.ChargeId == 0 && e.PatientId == patientId).ToList();
+            var drugs = this._chargeDrugDAL.GetAll().Where(e => !e.ChargeId.HasValue && e.PatientId == patientId).ToList();
             foreach (var chargeDrug in drugs)
             {
                 chargeDrug.ChargeId = dto.Id;
@@ -194,9 +197,9 @@
             if (clinical != null)
             {
                 clinical.ChargeId = entity.Id;
+                this._clinicalDAL.Update(clinical);
             }
-            this._clinicalDAL.Update(clinical);
-
+            
             this.SaveChanges();
         }
 

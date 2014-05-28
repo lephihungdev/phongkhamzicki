@@ -21,7 +21,7 @@
             this._facilityBLL = new FacilityBLL();
         }
 
-        public ActionResult Search(string key, bool allfacility = false, bool hasCharge = false)
+        public ActionResult Search(string key, int patientId = 0, bool allfacility = false, bool hasCharge = false)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
@@ -32,6 +32,18 @@
             if(!allfacility) facility = user.CompanyId;
             
             var model = new PatientModel();
+            if (patientId > 0)
+            {
+                var dto = this._patientBLL.GetById(patientId);
+                model.Address = dto.Address;
+                model.BirthYear = dto.BirthYear;
+                model.Email = dto.Email;
+                model.FirstName = dto.FirstName;
+                model.LastName = dto.LastName;
+                model.Phone = dto.Phone;
+                model.Id = dto.Id;
+                model.Sex = dto.Sex;
+            }
 
             //cheat code
             hasCharge = !string.IsNullOrEmpty(key);

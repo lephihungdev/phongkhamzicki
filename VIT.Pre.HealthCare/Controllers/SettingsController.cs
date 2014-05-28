@@ -37,6 +37,7 @@
             return View();
         }
 
+        #region drug
         public ActionResult DrugComplete(string term)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
@@ -46,7 +47,8 @@
 
             var query = this._drugBLL.Get(user.CompanyId)
                 .Where(e => e.Active)
-                .Where(c => c.Name.StartsWith(term) || c.Description.Contains(term));
+                .Where(c => c.Name.StartsWith(term) || c.Description.Contains(term))
+                .Take(100);
             var icds = query.Select(e => new AutoCompletedIntDto
             {
                 label = e.Name,
@@ -56,7 +58,7 @@
             return this.Json(icds, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Drug(string code)
+        public ActionResult Drug(string code, int id = 0)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
@@ -64,6 +66,18 @@
             this.ViewBag.UserName = user.UserName;
 
             var model = new DrugModel();
+            if (id > 0)
+            {
+                var dto = this._drugBLL.Get(user.CompanyId).FirstOrDefault(e => e.Id == id);
+                if (dto != null)
+                {
+                    model.Active = dto.Active;
+                    model.Name = dto.Name;
+                    model.Description = dto.Description;
+                    model.Id = dto.Id;
+                }
+            }
+
             model.Drugs = this._drugBLL.Get(user.CompanyId, code).ToList();
             return this.View(model);
         }
@@ -112,7 +126,9 @@
             this._drugBLL.Delete(id, user.CompanyId);
             return this.RedirectToAction("Drug", "Settings");
         }
+        #endregion
 
+        #region CPT
         public ActionResult CptComplete(string term)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
@@ -122,7 +138,8 @@
 
             var query = this._cptBLL.Get(user.CompanyId)
                 .Where(e => e.Active)
-                .Where(c => c.Code.StartsWith(term) || c.Description.Contains(term));
+                .Where(c => c.Code.StartsWith(term) || c.Description.Contains(term))
+                .Take(100);
             var icds = query.Select(e => new AutoCompletedStringDto
             {
                 label = e.Code + " - " + e.Description,
@@ -150,7 +167,7 @@
             return this.Json(dto, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Cpt(string code)
+        public ActionResult Cpt(string code, int id = 0)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
@@ -158,6 +175,18 @@
             this.ViewBag.UserName = user.UserName;
 
             var model = new CptModel();
+            if (id > 0)
+            {
+                var dto = this._cptBLL.Get(user.CompanyId).FirstOrDefault(e => e.Id == id);
+                if (dto != null)
+                {
+                    model.Active = dto.Active;
+                    model.Code = dto.Code;
+                    model.Description = dto.Description;
+                    model.Id = dto.Id;
+                }
+            }
+
             model.Cpts = this._cptBLL.Get(user.CompanyId, code).ToList();
             return this.View(model);
         }
@@ -206,7 +235,9 @@
             this._cptBLL.Delete(id, user.CompanyId);
             return this.RedirectToAction("Cpt", "Settings");
         }
+        #endregion
 
+        #region ICD
         public ActionResult IcdComplete(string term)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
@@ -214,7 +245,10 @@
             this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
             this.ViewBag.UserName = user.UserName;
 
-            var query = this._icdBLL.Get().Where(e => e.Active).Where(c => c.Code.StartsWith(term) || c.Description.Contains(term));
+            var query = this._icdBLL.Get()
+                .Where(e => e.Active)
+                .Where(c => c.Code.StartsWith(term) || c.Description.Contains(term))
+                .Take(100);
             var icds = query.Select(e => new AutoCompletedStringDto
             {
                 label = e.Description,
@@ -242,7 +276,7 @@
             return this.Json(dto, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Icd(string code)
+        public ActionResult Icd(string code, int id = 0)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
@@ -250,6 +284,18 @@
             this.ViewBag.UserName = user.UserName;
 
             var model = new IcdModel();
+            if (id > 0)
+            {
+                var dto = this._icdBLL.Get().FirstOrDefault(e => e.Id == id);
+                if (dto != null)
+                {
+                    model.Active = dto.Active;
+                    model.Code = dto.Code;
+                    model.Description = dto.Description;
+                    model.Id = dto.Id;
+                }
+            }
+
             model.Icds = this._icdBLL.Get(code).ToList();
             return this.View(model);
         }
@@ -288,8 +334,10 @@
 
             return this.View(model);
         }
+        #endregion
 
-        public ActionResult Doctor(string key)
+        #region Doctor
+        public ActionResult Doctor(string vkey, int id = 0)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
@@ -297,6 +345,22 @@
             this.ViewBag.UserName = user.UserName;
 
             var model = new DoctorModel();
+            if (id > 0)
+            {
+                var dto = this._doctorBLL.Get(user.CompanyId).FirstOrDefault(e => e.Id == id);
+                if (dto != null)
+                {
+                    model.Address = dto.Address;
+                    model.BirthYear = dto.BirthYear;
+                    model.Email = dto.Email;
+                    model.FirstName = dto.FirstName;
+                    model.LastName = dto.LastName;
+                    model.Phone = dto.Phone;
+                    model.Id = dto.Id;
+                    model.Sex = dto.Sex;
+                }
+            }
+
             var doctors = this._doctorBLL.Get(user.CompanyId).ToList();
             doctors.ForEach(e => e.SexName = e.Sex == true ? "Nam" : "Nữ");
             model.Doctors = doctors;
@@ -356,5 +420,6 @@
             this._doctorBLL.Delete(id, user.CompanyId);
             return this.RedirectToAction("Doctor", "Settings");
         }
+        #endregion
     }
 }

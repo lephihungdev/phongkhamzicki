@@ -1,0 +1,117 @@
+﻿@model VIT.Pre.HealthCare.Models.FacilityModel
+
+@{
+    ViewBag.Title = "Intro";
+    Layout = "~/Views/Shared/_ZickiLayout.cshtml";
+}
+
+<div id="article_content_center">
+    <h1>GIẢI PHÁP PHÒNG KHÁM Z-HEALTHCARE</h1>
+    <p>
+        <a href="http://phongkham.zicki.vn/">Giải pháp phòng khám Z-HealthCare</a> hỗ trợ công tác quản lý, công tác tiếp nhận và khám chữa bệnh cũng như công tác thống kê báo cáo nhanh chóng chính xác và hiệu quả.
+    </p>
+    
+    <ul style="font-weight: bold;font-size: 14px; margin-bottom: 10px; padding: 0">Chức năng chính:
+        <li style="margin-left: 50px; font-weight: normal; padding: 5px 0px">Quản lý bệnh nhân, bệnh án.</li>
+        <li style="margin-left: 50px; font-weight: normal; padding: 5px 0px">Điều trị, phát hiện lâm sàng, chỉ định dùng thuốc ( tên thuốc, số lượng, ngày uống, thời gian uống, lời dặn).</li>
+        <li style="margin-left: 50px; font-weight: normal; padding: 5px 0px">Báo cáo thống kê bệnh nhân….</li>
+    </ul>
+    
+    <ul style="font-weight: bold;font-size: 14px; margin-bottom: 10px; padding: 0">Lợi ích sử dụng:
+        <li style="margin-left: 50px; font-weight: normal; padding: 5px 0px">Quản lý, theo dõi hồ sơ bệnh án, bệnh nhân nhanh chóng, rõ ràng.</li>
+        <li style="margin-left: 50px; font-weight: normal; padding: 5px 0px">Giảm thiểu số lượng giấy tờ liên quan tới bệnh nhân.</li>
+        <li style="margin-left: 50px; font-weight: normal; padding: 5px 0px">Sử dụng mã bệnh chuẩn quốc tế 1 cách nhanh chóng (ICD10).</li>
+        <li style="margin-left: 50px; font-weight: normal; padding: 5px 0px">Tạo ra các quy trình khám bệnh rõ ràng.</li>
+        <li style="margin-left: 50px; font-weight: normal; padding: 5px 0px">Quản lý bệnh nhân, bệnh án, thuốc và phương pháp điều trị 1 cách có hiểu quả.</li>
+        <li style="margin-left: 50px; font-weight: normal; padding: 5px 0px">Chia sẻ thông tin giữa các phòng khám hỗ trợ điều trị hiệu quả nhất.</li>
+    </ul>
+    
+    <ul style="font-weight: bold;font-size: 14px; margin-bottom: 10px; padding: 0">Yêu cầu cơ sở vật chất:
+        <li style="margin-left: 50px; font-weight: normal; padding: 5px 0px">Máy tính, thiêt bị có kết nối internet.</li>
+        <li style="margin-left: 50px; font-weight: normal; padding: 5px 0px">Máy chủ (server), chi phí thuê 3.000 vnđ/ 1 ngày.</li>
+        <li style="margin-left: 50px; font-weight: normal; padding: 5px 0px"><b>Lưu ý:</b> chi phí cài đặt phần mềm miễn phí.</li>
+    </ul>
+    
+    <ul style="font-size: 14px; margin-bottom: 10px; padding: 0; text-align: left"> <strong>Giao diện hệ thống</strong>
+        <li style="margin-left: 50px; padding: 5px 0px"><b>Quản lý bệnh nhân: </b>lập hồ sơ bệnh nhân nhanh chóng, đơn giản.
+            <img src="../../Content/images/solution/BenhNhan.png" style="margin: 15px 0px 20px" width="580px"/>
+        </li>
+        <li style="margin-left: 50px; padding: 5px 0px"><b>Thông tin cận lâm sàng: </b>hỗ trợ bác sĩ có thêm thông tin, triệu chứng của bệnh nhân, rút ngắn thời gian chuẩn đoán, điều trị.
+            <img src="../../Content/images/solution/CanLamSang.JPG" style="margin: 15px 0px 20px" width="580px"/>
+        </li>
+        <li style="margin-left: 50px; padding: 5px 0px"><b>Hồ sơ bệnh án của từng bênh nhân: </b>Theo dõi quá trình điều trị bệnh.
+            <img src="../../Content/images/solution/BenhAn.JPG" style="margin: 15px 0px 20px" width="580px"/>
+        </li>
+        <li style="margin-left: 50px; padding: 5px 0px"><b>Điều trị: </b>Quản lý mã bệnh theo chuẩn quốc tế ICD10, thao tác dể dàng giúp tạo hồ sơ nhanh chóng.
+            <img src="../../Content/images/solution/DieuTri.JPG" style="margin: 15px 0px 20px" width="580px"/>
+            <p>in đơn thốc dể dàng, tiết kiệm chi phí.</p>
+            <img src="../../Content/images/solution/DonThuoc.JPG" style="margin: 15px 0px 20px" width="580px"/>
+        </li>
+        <li style="margin-left: 50px; padding: 5px 0px"><b>Quản lý các danh mục: </b>bệnh án (ICD10), Điều trị(CPT), Bác sĩ, Thuốc ...
+        </li>
+    </ul>
+</div>
+
+<div id="article_content_right">
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend style="font-size: 18px">Đăng ký</legend>
+        
+        <img src="../../Content/images/logo.png" alt="Giải pháp phòng khám trực tuyến" style="margin:15px 0px 15px 115px"/>
+        <table style="font-size: 14px">
+            <tr>
+                <td>Tên phòng khám:</td>
+                <td>@Html.EditorFor(model => model.Name)</td>
+            </tr>
+            <tr>
+                <td>Tên miền:</td>
+                <td>@Html.EditorFor(model => model.Domain)</td>
+            </tr>
+            <tr>
+                <td>Tài khoản:</td>
+                <td>@Html.EditorFor(model => model.UserName)</td>
+            </tr>
+            <tr>
+                <td>Mật khẩu:</td>
+                <td>@Html.EditorFor(model => model.PassWord)</td>
+            </tr>
+            <tr>
+                <td>Nhập lại mật khẩu:</td>
+                <td>@Html.EditorFor(model => model.RePassWord)</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center; padding-top: 10px"><input type="submit" value="Tạo phòng khám" /></td>
+            </tr>
+        </table>
+    </fieldset>
+}
+
+<div class="item">
+	<h1 class="title3" title="Tư vấn">Liên hệ</h1>
+	
+
+<div class="SupportOnline">
+    
+        <ul>
+                <li class="yahoo">
+                    <a href="ymsgr:sendim?m0nkey61"><img src="http://opi.yahoo.com/online?u=m0nkey61&amp;m=g&amp;t=0" border="0"></a> Mr. Vũ - 0987 877 602
+                </li>
+                <li class="yahoo">
+                    <a href="ymsgr:sendim?fashaju"><img src="http://opi.yahoo.com/online?u=fashaju&amp;m=g&amp;t=0" border="0"></a> Mr. Giàu - 0997 180988
+                </li>
+            
+                <li class="yahoo">
+                    <a href="skype:dongacs_vu?chat"><img src="http://mystatus.skype.com/smallicon/dongacs_vu" border="none"></a> Ms. Hiền - 0164 283 6848
+                </li>
+                <li class="yahoo">
+                    <a href="skype:dongacs_lethanhtinh?chat"><img src="http://mystatus.skype.com/smallicon/dongacs_lethanhtinh" border="none"></a> Mr. Tỉnh - 0932 733 062
+                </li>
+        </ul>
+    
+</div>
+</div>
+</div>

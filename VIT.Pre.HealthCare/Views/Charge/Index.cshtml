@@ -40,8 +40,8 @@
             <td class="value"><input type="button" onclick="Print();" value="In" class="btnLogin save" style="float:left; margin-left: 15px; width: 80px"/></td>
         </tr>
     </table>
-    <a href="/Charge/Detail?patientId=@Model.PatientId" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/Document-Add-icon.png" alt="Thêm mới điều trị" style="width: 58px;"/> Thêm điều trị mới</a>
-    <a href="/Patient/Clinical?patientId=@Model.PatientId" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/enrollment_icon_1.png" alt="Lâm sàng" style="width: 58px;"/> Lâm sàng</a>
+    <a href="/Charge/Detail?patientId=@Model.PatientId" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/Document-Add-icon.png" alt="Thêm mới điều trị" style="width: 58px;"/>Thêm điều trị mới</a>
+    <a href="/Patient/Clinical?patientId=@Model.PatientId" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/enrollment_icon_1.png" alt="Cận lâm sàng" style="width: 58px;"/>Cận lâm sàng</a>
 </fieldset>
 
 <fieldset class="patientlist">
@@ -53,7 +53,7 @@
                 <td>Ngày khám</td>
                 <td>Chuẩn đoán</td>
                 <td>Điều trị</td>
-                <td style="width: 65px">Thòi gian</td>
+                <td style="width: 65px">Thời gian</td>
                 <td style="width: 60px">Chi tiết</td>
                 <td style="width: 25px">Xóa</td>
             </tr>
@@ -78,7 +78,7 @@
                     <span style="display: none">@o.Note</span>
                 </td>
                 <td style="text-align: center"><a href="/Charge/Detail?chargeId=@o.Id&patientId=@Model.PatientId"><img src="../../Content/images/edit.png"/></a></td>
-                <td style="text-align: center"><a href="/Charge/Delete?id=@o.Id"><img src="../../Content/images/DeleteRed.png"/></a></td>
+                <td style="text-align: center"><a href="/Charge/Delete?id=@o.Id&patientId=@Model.PatientId"><img src="../../Content/images/DeleteRed.png"/></a></td>
             </tr>
         }
     </table>

@@ -22,7 +22,7 @@
         }
 
         /// <returns>
-        /// bệnh nhân mới tạo hoặc đă từn khám chữa bệnh ở đây
+        /// bệnh nhân mới tạo hoặc đă từng khám chữa bệnh ở đây
         /// </returns>
         public IQueryable<PatientDto> Get(int facilityId)
         {
@@ -41,6 +41,28 @@
                     });
 
             return query;
+        }
+
+        /// <returns>
+        /// get thông tin bệnh nhân
+        /// </returns>
+        public PatientDto GetById(int patientId)
+        {
+            var query = this._dal.GetAll()
+                .Where(e => e.Id == patientId)
+                .Select(e => new PatientDto
+                {
+                    Id = e.Id,
+                    Address = e.Address,
+                    BirthYear = e.BirthYear,
+                    Email = e.Email,
+                    FirstName = e.FirstName,
+                    LastName = e.LastName,
+                    Phone = e.Phone,
+                    Sex = e.Sex
+                });
+
+            return query.FirstOrDefault();
         }
 
         /// <summary>
@@ -99,10 +121,10 @@
 
             entity.Address = dto.Address;
             entity.BirthYear = dto.BirthYear;
-            entity.Email = entity.Email;
-            entity.FirstName = entity.FirstName;
-            entity.LastName = entity.LastName;
-            entity.Phone = entity.Phone;
+            entity.Email = dto.Email;
+            entity.FirstName = dto.FirstName;
+            entity.LastName = dto.LastName;
+            entity.Phone = dto.Phone;
             entity.Sex = entity.Sex;
 
             this.SaveChanges();
@@ -226,7 +248,8 @@
             var dto = query.FirstOrDefault();
             if (dto != null) return dto;
 
-            dto = query.OrderByDescending(e => e.Id).FirstOrDefault();
+            // thong tin sau cung
+            // dto = query.OrderByDescending(e => e.Id).FirstOrDefault();
             if (dto == null)
             {
                 var patientName = this._dal.GetAll().Where(e => e.Id == patientId).Select(e => e.FirstName + " " + e.LastName).FirstOrDefault();

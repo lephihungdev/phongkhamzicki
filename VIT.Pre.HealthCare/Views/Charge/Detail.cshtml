@@ -12,7 +12,7 @@
     <tr>
         <td style="width: 155px;vertical-align: top" class="clinicaldisplay">
             <fieldset class="patientinfo chargeinfo">
-                <legend>Lâm sàng</legend>
+                <legend>Cận lâm sàng</legend>
                 <ul> <b>Tổng quát</b>
                     <li>Chiều cao: @Model.Clinical.ChieuCao</li>
                     <li>Cân nặng: @Model.Clinical.CanNang</li>
@@ -172,7 +172,7 @@
                 </ul>
             </fieldset>
         </td>
-        <td>
+        <td style="vertical-align: top">
 
             @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "charge" }))
             {
@@ -307,7 +307,7 @@
                     <table class="table" width="100%" border="0" cellspacing="0" cellpadding="0">
                         <thead>
                             <tr>
-                                <td>Mã thốc</td>
+                                <td>Mã thuốc</td>
                                 <td>Tên thuốc</td>
                                 <td>Số lượng</td>
                                 <td>Ghi chú</td>

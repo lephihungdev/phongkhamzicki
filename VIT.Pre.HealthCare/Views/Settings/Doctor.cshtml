@@ -91,7 +91,7 @@
     <form action="/Settings/Doctor" method="GET">
         <table width="100%">
             <tr>
-                <td><input id='search' name="key" type="text" style="width: 100%;height: 19px;"/> </td>
+                <td><input id='search' name="vkey" type="text" style="width: 100%;height: 19px;"/> </td>
                 <td style="padding-left:10px" class="btnSearch"><input name="" type="submit" value="Tìm"/></td>                  
             </tr>
         </table>
@@ -114,7 +114,7 @@
         @foreach (var o in Model.Doctors)
         {
             var active = o.Active ? "Y" : "N";
-            <tr>
+            <tr onclick="window.location.assign('/Settings/Doctor?id=@o.Id&vkey=@Request["vkey"]')">
                 <td>@o.Id</td>
                 <td>@o.FirstName</td>
                 <td>@o.LastName</td>
