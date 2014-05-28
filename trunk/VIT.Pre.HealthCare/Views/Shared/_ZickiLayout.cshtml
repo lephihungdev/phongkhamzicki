@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Giải pháp quản lý phòng khám qua mạng</title>
+        <meta name="description" content="Giải pháp quản lý phòng mạch hiệu quả và tiết kiệm nhất.">
+        <meta name="keywords" content="phan mem quan ly phong kham, quan ly phong mach, giai phap quan ly, phong kham tu">
+        <link href="@Url.Content("~/Content/css/zicki.css")" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body>
+        <div>
+      
+            <div id="container">
+                <!-- Panel -->
+                <div id="toppanel">
+                    <!-- The tab on top --> 
+                    <div class="tab">
+                        <div id="toggle">
+                            <a id="open" class="open" href="http://zicki.vn/bang-gia-dich-vu#"></a>
+                            <a id="close" style="display: none;" class="close" href="http://zicki.vn/bang-gia-dich-vu#"></a>         
+                        </div>
+                    </div> <!-- / top -->
+			
+                </div> <!--panel -->
+
+        
+                <div id="article_content_top">
+            
+            
+                    <div id="header"> <!-- header -->
+                        <div class="logo">
+                            <a href="http://zicki.vn/"><img src="http://admin.zicki.vn/Uploads/C1/Images/Agents/em-nhat--140521104650.png" height="60px" width="220px" alt="Zicki Team"></a> <!-- logo -->
+                        </div>
+                        <div id="menu">
+                            <div class="menu-top"> <!-- menu-top -->
+                                <li><a id="mnuHome" href="http://zicki.vn/">Trang chủ</a></li>
+                                <li><a id="mnuProduct" href="http://zicki.vn/template-mau">Kho giao diện</a></li>
+                                <li><a id="mnuService" href="http://zicki.vn/bang-gia-dich-vu">Bảng giá website</a></li>
+                                <li><a id="mnuClinic" href="http://phongkham.zicki.vn/Facility/Intro" class="selected">Giải pháp phòng khám</a></li>
+                                <li><a id="mnuContract" href="http://zicki.vn/lien-he">Liên hệ</a></li>
+                            </div> <!-- end menu-top -->
+
+                            <div class="clear-fix"> </div>
+                
+                            <div class="menu-bottom"> <!-- menu-top -->
+                            </div>
+
+                            <div class="clear-fix"> </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="article_content_middle">
+                    @RenderBody()
+                </div>
+                <p id="back-top" style="display: none;">
+                    <a href="http://zicki.vn/bang-gia-dich-vu#top"><span></span></a>
+                </p>
+                <div class="clr"></div>
+                <div id="footer"> <!-- footer -->
+                    <div> <b>Phát triển bởi: </b> Zicki Team </div>
+                    <div> <b>Điện thoại: </b> 0997 180988 - <b>Email : </b> zicki.vn@gmail.com</div>
+                    <div> <b>Địa chỉ: </b> 32A/1c - Tháp Mười - Phường 2 - Quận 6 - Tp.HCM</div>
+                </div>
+            </div>
+            <script type="text/javascript">	    $(document).ready(function () { document.getElementsByTagName('body')[0].style.cssText = 'background-color: #000000'; });</script>
+        </div>
+    </body>
+</html>

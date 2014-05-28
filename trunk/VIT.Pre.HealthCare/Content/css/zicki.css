@@ -1,0 +1,371 @@
+/*** header ******************************************************************/
+body {
+	background: url(../images/zicki/background.png);
+	margin: 0;
+	padding:0;
+	font: 62.5% "Trebuchet MS", sans-serif;
+}
+
+.btn_eve {background: none repeat scroll 0 0 #0075AA;border: 0 none;border-radius: 20px 20px 20px 20px;color: #FFFFFF;float: right;font-family: Georgia,"Times New Roman",Times,serif;font-size: 16px; margin: 15px 5px;padding: 2px 5px;position: relative;text-align: center;cursor:pointer}
+.tab_input{background: none repeat scroll 0 0 #FFFDFC;border: medium none;border-radius: 20px 20px 20px 20px;color: #636363;font-family: "Crimson Text";font-size: 18px;overflow: hidden;width: 93%;padding: 0 10px;outline: none;height: 30px;}
+.table_left{font-size: 14px;width: 130px; vertical-align: top}
+.captcha{float: left; width: 68%}
+.changecaptcha{ float: none; vertical-align: top}
+
+#header {
+	background-color: #3b3f42;
+	min-width: 1000px;
+}
+#home_content_top {
+	background-color: #3b3f42;
+	min-width: 1000px;
+}
+#contact_content_top {
+	background-color: #3b3f42;
+	min-width: 1000px;
+}
+#header .menu-top {
+	margin: auto;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 400px;
+}   
+#header .menu-bottom {
+	width: 1000px;
+	margin: auto;
+	height: 35px;
+	line-height: 35px;
+}
+#header .logo {
+	padding-top: 15px;
+	margin: 0 0 -20px 120px;
+}
+/*** menu ******************************************************************/
+#menu {
+	background: url(../images/zicki/lineHeader.png) repeat-x;
+	margin: -5px auto 0;
+	color: white;   
+	width: 100%;
+}
+
+.menu-top li{
+	list-style-type: none;
+	display: inline;
+	padding-right: 40px;
+	font-size: 14px;
+	float: left;
+    margin-top: 0px
+}
+
+/***Top menu menu link items style******************************************************************/
+.menu-top  li a {
+	height: 35px;
+	line-height: 35px;
+	font-size: 14px;
+	color: #ccc;	
+	text-decoration: none;
+	outline: none;
+	text-align: left;
+	font-weight: bold;
+	display: block;	
+}
+.menu-top  a.selected, .menu-top a:hover { /*CSS class that's dynamically added to the currently active menu items' LI A element*/
+	color: #1783aa;
+	background: url(../images/zicki/selectedMenu.png) no-repeat center bottom; 
+	
+}
+/***Bottom menu link items style******************************************************************/
+.menu-bottom li{
+	list-style-type: none;
+	display: inline;
+	font-size: 14px;
+	float: left;
+	padding-left: 35px;
+	padding-right: 15px;
+	margin-right: 5px;
+
+}
+
+.menu_1 a,.menu_2 a, .menu_3 a, .menu_4 a, .menu_5 a, .menu_6 a, .menu_7 a,.menu_8 a {color: white; display: block; font-weight: bold; font-size: 13px}
+.menuHover_1 a:hover, .menuHover_2 a:hover, .menuHover_3 a:hover, .menuHover_4 a:hover, .menuHover_5 a:hover, .menuHover_6 a:hover, .menuHover_7 a:hover, .menuHover_8 a:hover {
+	color: white;
+}
+.menu_1  {background: url(../images/zicki/star.png) no-repeat center left;}
+.menu_2  {background: url(../images/zicki/shoes.png) no-repeat center left;}
+.menu_3  {background: url(../images/zicki/television.png) no-repeat center left;}
+.menu_4  {background: url(../images/zicki/heathy.png) no-repeat center left;}
+.menu_5  {background: url(../images/zicki/gift.png) no-repeat center left;}
+.menu_6  {background: url(../images/zicki/toy.png) no-repeat center left;}
+.menu_7  {background: url(../images/zicki/furniture.png) no-repeat center left;}
+.menu_8  {background: url(../images/zicki/another.png) no-repeat center left;}
+
+.menuHover_1  {background: #666666 url(../images/zicki/star_light.png) no-repeat center left;}
+.menuHover_2  {background: #666666 url(../images/zicki/shoes_light.png) no-repeat center left;}
+.menuHover_3  {background: #666666 url(../images/zicki/television_light.png) no-repeat center left;}
+.menuHover_4  {background: #666666 url(../images/zicki/heathy_light.png) no-repeat center left;}
+.menuHover_5  {background: #666666 url(../images/zicki/gift_light.png) no-repeat center left;}
+.menuHover_6  {background: #666666 url(../images/zicki/toy_light.png) no-repeat center left;}
+.menuHover_7  {background: #666666 url(../images/zicki/furniture_light.png) no-repeat center left;}
+.menuHover_8  {background: #666666 url(../images/zicki/another_light.png) no-repeat center left;}
+/*** footer ******************************************************************/
+#footer {
+	margin-top: 10px;	
+	padding: 15px;
+	color: white;
+	background-color: #3b3f42;
+	text-align: center;
+	min-width: 1000px;
+}
+/*** back to top ******************************************************************/
+#back-top {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+}
+#back-top a {
+	width: 50px;
+	display: block;
+	text-align: center;
+	font: 11px/100% Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #bbb;
+	/* background color transition */
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+}
+#back-top a:hover {
+
+}
+/*********************************arrow icon (span tag)************************************/
+#back-top span {
+	width: 50px;
+	height: 50px;
+	display: block;
+	margin-bottom: 7px;
+	background: url(../images/zicki/up-arrow.png) no-repeat center center;
+	/* rounded corners */
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	/* background color transition */
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+}
+#back-top a:hover span {
+}
+/*** content ******************************************************************/
+#content, #products_content_middle, #article_content_middle, #contact_content_middle, #product_content_middle {
+	width: 1000px;
+	margin: 20px auto;
+	background: transparent;
+    display: table;
+}
+
+#article_content_middle .item{width: 318px;float: left;margin-right: 15px;margin-top: 15px;}
+#content .item, #products_content_middle .item{width: 318px;float: left;margin-right: 15px;margin-top: 15px;}
+#content .item .frame, #products_content_middle .item .frame, #article_content_middle .item .frame, #contact_content_middle .item .frame {
+	margin: auto;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	/* background color transition */
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+	background: white;
+}
+#content .item .frame .img, #products_content_middle .item .frame .img, #article_content_middle .item .frame .img, #contact_content_middle .item .frame .img{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 290px;
+	margin: auto;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+	/* background color transition */
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+	position:relative; /* important(so we can absolutely position the description div */ 
+}
+
+#article_content_center {width: 620px;padding-right: 20px;float: left;background: transparent;font-size: 14px;text-align: justify;}
+
+#contact_content_left, #product_content_center #col1 {float: left;width: 425px;}
+#product_content_center #col1 img {width: 425px;margin-top: 20px}
+#contact_content_left #map_action{background: none repeat scroll 0 0 #ECEAE7;border: medium none;border-radius: 20px 20px 20px 20px;font-family: "Crimson Text";font-size: 12px;height: 200px;overflow: hidden;padding: 10px;position: relative;width: 400px;margin-bottom: 20px}
+#contact_content_left #map_action #map_canvas{position: static !important;height: 210px; overflow: visible !important;}
+#contact_content_left .item{background: none repeat scroll 0 0 #CFC9C9;border-radius: 20px 20px 20px 20px; margin-bottom: 20px;overflow: hidden;padding: 0 20px 20px;width: 385px;}
+#contact_content_left .item h1{color: #F35827;font-size: 18px;padding: 10px 0 0;text-transform: uppercase;}
+#contact_content_left .item #col1_a {float: left;width: 200px;color: #636363;font-size: 14px}
+#contact_content_left .item #col1_b {float: right;padding-right: 15px;text-align: right;width: 200px;color: #636363;font-size: 14px}
+
+#contact_content_right {float: right;width: 575px;}
+#contact_content_right .item{background: none repeat scroll 0 0 #CFC9C9;border-radius: 20px 20px 20px 20px; margin: 0 0 20px 20px;overflow: hidden;padding: 0 20px 20px;width: 495px;}
+#contact_content_right .item h1{color: #F35827;font-size: 18px;padding: 10px 0 0;text-transform: uppercase;}
+#contact_content_right .item #col1_a {float: left;width: 220px;color: #636363;font-size: 16px}
+#contact_content_right .item #col1_b {float: right;padding-right: 15px;text-align: right;width: 220px;color: #636363;font-size: 16px}
+#contact_content_right .table_lienhe{width: 530px;background: none repeat scroll 0 0 #CFC9C9;border-radius: 20px 20px 20px 20px;overflow: hidden;padding: 20px;}
+#contact_content_right .table_lienhe td{ height: 30px;font-size: 14px;color: #636363;padding: 5px 0}
+#contact_content_right .table_lienhe td textarea{ height: 100px}
+
+#product_content_center #col2 {float: right;width: 555px;}
+#product_content_center #col2 h2 {color: #636363;font-size: 18px;padding-left: 20px;text-transform: uppercase;}
+#product_content_center #col2 #bg_td {background: none repeat scroll 0 0 #F2F1EC;border-radius: 10px 10px 10px 10px;margin-bottom: 20px;overflow: hidden;padding: 20px;text-align: left;}
+#product_content_center #col2 #bg_td table tr td{padding: 5px 0}
+
+#article_content_center {width: 620px; padding-right: 20px;float: left;background: transparent;font-size: 14px;text-align: justify}
+#article_content_center .article_title{margin: 10px 0px 0px;}
+#article_content_center .article_date, #article_content_center .article_tag{font-size: 12px;}
+#article_content_center .article_brief{font-weight: bold;margin: 15px 0px}
+
+#article_content_right {width: 333px; float: right;background: transparent; padding-left: 20px;border-left: 1px dotted;}
+#article_content_right .item .title3 {text-transform: uppercase;text-align: center;	font-size: 17px;font-weight: bold;	height: 55px;line-height: 55px;	background: url(../images/zicki/icon3.png) no-repeat 80px -5px;}
+#article_content_right .item .title2 {text-transform: uppercase;text-align: center;	font-size: 17px;font-weight: bold;	height: 55px;line-height: 55px;	background: url(../images/zicki/icon2.png) no-repeat 0px -5px;}
+#article_content_right .item ._ li{padding: 5px}
+#article_content_right .item ._ li a{text-decoration:none; font-size:13px;}
+#article_content_right .item ._ li .simpledes{display: none}
+
+#article_content_right p{padding-left: 20px;padding-right: 20px;text-align: justify;font-size: 13px;}
+#article_content_right p a{text-align: justify; color: #000;text-decoration:none}
+
+#article_content_right ul{ font-size: 14px; padding-bottom: 5px}
+.yahoo {font-size: 15px; margin-top: 5px; list-style: none; vertical-align: middle}
+.yahoo img{width: 20px; height: 20px}
+
+.description{
+    position:absolute; /* absolute position (so we can position it where we want)*/
+    bottom: 0px; /* position will be on bottom */
+    left:0px;
+    /* display:none; hide it */
+    /* styling bellow */
+    background: url(../images/zicki/review_background.png);
+    font-family: 'tahoma';
+    font-size: 16px;
+    height: 40px;
+    width: 100%;
+    line-height: 40px;
+    color: white
+}
+.private{background-image:none;background-color:ThreeDFace;width: 100% !important;}
+.private a:hover{color:#000 !important;}
+.clear-fix {
+	clear: both;
+}
+.reviewLayout {
+	width: 60%;
+	text-align: center;
+}
+
+.usingLayout {
+	width: 40%;
+	text-align: center;
+}
+.reviewLayout a, .usingLayout a{
+	color: white;
+	text-decoration: none;
+}
+
+.reviewLayout a:hover, .usingLayout a:hover{
+	color: #fdf407;
+    text-decoration: none;
+}
+#view-more {
+	margin-top: 10px;
+	height: 30px;
+	background-color:  #eeeeee ;
+	text-align: center;
+}
+#view-more .icon {
+	width: 180px;
+	line-height: 30px;
+	margin: auto;
+	background: url(../images/zicki/view-more.png) no-repeat left;
+	background-color:  #eeeeee ;
+	text-align: right;
+	font-size: 14px;
+	font-weight: bold;
+	color: #4e4c4c;
+	cursor: pointer;
+}
+#contact {
+    width: 1000px;
+    height: 400px;
+    background-color: #eef0f0;
+    color: #4b4d4d;
+}
+#contact .map{
+    width: 600px;
+    background-color: #eef0f0;
+    color: #4b4d4d;
+    float: left;
+    border-right:1px solid #c2c4c4;
+}
+#contact .map #footer{
+    margin-top: 0;
+    min-width: 0;
+    padding: 0;
+    text-align: center;
+}
+#contact .map #footer #map_action{
+    position:absolute;
+    display: block;
+}
+#contact .map #footer #map_action #map_canvas{
+    background-color: #E5E3DF;
+    height: 375px;
+    left: 0px;
+    position: inherit;
+    top: 0;
+    width: 600px;
+    display: block;
+}
+#contact .contact{
+    width: 350px;
+    float: right;
+    height: 370px;
+    text-align: center;
+}
+
+#contact .contact h2{
+    font-family: Arial;
+    text-align: center;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    color: #444;
+    text-shadow: -1px -1px 1px #CCC;
+    text-transform: uppercase;
+}
+
+form { margin: 0}
+
+.popup{padding: 10px}
+.popup .popup_title{ border: 1px solid rgba(255, 227, 80, 0.62);padding: 0.3em;background: cornsilk;color: blue;font-size: 14px;font-weight: bold;margin: 10px 0px}
+.popup .popup_title h1{ margin: 3px 0px;float: left;}
+.popup .popup_content table tr td{ font-size: 14px}
+
+/* ----- Comment ----- */
+.share{margin-top:30px}
+.main_panel {border: 10x solid #ccc;}
+.main_panel_header {background-color: #666;color: White;font-weight: bold;margin: 5px;padding: 5px;font-size: 13px;border-radius:5px;-moz-border-radius:5px;}
+.odd {clear: both;padding: 2px 0px 5px 0px;font-size: 10px; margin:5px}
+.odd span{float:right}
+.odd input{font-size:10px}
+.odd .typename{background: none repeat scroll 0 0 #434343;border: 1px solid #767676;color: #FFFFFF;font-variant: normal;line-height: normal;padding: 4px;width: 100px;}
+#myScrollContainer {margin:5px;overflow: auto;}
+.comment_odd {background:#fff; clear:both; padding:3px; border-radius:5px;-moz-border-radius:5px; margin-top:5px;}
+.comment_even {background:#F0F0F0;clear:both; padding:3px; border-radius:5px;-moz-border-radius:5px; margin-top:5px;}
+.comment_date {font-size: 80%;padding: 2px 5px;}
+.comment_title {font-size: 90%;font-weight: bold;height: 16px;padding: 2px 5px;width: auto;}
+.comment_content {font-size: 90%;padding: 2px 5px;text-align: justify;width: auto;}
+span.cke_skin_kama {border:0px !important;border-radius:0px !important}
+.news_main_comment{height:100px}
+.comment_captcha{float:right}
+.comment_captcha img{width:100px;height:20px;vertical-align:middle}
+.comment_captcha .input_form{width:50px}
+.txtContents{width:610px; height: 80px;}
+/* ----- End of Comment ----- */

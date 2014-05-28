@@ -1,5 +1,7 @@
 ﻿namespace VIT.Pre.HealthCare.Controllers
 {
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -8,7 +10,6 @@
     using VIT.Library;
     using VIT.Library.Web.ObjectData;
     using VIT.Pre.HealthCare.Models;
-    using System;
 
     public class ChargeController : Controller
     {
@@ -63,8 +64,8 @@
 
             this.ViewBag.PatientId = patientId;
 
-            var patientName = this._patientBLL.Get(user.CompanyId).Where(e => e.Id == patientId).Select(e => new { e.FirstName, e.LastName }).FirstOrDefault();
-            this.ViewBag.PatientName = patientName.FirstName + " " + patientName.LastName;
+            var patientName = this._patientBLL.GetById(patientId);
+            if (patientName != null) this.ViewBag.PatientName = patientName.FirstName + " " + patientName.LastName;
 
             var models = this._facilityBLL.GetAll(patientId)
                 .Select(e => new ChargesPrintModel
@@ -125,9 +126,9 @@
 
             model.Id = chargeId;
             model.PatientId = patientId;
-            var patientName = this._patientBLL.Get(user.CompanyId).Where(e => e.Id == patientId).Select(e => new { e.FirstName, e.LastName }).FirstOrDefault();
+            var patientName = this._patientBLL.GetById(patientId);
             if (patientName == null) ViewBag.ErrorLabel = "Bệnh nhân không tồn tại";
-            model.PatientName = patientName.FirstName + " " + patientName.LastName;
+            else model.PatientName = patientName.FirstName + " " + patientName.LastName;
 
             var charge = this._chargeBLL.Get(patientId, user.CompanyId);
             if (chargeId == 0)
@@ -171,7 +172,7 @@
             this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
             this.ViewBag.UserName = user.UserName;
 
-            var patientName = this._patientBLL.Get(user.CompanyId).Where(e => e.Id == model.PatientId).Select(e => new { e.FirstName, e.LastName }).FirstOrDefault();
+            var patientName = this._patientBLL.GetById(model.PatientId);
             if (patientName != null) model.PatientName = patientName.FirstName + " " + patientName.LastName;
             
             switch (action)
@@ -215,7 +216,11 @@
                         DateService = model.DateService,
                     };
 
-                    if (dto.Id == 0) this._chargeBLL.Insert(dto, model.PatientId, user.CompanyId, user.UserId);
+                    if (dto.Id == 0)
+                    {
+                        this._chargeBLL.Insert(dto, model.PatientId, user.CompanyId, user.UserId);
+                        model.Id = dto.Id;
+                    }
                     else this._chargeBLL.Update(dto, model.PatientId, user.CompanyId, user.UserId);
 
                     break;
@@ -241,8 +246,14 @@
             var model = new ChargeListModel();
 
             model.PatientId = patientId;
-            var patientName = this._patientBLL.Get(user.CompanyId).Where(e => e.Id == patientId).Select(e => new { e.FirstName, e.LastName }).FirstOrDefault();
-            if (patientName == null) ViewBag.ErrorLabel = "Bệnh nhân không tồn tại";
+            var patientName = this._patientBLL.GetById(patientId);
+            if (patientName == null)
+            {
+                ViewBag.ErrorLabel = "Bệnh nhân không tồn tại";
+                model.ListCharges = new List<ChargeDto>();
+                return View(model);
+            }
+
             model.PatientName = patientName.FirstName + " " + patientName.LastName;
             model.DateService = this._chargeBLL.Get(patientId, user.CompanyId).Select(e => e.DateService).Max();
 
@@ -286,6 +297,25 @@
             model.ListCharges = charges;
 
             return View(model);
+        }
+
+        public ActionResult Delete(int patientId, int id, bool allfacility = false)
+        {
+            var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
+            if (user == null) return this.RedirectToAction("Login", "Login");
+            this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
+            this.ViewBag.UserName = user.UserName;
+
+            try
+            {
+                this._chargeBLL.Delete(id, user.CompanyId);
+            }
+            catch (Exception exception)
+            {
+                ViewBag.ErrorLabel = exception.Message;
+            }
+
+            return this.RedirectToAction("Index", "Charge", new { PatientId = patientId, Allfacility = allfacility });
         }
     }
 }
