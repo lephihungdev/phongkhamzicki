@@ -7,8 +7,6 @@
 
     public class CptModel
     {
-        public int Id { get; set; }
-
         [Display(Name = "Mã")]
         [Required(ErrorMessage = "Không được để trống.")]
         public string Code { get; set; }

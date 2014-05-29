@@ -23,7 +23,6 @@
                 .Where(e => e.FacilityId == facilityId)
                 .Select(e => new CptDto
                     {
-                        Id = e.Id,
                         Code = e.Code,
                         Description = e.Description,
                         Fee = e.Fee,
@@ -35,11 +34,21 @@
             return query;
         }
 
-        public void Update(CptDto dto, int facilityId)
+        public void Save(CptDto dto, int facilityId)
         {
-            var entity = this._dal.GetAll().FirstOrDefault(e => e.Id == dto.Id && e.FacilityId == facilityId);
-            
-            if(entity == null) throw new Exception("Đối tượng không tồn tại");
+            var entity = this._dal.GetAll().FirstOrDefault(e => e.Code == dto.Code && e.FacilityId == facilityId);
+
+            if (entity == null)
+            {
+                entity = new CPT();
+                entity.Code = dto.Code;
+                entity.FacilityId = facilityId;
+                this._dal.Add(entity);
+            }
+            else
+            {
+                this._dal.Update(entity);
+            };
 
             entity.Description = dto.Description;
             entity.Fee = dto.Fee;
@@ -48,27 +57,9 @@
             this.SaveChanges();
         }
 
-        public void Insert(CptDto dto, int facilityId)
+        public void Delete(string code, int facilityId)
         {
-            var exist = this._dal.GetAll().Any(e => e.Code == dto.Code);
-
-            if (exist) throw new Exception("Đối tượng đã tồn tại");
-
-            var entity = new CPT();
-            entity.FacilityId = facilityId;
-            entity.Code = dto.Code;
-            entity.Description = dto.Description;
-            entity.Fee = dto.Fee;
-            entity.Active = dto.Active;
-            this._dal.Add(entity);
-
-            this.SaveChanges();
-            dto.Id = entity.Id;
-        }
-
-        public void Delete(int id, int facilityId)
-        {
-            var entity = this._dal.GetAll().FirstOrDefault(e => e.Id == id && e.FacilityId == facilityId);
+            var entity = this._dal.GetAll().FirstOrDefault(e => e.Code == code && e.FacilityId == facilityId);
 
             if (entity == null) throw new Exception("Đối tượng không tồn tại");
 
