@@ -167,7 +167,7 @@
             return this.Json(dto, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Cpt(string code, int id = 0)
+        public ActionResult Cpt(string skey, int id = 0)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
@@ -187,7 +187,7 @@
                 }
             }
 
-            model.Cpts = this._cptBLL.Get(user.CompanyId, code).ToList();
+            model.Cpts = this._cptBLL.Get(user.CompanyId, skey).ToList();
             return this.View(model);
         }
 
@@ -251,7 +251,7 @@
                 .Take(100);
             var icds = query.Select(e => new AutoCompletedStringDto
             {
-                label = e.Description,
+                label = e.Code + " - " + e.Description,
                 value = e.Code
             });
 
@@ -269,14 +269,14 @@
             var data = this._icdBLL.Get().Select(e => new { e.Code, e.Description }).FirstOrDefault(c => c.Code == value);
             if (data != null)
             {
-                dto.label = data.Description;
+                dto.label = data.Code + " - " + data.Description;
                 dto.value = data.Code;
             }
 
             return this.Json(dto, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Icd(string code, int id = 0)
+        public ActionResult Icd(string skey, string code)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
@@ -284,9 +284,9 @@
             this.ViewBag.UserName = user.UserName;
 
             var model = new IcdModel();
-            if (id > 0)
+            if (!string.IsNullOrEmpty(code))
             {
-                var dto = this._icdBLL.Get().FirstOrDefault(e => e.Id == id);
+                var dto = this._icdBLL.Get().FirstOrDefault(e => e.Code == code);
                 if (dto != null)
                 {
                     model.Active = dto.Active;
@@ -296,7 +296,7 @@
                 }
             }
 
-            model.Icds = this._icdBLL.Get(code).ToList();
+            model.Icds = this._icdBLL.Get(skey).Take(100).ToList();
             return this.View(model);
         }
 
