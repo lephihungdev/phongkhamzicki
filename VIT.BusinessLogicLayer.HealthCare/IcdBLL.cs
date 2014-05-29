@@ -19,7 +19,7 @@
 
         public IQueryable<IcdDto> Get(string key = "")
         {
-            var query = this._dal.GetAll()
+            var query = this._dal.GetAll().OrderBy(e => e.Code)
                 .Select(e => new IcdDto
                     {
                         Id = e.Id,

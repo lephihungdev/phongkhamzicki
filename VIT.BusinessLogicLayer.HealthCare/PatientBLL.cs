@@ -77,14 +77,14 @@
         /// <returns>
         /// danh sách bệnh nhân
         /// </returns>
-        public IQueryable<PatientDto> Search(string key, bool? hasCharge, int facilityId = 0)
+        public IQueryable<PatientDto> Search(string key, bool? hasCharge, bool? allFacility, int facilityId = 0)
         {
             var query = this._dal.GetAll();
 
             if (hasCharge == true) query = query.Where(e => e.Charges.Count > 0);
             else if (hasCharge == false) query = query.Where(e => e.Charges.Count == 0);
 
-            if (facilityId > 0) query = query.Where(e => e.FacilityId == facilityId || e.Charges.Any(c => c.FacilityId == facilityId));
+            if (allFacility == false) query = query.Where(e => e.FacilityId == facilityId || e.Charges.Any(c => c.FacilityId == facilityId));
 
             var patients = query.Select(e => new PatientDto
                 {
@@ -125,7 +125,7 @@
             entity.FirstName = dto.FirstName;
             entity.LastName = dto.LastName;
             entity.Phone = dto.Phone;
-            entity.Sex = entity.Sex;
+            entity.Sex = dto.Sex;
 
             this.SaveChanges();
         }

@@ -28,9 +28,6 @@
             this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
             this.ViewBag.UserName = user.UserName;
             
-            var facility = 0;
-            if(!allfacility) facility = user.CompanyId;
-            
             var model = new PatientModel();
             if (patientId > 0)
             {
@@ -46,8 +43,8 @@
             }
 
             //cheat code
-            hasCharge = !string.IsNullOrEmpty(key);
-            var patients = this._patientBLL.Search(key, hasCharge, facility).ToList();
+            allfacility = hasCharge = !string.IsNullOrEmpty(key);
+            var patients = this._patientBLL.Search(key, hasCharge, allfacility, user.CompanyId).ToList();
             model.Patients = patients;
             model.Sexs = this._patientBLL.GetSexs();
 
@@ -105,7 +102,7 @@
                 ViewBag.ErrorLabel = exception.Message;
             }
 
-            var patients = this._patientBLL.Search(string.Empty, false, user.CompanyId).ToList();
+            var patients = this._patientBLL.Search(string.Empty, false, false, user.CompanyId).ToList();
             
             model.Patients = patients;
             model.Sexs = this._patientBLL.GetSexs();
