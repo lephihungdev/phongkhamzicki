@@ -41,6 +41,7 @@
             
             if(entity == null) throw new Exception("Đối tượng không tồn tại");
 
+            entity.Name = dto.Name;
             entity.Description = dto.Description;
             entity.Fee = dto.Fee;
             entity.Active = dto.Active;
