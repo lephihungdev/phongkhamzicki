@@ -15,7 +15,6 @@ namespace VIT.Entity.HealthCare
 {
     public partial class CPT
     {
-        public int Id { get; set; }
         public int FacilityId { get; set; }
         public string Code { get; set; }
         public string Description { get; set; }

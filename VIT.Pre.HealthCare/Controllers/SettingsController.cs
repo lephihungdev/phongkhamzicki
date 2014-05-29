@@ -167,7 +167,7 @@
             return this.Json(dto, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Cpt(string skey, int id = 0)
+        public ActionResult Cpt(string skey, string code)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
@@ -175,15 +175,14 @@
             this.ViewBag.UserName = user.UserName;
 
             var model = new CptModel();
-            if (id > 0)
+            if (!string.IsNullOrEmpty(code))
             {
-                var dto = this._cptBLL.Get(user.CompanyId).FirstOrDefault(e => e.Id == id);
+                var dto = this._cptBLL.Get(user.CompanyId).FirstOrDefault(e => e.Code == code);
                 if (dto != null)
                 {
                     model.Active = dto.Active;
                     model.Code = dto.Code;
                     model.Description = dto.Description;
-                    model.Id = dto.Id;
                 }
             }
 
@@ -201,7 +200,6 @@
 
             var dto = new CptDto
             {
-                Id = model.Id,
                 Code = model.Code,
                 Description = model.Description,
                 Fee = model.Fee,
@@ -210,12 +208,7 @@
 
             try
             {
-                if (model.Id > 0) this._cptBLL.Update(dto, user.CompanyId);
-                else
-                {
-                    this._cptBLL.Insert(dto, user.CompanyId);
-                    model.Id = dto.Id;
-                }
+                if (!string.IsNullOrEmpty(model.Code)) this._cptBLL.Save(dto, user.CompanyId);
             }
             catch (Exception exception)
             {
@@ -227,12 +220,12 @@
             return this.View(model);
         }
 
-        public ActionResult CptDelete(int id)
+        public ActionResult CptDelete(string code)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
 
-            this._cptBLL.Delete(id, user.CompanyId);
+            this._cptBLL.Delete(code, user.CompanyId);
             return this.RedirectToAction("Cpt", "Settings");
         }
         #endregion
@@ -292,7 +285,6 @@
                     model.Active = dto.Active;
                     model.Code = dto.Code;
                     model.Description = dto.Description;
-                    model.Id = dto.Id;
                 }
             }
 
@@ -310,7 +302,6 @@
 
             var dto = new IcdDto
             {
-                Id = model.Id,
                 Code = model.Code,
                 Description = model.Description,
                 Active = model.Active
@@ -318,12 +309,7 @@
 
             try
             {
-                if (model.Id > 0) this._icdBLL.Update(dto);
-                else
-                {
-                    this._icdBLL.Insert(dto);
-                    model.Id = dto.Id;
-                }
+                if (!string.IsNullOrEmpty(model.Code)) this._icdBLL.Save(dto);
             }
             catch (Exception exception)
             {

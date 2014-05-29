@@ -22,7 +22,6 @@
             var query = this._dal.GetAll().OrderBy(e => e.Code)
                 .Select(e => new IcdDto
                     {
-                        Id = e.Id,
                         Code = e.Code,
                         Description = e.Description,
                         Active = e.Active
@@ -33,37 +32,30 @@
             return query;
         }
 
-        public void Update(IcdDto dto)
+        public void Save(IcdDto dto)
         {
-            var entity = this._dal.GetAll().FirstOrDefault(e => e.Id == dto.Id);
-            
-            if(entity == null) throw new Exception("Đối tượng không tồn tại");
+            var entity = this._dal.GetAll().FirstOrDefault(e => e.Code == dto.Code);
 
+            if (entity == null)
+            {
+                entity = new ICD();
+                entity.Code = dto.Code;
+                this._dal.Add(entity);
+            }
+            else
+            {
+                this._dal.Update(entity);
+            }
+            
             entity.Description = dto.Description;
             entity.Active = dto.Active;
-
+            
             this.SaveChanges();
         }
 
-        public void Insert(IcdDto dto)
+        public void Delete(string code)
         {
-            var exist = this._dal.GetAll().Any(e => e.Code == dto.Code);
-
-            if (exist) throw new Exception("Đối tượng đã tồn tại");
-
-            var entity = new ICD();
-            entity.Code = dto.Code;
-            entity.Description = dto.Description;
-            entity.Active = dto.Active;
-            this._dal.Add(entity);
-            
-            this.SaveChanges();
-            dto.Id = entity.Id;
-        }
-
-        public void Delete(int id)
-        {
-            var entity = this._dal.GetAll().FirstOrDefault(e => e.Id == id);
+            var entity = this._dal.GetAll().FirstOrDefault(e => e.Code == code);
 
             if (entity == null) throw new Exception("Đối tượng không tồn tại");
 
