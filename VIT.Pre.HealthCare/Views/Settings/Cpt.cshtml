@@ -51,6 +51,14 @@
         </table>
 
         <input type="submit" value="Lưu" class="btnLogin save" style="float:left; padding-left: 15px"/>
+        
+        @{ var display = !string.IsNullOrEmpty(Model.Code) ? "" : "none"; }
+        <input type="button" value="Thêm mới" onclick="window.location.href = '/Settings/Cpt';" class="btnLogin save" style="float:left; padding-left: 15px; display:@display"/>
+        
+        <script language="javascript" type="text/javascript">
+            @{ var readOnly = string.IsNullOrEmpty(Model.Code) ? "false" : "true";}
+                $('#Code').prop('readonly', @readOnly);
+        </script>
     </fieldset>
 }
 

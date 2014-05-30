@@ -83,6 +83,8 @@
             </tr>
         </table>
         <input type="submit" value="Lưu" class="btnLogin save"/>
+        @{ var display = Model.Id > 0 ? "" : "none"; }
+        <input type="button" value="Thêm mới" onclick="window.location.href = '/Settings/Doctor';" class="btnLogin save" style="float:left; padding-left: 15px; display:@display"/>
     </fieldset>
 }
 
@@ -121,14 +123,17 @@
                 <td>@o.BirthYear</td>
                 <td>@o.SexName</td>
                 <td>@o.Phone</td>
-                <td>
-                    <span>@o.Address</span>
-                    <span style="display: none">@o.Email</span>
-                    <span style="display: none">@o.Sex</span>
-                </td>
+                <td>@o.Address</td>
                 <td style="text-align: center">@active</td>
                 <td style="text-align: center"><a href="/Settings/DoctorDelete?id=@o.Id"><img src="../../Content/images/DeleteRed.png"/></a></td>
             </tr>
         }
     </table>
- </fieldset>
+</fieldset>
+
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+        $("#BirthYear").attr('type', 'number');
+        $("#Email").attr('type', 'email');
+    });
+</script>

@@ -24,21 +24,23 @@
         /// <returns>
         /// bệnh nhân mới tạo hoặc đă từng khám chữa bệnh ở đây
         /// </returns>
-        public IQueryable<PatientDto> Get(int facilityId)
+        public IQueryable<PatientDto> Gets(int facilityId, DateTime fromDate, DateTime toDate)
         {
+            toDate = toDate.AddDays(1);
             var query = this._dal.GetAll()
-                .Where(e => e.Charges.Count == 0 || e.Charges.Any(c => c.FacilityId == facilityId))
+                .Where(e => e.FacilityId == facilityId || e.Charges.Any(c => c.FacilityId == facilityId))
+                .Where(e => e.Charges.Any(c => fromDate <= c.DateService && c.DateService <= toDate))
                 .Select(e => new PatientDto
-                    {
-                        Id = e.Id,
-                        Address = e.Address,
-                        BirthYear = e.BirthYear,
-                        Email = e.Email,
-                        FirstName = e.FirstName,
-                        LastName = e.LastName,
-                        Phone = e.Phone,
-                        Sex = e.Sex
-                    });
+                {
+                    Id = e.Id,
+                    Address = e.Address,
+                    BirthYear = e.BirthYear,
+                    Email = e.Email,
+                    FirstName = e.FirstName,
+                    LastName = e.LastName,
+                    Phone = e.Phone,
+                    Sex = e.Sex
+                });
 
             return query;
         }
