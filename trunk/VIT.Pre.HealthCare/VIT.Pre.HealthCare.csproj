@@ -84,6 +84,7 @@
     <Compile Include="Models\ChargePrintModel.cs" />
     <Compile Include="Models\ChargesPrintModel.cs" />
     <Compile Include="Models\ClinicalModel.cs" />
+    <Compile Include="Models\PatientReportModel.cs" />
     <Compile Include="Models\FacilityModel.cs" />
     <Compile Include="Models\CptModel.cs" />
     <Compile Include="Models\IcdModel.cs" />
@@ -122,6 +123,7 @@
     <Content Include="Content\images\new-patient.png" />
     <Content Include="Content\images\plus.png" />
     <Content Include="Content\images\print-printer-icon.png" />
+    <Content Include="Content\images\report-builder.png" />
     <Content Include="Content\images\Save.png" />
     <Content Include="Content\images\settings.png" />
     <Content Include="Content\images\solution\BenhAn.JPG" />
@@ -241,6 +243,7 @@
     <Content Include="Views\Patient\Clinical.cshtml" />
     <Content Include="Views\Shared\_ZickiLayout.cshtml" />
     <Content Include="Views\Facility\Intro.cshtml" />
+    <Content Include="Views\Patient\Report.cshtml" />
     <None Include="Web References\PreAdmin\PreAdmin.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

@@ -1,6 +1,7 @@
 ﻿namespace VIT.Pre.HealthCare.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -21,7 +22,7 @@
             this._facilityBLL = new FacilityBLL();
         }
 
-        public ActionResult Search(string key, int patientId = 0, bool allfacility = false, bool hasCharge = false)
+        public ActionResult Search(string key, int patientId = 0, bool allfacility = false, bool? hasCharge = false)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
@@ -43,7 +44,13 @@
             }
 
             //cheat code
-            allfacility = hasCharge = !string.IsNullOrEmpty(key);
+            if (!string.IsNullOrEmpty(key))
+            {
+                allfacility = true;
+                hasCharge = null;
+            }
+            else hasCharge = allfacility = false;
+
             var patients = this._patientBLL.Search(key, hasCharge, allfacility, user.CompanyId).ToList();
             model.Patients = patients;
             model.Sexs = this._patientBLL.GetSexs();
@@ -285,6 +292,33 @@
             this._patientBLL.SaveClinical(dto);
 
             return View(model);
+        }
+
+        public ActionResult Report()
+        {
+            var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
+            if (user == null) return this.RedirectToAction("Login", "Login");
+            this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
+            this.ViewBag.UserName = user.UserName;
+
+            var model = new PatientReportModel();
+            model.FromDate = DateTime.Now;
+            model.ToDate = DateTime.Now;
+            model.Patients = new List<PatientDto>();
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Report(PatientReportModel model)
+        {
+            var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
+            if (user == null) return this.RedirectToAction("Login", "Login");
+            this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
+            this.ViewBag.UserName = user.UserName;
+
+            model.Patients = this._patientBLL.Gets(user.CompanyId, model.FromDate, model.ToDate).ToList(); ;
+            return this.View(model);
         }
     }
 }

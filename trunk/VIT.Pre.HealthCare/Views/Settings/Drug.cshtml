@@ -64,6 +64,9 @@
         </table>
 
         <input type="submit" value="Lưu" class="btnLogin save" style="float:left; padding-left: 15px"/>
+        
+        @{ var display = Model.Id > 0 ? "" : "none"; }
+        <input type="button" value="Thêm mới" onclick="window.location.href = '/Settings/Drug';" class="btnLogin save" style="float:left; padding-left: 15px; display:@display"/>
     </fieldset>
 }
 

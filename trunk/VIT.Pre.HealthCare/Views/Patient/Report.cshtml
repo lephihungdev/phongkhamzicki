@@ -1,0 +1,64 @@
+﻿@model VIT.Pre.HealthCare.Models.PatientReportModel
+@{
+    ViewBag.Title = "Phòng khám online";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+<fieldset class="patientinfo">
+    <legend>Thống kê bệnh nhân</legend>
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td class="title">Từ ngày</td>
+            <td class="value">@Html.EditorFor(model => model.FromDate)</td>
+            <td class="title">Đến ngày</td>
+            <td class="value">@Html.EditorFor(model => model.ToDate)</td>
+            <td><input type="submit" value="Xem thống kê"/></td>
+        </tr>
+    </table>
+    <table class="table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <thead>
+            <tr>
+                <td>Mã</td>
+                <td>Họ</td>
+                <td>Tên</td>
+                <td>Năm sinh</td>
+                <td>Giới tính</td>
+                <td>Điện Thoại</td>
+                <td>Email</td>
+                <td>Địa chỉ</td>
+            </tr>
+        </thead>
+        
+        @foreach (var o in Model.Patients)
+        {
+            var sex = o.Sex == true ? "Nam" : "Nữ";
+            <tr>
+                <td>@o.Id</td>
+                <td>@o.FirstName</td>
+                <td>@o.LastName</td>
+                <td>@o.BirthYear</td>
+                <td style="text-align: center">@sex</td>
+                <td>@o.Phone</td>
+                <td>@o.Email</td>
+                <td>@o.Address</td>
+            </tr>
+        }
+    </table>
+    <div style="display: block;clear: both;padding: 10px;text-align: right;">
+    Tổng số bệnh nhân: <b>@Model.Patients.Count</b>
+    </div>
+</fieldset>
+}
+
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+        $("#FromDate").attr('type', 'date');
+        $("#ToDate").attr('type', 'date');
+    });
+</script>
