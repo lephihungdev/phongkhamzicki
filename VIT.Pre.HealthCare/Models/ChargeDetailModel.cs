@@ -62,7 +62,7 @@
         [Display(Name = "Ngày điều trị")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        public DateTime DateService { get; set; }
+        public Nullable<System.DateTime> DateService { get; set; }
 
         [Display(Name = "Ngày bệnh")]
         [DataType(DataType.Date)]
