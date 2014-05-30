@@ -86,7 +86,7 @@
           <Property Name="CPTCode" Type="varchar" MaxLength="10" />
           <Property Name="Days" Type="int" Nullable="false" />
           <Property Name="Note" Type="nvarchar" MaxLength="200" />
-          <Property Name="DateService" Type="datetime" Nullable="false" />
+          <Property Name="DateService" Type="datetime" />
           <Property Name="DateOnset" Type="datetime" />
         </EntityType>
         <EntityType Name="ChargeDrug">
@@ -512,7 +512,7 @@
           <Property Type="String" Name="CPTCode" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="Days" Nullable="false" />
           <Property Type="String" Name="Note" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="DateService" Nullable="false" />
+          <Property Type="DateTime" Name="DateService" />
           <Property Type="DateTime" Name="DateOnset" />
           <NavigationProperty Name="ChargeDrugs" Relationship="VITHealthCareModel.FK_ChargeDrug_Charges" FromRole="Charge" ToRole="ChargeDrug" />
           <NavigationProperty Name="Doctor" Relationship="VITHealthCareModel.FK_Charges_Doctor" FromRole="Charge" ToRole="Doctor" />
@@ -1082,35 +1082,35 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="VITData">
-        <EntityTypeShape EntityType="VITHealthCareModel.Charge" Width="1.5" PointX="5.25" PointY="23.25" Height="4.8648079427083317" />
-        <EntityTypeShape EntityType="VITHealthCareModel.ChargeDrug" Width="1.5" PointX="7.5" PointY="26.25" Height="2.7494921875000031" />
+        <EntityTypeShape EntityType="VITHealthCareModel.Charge" Width="1.5" PointX="5.25" PointY="23.25" Height="4.8648079427083388" />
+        <EntityTypeShape EntityType="VITHealthCareModel.ChargeDrug" Width="1.5" PointX="7.5" PointY="26.25" Height="2.7494921875000102" />
         <EntityTypeShape EntityType="VITHealthCareModel.Clinical" Width="1.5" PointX="10.5" PointY="20.125" Height="15.056783854166667" />
-        <EntityTypeShape EntityType="VITHealthCareModel.CPT" Width="1.5" PointX="3" PointY="17.875" Height="2.1725878906250031" />
-        <EntityTypeShape EntityType="VITHealthCareModel.Doctor" Width="1.5" PointX="3" PointY="20.875" Height="3.326396484374996" />
+        <EntityTypeShape EntityType="VITHealthCareModel.CPT" Width="1.5" PointX="3" PointY="17.875" Height="2.172587890624996" />
+        <EntityTypeShape EntityType="VITHealthCareModel.Doctor" Width="1.5" PointX="3" PointY="20.875" Height="3.3263964843750102" />
         <EntityTypeShape EntityType="VITHealthCareModel.Drug" Width="1.5" PointX="3" PointY="24.875" Height="2.5571907552083388" />
-        <EntityTypeShape EntityType="VITHealthCareModel.Facility" Width="1.5" PointX="0.75" PointY="19.5" Height="2.5571907552083388" />
-        <EntityTypeShape EntityType="VITHealthCareModel.ICD" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5956835937500031" />
-        <EntityTypeShape EntityType="VITHealthCareModel.Patient" Width="1.5" PointX="3" PointY="28.25" Height="3.7109993489583388" />
-        <EntityTypeShape EntityType="VITHealthCareModel.User" Width="1.5" PointX="3" PointY="32.625" Height="2.1725878906250102" />
+        <EntityTypeShape EntityType="VITHealthCareModel.Facility" Width="1.5" PointX="0.75" PointY="19.5" Height="2.5571907552083246" />
+        <EntityTypeShape EntityType="VITHealthCareModel.ICD" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5956835937500102" />
+        <EntityTypeShape EntityType="VITHealthCareModel.Patient" Width="1.5" PointX="3" PointY="28.25" Height="3.7109993489583246" />
+        <EntityTypeShape EntityType="VITHealthCareModel.User" Width="1.5" PointX="3" PointY="32.625" Height="2.172587890624996" />
         <AssociationConnector Association="VITHealthCareModel.FK_ChargeDrug_Charges" >
-          <ConnectorPoint PointX="6.75" PointY="27.182403971354166" />
-          <ConnectorPoint PointX="7.5" PointY="27.182403971354166" />
+          <ConnectorPoint PointX="6.75" PointY="27.182403971354169" />
+          <ConnectorPoint PointX="7.5" PointY="27.182403971354169" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Charges_Doctor" >
-          <ConnectorPoint PointX="4.5" PointY="23.725698242187498" />
-          <ConnectorPoint PointX="5.25" PointY="23.725698242187498" />
+          <ConnectorPoint PointX="4.5" PointY="23.725698242187505" />
+          <ConnectorPoint PointX="5.25" PointY="23.725698242187505" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Charges_Facility" >
-          <ConnectorPoint PointX="1.5" PointY="22.057190755208339" />
-          <ConnectorPoint PointX="1.5" PointY="27.804749348958335" />
-          <ConnectorPoint PointX="2.0260454166666664" PointY="27.804749348958335" />
-          <ConnectorPoint PointX="2.1927120833333333" PointY="27.804749348958335" />
-          <ConnectorPoint PointX="5.25" PointY="27.804749348958335" />
+          <ConnectorPoint PointX="1.5" PointY="22.057190755208325" />
+          <ConnectorPoint PointX="1.5" PointY="27.804749348958339" />
+          <ConnectorPoint PointX="2.0260454166666664" PointY="27.804749348958339" />
+          <ConnectorPoint PointX="2.1927120833333333" PointY="27.804749348958339" />
+          <ConnectorPoint PointX="5.25" PointY="27.804749348958339" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Charges_Patient" >
-          <ConnectorPoint PointX="4.5" PointY="30.105499674479169" />
-          <ConnectorPoint PointX="6" PointY="30.105499674479169" />
-          <ConnectorPoint PointX="6" PointY="28.114807942708332" />
+          <ConnectorPoint PointX="4.5" PointY="30.105499674479162" />
+          <ConnectorPoint PointX="6" PointY="30.105499674479162" />
+          <ConnectorPoint PointX="6" PointY="28.114807942708339" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Clinical_Charge" >
           <ConnectorPoint PointX="6.75" PointY="24.71875" />
@@ -1119,50 +1119,50 @@
         <AssociationConnector Association="VITHealthCareModel.FK_ChargeDrug_Drug" >
           <ConnectorPoint PointX="4.5" PointY="27.432190755208339" />
           <ConnectorPoint PointX="4.875" PointY="27.807190755208339" />
-          <ConnectorPoint PointX="4.875" PointY="29.374492187500003" />
-          <ConnectorPoint PointX="5.916666666666667" PointY="29.374492187500003" />
-          <ConnectorPoint PointX="6.083333333333333" PointY="29.374492187500003" />
-          <ConnectorPoint PointX="7.1261528461538433" PointY="29.374492187500003" />
-          <ConnectorPoint PointX="7.5011528461538459" PointY="28.999492187500003" />
+          <ConnectorPoint PointX="4.875" PointY="29.37449218750001" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="29.37449218750001" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="29.37449218750001" />
+          <ConnectorPoint PointX="7.1261528461538433" PointY="29.37449218750001" />
+          <ConnectorPoint PointX="7.5011528461538459" PointY="28.99949218750001" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_ChargeDrug_Patient" >
-          <ConnectorPoint PointX="4.5" PointY="28.62474609375" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="28.62474609375" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="28.62474609375" />
-          <ConnectorPoint PointX="5.916666666666667" PointY="28.62474609375" />
-          <ConnectorPoint PointX="6.083333333333333" PointY="28.62474609375" />
-          <ConnectorPoint PointX="7.5" PointY="28.62474609375" />
+          <ConnectorPoint PointX="4.5" PointY="28.624746093750005" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="28.624746093750005" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="28.624746093750005" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="28.624746093750005" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="28.624746093750005" />
+          <ConnectorPoint PointX="7.5" PointY="28.624746093750005" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Clinical_Patient" >
-          <ConnectorPoint PointX="4.5" PointY="31.095749511718754" />
-          <ConnectorPoint PointX="10.5" PointY="31.095749511718754" />
+          <ConnectorPoint PointX="4.5" PointY="31.095749511718743" />
+          <ConnectorPoint PointX="10.5" PointY="31.095749511718743" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_CPT_Facility" >
-          <ConnectorPoint PointX="2.25" PointY="19.7737939453125" />
-          <ConnectorPoint PointX="3" PointY="19.7737939453125" />
+          <ConnectorPoint PointX="2.25" PointY="19.773793945312498" />
+          <ConnectorPoint PointX="3" PointY="19.773793945312498" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Doctor_Facility" >
-          <ConnectorPoint PointX="2.25" PointY="21.466095377604169" />
-          <ConnectorPoint PointX="3" PointY="21.466095377604169" />
+          <ConnectorPoint PointX="2.25" PointY="21.466095377604162" />
+          <ConnectorPoint PointX="3" PointY="21.466095377604162" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Drug_Facility" >
-          <ConnectorPoint PointX="1.9062525" PointY="22.057190755208339" />
+          <ConnectorPoint PointX="1.9062525" PointY="22.057190755208325" />
           <ConnectorPoint PointX="1.9062525" PointY="26.153595377604169" />
           <ConnectorPoint PointX="2.0260454166666664" PointY="26.153595377604169" />
           <ConnectorPoint PointX="2.1927120833333333" PointY="26.153595377604169" />
           <ConnectorPoint PointX="3" PointY="26.153595377604169" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Patient_Facility" >
-          <ConnectorPoint PointX="1.0937475" PointY="22.057190755208339" />
-          <ConnectorPoint PointX="1.0937475" PointY="30.105499674479169" />
-          <ConnectorPoint PointX="2.0260454166666664" PointY="30.105499674479169" />
-          <ConnectorPoint PointX="2.1927120833333333" PointY="30.105499674479169" />
-          <ConnectorPoint PointX="3" PointY="30.105499674479169" />
+          <ConnectorPoint PointX="1.0937475" PointY="22.057190755208325" />
+          <ConnectorPoint PointX="1.0937475" PointY="30.105499674479162" />
+          <ConnectorPoint PointX="2.0260454166666664" PointY="30.105499674479162" />
+          <ConnectorPoint PointX="2.1927120833333333" PointY="30.105499674479162" />
+          <ConnectorPoint PointX="3" PointY="30.105499674479162" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_User_Facility" >
-          <ConnectorPoint PointX="2.10937875" PointY="22.057190755208339" />
-          <ConnectorPoint PointX="2.10937875" PointY="33.711293945312505" />
-          <ConnectorPoint PointX="3" PointY="33.711293945312505" />
+          <ConnectorPoint PointX="2.10937875" PointY="22.057190755208325" />
+          <ConnectorPoint PointX="2.10937875" PointY="33.7112939453125" />
+          <ConnectorPoint PointX="3" PointY="33.7112939453125" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

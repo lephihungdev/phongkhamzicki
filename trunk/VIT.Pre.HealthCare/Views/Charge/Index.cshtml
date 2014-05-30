@@ -25,7 +25,7 @@
         </tr>
         <tr>
             <td class="title">Ngày khám gần nhất:</td>
-            <td class="value"><div class="id">@Html.DisplayFor(model => model.DateService)</div></td>
+            <td class="value"><div class="id">@String.Format("{0:dd/MM/yyy}", Model.DateService)</div></td>
         </tr>
     </table>
     <table style="margin-right:15px">

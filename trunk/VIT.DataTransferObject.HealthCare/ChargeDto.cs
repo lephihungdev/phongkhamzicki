@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
 
-    [Serializable]
     public class ChargeDto
     {
         public int Id { get; set; }
@@ -17,7 +16,7 @@
         public string CPTDescription { get; set; }
         public int Days { get; set; }
         public string Note { get; set; }
-        public DateTime DateService { get; set; }
+        public Nullable<System.DateTime> DateService { get; set; }
         public Nullable<System.DateTime> DateOnset { get; set; }
 
         public string Drugs { get; set; }

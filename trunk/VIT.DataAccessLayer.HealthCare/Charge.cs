@@ -34,7 +34,7 @@ namespace VIT.Entity.HealthCare
         public string CPTCode { get; set; }
         public int Days { get; set; }
         public string Note { get; set; }
-        public System.DateTime DateService { get; set; }
+        public Nullable<System.DateTime> DateService { get; set; }
         public Nullable<System.DateTime> DateOnset { get; set; }
     
         public virtual Collection<ChargeDrug> ChargeDrugs { get; set; }
