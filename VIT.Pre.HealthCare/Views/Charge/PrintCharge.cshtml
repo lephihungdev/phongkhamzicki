@@ -16,15 +16,15 @@
 <table width="100%">
     <tr>
         <td style="text-align:left;">Mã bệnh nhân: <b>@Model.PatientId</b></td>
-        <td style="text-align:left;padding-left:20px;width:175px">Họ tên: <b>@Model.PatientName</b></td>
+        <td style="text-align:left;padding-left:20px;width:150px">Họ tên: <b>@Model.PatientName</b></td>
     </tr>
     <tr>
         <td style="text-align:left;">Chẩn đoán: <b>@Model.Diagnostic</b></td>
-        <td style="text-align:left;padding-left:20px;width:175px">Ngày khám: <b>@String.Format("{0:dd/MM/yyy}", Model.DateService)</b></td>
+        <td style="text-align:left;padding-left:20px">Ngày khám: <b>@String.Format("{0:dd/MM/yyy}", Model.DateService)</b></td>
     </tr>
     <tr>
-        <td style="text-align:left;">Phương pháp điều trị: <b>@Model.CPT</b></td>
-        <td style="text-align:left;padding-left:20px;width:175px">Thời gian điều trị: <b>@Model.Days</b> ngày</td>
+        <td style="text-align:left;">Điều trị: <b>@Model.CPT</b></td>
+        <td style="text-align:left;padding-left:20px">Thời gian điều trị: <b>@Model.Days</b> ngày</td>
     </tr>
 </table>
 
@@ -45,7 +45,7 @@
 
 <div class="sign" style="margin-top: 15px">Ngày @String.Format("{0:dd/MM/yyy}", DateTime.Now)</div>
 <div class="sign">Bác sĩ điều trị</div>
-<div class="sign" style="margin-top: 50px">@Model.DoctorName</div>
+<div class="sign" style="margin-top: 30px">@Model.DoctorName</div>
     
     <hr />
     Khám lại xin mang theo đơn này.

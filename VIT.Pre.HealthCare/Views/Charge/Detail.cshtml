@@ -298,7 +298,7 @@
         
                     @{ var display = Model.Id > 0 ? "" : "none"; }
                     <div style="float: left; margin: 5px"><a href="#" onclick="SetAction('ADDCHARGE')" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/Save.png" alt="Lưu" style="width: 58px;"/>Lưu</a></div>
-                    <div style="float: left; margin: 5px; display: @display"><a href="#" onclick="window.open('/Charge/PrintCharge?chargeId=@Model.Id', '_blank', 'width=450, height=600');" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/print-printer-icon.png" alt="In" style="width: 58px;"/>In bệnh án</a></div>
+                    <div style="float: left; margin: 5px; display: @display"><a href="#" onclick="window.open('/Charge/PrintCharge?chargeId=@Model.Id', '_blank', 'width=310, height=430');" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/print-printer-icon.png" alt="In" style="width: 58px;"/>In bệnh án</a></div>
                     <div style="float: left; margin: 5px"><a href="/Charge/Index?patientId=@Model.PatientId" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/dossierbleu_documents.png" alt="Quay lại danh sách" style="width: 58px;"/>Quay lại danh sách</a></div>
                 </fieldset>
 
