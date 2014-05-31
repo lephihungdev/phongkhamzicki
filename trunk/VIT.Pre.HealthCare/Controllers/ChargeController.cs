@@ -67,13 +67,17 @@
             var patientName = this._patientBLL.GetById(patientId);
             if (patientName != null) this.ViewBag.PatientName = patientName.FirstName + " " + patientName.LastName;
 
-            var models = this._facilityBLL.GetAll(patientId)
-                .Select(e => new ChargesPrintModel
+            var facility = this._facilityBLL.GetAll(patientId);
+            if (!allfacility) facility = facility.Where(e => e.value == user.CompanyId);
+
+            var models = facility.Select(e => new ChargesPrintModel
                     {
                         FacilityId = e.value,
                         FacilityName = e.label
                     })
                     .ToList();
+
+            
 
             var cpts = this._cptBLL.Get(user.CompanyId).ToList();
             var icds = this._icdBLL.Get().ToList();
