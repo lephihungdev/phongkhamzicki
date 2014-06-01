@@ -14,7 +14,7 @@ body {
 
 h1{text-align:center; font-size:16px; margin: 20px 0px 30px 0px}
 .toathuoc td{ padding: 5px}
-.toathuoc .header td{font-weight: bold;font-size: 12px;background-color: #999;padding: 5px;text-align: center; border: solid 1px #fff}
+.toathuoc .header td{font-weight: bold;font-size: 12px;background-color: #999;padding: 5px;color: #fff; text-align: center}
 .sign {margin-left: 120px; text-align:center; padding:5px; width:200px}
 
 .table .fac {padding: 15px 0px 10px 0px;font-weight: bold; font-size: 14px}
