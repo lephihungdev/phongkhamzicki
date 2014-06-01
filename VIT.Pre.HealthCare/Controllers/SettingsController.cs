@@ -344,6 +344,7 @@
                     model.Phone = dto.Phone;
                     model.Id = dto.Id;
                     model.Sex = dto.Sex;
+                    model.Active = dto.Active;
                 }
             }
 
