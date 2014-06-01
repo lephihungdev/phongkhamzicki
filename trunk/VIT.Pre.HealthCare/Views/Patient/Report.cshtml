@@ -38,7 +38,7 @@
         @foreach (var o in Model.Patients)
         {
             var sex = o.Sex == true ? "Nam" : "Nữ";
-            <tr>
+            <tr onclick="window.location.assign('/Charge/Index?patientId=@o.Id')">
                 <td>@o.Id</td>
                 <td>@o.FirstName</td>
                 <td>@o.LastName</td>
