@@ -44,7 +44,7 @@
 
         public void Update(DoctorDto dto, int facilityId)
         {
-            var entity = this._dal.GetAll().FirstOrDefault(e => e.Id == dto.Id && e.Charges.Count == 0 || e.Charges.Any(c => c.FacilityId == facilityId));
+            var entity = this._dal.GetAll().FirstOrDefault(e => e.Id == dto.Id && e.FacilityId == facilityId);
             
             if(entity == null) throw new Exception("Đối tượng không tồn tại");
 
@@ -81,7 +81,7 @@
 
         public void Delete(int id, int facilityId)
         {
-            var entity = this._dal.GetAll().FirstOrDefault(e => e.Id == id && e.Charges.Count == 0 || (e.Charges.Any(c => c.FacilityId == facilityId) && !e.Charges.Any(c => c.FacilityId != facilityId)));
+            var entity = this._dal.GetAll().FirstOrDefault(e => e.Id == id && e.FacilityId == facilityId && e.Charges.Count == 0);
 
             if (entity == null) throw new Exception("Đối tượng không tồn tại");
 
