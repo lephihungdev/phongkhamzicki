@@ -29,11 +29,14 @@
 </table>
 
 <table class="toathuoc" width="100%" border="1" cellspacing="0" cellpadding="0" style="margin:10px 0px">
-
+        <tr class="header">
+            <td>Tên</td>
+            <td>Số lượng</td>
+            <td>Ghi chú</td>
+        </tr>
         @foreach (var o in Model.Drugs)
         {
             <tr>
-                <td>@o.DrugId</td>
                 <td>@o.DrugName</td>
                 <td>@o.Quality</td>
                 <td>@o.Note</td>
