@@ -51,7 +51,7 @@
             }
             else hasCharge = allfacility = false;
 
-            var patients = this._patientBLL.Search(key, hasCharge, allfacility, user.CompanyId).ToList();
+            var patients = this._patientBLL.Search(key, hasCharge, allfacility, user.CompanyId).OrderBy(e => e.LastName).ToList();
             model.Patients = patients;
             model.Sexs = this._patientBLL.GetSexs();
 
@@ -109,7 +109,7 @@
                 ViewBag.ErrorLabel = exception.Message;
             }
 
-            var patients = this._patientBLL.Search(string.Empty, false, false, user.CompanyId).ToList();
+            var patients = this._patientBLL.Search(string.Empty, false, false, user.CompanyId).OrderBy(e => e.LastName).ToList();
             
             model.Patients = patients;
             model.Sexs = this._patientBLL.GetSexs();
@@ -317,7 +317,7 @@
             this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
             this.ViewBag.UserName = user.UserName;
 
-            model.Patients = this._patientBLL.Gets(user.CompanyId, model.FromDate, model.ToDate).ToList(); ;
+            model.Patients = this._patientBLL.Gets(user.CompanyId, model.FromDate, model.ToDate).OrderBy(e => e.LastName).ToList(); ;
             return this.View(model);
         }
     }
