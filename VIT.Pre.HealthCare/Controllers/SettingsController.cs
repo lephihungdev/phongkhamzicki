@@ -48,7 +48,8 @@
             var query = this._drugBLL.Get(user.CompanyId)
                 .Where(e => e.Active)
                 .Where(c => c.Name.StartsWith(term) || c.Description.Contains(term))
-                .Take(100);
+                .Take(100)
+                .OrderBy(e => e.Name);
             var icds = query.Select(e => new AutoCompletedIntDto
             {
                 label = e.Name,
@@ -78,7 +79,7 @@
                 }
             }
 
-            model.Drugs = this._drugBLL.Get(user.CompanyId, code).ToList();
+            model.Drugs = this._drugBLL.Get(user.CompanyId, code).OrderBy(e => e.Name).ToList();
             return this.View(model);
         }
 
@@ -113,7 +114,7 @@
                 ViewBag.ErrorLabel = exception.Message;
             }
 
-            model.Drugs = this._drugBLL.Get(user.CompanyId).ToList();
+            model.Drugs = this._drugBLL.Get(user.CompanyId).OrderBy(e => e.Name).ToList();
 
             return this.View(model);
         }
@@ -139,7 +140,8 @@
             var query = this._cptBLL.Get(user.CompanyId)
                 .Where(e => e.Active)
                 .Where(c => c.Code.StartsWith(term) || c.Description.Contains(term))
-                .Take(100);
+                .Take(100)
+                .OrderBy(e => e.Code);
             var icds = query.Select(e => new AutoCompletedStringDto
             {
                 label = e.Code + " - " + e.Description,
@@ -186,7 +188,7 @@
                 }
             }
 
-            model.Cpts = this._cptBLL.Get(user.CompanyId, skey).ToList();
+            model.Cpts = this._cptBLL.Get(user.CompanyId, skey).OrderBy(e => e.Code).ToList();
             return this.View(model);
         }
 
@@ -215,7 +217,7 @@
                 ViewBag.ErrorLabel = exception.Message;
             }
 
-            model.Cpts = this._cptBLL.Get(user.CompanyId).ToList();
+            model.Cpts = this._cptBLL.Get(user.CompanyId).OrderBy(e => e.Code).ToList();
 
             return this.View(model);
         }
@@ -241,7 +243,8 @@
             var query = this._icdBLL.Get()
                 .Where(e => e.Active)
                 .Where(c => c.Code.StartsWith(term) || c.Description.Contains(term))
-                .Take(100);
+                .Take(100)
+                .OrderBy(e => e.Code);
             var icds = query.Select(e => new AutoCompletedStringDto
             {
                 label = e.Code + " - " + e.Description,
@@ -288,7 +291,7 @@
                 }
             }
 
-            model.Icds = this._icdBLL.Get(skey).Take(100).ToList();
+            model.Icds = this._icdBLL.Get(skey).Take(100).OrderBy(e => e.Code).ToList();
             return this.View(model);
         }
 
@@ -316,7 +319,7 @@
                 ViewBag.ErrorLabel = exception.Message;
             }
 
-            model.Icds = this._icdBLL.Get().ToList();
+            model.Icds = this._icdBLL.Get().OrderBy(e => e.Code).ToList();
 
             return this.View(model);
         }
@@ -348,7 +351,7 @@
                 }
             }
 
-            var doctors = this._doctorBLL.Get(user.CompanyId).ToList();
+            var doctors = this._doctorBLL.Get(user.CompanyId).OrderBy(e => e.LastName).ToList();
             doctors.ForEach(e => e.SexName = e.Sex == true ? "Nam" : "Nữ");
             model.Doctors = doctors;
             model.Sexs = this._doctorBLL.GetSexs();
@@ -391,7 +394,7 @@
                 ViewBag.ErrorLabel = exception.Message;
             }
 
-            var doctors = this._doctorBLL.Get(user.CompanyId).ToList();
+            var doctors = this._doctorBLL.Get(user.CompanyId).OrderBy(e => e.LastName).ToList();
             doctors.ForEach(e => e.SexName = e.Sex == true ? "Nam" : "Nữ");
             model.Doctors = doctors;
             model.Sexs = this._doctorBLL.GetSexs();
