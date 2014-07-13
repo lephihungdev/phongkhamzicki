@@ -13,14 +13,21 @@ using System.Collections.ObjectModel;
 
 namespace VIT.Entity.HealthCare
 {
-    public partial class CPT
+    public partial class Instrument
     {
+        public Instrument()
+        {
+            this.ChargeInstruments = new Collection<ChargeInstrument>();
+        }
+    
+        public int Id { get; set; }
         public int FacilityId { get; set; }
-        public string Code { get; set; }
         public string Description { get; set; }
         public decimal Fee { get; set; }
         public bool Active { get; set; }
+        public string Name { get; set; }
     
+        public virtual Collection<ChargeInstrument> ChargeInstruments { get; set; }
         public virtual Facility Facility { get; set; }
     }
     

@@ -18,6 +18,7 @@ namespace VIT.Entity.HealthCare
         public Charge()
         {
             this.ChargeDrugs = new Collection<ChargeDrug>();
+            this.ChargeInstruments = new Collection<ChargeInstrument>();
             this.Clinicals = new Collection<Clinical>();
         }
     
@@ -31,13 +32,14 @@ namespace VIT.Entity.HealthCare
         public string ICDCode2 { get; set; }
         public string ICDCode3 { get; set; }
         public string ICDCode4 { get; set; }
-        public string CPTCode { get; set; }
+        public string Treatments { get; set; }
         public int Days { get; set; }
         public string Note { get; set; }
         public Nullable<System.DateTime> DateService { get; set; }
         public Nullable<System.DateTime> DateOnset { get; set; }
     
         public virtual Collection<ChargeDrug> ChargeDrugs { get; set; }
+        public virtual Collection<ChargeInstrument> ChargeInstruments { get; set; }
         public virtual Doctor Doctor { get; set; }
         public virtual Facility Facility { get; set; }
         public virtual Patient Patient { get; set; }

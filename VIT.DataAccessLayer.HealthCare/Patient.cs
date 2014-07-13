@@ -19,6 +19,7 @@ namespace VIT.Entity.HealthCare
         {
             this.Charges = new Collection<Charge>();
             this.ChargeDrugs = new Collection<ChargeDrug>();
+            this.ChargeInstruments = new Collection<ChargeInstrument>();
             this.Clinicals = new Collection<Clinical>();
         }
     
@@ -35,6 +36,7 @@ namespace VIT.Entity.HealthCare
     
         public virtual Collection<Charge> Charges { get; set; }
         public virtual Collection<ChargeDrug> ChargeDrugs { get; set; }
+        public virtual Collection<ChargeInstrument> ChargeInstruments { get; set; }
         public virtual Collection<Clinical> Clinicals { get; set; }
         public virtual Facility Facility { get; set; }
     }

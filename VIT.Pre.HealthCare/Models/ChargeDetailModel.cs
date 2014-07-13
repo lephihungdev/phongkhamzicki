@@ -47,11 +47,8 @@
         [AutoComplete("Settings", "IcdComplete", "IcdCompleteById")]
         public string ICDCode4 { get; set; }
 
-        [Display(Name = "Điều trị")]
-        [Required(ErrorMessage = "Không được để trống.")]
-        [UIHint("autoComplete"), AllowHtml]
-        [AutoComplete("Settings", "CptComplete", "CptCompleteById")]
-        public string CPTCode { get; set; }
+        [Display(Name = "Hướng điều trị")]
+        public string Treatments { get; set; }
 
         [Display(Name = "Số ngày")]
         public int Days { get; set; }

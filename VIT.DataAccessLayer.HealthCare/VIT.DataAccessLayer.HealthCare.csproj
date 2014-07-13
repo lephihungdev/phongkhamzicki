@@ -72,16 +72,16 @@
     <Compile Include="ChargeDrugDAL.genarated.cs">
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>
+    <Compile Include="ChargeInstrument.cs">
+      <DependentUpon>Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeInstrumentDAL.genarated.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
     <Compile Include="Clinical.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="ClinicalDAL.genarated.cs">
-      <DependentUpon>DAL.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CPT.cs">
-      <DependentUpon>Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CPTDAL.genarated.cs">
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>
     <Compile Include="Doctor.cs">
@@ -122,6 +122,18 @@
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="ICDDAL.genarated.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Instrument.cs">
+      <DependentUpon>Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InstrumentDAL.genarated.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory.cs">
+      <DependentUpon>Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InventoryDAL.genarated.cs">
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>
     <Compile Include="Patient.cs">

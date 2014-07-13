@@ -12,7 +12,7 @@
         private readonly IChargeDAL _dal;
         private readonly IChargeDrugDAL _chargeDrugDAL;
         private readonly IICDDAL _icdDAL;
-        private readonly ICPTDAL _cptDAL;
+        private readonly IInstrumentDAL _instrumentDAL;
         private readonly IClinicalDAL _clinicalDAL;
 
         public ChargeBLL(string connectionString = "")
@@ -21,7 +21,7 @@
             this._dal = new ChargeDAL(this.DatabaseFactory);
             this._chargeDrugDAL = new ChargeDrugDAL(this.DatabaseFactory);
             this._icdDAL = new ICDDAL(this.DatabaseFactory);
-            this._cptDAL = new CPTDAL(this.DatabaseFactory);
+            this._instrumentDAL = new InstrumentDAL(this.DatabaseFactory);
             this._clinicalDAL = new ClinicalDAL(this.DatabaseFactory);
         }
 
@@ -34,7 +34,7 @@
                         Id = e.Id,
                         PatientName = e.Patient.FirstName + " " + e.Patient.LastName,
                         DoctorName = e.Doctor.FirstName + " " + e.Doctor.LastName,
-                        CPTCode = e.CPTCode,
+                        Treatments = e.Treatments,
                         Diagnostic = e.Diagnostic,
                         ICDCode1 = e.ICDCode1,
                         ICDCode2 = e.ICDCode2,
@@ -59,7 +59,7 @@
                 PatientId = e.PatientId,
                 PatientName = e.Patient.FirstName + " " + e.Patient.LastName,
                 DoctorName = e.Doctor.FirstName + " " + e.Doctor.LastName,
-                CPT = e.CPTCode,
+                Treatments = e.Treatments,
                 Diagnostic = e.Diagnostic + "|" + (e.ICDCode1 ?? string.Empty) + "|" + (e.ICDCode2 ?? string.Empty) + "|" + (e.ICDCode3 ?? string.Empty) + "|" + (e.ICDCode4 ?? string.Empty),
                 Note = e.Note,
                 Days = e.Days,
@@ -69,8 +69,6 @@
 
             if (charge != null)
             {
-                charge.CPT = this._cptDAL.GetAll().Where(e => e.Code == charge.CPT).Select(e => e.Description).FirstOrDefault();
-
                 if (!string.IsNullOrEmpty(charge.Diagnostic))
                 {
                     var icds = charge.Diagnostic.Split('|');
@@ -110,7 +108,11 @@
 
         public void RemoveChargeDrug(int id, int patientId, int chargeId)
         {
-            var entity = this._chargeDrugDAL.GetAll().FirstOrDefault(e => e.Id == id && e.PatientId == patientId && e.ChargeId == chargeId);
+            var query = this._chargeDrugDAL.GetAll().Where(e => e.Id == id && e.PatientId == patientId);
+
+            if (chargeId > 0) query = query.Where(e => e.ChargeId == chargeId);
+
+           var entity = query.FirstOrDefault();
 
             if (entity == null) throw new Exception("Đối tượng không tồn tại");
 
@@ -146,7 +148,7 @@
             entity.DoctorId = dto.DoctorId;
             entity.DateOnset = dto.DateOnset;
             entity.DateService = dto.DateService;
-            entity.CPTCode = dto.CPTCode;
+            entity.Treatments = dto.Treatments;
             entity.Diagnostic = dto.Diagnostic;
             entity.ICDCode1 = dto.ICDCode1;
             entity.ICDCode2 = dto.ICDCode2;
@@ -170,7 +172,7 @@
                     DoctorId = dto.DoctorId,
                     DateOnset = dto.DateOnset,
                     DateService = dto.DateService,
-                    CPTCode = dto.CPTCode,
+                    Treatments = dto.Treatments,
                     Diagnostic = dto.Diagnostic,
                     ICDCode1 = dto.ICDCode1,
                     ICDCode2 = dto.ICDCode2,

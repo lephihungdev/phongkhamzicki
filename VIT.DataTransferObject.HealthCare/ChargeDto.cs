@@ -12,8 +12,7 @@
         public string ICDCode2 { get; set; }
         public string ICDCode3 { get; set; }
         public string ICDCode4 { get; set; }
-        public string CPTCode { get; set; }
-        public string CPTDescription { get; set; }
+        public string Treatments { get; set; }
         public int Days { get; set; }
         public string Note { get; set; }
         public Nullable<System.DateTime> DateService { get; set; }
