@@ -139,61 +139,44 @@
 
             var query = this._cptBLL.Get(user.CompanyId)
                 .Where(e => e.Active)
-                .Where(c => c.Code.StartsWith(term) || c.Description.Contains(term))
+                .Where(c => c.Name.StartsWith(term) || c.Description.Contains(term))
                 .Take(100)
-                .OrderBy(e => e.Code);
-            var icds = query.Select(e => new AutoCompletedStringDto
+                .OrderBy(e => e.Name);
+            var icds = query.Select(e => new AutoCompletedIntDto
             {
-                label = e.Code + " - " + e.Description,
-                value = e.Code
+                label = e.Name,
+                value = e.Id
             });
 
             return this.Json(icds, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult CptCompleteById(string value)
+        public ActionResult Cpt(string code, int id = 0)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
             this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
             this.ViewBag.UserName = user.UserName;
 
-            var dto = new AutoCompletedStringDto();
-            var data = this._cptBLL.Get(user.CompanyId).Select(e => new { e.Code, e.Description }).FirstOrDefault(c => c.Code == value);
-            if (data != null)
+            var model = new DrugModel();
+            if (id > 0)
             {
-                dto.label = data.Code + " - " + data.Description;
-                dto.value = data.Code;
-            }
-
-            return this.Json(dto, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult Cpt(string skey, string code)
-        {
-            var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
-            if (user == null) return this.RedirectToAction("Login", "Login");
-            this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
-            this.ViewBag.UserName = user.UserName;
-
-            var model = new CptModel();
-            if (!string.IsNullOrEmpty(code))
-            {
-                var dto = this._cptBLL.Get(user.CompanyId).FirstOrDefault(e => e.Code == code);
+                var dto = this._cptBLL.Get(user.CompanyId).FirstOrDefault(e => e.Id == id);
                 if (dto != null)
                 {
                     model.Active = dto.Active;
-                    model.Code = dto.Code;
+                    model.Name = dto.Name;
                     model.Description = dto.Description;
+                    model.Id = dto.Id;
                 }
             }
 
-            model.Cpts = this._cptBLL.Get(user.CompanyId, skey).OrderBy(e => e.Code).ToList();
+            model.Drugs = this._drugBLL.Get(user.CompanyId, code).OrderBy(e => e.Name).ToList();
             return this.View(model);
         }
 
         [HttpPost]
-        public ActionResult Cpt(CptModel model)
+        public ActionResult Drug(CptModel model)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
@@ -202,32 +185,34 @@
 
             var dto = new CptDto
             {
-                Code = model.Code,
+                Id = model.Id,
+                Name = model.Name,
                 Description = model.Description,
                 Fee = model.Fee,
-                Active = model.Active
+                Active = model.Active,
             };
 
             try
             {
-                if (!string.IsNullOrEmpty(model.Code)) this._cptBLL.Save(dto, user.CompanyId);
+                this._cptBLL.Save(dto, user.CompanyId);
+                model.Id = dto.Id;
             }
             catch (Exception exception)
             {
                 ViewBag.ErrorLabel = exception.Message;
             }
 
-            model.Cpts = this._cptBLL.Get(user.CompanyId).OrderBy(e => e.Code).ToList();
+            model.Cpts = this._cptBLL.Get(user.CompanyId).OrderBy(e => e.Name).ToList();
 
             return this.View(model);
         }
 
-        public ActionResult CptDelete(string code)
+        public ActionResult CptDelete(int id)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
 
-            this._cptBLL.Delete(code, user.CompanyId);
+            this._cptBLL.Delete(id, user.CompanyId);
             return this.RedirectToAction("Cpt", "Settings");
         }
         #endregion

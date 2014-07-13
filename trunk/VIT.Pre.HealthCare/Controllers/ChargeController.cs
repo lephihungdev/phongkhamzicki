@@ -42,7 +42,7 @@
             var model = new ChargePrintModel
                 {
                     Id = chargeInfo.Id,
-                    CPT = chargeInfo.CPT,
+                    CPT = chargeInfo.Treatments,
                     DateService = chargeInfo.DateService,
                     Days = chargeInfo.Days,
                     Diagnostic = chargeInfo.Diagnostic,
@@ -77,17 +77,12 @@
                     })
                     .ToList();
 
-            
-
-            var cpts = this._cptBLL.Get(user.CompanyId).ToList();
             var icds = this._icdBLL.Get().ToList();
             foreach (var chargesPrintModel in models)
             {
                 var charges = this._chargeBLL.Get(patientId, chargesPrintModel.FacilityId).OrderByDescending(e => e.DateService).ToList();
                 foreach (var charge in charges)
                 {
-                    charge.CPTDescription = cpts.Where(e => e.Code == charge.CPTCode).Select(e => e.Description).FirstOrDefault();
-
                     charge.DiagnosticDisplay = charge.Diagnostic;
                     if(!string.IsNullOrEmpty(charge.ICDCode1))
                     {
@@ -153,7 +148,7 @@
                 model.ICDCode2 = chargeInfo.ICDCode2;
                 model.ICDCode3 = chargeInfo.ICDCode3;
                 model.ICDCode4 = chargeInfo.ICDCode4;
-                model.CPTCode = chargeInfo.CPTCode;
+                model.Treatments = chargeInfo.Treatments;
                 model.DoctorId = chargeInfo.DoctorId;
                 model.Diagnostic = chargeInfo.Diagnostic;
             }
@@ -207,7 +202,7 @@
                     var dto = new ChargeDto
                     {
                         Id = model.Id,
-                        CPTCode = model.CPTCode,
+                        Treatments = model.Treatments,
                         Diagnostic = model.Diagnostic,
                         DoctorId = model.DoctorId == 0 ? null : model.DoctorId,
                         ICDCode1 = model.ICDCode1,
@@ -270,8 +265,6 @@
             var charges = this._chargeBLL.Get(patientId, facility).OrderByDescending(e => e.DateService).ToList();
             foreach (var charge in charges)
             {
-                charge.CPTDescription = cpts.Where(e => e.Code == charge.CPTCode).Select(e => e.Description).FirstOrDefault();
-
                 charge.DiagnosticDisplay = charge.Diagnostic;
                 if(!string.IsNullOrEmpty(charge.ICDCode1))
                 {

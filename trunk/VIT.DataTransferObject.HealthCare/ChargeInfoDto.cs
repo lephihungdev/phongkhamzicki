@@ -10,7 +10,7 @@
         public string PatientName { get; set; }
         public string DoctorName { get; set; }
         public string Diagnostic { get; set; }
-        public string CPT { get; set; }
+        public string Treatments { get; set; }
         public int Days { get; set; }
         public string Note { get; set; }
         public Nullable<System.DateTime> DateService { get; set; }
