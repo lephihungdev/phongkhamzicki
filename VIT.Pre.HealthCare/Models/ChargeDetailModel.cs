@@ -80,5 +80,6 @@
         public ClinicalDto Clinical { get; set; }
         public IList<DoctorDto> ListDoctors { get; set; }
         public IList<ChargeDrugDto> ListChargeDrugs { get; set; }
+        public IList<ChargeInstrumentDto> ListChargeInstruments { get; set; }
     }
 }

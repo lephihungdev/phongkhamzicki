@@ -11,6 +11,7 @@
     {
         private readonly IChargeDAL _dal;
         private readonly IChargeDrugDAL _chargeDrugDAL;
+        private readonly IChargeInstrumentDAL _chargeInstrumentDAL;
         private readonly IICDDAL _icdDAL;
         private readonly IInstrumentDAL _instrumentDAL;
         private readonly IClinicalDAL _clinicalDAL;
@@ -20,6 +21,7 @@
         {
             this._dal = new ChargeDAL(this.DatabaseFactory);
             this._chargeDrugDAL = new ChargeDrugDAL(this.DatabaseFactory);
+            this._chargeInstrumentDAL = new ChargeInstrumentDAL(this.DatabaseFactory);
             this._icdDAL = new ICDDAL(this.DatabaseFactory);
             this._instrumentDAL = new InstrumentDAL(this.DatabaseFactory);
             this._clinicalDAL = new ClinicalDAL(this.DatabaseFactory);
@@ -105,14 +107,13 @@
 
             return drugs;
         }
-
         public void RemoveChargeDrug(int id, int patientId, int chargeId)
         {
             var query = this._chargeDrugDAL.GetAll().Where(e => e.Id == id && e.PatientId == patientId);
 
             if (chargeId > 0) query = query.Where(e => e.ChargeId == chargeId);
 
-           var entity = query.FirstOrDefault();
+            var entity = query.FirstOrDefault();
 
             if (entity == null) throw new Exception("Đối tượng không tồn tại");
 
@@ -138,6 +139,55 @@
             this.SaveChanges();
             dto.Id = entity.Id;
         }
+
+        public IQueryable<ChargeInstrumentDto> GetInstruments(int patientId, int chargeId = 0)
+        {
+            var query = this._chargeInstrumentDAL.GetAll().Where(e => e.PatientId == patientId);
+            if (chargeId == 0) query = query.Where(e => e.ChargeId == null);
+            else query = query.Where(e => e.ChargeId == chargeId);
+            var drugs = query.Select(e => new ChargeInstrumentDto
+            {
+                Id = e.Id,
+                InstrumentId = e.InstrumentsId,
+                InstrumentName = e.Instrument.Name,
+                Quality = e.Quality,
+                Note = e.Note
+            });
+
+            return drugs;
+        }
+        public void RemoveChargeInstrument(int id, int patientId, int chargeId)
+        {
+            var query = this._chargeInstrumentDAL.GetAll().Where(e => e.Id == id && e.PatientId == patientId);
+
+            if (chargeId > 0) query = query.Where(e => e.ChargeId == chargeId);
+
+            var entity = query.FirstOrDefault();
+
+            if (entity == null) throw new Exception("Đối tượng không tồn tại");
+
+            this._chargeInstrumentDAL.Delete(entity);
+
+            this.SaveChanges();
+        }
+        public void AddChargeInstrument(ChargeInstrumentDto dto)
+        {
+            var entity = new ChargeInstrument
+            {
+                PatientId = dto.PatientId,
+                InstrumentsId = dto.InstrumentId,
+                ChargeId = dto.ChargeId,
+                Quality = dto.Quality,
+                Note = dto.Note
+            };
+
+            if (entity.ChargeId == 0) entity.ChargeId = null;
+
+            this._chargeInstrumentDAL.Add(entity);
+
+            this.SaveChanges();
+            dto.Id = entity.Id;
+        }       
 
         public void Update(ChargeDto dto, int patientId, int facilityId, int userId)
         {
@@ -193,6 +243,13 @@
             {
                 chargeDrug.ChargeId = dto.Id;
                 this._chargeDrugDAL.Update(chargeDrug);
+            }
+
+            var instruments = this._chargeInstrumentDAL.GetAll().Where(e => !e.ChargeId.HasValue && e.PatientId == patientId).ToList();
+            foreach (var chargeInstrument in instruments)
+            {
+                chargeInstrument.ChargeId = dto.Id;
+                this._chargeInstrumentDAL.Update(chargeInstrument);
             }
 
             var clinical = this._clinicalDAL.GetAll().FirstOrDefault(e => e.PatientId == patientId && !e.ChargeId.HasValue);

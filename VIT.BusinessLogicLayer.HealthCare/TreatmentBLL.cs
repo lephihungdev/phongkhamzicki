@@ -7,11 +7,11 @@
     using VIT.DataTransferObject.HealthCare;
     using VIT.Entity.HealthCare;
 
-    public class CptBLL : BLLBase
+    public class TreatmentBLL : BLLBase
     {
         private readonly IInstrumentDAL _dal;
 
-        public CptBLL(string connectionString = "")
+        public TreatmentBLL(string connectionString = "")
             : base(connectionString)
         {
             this._dal = new InstrumentDAL(this.DatabaseFactory);

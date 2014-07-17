@@ -71,6 +71,11 @@ text-align: center
 .main .clinicaldisplay ul li{padding: 3px 10px}
 
 .main .patientlist{ border-bottom: none;border-left: none;border-right: none;padding: 5px 0px 0px 0px; margin-top: 15px}
+
+.main .patientlist table img, .main .treatmentlist table img{ width: 16px;height: 16px;cursor: pointer}
+.main .treatmentlist table .input td{padding:5px}
+.main .treatmentlist .input input{ width: 99%;}
+
 .main .patientlist table img, .main .druglist table img{ width: 16px;height: 16px;cursor: pointer}
 .main .druglist table .input td{padding:5px}
 .main .druglist .input input{ width: 99%;}
