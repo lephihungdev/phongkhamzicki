@@ -15,7 +15,7 @@
     {
         private readonly FacilityBLL _facilityBLL;
         private readonly PatientBLL _patientBLL;
-        private readonly CptBLL _cptBLL;
+        private readonly TreatmentBLL _treatmentBLL;
         private readonly IcdBLL _icdBLL;
         private readonly ChargeBLL _chargeBLL;
 
@@ -25,7 +25,7 @@
         {
             this._facilityBLL = new FacilityBLL();
             this._patientBLL = new PatientBLL();
-            this._cptBLL = new CptBLL();
+            this._treatmentBLL = new TreatmentBLL();
             this._icdBLL = new IcdBLL();
             this._chargeBLL = new ChargeBLL();
             this._doctorBLL = new DoctorBLL();
@@ -198,6 +198,28 @@
                     this._chargeBLL.RemoveChargeDrug(model.DrugId, model.PatientId, model.Id);
                     model.DrugId = 0;
                     break;
+                case "ADDINSTRUMENT":
+                    if (model.DrugId > 0)
+                    {
+                        var drugDto = new ChargeDrugDto
+                        {
+                            ChargeId = model.Id,
+                            DrugId = model.DrugId,
+                            Quality = model.Quality,
+                            Note = model.DrugNote,
+                            PatientId = model.PatientId
+                        };
+                        this._chargeBLL.AddChargeDrug(drugDto);
+                        model.DrugNote = string.Empty;
+                        model.Quality = null;
+                        model.DrugId = 0;
+                    }
+
+                    break;
+                case "REMOVEDINSTRUMENT":
+                    this._chargeBLL.RemoveChargeDrug(model.DrugId, model.PatientId, model.Id);
+                    model.DrugId = 0;
+                    break;
                 case "ADDCHARGE": 
                     var dto = new ChargeDto
                     {
@@ -228,6 +250,7 @@
             model.ListDoctors = this._doctorBLL.Get(user.CompanyId).Where(e => e.Active).ToList();
             model.ListDoctors.Insert(0, new DoctorDto { LastName = "--- Chọn ---" });
             model.ListChargeDrugs = this._chargeBLL.GetDrugs(model.PatientId, model.Id).ToList();
+            model.ListChargeInstruments = this._chargeBLL.GetInstruments(model.PatientId, model.Id).ToList();
 
             if (model.Id == 0) model.Clinical = this._patientBLL.GetClinical(model.PatientId, null);
             else model.Clinical = this._patientBLL.GetClinical(model.PatientId, model.Id);
@@ -256,7 +279,6 @@
             model.PatientName = patientName.FirstName + " " + patientName.LastName;
             model.DateService = this._chargeBLL.Get(patientId, user.CompanyId).Select(e => e.DateService).Max();
 
-            var cpts = this._cptBLL.Get(user.CompanyId).ToList();
             var icds = this._icdBLL.Get().ToList();
 
             var facility = 0;

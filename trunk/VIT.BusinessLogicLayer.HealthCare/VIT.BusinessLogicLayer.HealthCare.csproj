@@ -60,7 +60,7 @@
     <Compile Include="FacilityBLL.cs" />
     <Compile Include="PatientBLL.cs" />
     <Compile Include="DrugBLL.cs" />
-    <Compile Include="CptBLL.cs" />
+    <Compile Include="TreatmentBLL.cs" />
     <Compile Include="IcdBLL.cs" />
     <Compile Include="UserBLL.cs" />
     <Compile Include="BLLBase.cs" />

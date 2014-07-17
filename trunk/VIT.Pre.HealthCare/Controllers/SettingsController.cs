@@ -14,7 +14,7 @@
     {
         private readonly FacilityBLL _facilityBLL;
         private readonly DrugBLL _drugBLL;
-        private readonly CptBLL _cptBLL;
+        private readonly TreatmentBLL _cptBLL;
         private readonly IcdBLL _icdBLL;
         private readonly DoctorBLL _doctorBLL;
 
@@ -22,7 +22,7 @@
         {
             this._facilityBLL = new FacilityBLL();
             this._drugBLL = new DrugBLL();
-            this._cptBLL = new CptBLL();
+            this._treatmentBLL = new TreatmentBLL();
             this._icdBLL = new IcdBLL();
             this._doctorBLL = new DoctorBLL();
         }
@@ -396,5 +396,7 @@
             return this.RedirectToAction("Doctor", "Settings");
         }
         #endregion
+
+        public TreatmentBLL _treatmentBLL { get; set; }
     }
 }

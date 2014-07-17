@@ -20,9 +20,9 @@
                     <li>Nhịp tim: @Model.Clinical.NhipTim</li>
                     <li>Nhịp thở: @Model.Clinical.NhipTho</li>
                 </ul>
-                <ul @Model.Clinical.Display(Model.Clinical.TimKhoTho 
-                    || Model.Clinical.TimMet 
-                    || Model.Clinical.TimNangNguc 
+                <ul @Model.Clinical.Display(Model.Clinical.TimKhoTho
+                    || Model.Clinical.TimMet
+                    || Model.Clinical.TimNangNguc
                     || Model.Clinical.PhoiHo)>
                      <b>Tim - phổi</b>
                     <li @Model.Clinical.Display(Model.Clinical.TimKhoTho)>Khó thở</li>
@@ -268,10 +268,10 @@
                     <table>
                         <tr>
                             <td class="title">
-                                @Html.LabelFor(model => model.CPTCode):
-                                @Html.ValidationMessageFor(model => model.CPTCode)
+                                @Html.LabelFor(model => model.Treatments):
+                                @Html.ValidationMessageFor(model => model.Treatments)
                             </td>
-                            <td class="value">@Html.EditorFor(model => model.CPTCode)</td>
+                            <td class="value">@Html.EditorFor(model => model.Treatments)</td>
                         </tr>
                         <tr>
                             <td class="title">
@@ -332,6 +332,41 @@
                             <td>@Html.EditorFor(model => model.DrugNote)</td>
                             <td style="text-align: center">
                                 <img onclick="SetAction('ADDDRUG')" src="../../Content/images/plus.png" alt="Thêm thuốc"/>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+                
+                <fieldset class="treatmentlist">
+                    <legend>Điều trị</legend>
+                    <table class="table" width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>
+                                <td>Mã thuốc</td>
+                                <td>Tên thuốc</td>
+                                <td>Số lượng</td>
+                                <td>Ghi chú</td>
+                                <td style="width: 30px"></td>
+                            </tr>
+                        </thead>
+        
+                        @foreach (var o in Model.ListChargeInstruments)
+                        {
+                            <tr>
+                                <td>@o.InstrumentId</td>
+                                <td>@o.InstrumentName</td>
+                                <td>@o.Quality</td>
+                                <td>@o.Note</td>
+                                <td style="text-align: center"><img onclick="SetDrugId(@o.Id); SetAction('REMOVEDINSTRUMENT')" src="../../Content/images/DeleteRed.png" alt="Xóa thuốc"/></td>
+                            </tr>
+                        }
+
+                        <tr class="input">
+                            <td colspan="2">@Html.EditorFor(model => model.DrugId)</td>
+                            <td>@Html.EditorFor(model => model.Quality)</td>
+                            <td>@Html.EditorFor(model => model.DrugNote)</td>
+                            <td style="text-align: center">
+                                <img onclick="SetAction('ADDINSTRUMENT')" src="../../Content/images/plus.png" alt="Thêm thuốc"/>
                             </td>
                         </tr>
                     </table>
