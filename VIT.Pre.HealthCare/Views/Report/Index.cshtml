@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Thống kê";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<fieldset class="listReport">
+    <legend>Thống kê</legend>
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td><img src="../../Content/images/report-builder.png"/></td>
+            <td class="title" onclick="window.location.href = '/Report/Patient';">Bệnh nhân</td>
+        </tr>
+        <tr>
+            <td><img src="../../Content/images/report-builder.png"/></td>
+            <td class="title" onclick="window.location.href = '/Report/Charge';">Đơn thuốc</td>
+        </tr>
+    </table>
+</fieldset>

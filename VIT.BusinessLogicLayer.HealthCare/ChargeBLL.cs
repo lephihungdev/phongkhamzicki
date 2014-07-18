@@ -27,7 +27,7 @@
             this._clinicalDAL = new ClinicalDAL(this.DatabaseFactory);
         }
 
-        public IQueryable<ChargeDto> Get(int patientId, int facilityId = 0)
+        public IQueryable<ChargeDto> Gets(int patientId, int facilityId = 0)
         {
             var query = this._dal.GetAll().Where(e => e.PatientId == patientId);
             if(facilityId > 0) query = query.Where(e => e.FacilityId == facilityId);
@@ -50,6 +50,29 @@
                     });
 
             return charges;
+        }
+
+        /// <returns>
+        /// bệnh nhân mới tạo hoặc đă từng khám chữa bệnh ở đây
+        /// </returns>
+        public IQueryable<ChargeReportDto> GetReports(int facilityId, DateTime fromDate, DateTime toDate)
+        {
+            toDate = toDate.AddDays(1);
+            var query = this._dal.GetAll()
+                .Where(e => e.FacilityId == facilityId && fromDate <= e.DateService && e.DateService <= toDate)
+                .Select(e => new ChargeReportDto
+                {
+                    Id = e.Id,
+                    PatientId = e.PatientId,
+                    PatientName = e.Patient.FirstName + " " + e.Patient.LastName,
+                    DateService = e.DateService,
+                    DoctorName = e.Doctor.FirstName + " " + e.Doctor.LastName,
+                    Treatments = e.Treatments,
+                    Diagnostic = e.Diagnostic,
+                    Price = e.ChargeDrugs.Sum(c => c.Drug.Fee) + e.ChargeInstruments.Sum(c => c.Instrument.Fee)
+                });
+
+            return query;
         }
 
         public ChargeInfoDto GetInfo(int chargeId)
