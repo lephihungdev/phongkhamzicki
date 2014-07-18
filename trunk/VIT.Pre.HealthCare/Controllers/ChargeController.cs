@@ -80,7 +80,7 @@
             var icds = this._icdBLL.Get().ToList();
             foreach (var chargesPrintModel in models)
             {
-                var charges = this._chargeBLL.Get(patientId, chargesPrintModel.FacilityId).OrderByDescending(e => e.DateService).ToList();
+                var charges = this._chargeBLL.Gets(patientId, chargesPrintModel.FacilityId).OrderByDescending(e => e.DateService).ToList();
                 foreach (var charge in charges)
                 {
                     charge.DiagnosticDisplay = charge.Diagnostic;
@@ -129,7 +129,7 @@
             if (patientName == null) ViewBag.ErrorLabel = "Bệnh nhân không tồn tại";
             else model.PatientName = patientName.FirstName + " " + patientName.LastName;
 
-            var charge = this._chargeBLL.Get(patientId, user.CompanyId);
+            var charge = this._chargeBLL.Gets(patientId, user.CompanyId);
             if (chargeId == 0)
             {
                 model.DateOnset = charge.Select(e => e.DateOnset).Max();
@@ -156,6 +156,7 @@
             model.ListDoctors = this._doctorBLL.Get(user.CompanyId).ToList();
             model.ListDoctors.Insert(0, new DoctorDto { Id = 0, LastName = "--- Chọn ---" });
             model.ListChargeDrugs = this._chargeBLL.GetDrugs(patientId, chargeId).ToList();
+            model.ListChargeInstruments = this._chargeBLL.GetInstruments(model.PatientId, model.Id).ToList();
 
             if (chargeId == 0) model.Clinical = this._patientBLL.GetClinical(model.PatientId, null);
             else model.Clinical = this._patientBLL.GetClinical(model.PatientId, chargeId);
@@ -183,13 +184,13 @@
                             {
                                 ChargeId = model.Id,
                                 DrugId = model.DrugId,
-                                Quality = model.Quality,
+                                Quality = model.DrugQuality,
                                 Note = model.DrugNote,
                                 PatientId = model.PatientId
                             };
                         this._chargeBLL.AddChargeDrug(drugDto);
                         model.DrugNote = string.Empty;
-                        model.Quality = null;
+                        model.DrugQuality = null;
                         model.DrugId = 0;
                     }
 
@@ -201,23 +202,23 @@
                 case "ADDINSTRUMENT":
                     if (model.DrugId > 0)
                     {
-                        var drugDto = new ChargeDrugDto
+                        var drugDto = new ChargeInstrumentDto
                         {
                             ChargeId = model.Id,
-                            DrugId = model.DrugId,
-                            Quality = model.Quality,
-                            Note = model.DrugNote,
+                            InstrumentId = model.InstrumentId,
+                            Quality = model.InstrumentQuality,
+                            Note = model.InstrumentNote,
                             PatientId = model.PatientId
                         };
-                        this._chargeBLL.AddChargeDrug(drugDto);
+                        this._chargeBLL.AddChargeInstrument(drugDto);
                         model.DrugNote = string.Empty;
-                        model.Quality = null;
+                        model.DrugQuality = null;
                         model.DrugId = 0;
                     }
 
                     break;
                 case "REMOVEDINSTRUMENT":
-                    this._chargeBLL.RemoveChargeDrug(model.DrugId, model.PatientId, model.Id);
+                    this._chargeBLL.RemoveChargeInstrument(model.DrugId, model.PatientId, model.Id);
                     model.DrugId = 0;
                     break;
                 case "ADDCHARGE": 
@@ -277,14 +278,14 @@
             }
 
             model.PatientName = patientName.FirstName + " " + patientName.LastName;
-            model.DateService = this._chargeBLL.Get(patientId, user.CompanyId).Select(e => e.DateService).Max();
+            model.DateService = this._chargeBLL.Gets(patientId, user.CompanyId).Select(e => e.DateService).Max();
 
             var icds = this._icdBLL.Get().ToList();
 
             var facility = 0;
             if (!allfacility) facility = user.CompanyId;
 
-            var charges = this._chargeBLL.Get(patientId, facility).OrderByDescending(e => e.DateService).ToList();
+            var charges = this._chargeBLL.Gets(patientId, facility).OrderByDescending(e => e.DateService).ToList();
             foreach (var charge in charges)
             {
                 charge.DiagnosticDisplay = charge.Diagnostic;

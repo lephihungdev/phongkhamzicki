@@ -1,4 +1,4 @@
-﻿@model VIT.Pre.HealthCare.Models.PatientReportModel
+﻿@model VIT.Pre.HealthCare.Models.ChargeReportModel
 @{
     ViewBag.Title = "Phòng khám online";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
@@ -10,6 +10,19 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
+<fieldset class="listReport">
+    <legend>Thống kê</legend>
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td><img src="../../Content/images/report-builder.png"/></td>
+            <td class="title" onclick="window.location.href = '/Report/Patient';">Bệnh nhân</td>
+        </tr>
+        <tr>
+            <td><img src="../../Content/images/report-builder.png"/></td>
+            <td class="title active" onclick="window.location.href = '/Report/Charge';">Đơn thuốc</td>
+        </tr>
+    </table>
+</fieldset>
 <fieldset class="patientinfo">
     <legend>Thống kê bệnh nhân</legend>
     <table border="0" cellspacing="0" cellpadding="0">
@@ -25,33 +38,31 @@
         <thead>
             <tr>
                 <td>Mã</td>
-                <td>Họ</td>
-                <td>Tên</td>
-                <td>Năm sinh</td>
-                <td>Giới tính</td>
-                <td>Điện Thoại</td>
-                <td>Email</td>
-                <td>Địa chỉ</td>
+                <td>Ngày khám</td>
+                <td>Bệnh nhân</td>
+                
+                <td>Bệnh</td>
+                <td>Điều trị</td>
+                <td>Bác sỹ</td>
+                <td>Chi phí</td>
             </tr>
         </thead>
         
-        @foreach (var o in Model.Patients)
+        @foreach (var o in Model.Charges)
         {
-            var sex = o.Sex == true ? "Nam" : "Nữ";
-            <tr onclick="window.location.assign('/Charge/Index?patientId=@o.Id')">
+            <tr onclick="window.location.assign('/Charge/Detail?chargeId=@o.Id&patientId=@o.PatientId')">
                 <td>@o.Id</td>
-                <td>@o.FirstName</td>
-                <td>@o.LastName</td>
-                <td>@o.BirthYear</td>
-                <td style="text-align: center">@sex</td>
-                <td>@o.Phone</td>
-                <td>@o.Email</td>
-                <td>@o.Address</td>
+                <td>@String.Format("{0:dd/MM/yyy}", @o.DateService)</td>
+                <td>@o.PatientName</td>
+                <td>@o.Diagnostic</td>
+                <td>@o.Treatments</td>
+                <td>@o.DoctorName</td>
+                <td>@o.Price</td>
             </tr>
         }
     </table>
     <div style="display: block;clear: both;padding: 10px;text-align: right;">
-    Tổng số bệnh nhân: <b>@Model.Patients.Count</b>
+    Tổng tiền: <b>@Model.Charges.Sum(e => e.Price ?? 0)</b>
     </div>
 </fieldset>
 }

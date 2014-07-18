@@ -72,6 +72,7 @@
     <Compile Include="AutoCompleteAttribute.cs" />
     <Compile Include="AutocompleteHelpers.cs" />
     <Compile Include="Controllers\ChargeController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\FacilityController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Models\ChargeDetailModel.cs" />
     <Compile Include="Models\ChargeListModel.cs" />
     <Compile Include="Models\ChargePrintModel.cs" />
+    <Compile Include="Models\ChargeReportModel.cs" />
     <Compile Include="Models\ChargesPrintModel.cs" />
     <Compile Include="Models\ClinicalModel.cs" />
     <Compile Include="Models\PatientReportModel.cs" />
@@ -104,8 +106,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\printa6.css" />
     <Content Include="Content\css\zicki.css" />
-    <Content Include="Content\css\print.css" />
+    <Content Include="Content\css\printa5.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\images\Document-Add-icon.png" />
     <Content Include="Content\images\dossierbleu_documents.png" />
@@ -243,7 +246,9 @@
     <Content Include="Views\Patient\Clinical.cshtml" />
     <Content Include="Views\Shared\_ZickiLayout.cshtml" />
     <Content Include="Views\Facility\Intro.cshtml" />
-    <Content Include="Views\Patient\Report.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Report\Patient.cshtml" />
+    <Content Include="Views\Report\Charge.cshtml" />
     <None Include="Web References\PreAdmin\PreAdmin.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

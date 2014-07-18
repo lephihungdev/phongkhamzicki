@@ -298,7 +298,7 @@
         
                     @{ var display = Model.Id > 0 ? "" : "none"; }
                     <div style="float: left; margin: 5px"><a href="#" onclick="SetAction('ADDCHARGE')" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/Save.png" alt="Lưu" style="width: 58px;"/>Lưu</a></div>
-                    <div style="float: left; margin: 5px; display: @display"><a href="#" onclick="window.open('/Charge/PrintCharge?chargeId=@Model.Id', '_blank', 'width=310, height=430');" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/print-printer-icon.png" alt="In" style="width: 58px;"/>In bệnh án</a></div>
+                    <div style="float: left; margin: 5px; display: @display"><a href="#" onclick="window.open('/Charge/PrintCharge?chargeId=@Model.Id', '_blank', 'width=432, height=605');" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/print-printer-icon.png" alt="In" style="width: 58px;"/>In bệnh án</a></div>
                     <div style="float: left; margin: 5px"><a href="/Charge/Index?patientId=@Model.PatientId" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/dossierbleu_documents.png" alt="Quay lại danh sách" style="width: 58px;"/>Quay lại danh sách</a></div>
                 </fieldset>
 
@@ -342,8 +342,8 @@
                     <table class="table" width="100%" border="0" cellspacing="0" cellpadding="0">
                         <thead>
                             <tr>
-                                <td>Mã thuốc</td>
-                                <td>Tên thuốc</td>
+                                <td>Mã</td>
+                                <td>Tên</td>
                                 <td>Số lượng</td>
                                 <td>Ghi chú</td>
                                 <td style="width: 30px"></td>
@@ -362,11 +362,11 @@
                         }
 
                         <tr class="input">
-                            <td colspan="2">@Html.EditorFor(model => model.DrugId)</td>
-                            <td>@Html.EditorFor(model => model.Quality)</td>
-                            <td>@Html.EditorFor(model => model.DrugNote)</td>
+                            <td colspan="2">@Html.EditorFor(model => model.InstrumentId)</td>
+                            <td>@Html.EditorFor(model => model.InstrumentQuality)</td>
+                            <td>@Html.EditorFor(model => model.InstrumentNote)</td>
                             <td style="text-align: center">
-                                <img onclick="SetAction('ADDINSTRUMENT')" src="../../Content/images/plus.png" alt="Thêm thuốc"/>
+                                <img onclick="SetAction('ADDINSTRUMENT')" src="../../Content/images/plus.png" alt="Thêm điều trị"/>
                             </td>
                         </tr>
                     </table>

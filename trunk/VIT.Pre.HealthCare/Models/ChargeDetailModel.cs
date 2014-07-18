@@ -66,16 +66,19 @@
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> DateOnset { get; set; }
 
-
-
         [Display(Name = "Thuốc")]
         [UIHint("autoComplete"), AllowHtml]
         [AutoComplete("Settings", "DrugComplete")]
         public int DrugId { get; set; }
-        public Nullable<int> Quality { get; set; }
+        public Nullable<int> DrugQuality { get; set; }
         public string DrugNote { get; set; }
 
-
+        [Display(Name = "Thuốc")]
+        [UIHint("autoComplete"), AllowHtml]
+        [AutoComplete("Settings", "InstrumentComplete")]
+        public int InstrumentId { get; set; }
+        public Nullable<int> InstrumentQuality { get; set; }
+        public string InstrumentNote { get; set; }
 
         public ClinicalDto Clinical { get; set; }
         public IList<DoctorDto> ListDoctors { get; set; }

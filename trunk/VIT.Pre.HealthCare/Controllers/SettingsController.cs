@@ -14,7 +14,7 @@
     {
         private readonly FacilityBLL _facilityBLL;
         private readonly DrugBLL _drugBLL;
-        private readonly TreatmentBLL _cptBLL;
+        private readonly TreatmentBLL _instrumentBLL;
         private readonly IcdBLL _icdBLL;
         private readonly DoctorBLL _doctorBLL;
 
@@ -129,15 +129,15 @@
         }
         #endregion
 
-        #region CPT
-        public ActionResult CptComplete(string term)
+        #region Instrument
+        public ActionResult InstrumentComplete(string term)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
             this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
             this.ViewBag.UserName = user.UserName;
 
-            var query = this._cptBLL.Get(user.CompanyId)
+            var query = this._instrumentBLL.Get(user.CompanyId)
                 .Where(e => e.Active)
                 .Where(c => c.Name.StartsWith(term) || c.Description.Contains(term))
                 .Take(100)
@@ -151,7 +151,7 @@
             return this.Json(icds, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Cpt(string code, int id = 0)
+        public ActionResult InstrumentCpt(string code, int id = 0)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
@@ -161,7 +161,7 @@
             var model = new DrugModel();
             if (id > 0)
             {
-                var dto = this._cptBLL.Get(user.CompanyId).FirstOrDefault(e => e.Id == id);
+                var dto = this._instrumentBLL.Get(user.CompanyId).FirstOrDefault(e => e.Id == id);
                 if (dto != null)
                 {
                     model.Active = dto.Active;
@@ -176,7 +176,7 @@
         }
 
         [HttpPost]
-        public ActionResult Drug(CptModel model)
+        public ActionResult Cpt(CptModel model)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
@@ -194,7 +194,7 @@
 
             try
             {
-                this._cptBLL.Save(dto, user.CompanyId);
+                this._instrumentBLL.Save(dto, user.CompanyId);
                 model.Id = dto.Id;
             }
             catch (Exception exception)
@@ -202,7 +202,7 @@
                 ViewBag.ErrorLabel = exception.Message;
             }
 
-            model.Cpts = this._cptBLL.Get(user.CompanyId).OrderBy(e => e.Name).ToList();
+            model.Cpts = this._instrumentBLL.Get(user.CompanyId).OrderBy(e => e.Name).ToList();
 
             return this.View(model);
         }
@@ -212,7 +212,7 @@
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
 
-            this._cptBLL.Delete(id, user.CompanyId);
+            this._instrumentBLL.Delete(id, user.CompanyId);
             return this.RedirectToAction("Cpt", "Settings");
         }
         #endregion
