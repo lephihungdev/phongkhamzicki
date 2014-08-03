@@ -22,10 +22,11 @@ namespace VIT.Entity.HealthCare
     
         public int Id { get; set; }
         public int FacilityId { get; set; }
-        public string Description { get; set; }
-        public decimal Fee { get; set; }
-        public bool Active { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
+        public Nullable<int> Stock { get; set; }
+        public bool Active { get; set; }
+        public decimal Fee { get; set; }
     
         public virtual Collection<ChargeInstrument> ChargeInstruments { get; set; }
         public virtual Facility Facility { get; set; }

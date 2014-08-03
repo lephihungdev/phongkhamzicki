@@ -13,6 +13,7 @@
         private readonly IChargeDrugDAL _chargeDrugDAL;
         private readonly IChargeInstrumentDAL _chargeInstrumentDAL;
         private readonly IICDDAL _icdDAL;
+        private readonly IDrugDAL _drugDAL;
         private readonly IInstrumentDAL _instrumentDAL;
         private readonly IClinicalDAL _clinicalDAL;
 
@@ -25,6 +26,7 @@
             this._icdDAL = new ICDDAL(this.DatabaseFactory);
             this._instrumentDAL = new InstrumentDAL(this.DatabaseFactory);
             this._clinicalDAL = new ClinicalDAL(this.DatabaseFactory);
+            this._drugDAL = new DrugDAL(this.DatabaseFactory);
         }
 
         public IQueryable<ChargeDto> Gets(int patientId, int facilityId = 0)
@@ -266,6 +268,13 @@
             {
                 chargeDrug.ChargeId = dto.Id;
                 this._chargeDrugDAL.Update(chargeDrug);
+
+                var drug = this._drugDAL.GetAll().FirstOrDefault(e => e.Id == chargeDrug.DrugId && e.Stock > 0);
+                if (drug != null)
+                {
+                    drug.Stock -= 1;
+                    this._drugDAL.Update(drug);
+                }
             }
 
             var instruments = this._chargeInstrumentDAL.GetAll().Where(e => !e.ChargeId.HasValue && e.PatientId == patientId).ToList();
@@ -273,6 +282,13 @@
             {
                 chargeInstrument.ChargeId = dto.Id;
                 this._chargeInstrumentDAL.Update(chargeInstrument);
+
+                var instrument = this._instrumentDAL.GetAll().FirstOrDefault(e => e.Id == chargeInstrument.InstrumentsId && e.Stock > 0);
+                if (instrument != null)
+                {
+                    instrument.Stock -= 1;
+                    this._instrumentDAL.Update(instrument);
+                }
             }
 
             var clinical = this._clinicalDAL.GetAll().FirstOrDefault(e => e.PatientId == patientId && !e.ChargeId.HasValue);

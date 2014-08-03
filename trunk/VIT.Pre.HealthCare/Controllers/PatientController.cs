@@ -286,7 +286,7 @@
                 KinhNguyetSom = model.KinhNguyetSom,
                 KinhNguyetRongKinh = model.KinhNguyetRongKinh,
                 KinhNguyetManKinh = model.KinhNguyetManKinh,
-                HuyetTrang = model.HuyetTrang,
+                HuyetTrang = model.HuyetTrang
             };
 
             this._patientBLL.SaveClinical(dto);

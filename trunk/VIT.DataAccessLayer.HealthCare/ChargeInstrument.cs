@@ -23,8 +23,8 @@ namespace VIT.Entity.HealthCare
         public string Note { get; set; }
     
         public virtual Charge Charge { get; set; }
-        public virtual Patient Patient { get; set; }
         public virtual Instrument Instrument { get; set; }
+        public virtual Patient Patient { get; set; }
     }
     
 }

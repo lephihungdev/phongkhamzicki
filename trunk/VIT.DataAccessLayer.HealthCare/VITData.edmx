@@ -15,7 +15,6 @@
           <EntitySet Name="Facility" EntityType="VITCRMModel.Store.Facility" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ICD" EntityType="VITCRMModel.Store.ICD" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Instruments" EntityType="VITCRMModel.Store.Instruments" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Inventory" EntityType="VITCRMModel.Store.Inventory" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Patient" EntityType="VITCRMModel.Store.Patient" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="VITCRMModel.Store.User" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_ChargeDrug_Charges" Association="VITCRMModel.Store.FK_ChargeDrug_Charges">
@@ -224,6 +223,7 @@
           <Property Name="FacilityId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
           <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Stock" Type="int" />
           <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="Fee" Type="decimal" Nullable="false" />
         </EntityType>
@@ -248,19 +248,11 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="FacilityId" Type="int" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="200" />
-          <Property Name="Fee" Type="decimal" Nullable="false" />
-          <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="Inventory">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Type" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Type" Type="varchar" Nullable="false" MaxLength="1" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
           <Property Name="Stock" Type="int" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Fee" Type="decimal" Nullable="false" />
         </EntityType>
         <EntityType Name="Patient">
           <Key>
@@ -514,7 +506,7 @@
           <EntitySet Name="Drugs" EntityType="VITHealthCareModel.Drug" />
           <EntitySet Name="Facilities" EntityType="VITHealthCareModel.Facility" />
           <EntitySet Name="ICDs" EntityType="VITHealthCareModel.ICD" />
-          <EntitySet Name="Inventories" EntityType="VITHealthCareModel.Inventory" />
+          <EntitySet Name="Instruments" EntityType="VITHealthCareModel.Instrument" />
           <EntitySet Name="Patients" EntityType="VITHealthCareModel.Patient" />
           <EntitySet Name="Users" EntityType="VITHealthCareModel.User" />
           <AssociationSet Name="FK_ChargeDrug_Charges" Association="VITHealthCareModel.FK_ChargeDrug_Charges">
@@ -549,6 +541,10 @@
             <End Role="Patient" EntitySet="Patients" />
             <End Role="ChargeDrug" EntitySet="ChargeDrugs" />
           </AssociationSet>
+          <AssociationSet Name="FK_ChargeInstruments_Instruments" Association="VITHealthCareModel.FK_ChargeInstruments_Instruments">
+            <End Role="Instrument" EntitySet="Instruments" />
+            <End Role="ChargeInstrument" EntitySet="ChargeInstruments" />
+          </AssociationSet>
           <AssociationSet Name="FK_ChargeInstruments_Patient" Association="VITHealthCareModel.FK_ChargeInstruments_Patient">
             <End Role="Patient" EntitySet="Patients" />
             <End Role="ChargeInstrument" EntitySet="ChargeInstruments" />
@@ -565,6 +561,10 @@
             <End Role="Facility" EntitySet="Facilities" />
             <End Role="Drug" EntitySet="Drugs" />
           </AssociationSet>
+          <AssociationSet Name="FK_Instrucment_Facility" Association="VITHealthCareModel.FK_Instrucment_Facility">
+            <End Role="Facility" EntitySet="Facilities" />
+            <End Role="Instrument" EntitySet="Instruments" />
+          </AssociationSet>
           <AssociationSet Name="FK_Patient_Facility" Association="VITHealthCareModel.FK_Patient_Facility">
             <End Role="Facility" EntitySet="Facilities" />
             <End Role="Patient" EntitySet="Patients" />
@@ -572,15 +572,6 @@
           <AssociationSet Name="FK_User_Facility" Association="VITHealthCareModel.FK_User_Facility">
             <End Role="Facility" EntitySet="Facilities" />
             <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <EntitySet Name="Instruments" EntityType="VITHealthCareModel.Instrument" />
-          <AssociationSet Name="FK_ChargeInstruments_Instruments" Association="VITHealthCareModel.FK_ChargeInstruments_Instruments">
-            <End Role="Instrument" EntitySet="Instruments" />
-            <End Role="ChargeInstrument" EntitySet="ChargeInstruments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Instrucment_Facility" Association="VITHealthCareModel.FK_Instrucment_Facility">
-            <End Role="Facility" EntitySet="Facilities" />
-            <End Role="Instrument" EntitySet="Instruments" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Charge">
@@ -634,8 +625,8 @@
           <Property Type="Int32" Name="Quality" />
           <Property Type="String" Name="Note" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Charge" Relationship="VITHealthCareModel.FK_ChargeInstruments_Charges" FromRole="ChargeInstrument" ToRole="Charge" />
-          <NavigationProperty Name="Patient" Relationship="VITHealthCareModel.FK_ChargeInstruments_Patient" FromRole="ChargeInstrument" ToRole="Patient" />
           <NavigationProperty Name="Instrument" Relationship="VITHealthCareModel.FK_ChargeInstruments_Instruments" FromRole="ChargeInstrument" ToRole="Instrument" />
+          <NavigationProperty Name="Patient" Relationship="VITHealthCareModel.FK_ChargeInstruments_Patient" FromRole="ChargeInstrument" ToRole="Patient" />
         </EntityType>
         <EntityType Name="Clinical">
           <Key>
@@ -740,6 +731,7 @@
           <Property Type="Int32" Name="FacilityId" Nullable="false" />
           <Property Type="String" Name="Name" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Stock" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
           <Property Type="Decimal" Name="Fee" Nullable="false" Precision="18" Scale="0" />
           <NavigationProperty Name="ChargeDrugs" Relationship="VITHealthCareModel.FK_ChargeDrug_Drug" FromRole="Drug" ToRole="ChargeDrug" />
@@ -754,9 +746,9 @@
           <NavigationProperty Name="Charges" Relationship="VITHealthCareModel.FK_Charges_Facility" FromRole="Facility" ToRole="Charge" />
           <NavigationProperty Name="Doctors" Relationship="VITHealthCareModel.FK_Doctor_Facility" FromRole="Facility" ToRole="Doctor" />
           <NavigationProperty Name="Drugs" Relationship="VITHealthCareModel.FK_Drug_Facility" FromRole="Facility" ToRole="Drug" />
+          <NavigationProperty Name="Instruments" Relationship="VITHealthCareModel.FK_Instrucment_Facility" FromRole="Facility" ToRole="Instrument" />
           <NavigationProperty Name="Patients" Relationship="VITHealthCareModel.FK_Patient_Facility" FromRole="Facility" ToRole="Patient" />
           <NavigationProperty Name="Users" Relationship="VITHealthCareModel.FK_User_Facility" FromRole="Facility" ToRole="User" />
-          <NavigationProperty Name="Instruments" Relationship="VITHealthCareModel.FK_Instrucment_Facility" FromRole="Facility" ToRole="Instrument" />
         </EntityType>
         <EntityType Name="ICD">
           <Key>
@@ -766,14 +758,19 @@
           <Property Type="String" Name="Description" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
         </EntityType>
-        <EntityType Name="Inventory">
+        <EntityType Name="Instrument">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="Type" />
           </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="Type" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="FacilityId" Nullable="false" />
+          <Property Type="String" Name="Name" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="Stock" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="Decimal" Name="Fee" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="ChargeInstruments" Relationship="VITHealthCareModel.FK_ChargeInstruments_Instruments" FromRole="Instrument" ToRole="ChargeInstrument" />
+          <NavigationProperty Name="Facility" Relationship="VITHealthCareModel.FK_Instrucment_Facility" FromRole="Instrument" ToRole="Facility" />
         </EntityType>
         <EntityType Name="Patient">
           <Key>
@@ -902,6 +899,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ChargeInstruments_Instruments">
+          <End Type="VITHealthCareModel.Instrument" Role="Instrument" Multiplicity="1" />
+          <End Type="VITHealthCareModel.ChargeInstrument" Role="ChargeInstrument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instrument">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChargeInstrument">
+              <PropertyRef Name="InstrumentsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ChargeInstruments_Patient">
           <End Type="VITHealthCareModel.Patient" Role="Patient" Multiplicity="1" />
           <End Type="VITHealthCareModel.ChargeInstrument" Role="ChargeInstrument" Multiplicity="*" />
@@ -950,6 +959,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Instrucment_Facility">
+          <End Type="VITHealthCareModel.Facility" Role="Facility" Multiplicity="1" />
+          <End Type="VITHealthCareModel.Instrument" Role="Instrument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facility">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Instrument">
+              <PropertyRef Name="FacilityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Patient_Facility">
           <End Type="VITHealthCareModel.Facility" Role="Facility" Multiplicity="1" />
           <End Type="VITHealthCareModel.Patient" Role="Patient" Multiplicity="*" />
@@ -970,43 +991,6 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="User">
-              <PropertyRef Name="FacilityId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Instrument">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="FacilityId" Nullable="false" />
-          <Property Type="String" Name="Description" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="Decimal" Name="Fee" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="Boolean" Name="Active" Nullable="false" />
-          <Property Type="String" Name="Name" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ChargeInstruments" Relationship="VITHealthCareModel.FK_ChargeInstruments_Instruments" FromRole="Instrument" ToRole="ChargeInstrument" />
-          <NavigationProperty Name="Facility" Relationship="VITHealthCareModel.FK_Instrucment_Facility" FromRole="Instrument" ToRole="Facility" />
-        </EntityType>
-        <Association Name="FK_ChargeInstruments_Instruments">
-          <End Type="VITHealthCareModel.Instrument" Role="Instrument" Multiplicity="1" />
-          <End Type="VITHealthCareModel.ChargeInstrument" Role="ChargeInstrument" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Instrument">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ChargeInstrument">
-              <PropertyRef Name="InstrumentsId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Instrucment_Facility">
-          <End Type="VITHealthCareModel.Facility" Role="Facility" Multiplicity="1" />
-          <End Type="VITHealthCareModel.Instrument" Role="Instrument" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Facility">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Instrument">
               <PropertyRef Name="FacilityId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1160,6 +1144,7 @@
               <MappingFragment StoreEntitySet="Drug">
                 <ScalarProperty Name="Fee" ColumnName="Fee" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
@@ -1184,11 +1169,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Inventories">
-            <EntityTypeMapping TypeName="VITHealthCareModel.Inventory">
-              <MappingFragment StoreEntitySet="Inventory">
+          <EntitySetMapping Name="Instruments">
+            <EntityTypeMapping TypeName="VITHealthCareModel.Instrument">
+              <MappingFragment StoreEntitySet="Instruments">
+                <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Stock" ColumnName="Stock" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1220,18 +1209,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Instruments">
-            <EntityTypeMapping TypeName="VITHealthCareModel.Instrument">
-              <MappingFragment StoreEntitySet="Instruments">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Fee" ColumnName="Fee" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1254,118 +1231,111 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="VITData">
-        <EntityTypeShape EntityType="VITHealthCareModel.Charge" Width="1.5" PointX="5.25" PointY="24.75" Height="5.0571093750000031" />
-        <EntityTypeShape EntityType="VITHealthCareModel.ChargeDrug" Width="1.5" PointX="7.5" PointY="27.875" Height="2.7494921875000031" />
-        <EntityTypeShape EntityType="VITHealthCareModel.ChargeInstrument" Width="1.5" PointX="10.5" PointY="28.25" Height="2.7494921875000031" />
-        <EntityTypeShape EntityType="VITHealthCareModel.Clinical" Width="1.5" PointX="13.5" PointY="22" Height="15.056783854166667" />
-        <EntityTypeShape EntityType="VITHealthCareModel.Doctor" Width="1.5" PointX="3" PointY="20" Height="3.326396484374996" />
-        <EntityTypeShape EntityType="VITHealthCareModel.Drug" Width="1.5" PointX="3" PointY="24.125" Height="2.5571907552083388" />
-        <EntityTypeShape EntityType="VITHealthCareModel.Facility" Width="1.5" PointX="0.75" PointY="21.625" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="VITHealthCareModel.Charge" Width="1.5" PointX="5.25" PointY="25" Height="5.0571093750000031" />
+        <EntityTypeShape EntityType="VITHealthCareModel.ChargeDrug" Width="1.5" PointX="7.5" PointY="28.25" Height="2.7494921875000031" />
+        <EntityTypeShape EntityType="VITHealthCareModel.ChargeInstrument" Width="1.5" PointX="10.5" PointY="28.625" Height="2.7494921875000031" />
+        <EntityTypeShape EntityType="VITHealthCareModel.Clinical" Width="1.5" PointX="13.5" PointY="22.5" Height="15.056783854166664" />
+        <EntityTypeShape EntityType="VITHealthCareModel.Doctor" Width="1.5" PointX="3" PointY="20.125" Height="3.326396484374996" />
+        <EntityTypeShape EntityType="VITHealthCareModel.Drug" Width="1.5" PointX="3" PointY="24.125" Height="2.749492187499996" />
+        <EntityTypeShape EntityType="VITHealthCareModel.Facility" Width="1.5" PointX="0.75" PointY="21.875" Height="2.5571907552083388" />
         <EntityTypeShape EntityType="VITHealthCareModel.ICD" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5956835937500031" />
-        <EntityTypeShape EntityType="VITHealthCareModel.Inventory" Width="1.5" PointX="2.75" PointY="0.75" Height="1.5956835937500031" />
-        <EntityTypeShape EntityType="VITHealthCareModel.Patient" Width="1.5" PointX="3" PointY="30.5" Height="3.9033007812499996" />
-        <EntityTypeShape EntityType="VITHealthCareModel.User" Width="1.5" PointX="3" PointY="35.25" Height="2.172587890624996" />
+        <EntityTypeShape EntityType="VITHealthCareModel.Instrument" Width="1.5" PointX="3" PointY="27.625" Height="2.7494921875000031" />
+        <EntityTypeShape EntityType="VITHealthCareModel.Patient" Width="1.5" PointX="3" PointY="31.125" Height="3.9033007812500102" />
+        <EntityTypeShape EntityType="VITHealthCareModel.User" Width="1.5" PointX="3" PointY="35.75" Height="2.172587890624996" />
         <AssociationConnector Association="VITHealthCareModel.FK_ChargeDrug_Charges" >
-          <ConnectorPoint PointX="6.75" PointY="28.8410546875" />
-          <ConnectorPoint PointX="7.5" PointY="28.8410546875" />
+          <ConnectorPoint PointX="6.75" PointY="29.1535546875" />
+          <ConnectorPoint PointX="7.5" PointY="29.1535546875" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_ChargeInstruments_Charges" >
-          <ConnectorPoint PointX="6.75" PointY="25.898435000000006" />
-          <ConnectorPoint PointX="8.1666666666666661" PointY="25.898435000000006" />
-          <ConnectorPoint PointX="8.3333333333333339" PointY="25.898435000000006" />
-          <ConnectorPoint PointX="10.760414166666665" PointY="25.898435000000006" />
-          <ConnectorPoint PointX="10.927080833333333" PointY="25.898435000000006" />
-          <ConnectorPoint PointX="11.25" PointY="25.898435000000006" />
-          <ConnectorPoint PointX="11.25" PointY="28.25" />
+          <ConnectorPoint PointX="6.75" PointY="26.59375" />
+          <ConnectorPoint PointX="8.1666666666666661" PointY="26.59375" />
+          <ConnectorPoint PointX="8.3333333333333339" PointY="26.59375" />
+          <ConnectorPoint PointX="11.25" PointY="26.59375" />
+          <ConnectorPoint PointX="11.25" PointY="28.625" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Charges_Doctor" >
-          <ConnectorPoint PointX="4.5" PointY="21.663198242187498" />
-          <ConnectorPoint PointX="6" PointY="21.663198242187498" />
-          <ConnectorPoint PointX="6" PointY="24.75" />
+          <ConnectorPoint PointX="4.5" PointY="21.788198242187498" />
+          <ConnectorPoint PointX="6" PointY="21.788198242187498" />
+          <ConnectorPoint PointX="6" PointY="25" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Charges_Facility" >
-          <ConnectorPoint PointX="2.25" PointY="23.725698242187498" />
-          <ConnectorPoint PointX="5.5937475" PointY="23.725698242187498" />
-          <ConnectorPoint PointX="5.5937475" PointY="24.75" />
+          <ConnectorPoint PointX="2.25" PointY="23.788198242187498" />
+          <ConnectorPoint PointX="5.5937475" PointY="23.788198242187498" />
+          <ConnectorPoint PointX="5.5937475" PointY="25" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Charges_Patient" >
-          <ConnectorPoint PointX="4.5" PointY="32.451650390625" />
-          <ConnectorPoint PointX="6" PointY="32.451650390625" />
-          <ConnectorPoint PointX="6" PointY="29.807109375000003" />
+          <ConnectorPoint PointX="4.5" PointY="33.076650390625005" />
+          <ConnectorPoint PointX="6" PointY="33.076650390625005" />
+          <ConnectorPoint PointX="6" PointY="30.057109375000003" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Clinical_Charge" >
-          <ConnectorPoint PointX="6.75" PointY="27.109375" />
-          <ConnectorPoint PointX="8.1666666666666661" PointY="27.109375" />
-          <ConnectorPoint PointX="8.3333333333333339" PointY="27.109375" />
-          <ConnectorPoint PointX="10.760414166666665" PointY="27.109375" />
-          <ConnectorPoint PointX="10.927080833333333" PointY="27.109375" />
-          <ConnectorPoint PointX="11.166666666666666" PointY="27.109375" />
-          <ConnectorPoint PointX="11.333333333333334" PointY="27.109375" />
-          <ConnectorPoint PointX="13.5" PointY="27.109375" />
+          <ConnectorPoint PointX="6.75" PointY="27.453125" />
+          <ConnectorPoint PointX="8.1666666666666661" PointY="27.453125" />
+          <ConnectorPoint PointX="8.3333333333333339" PointY="27.453125" />
+          <ConnectorPoint PointX="11.166666666666666" PointY="27.453125" />
+          <ConnectorPoint PointX="11.333333333333334" PointY="27.453125" />
+          <ConnectorPoint PointX="13.5" PointY="27.453125" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_ChargeDrug_Drug" >
-          <ConnectorPoint PointX="4.5" PointY="24.40625" />
-          <ConnectorPoint PointX="5.5104141666666671" PointY="24.40625" />
-          <ConnectorPoint PointX="5.6770808333333331" PointY="24.40625" />
-          <ConnectorPoint PointX="5.916666666666667" PointY="24.40625" />
-          <ConnectorPoint PointX="6.083333333333333" PointY="24.40625" />
-          <ConnectorPoint PointX="8.25" PointY="24.40625" />
-          <ConnectorPoint PointX="8.25" PointY="27.875" />
+          <ConnectorPoint PointX="4.5" PointY="24.53125" />
+          <ConnectorPoint PointX="5.5104141666666671" PointY="24.53125" />
+          <ConnectorPoint PointX="5.6770808333333331" PointY="24.53125" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="24.53125" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="24.53125" />
+          <ConnectorPoint PointX="8.25" PointY="24.53125" />
+          <ConnectorPoint PointX="8.25" PointY="28.25" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_ChargeDrug_Patient" >
-          <ConnectorPoint PointX="4.5" PointY="33.458728085937494" />
-          <ConnectorPoint PointX="8.25" PointY="33.458728085937494" />
-          <ConnectorPoint PointX="8.25" PointY="30.624492187500003" />
+          <ConnectorPoint PointX="4.5" PointY="32.069572695312509" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="32.069572695312509" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="32.069572695312509" />
+          <ConnectorPoint PointX="8.25" PointY="32.069572695312509" />
+          <ConnectorPoint PointX="8.25" PointY="30.999492187500003" />
+        </AssociationConnector>
+        <AssociationConnector Association="VITHealthCareModel.FK_ChargeInstruments_Instruments" >
+          <ConnectorPoint PointX="4.5" PointY="30.374492187500003" />
+          <ConnectorPoint PointX="4.875" PointY="30.749492187500003" />
+          <ConnectorPoint PointX="4.875" PointY="31.749492187500003" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="31.749492187500003" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="31.749492187500003" />
+          <ConnectorPoint PointX="8.1666666666666661" PointY="31.749492187500003" />
+          <ConnectorPoint PointX="8.3333333333333339" PointY="31.749492187500003" />
+          <ConnectorPoint PointX="10.125" PointY="31.749492187500003" />
+          <ConnectorPoint PointX="10.5" PointY="31.374492187500003" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_ChargeInstruments_Patient" >
-          <ConnectorPoint PointX="4.5" PointY="30.843242187500003" />
-          <ConnectorPoint PointX="5.916666666666667" PointY="30.843242187500003" />
-          <ConnectorPoint PointX="6.083333333333333" PointY="30.843242187500003" />
-          <ConnectorPoint PointX="8.1666666666666661" PointY="30.843242187500003" />
-          <ConnectorPoint PointX="8.3333333333333339" PointY="30.843242187500003" />
-          <ConnectorPoint PointX="10.5" PointY="30.843242187500003" />
+          <ConnectorPoint PointX="4.5" PointY="34.0837280859375" />
+          <ConnectorPoint PointX="11.2812525" PointY="34.0837280859375" />
+          <ConnectorPoint PointX="11.2812525" PointY="31.374492187500003" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Clinical_Patient" >
-          <ConnectorPoint PointX="4.5" PointY="31.9130712890625" />
-          <ConnectorPoint PointX="5.916666666666667" PointY="31.9130712890625" />
-          <ConnectorPoint PointX="6.083333333333333" PointY="31.9130712890625" />
-          <ConnectorPoint PointX="8.1666666666666661" PointY="31.9130712890625" />
-          <ConnectorPoint PointX="8.3333333333333339" PointY="31.9130712890625" />
-          <ConnectorPoint PointX="13.5" PointY="31.9130712890625" />
+          <ConnectorPoint PointX="4.5" PointY="34.618514433593759" />
+          <ConnectorPoint PointX="13.5" PointY="34.618514433593759" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Doctor_Facility" >
-          <ConnectorPoint PointX="2.25" PointY="22.475698242187498" />
-          <ConnectorPoint PointX="3" PointY="22.475698242187498" />
+          <ConnectorPoint PointX="2.25" PointY="22.663198242187498" />
+          <ConnectorPoint PointX="3" PointY="22.663198242187498" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Drug_Facility" >
-          <ConnectorPoint PointX="1.563476953125" PointY="24.182190755208335" />
-          <ConnectorPoint PointX="1.563476953125" PointY="25.432191255208338" />
-          <ConnectorPoint PointX="1.8546576432291666" PointY="25.432191255208338" />
-          <ConnectorPoint PointX="2.0213243098958333" PointY="25.432191255208338" />
-          <ConnectorPoint PointX="3" PointY="25.432191255208338" />
-        </AssociationConnector>
-        <AssociationConnector Association="VITHealthCareModel.FK_Patient_Facility" >
-          <ConnectorPoint PointX="1.1254859765625" PointY="24.182190755208335" />
-          <ConnectorPoint PointX="1.1254859765625" PointY="32.451650390625" />
-          <ConnectorPoint PointX="1.8546576432291666" PointY="32.451650390625" />
-          <ConnectorPoint PointX="2.0213243098958333" PointY="32.451650390625" />
-          <ConnectorPoint PointX="3" PointY="32.451650390625" />
-        </AssociationConnector>
-        <AssociationConnector Association="VITHealthCareModel.FK_User_Facility" >
-          <ConnectorPoint PointX="1.9379909765624999" PointY="24.182190755208335" />
-          <ConnectorPoint PointX="1.9379909765624999" PointY="36.3362939453125" />
-          <ConnectorPoint PointX="3" PointY="36.3362939453125" />
-        </AssociationConnector>
-        <EntityTypeShape EntityType="VITHealthCareModel.Instrument" Width="1.5" PointX="3" PointY="16.625" Height="2.5571907552083388" />
-        <AssociationConnector Association="VITHealthCareModel.FK_ChargeInstruments_Instruments" >
-          <ConnectorPoint PointX="4.5" PointY="17.903595377604169" />
-          <ConnectorPoint PointX="10.8437475" PointY="17.903595377604169" />
-          <ConnectorPoint PointX="10.8437475" PointY="28.25" />
+          <ConnectorPoint PointX="2.25" PointY="24.278595377604169" />
+          <ConnectorPoint PointX="3" PointY="24.278595377604169" />
         </AssociationConnector>
         <AssociationConnector Association="VITHealthCareModel.FK_Instrucment_Facility" >
-          <ConnectorPoint PointX="1.5" PointY="21.625" />
-          <ConnectorPoint PointX="1.5" PointY="17.903595377604169" />
-          <ConnectorPoint PointX="3" PointY="17.903595377604169" />
+          <ConnectorPoint PointX="1.5" PointY="24.432190755208339" />
+          <ConnectorPoint PointX="1.5" PointY="28.99974609375" />
+          <ConnectorPoint PointX="1.8229191666666667" PointY="28.99974609375" />
+          <ConnectorPoint PointX="1.9895858333333332" PointY="28.99974609375" />
+          <ConnectorPoint PointX="3" PointY="28.99974609375" />
+        </AssociationConnector>
+        <AssociationConnector Association="VITHealthCareModel.FK_Patient_Facility" >
+          <ConnectorPoint PointX="1.9062525" PointY="24.432190755208339" />
+          <ConnectorPoint PointX="1.9062525" PointY="33.076650390625005" />
+          <ConnectorPoint PointX="3" PointY="33.076650390625005" />
+        </AssociationConnector>
+        <AssociationConnector Association="VITHealthCareModel.FK_User_Facility" >
+          <ConnectorPoint PointX="1.0937475" PointY="24.432190755208339" />
+          <ConnectorPoint PointX="1.0937475" PointY="36.8362939453125" />
+          <ConnectorPoint PointX="3" PointY="36.8362939453125" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

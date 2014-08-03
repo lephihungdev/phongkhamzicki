@@ -15,10 +15,21 @@
         <table>
             <tr>
                 <td class="title">
-                    @Html.LabelFor(model => model.Code)
-                    @Html.ValidationMessageFor(model => model.Code)
+                    @Html.LabelFor(model => model.Id):
+                    @Html.HiddenFor(model => model.Id, new { @Value = Model.Id })
                 </td>
-                <td class="value">@Html.EditorFor(model => model.Code)</td>
+                <td class="value">
+                    <div class="id">@Html.DisplayFor(model => model.Id)</div>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td class="title">
+                    @Html.LabelFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </td>
+                <td class="value">@Html.EditorFor(model => model.Name)</td>
             </tr>
         </table>
         <table>
@@ -40,6 +51,15 @@
                 <td class="value">@Html.EditorFor(model => model.Fee)</td>
             </tr>
         </table>
+
+        <table>
+            <tr>
+                <td class="title">
+                    @Html.LabelFor(model => model.Stock):
+                </td>
+                <td class="value">@Html.EditorFor(model => model.Stock)</td>
+            </tr>
+        </table>
         
         <table>
             <tr>
@@ -52,13 +72,8 @@
 
         <input type="submit" value="Lưu" class="btnLogin save" style="float:left; padding-left: 15px"/>
         
-        @{ var display = !string.IsNullOrEmpty(Model.Code) ? "" : "none"; }
+        @{ var display = Model.Id > 0 ? "" : "none"; }
         <input type="button" value="Thêm mới" onclick="window.location.href = '/Settings/Cpt';" class="btnLogin save" style="float:left; padding-left: 15px; display:@display"/>
-        
-        <script language="javascript" type="text/javascript">
-            @{ var readOnly = string.IsNullOrEmpty(Model.Code) ? "false" : "true";}
-                $('#Code').prop('readonly', @readOnly);
-        </script>
     </fieldset>
 }
 
@@ -75,9 +90,10 @@
     <table class="table" width="100%" border="0" cellspacing="0" cellpadding="0">
         <thead>
             <tr>
-                <td>Mã</td>
+                <td>Tên</td>
                 <td>Mô tả</td>
                 <td>Phí</td>
+                <td>Số lượng</td>
                 <td style="width: 52px">Sử dụng</td>
                 <td style="width: 25px">Xóa</td>
             </tr>
@@ -86,12 +102,13 @@
         @foreach (var o in Model.Cpts)
         {
             var active = o.Active ? "Y" : "N";
-            <tr onclick="window.location.assign('/Settings/Cpt?code=@o.Code&skey=@Request["skey"]')">
-                <td>@o.Code</td>
+            <tr onclick="window.location.assign('/Settings/Cpt?id=@o.Id&skey=@Request["skey"]')">
+                <td>@o.Name</td>
                 <td>@o.Description</td>
                 <td>@o.Fee</td>
+                <td>@o.Stock</td>
                 <td style="text-align: center">@active</td>
-                <td style="text-align: center"><a href="/Settings/CptDelete?id=@o.Code"><img src="../../Content/images/DeleteRed.png"/></a></td>
+                <td style="text-align: center"><a href="/Settings/CptDelete?id=@o.Id"><img src="../../Content/images/DeleteRed.png"/></a></td>
             </tr>
         }
     </table>

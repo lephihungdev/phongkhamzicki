@@ -24,6 +24,9 @@
         [Display(Name = "Sử dụng")]
         public bool Active { get; set; }
 
+        [Display(Name = "Số lượng")]
+        public int? Stock { get; set; }
+
         public IList<DrugDto> Drugs { get; set; }
     }
 }

@@ -10,5 +10,7 @@
         public string Description { get; set; }
         public decimal Fee { get; set; }
         public bool Active { get; set; }
+
+        public int? Stock { get; set; }
     }
 }
