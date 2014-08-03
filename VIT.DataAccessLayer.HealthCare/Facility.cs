@@ -20,9 +20,9 @@ namespace VIT.Entity.HealthCare
             this.Charges = new Collection<Charge>();
             this.Doctors = new Collection<Doctor>();
             this.Drugs = new Collection<Drug>();
+            this.Instruments = new Collection<Instrument>();
             this.Patients = new Collection<Patient>();
             this.Users = new Collection<User>();
-            this.Instruments = new Collection<Instrument>();
         }
     
         public int Id { get; set; }
@@ -31,9 +31,9 @@ namespace VIT.Entity.HealthCare
         public virtual Collection<Charge> Charges { get; set; }
         public virtual Collection<Doctor> Doctors { get; set; }
         public virtual Collection<Drug> Drugs { get; set; }
+        public virtual Collection<Instrument> Instruments { get; set; }
         public virtual Collection<Patient> Patients { get; set; }
         public virtual Collection<User> Users { get; set; }
-        public virtual Collection<Instrument> Instruments { get; set; }
     }
     
 }

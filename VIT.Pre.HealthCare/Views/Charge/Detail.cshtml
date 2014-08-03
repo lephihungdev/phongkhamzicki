@@ -12,7 +12,7 @@
     <tr>
         <td style="width: 155px;vertical-align: top" class="clinicaldisplay">
             <fieldset class="patientinfo chargeinfo">
-                <legend>Cận lâm sàng</legend>
+                <legend>Triệu chứng</legend>
                 <ul> <b>Tổng quát</b>
                     <li>Chiều cao: @Model.Clinical.ChieuCao</li>
                     <li>Cân nặng: @Model.Clinical.CanNang</li>
@@ -328,7 +328,7 @@
 
                         <tr class="input">
                             <td colspan="2">@Html.EditorFor(model => model.DrugId)</td>
-                            <td>@Html.EditorFor(model => model.Quality)</td>
+                            <td>@Html.EditorFor(model => model.InstrumentQuality)</td>
                             <td>@Html.EditorFor(model => model.DrugNote)</td>
                             <td style="text-align: center">
                                 <img onclick="SetAction('ADDDRUG')" src="../../Content/images/plus.png" alt="Thêm thuốc"/>

@@ -53,6 +53,15 @@
                 <td class="value">@Html.EditorFor(model => model.Fee)</td>
             </tr>
         </table>
+
+        <table>
+            <tr>
+                <td class="title">
+                    @Html.LabelFor(model => model.Stock):
+                </td>
+                <td class="value">@Html.EditorFor(model => model.Stock)</td>
+            </tr>
+        </table>
         
        <table>
             <tr>
@@ -87,6 +96,7 @@
                 <td>Tên thuốc</td>
                 <td>Mô tả</td>
                 <td>Phí</td>
+                <td>Số lượng</td>
                 <td style="width: 52px">Sử dụng</td>
                 <td style="width: 25px">Xóa</td>
             </tr>
@@ -100,6 +110,7 @@
                 <td>@o.Name</td>
                 <td>@o.Description</td>
                 <td>@o.Fee</td>
+                <td>@o.Stock</td>
                 <td style="text-align: center">@active</td>
                 <td style="text-align: center"><a href="/Settings/DrugDelete?id=@o.Id"><img src="../../Content/images/DeleteRed.png"/></a></td>
             </tr>

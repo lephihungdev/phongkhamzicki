@@ -130,12 +130,6 @@
     <Compile Include="InstrumentDAL.genarated.cs">
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>
-    <Compile Include="Inventory.cs">
-      <DependentUpon>Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="InventoryDAL.genarated.cs">
-      <DependentUpon>DAL.tt</DependentUpon>
-    </Compile>
     <Compile Include="Patient.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>

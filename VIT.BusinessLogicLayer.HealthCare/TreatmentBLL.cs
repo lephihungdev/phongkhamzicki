@@ -11,6 +11,8 @@
     {
         private readonly IInstrumentDAL _dal;
 
+        private const string inventoryTypeInstrument = "Instrument";
+
         public TreatmentBLL(string connectionString = "")
             : base(connectionString)
         {
@@ -27,35 +29,48 @@
                     Name = e.Name,
                     Description = e.Description,
                     Fee = e.Fee,
-                    Active = e.Active
+                    Active = e.Active,
+                    Stock = e.Stock
                 });
 
-            if (!string.IsNullOrEmpty(key)) query = query.Where(e => e.Name.StartsWith(key));
+            if (!string.IsNullOrEmpty(key)) query = query.Where(e => e.Name.Contains(key));
 
             return query;
         }
 
-        public void Save(CptDto dto, int facilityId)
+        public void Update(CptDto dto, int facilityId)
         {
             var entity = this._dal.GetAll().FirstOrDefault(e => e.Id == dto.Id && e.FacilityId == facilityId);
 
-            if (entity == null)
-            {
-                entity = new Instrument();
-                entity.FacilityId = facilityId;
-                this._dal.Add(entity);
-            }
-            else
-            {
-                this._dal.Update(entity);
-            };
+            if (entity == null) throw new Exception("Đối tượng không tồn tại");
 
             entity.Name = dto.Name;
             entity.Description = dto.Description;
             entity.Fee = dto.Fee;
             entity.Active = dto.Active;
+            entity.Stock = dto.Stock;
 
             this.SaveChanges();
+        }
+
+        public void Insert(CptDto dto, int facilityId)
+        {
+            var exist = this._dal.GetAll().Any(e => e.Name == dto.Name);
+
+            if (exist) throw new Exception("Đối tượng đã tồn tại");
+
+            var entity = new Instrument();
+            entity.FacilityId = facilityId;
+            entity.Name = dto.Name;
+            entity.Description = dto.Description;
+            entity.Fee = dto.Fee;
+            entity.Active = dto.Active;
+            entity.Stock = dto.Stock;
+
+            this._dal.Add(entity);
+
+            this.SaveChanges();
+            dto.Id = entity.Id;
         }
 
         public void Delete(int id, int facilityId)

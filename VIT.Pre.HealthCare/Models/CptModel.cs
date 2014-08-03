@@ -9,8 +9,7 @@
     {
         public int Id { get; set; }
 
-        [Display(Name = "Mã")]
-        [Required(ErrorMessage = "Không được để trống.")]
+        [Display(Name = "Tên")]
         public string Name { get; set; }
 
         [Display(Name = "Mô tả")]
@@ -21,6 +20,9 @@
 
         [Display(Name = "Phí")]
         public decimal Fee { get; set; }
+
+        [Display(Name = "Số lượng")]
+        public int? Stock { get; set; }
 
         public IList<CptDto> Cpts { get; set; }
     }

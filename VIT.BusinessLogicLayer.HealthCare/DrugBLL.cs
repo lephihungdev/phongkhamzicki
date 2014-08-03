@@ -11,6 +11,8 @@
     {
         private readonly IDrugDAL _dal;
 
+        private const string inventoryTypeDrug = "Drug";
+
         public DrugBLL(string connectionString = "")
             : base(connectionString)
         {
@@ -27,7 +29,8 @@
                         Name = e.Name,
                         Description = e.Description,
                         Fee = e.Fee,
-                        Active = e.Active
+                        Active = e.Active,
+                        Stock = e.Stock
                     });
 
             if (!string.IsNullOrEmpty(key)) query = query.Where(e => e.Name.StartsWith(key));
@@ -45,6 +48,7 @@
             entity.Description = dto.Description;
             entity.Fee = dto.Fee;
             entity.Active = dto.Active;
+            entity.Stock = dto.Stock;
 
             this.SaveChanges();
         }
@@ -61,6 +65,7 @@
             entity.Description = dto.Description;
             entity.Fee = dto.Fee;
             entity.Active = dto.Active;
+            entity.Stock = dto.Stock;
 
             this._dal.Add(entity);
 

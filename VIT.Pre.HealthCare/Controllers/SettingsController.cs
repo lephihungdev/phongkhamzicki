@@ -23,6 +23,7 @@
             this._facilityBLL = new FacilityBLL();
             this._drugBLL = new DrugBLL();
             this._treatmentBLL = new TreatmentBLL();
+            this._instrumentBLL = new TreatmentBLL();
             this._icdBLL = new IcdBLL();
             this._doctorBLL = new DoctorBLL();
         }
@@ -76,6 +77,7 @@
                     model.Name = dto.Name;
                     model.Description = dto.Description;
                     model.Id = dto.Id;
+                    model.Stock = dto.Stock;
                 }
             }
 
@@ -98,6 +100,7 @@
                 Description = model.Description,
                 Fee = model.Fee,
                 Active = model.Active,
+                Stock = model.Stock
             };
 
             try
@@ -151,14 +154,14 @@
             return this.Json(icds, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult InstrumentCpt(string code, int id = 0)
+        public ActionResult Cpt(string skey, int id = 0)
         {
             var user = this.Session[SettingsManager.Constants.SessionUser] as UserData;
             if (user == null) return this.RedirectToAction("Login", "Login");
             this.ViewBag.FacilityName = this._facilityBLL.GetFacilityName(user.CompanyId);
             this.ViewBag.UserName = user.UserName;
 
-            var model = new DrugModel();
+            var model = new CptModel();
             if (id > 0)
             {
                 var dto = this._instrumentBLL.Get(user.CompanyId).FirstOrDefault(e => e.Id == id);
@@ -168,10 +171,11 @@
                     model.Name = dto.Name;
                     model.Description = dto.Description;
                     model.Id = dto.Id;
+                    model.Stock = dto.Stock;
                 }
             }
 
-            model.Drugs = this._drugBLL.Get(user.CompanyId, code).OrderBy(e => e.Name).ToList();
+            model.Cpts = this._instrumentBLL.Get(user.CompanyId, skey).OrderBy(e => e.Name).ToList();
             return this.View(model);
         }
 
@@ -190,12 +194,17 @@
                 Description = model.Description,
                 Fee = model.Fee,
                 Active = model.Active,
+                Stock = model.Stock
             };
 
             try
             {
-                this._instrumentBLL.Save(dto, user.CompanyId);
-                model.Id = dto.Id;
+                if (model.Id > 0) this._instrumentBLL.Update(dto, user.CompanyId);
+                else
+                {
+                    this._instrumentBLL.Insert(dto, user.CompanyId);
+                    model.Id = dto.Id;
+                }
             }
             catch (Exception exception)
             {
