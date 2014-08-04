@@ -302,6 +302,41 @@
                     <div style="float: left; margin: 5px"><a href="/Charge/Index?patientId=@Model.PatientId" class="btnSettings button" style="margin-left:20px; text-decoration:none"><img src="../../Content/images/dossierbleu_documents.png" alt="Quay lại danh sách" style="width: 58px;"/>Quay lại danh sách</a></div>
                 </fieldset>
 
+                 <fieldset class="treatmentlist">
+                    <legend>Điều trị</legend>
+                    <table class="table" width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>
+                                <td>Mã</td>
+                                <td>Tên</td>
+                                <td>Số lượng</td>
+                                <td>Ghi chú</td>
+                                <td style="width: 30px"></td>
+                            </tr>
+                        </thead>
+        
+                        @foreach (var o in Model.ListChargeInstruments)
+                        {
+                            <tr>
+                                <td>@o.InstrumentId</td>
+                                <td>@o.InstrumentName</td>
+                                <td>@o.Quality</td>
+                                <td>@o.Note</td>
+                                <td style="text-align: center"><img onclick="SetDrugId(@o.Id); SetAction('REMOVEDINSTRUMENT')" src="../../Content/images/DeleteRed.png" alt="Xóa thuốc"/></td>
+                            </tr>
+                        }
+
+                        <tr class="input">
+                            <td colspan="2">@Html.EditorFor(model => model.InstrumentId)</td>
+                            <td>@Html.EditorFor(model => model.InstrumentQuality)</td>
+                            <td>@Html.EditorFor(model => model.InstrumentNote)</td>
+                            <td style="text-align: center">
+                                <img onclick="SetAction('ADDINSTRUMENT')" src="../../Content/images/plus.png" alt="Thêm điều trị"/>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+                
                 <fieldset class="druglist">
                     <legend>Thông tin thuốc</legend>
                     <table class="table" width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -332,41 +367,6 @@
                             <td>@Html.EditorFor(model => model.DrugNote)</td>
                             <td style="text-align: center">
                                 <img onclick="SetAction('ADDDRUG')" src="../../Content/images/plus.png" alt="Thêm thuốc"/>
-                            </td>
-                        </tr>
-                    </table>
-                </fieldset>
-                
-                <fieldset class="treatmentlist">
-                    <legend>Điều trị</legend>
-                    <table class="table" width="100%" border="0" cellspacing="0" cellpadding="0">
-                        <thead>
-                            <tr>
-                                <td>Mã</td>
-                                <td>Tên</td>
-                                <td>Số lượng</td>
-                                <td>Ghi chú</td>
-                                <td style="width: 30px"></td>
-                            </tr>
-                        </thead>
-        
-                        @foreach (var o in Model.ListChargeInstruments)
-                        {
-                            <tr>
-                                <td>@o.InstrumentId</td>
-                                <td>@o.InstrumentName</td>
-                                <td>@o.Quality</td>
-                                <td>@o.Note</td>
-                                <td style="text-align: center"><img onclick="SetDrugId(@o.Id); SetAction('REMOVEDINSTRUMENT')" src="../../Content/images/DeleteRed.png" alt="Xóa thuốc"/></td>
-                            </tr>
-                        }
-
-                        <tr class="input">
-                            <td colspan="2">@Html.EditorFor(model => model.InstrumentId)</td>
-                            <td>@Html.EditorFor(model => model.InstrumentQuality)</td>
-                            <td>@Html.EditorFor(model => model.InstrumentNote)</td>
-                            <td style="text-align: center">
-                                <img onclick="SetAction('ADDINSTRUMENT')" src="../../Content/images/plus.png" alt="Thêm điều trị"/>
                             </td>
                         </tr>
                     </table>

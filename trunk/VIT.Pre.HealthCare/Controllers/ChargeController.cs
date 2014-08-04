@@ -53,6 +53,7 @@
                 };
 
             model.Drugs = this._chargeBLL.GetDrugs(model.PatientId, chargeId).ToList();
+            model.Instruments = this._chargeBLL.GetInstruments(model.PatientId, chargeId).ToList();
 
             return View(model);
         }

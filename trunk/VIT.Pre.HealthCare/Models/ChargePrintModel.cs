@@ -37,5 +37,6 @@
         public Nullable<System.DateTime> DateService { get; set; }
 
         public IList<ChargeDrugDto> Drugs { get; set; }
+        public IList<ChargeInstrumentDto> Instruments { get; set; }
     }
 }
