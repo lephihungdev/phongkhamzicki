@@ -23,14 +23,30 @@
         <td style="text-align:left;padding-left:20px">Ngày khám: <b>@String.Format("{0:dd/MM/yyy}", Model.DateService)</b></td>
     </tr>
     <tr>
-        <td style="text-align:left;">Điều trị: <b>@Model.CPT</b></td>
+        <td style="text-align:left;">Hướng điều trị: <b>@Model.CPT</b></td>
         <td style="text-align:left;padding-left:20px">Thời gian điều trị: <b>@Model.Days</b> ngày</td>
     </tr>
 </table>
 
 <table class="toathuoc" width="100%" border="1" cellspacing="0" cellpadding="0" style="margin:10px 0px">
         <tr class="header">
-            <td>Tên</td>
+            <td>Điều trị</td>
+            <td>Số lượng</td>
+            <td>Ghi chú</td>
+        </tr>
+        @foreach (var o in Model.Instruments)
+        {
+            <tr>
+                <td>@o.InstrumentName</td>
+                <td>@o.Quality</td>
+                <td>@o.Note</td>
+            </tr>
+        }
+</table>
+
+<table class="toathuoc" width="100%" border="1" cellspacing="0" cellpadding="0" style="margin:10px 0px">
+        <tr class="header">
+            <td>Thuốc</td>
             <td>Số lượng</td>
             <td>Ghi chú</td>
         </tr>

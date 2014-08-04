@@ -21,7 +21,7 @@
         [Display(Name = "Phí")]
         public decimal Fee { get; set; }
 
-        [Display(Name = "Số lượng")]
+        [Display(Name = "Tồn kho")]
         public int? Stock { get; set; }
 
         public IList<CptDto> Cpts { get; set; }
